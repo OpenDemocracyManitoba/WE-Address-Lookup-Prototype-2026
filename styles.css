@@ -112,6 +112,9 @@ input:focus-visible {
   margin: 0;
   padding: 0.35rem;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   border: 1px solid #c7d4d2;
   border-radius: 0.75rem;
   background: #fff;

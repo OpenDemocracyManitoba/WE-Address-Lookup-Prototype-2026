@@ -14,7 +14,7 @@ Then open `http://localhost:8000`.
 
 ## How the lookup works
 
-After the user enters a street number and at least one street-name character, the page waits 300 ms and calls the City of Winnipeg [Addresses dataset](https://data.winnipeg.ca/resource/cam2-ii3u.json) directly with `fetch()`. Selecting one of the returned official addresses displays:
+After the user enters a street number and at least two street-name characters, the page waits 300 ms and calls the City of Winnipeg [Addresses dataset](https://data.winnipeg.ca/resource/cam2-ii3u.json) directly with `fetch()`. Selecting one of the returned official addresses displays:
 
 - the official City-formatted address;
 - `ward_as_of_september_17` as the City Council ward;
@@ -41,7 +41,7 @@ Input is case-insensitive and repeated whitespace is collapsed. The parser separ
 
 All street types and aliases specified in the brief are normalized to City abbreviations. For example, `place` becomes `PL`, `boulevard` becomes `BLVD`, `parc` becomes `PK`, and `terrasse` becomes `TERR`. If the type is omitted, no type condition is added, so `1 Portage`, `1 Portage Ave`, and `1 Portage Avenue` can find the same record.
 
-A lone direction letter after the number is treated as the beginning of a street name. This makes `1 P` search for streets beginning with P instead of mistakenly treating a lone letter as a direction.
+A lone letter after the number is treated as the beginning of a street name rather than as a direction, but the API request waits until a second street-name character is entered. For example, `1 P` does not query yet, while `1 Po` searches for streets beginning with PO.
 
 ## Privacy
 

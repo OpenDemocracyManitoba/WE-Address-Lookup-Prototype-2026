@@ -3,6 +3,7 @@
 const API_URL = "https://data.winnipeg.ca/resource/cam2-ii3u.json";
 const RESULT_LIMIT = 10;
 const DEBOUNCE_DELAY = 300;
+const MIN_STREET_NAME_LENGTH = 2;
 
 // The live dataset calls its official formatted address `full_address`.
 // Socrata aliases it here so the rest of the prototype can consistently use
@@ -80,6 +81,8 @@ let debounceTimer;
 let activeRequest;
 let requestSequence = 0;
 let selectedDisplayAddress = "";
+let pointerStart = null;
+let pointerMoved = false;
 
 function normalizeInput(value) {
   return value
@@ -126,6 +129,10 @@ function parseAddress(value) {
 
 function escapeSoqlLiteral(value) {
   return value.replace(/'/g, "''");
+}
+
+function hasEnoughStreetName(streetName) {
+  return streetName.replace(/[^A-Z0-9]/g, "").length >= MIN_STREET_NAME_LENGTH;
 }
 
 function buildQuery(parsed) {
@@ -198,8 +205,11 @@ function renderSuggestions(addresses) {
     option.setAttribute("role", "option");
     option.setAttribute("aria-selected", "false");
     option.textContent = address.display_address;
-    option.addEventListener("pointerdown", (event) => {
-      event.preventDefault();
+    option.addEventListener("click", () => {
+      if (pointerMoved) {
+        return;
+      }
+
       selectAddress(address);
     });
     fragment.append(option);
@@ -289,6 +299,11 @@ function queueSearch() {
     return;
   }
 
+  if (!hasEnoughStreetName(parsed.streetName)) {
+    setStatus("Keep typing: enter at least two letters of the street name.");
+    return;
+  }
+
   setStatus("Waiting for more typing…");
   debounceTimer = window.setTimeout(() => searchAddresses(parsed), DEBOUNCE_DELAY);
 }
@@ -314,10 +329,34 @@ input.addEventListener("keydown", (event) => {
   }
 });
 
-input.addEventListener("blur", () => {
+listbox.addEventListener("pointerdown", (event) => {
+  pointerStart = { x: event.clientX, y: event.clientY };
+  pointerMoved = false;
+});
+
+listbox.addEventListener("pointermove", (event) => {
+  if (!pointerStart) {
+    return;
+  }
+
+  const horizontalMove = Math.abs(event.clientX - pointerStart.x);
+  const verticalMove = Math.abs(event.clientY - pointerStart.y);
+  pointerMoved = pointerMoved || horizontalMove > 8 || verticalMove > 8;
+});
+
+function finishPointerGesture() {
+  // Keep the movement flag through the click event that follows pointerup.
   window.setTimeout(() => {
-    activeRequest?.abort();
-    requestSequence += 1;
+    pointerStart = null;
+    pointerMoved = false;
+  }, 0);
+}
+
+listbox.addEventListener("pointerup", finishPointerGesture);
+listbox.addEventListener("pointercancel", finishPointerGesture);
+
+document.addEventListener("pointerdown", (event) => {
+  if (!event.target.closest(".combobox-wrap")) {
     closeSuggestions();
-  }, 100);
+  }
 });
