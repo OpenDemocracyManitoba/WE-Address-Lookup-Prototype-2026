@@ -1,15 +1,27 @@
 "use strict";
 
 const API_URL = "https://data.winnipeg.ca/resource/cam2-ii3u.json";
-const RESULT_LIMIT = 10;
+const DISPLAY_LIMIT = 10;
+const QUERY_LIMIT = DISPLAY_LIMIT + 1;
 const DEBOUNCE_DELAY = 300;
-const MIN_STREET_NAME_LENGTH = 2;
+const MIN_STREET_NAME_LENGTH = 3;
 
-// The live dataset calls its official formatted address `full_address`.
-// Socrata aliases it here so the rest of the prototype can consistently use
-// the requested `display_address` property.
+// `street_address` is the City's official civic address without apartment or
+// condo units. Alias it so the rest of the prototype can consistently use the
+// requested `display_address` property.
 const SELECT_FIELDS = [
-  "full_address as display_address",
+  "street_address as display_address",
+  "street_number",
+  "street_name",
+  "street_type",
+  "street_direction",
+  "school_division",
+  "school_division_ward",
+  "ward_as_of_september_17"
+].join(",");
+
+const GROUP_FIELDS = [
+  "street_address",
   "street_number",
   "street_name",
   "street_type",
@@ -152,8 +164,9 @@ function buildQuery(parsed) {
   const params = new URLSearchParams({
     "$select": SELECT_FIELDS,
     "$where": clauses.join(" AND "),
-    "$limit": String(RESULT_LIMIT),
-    "$order": "street_name,street_type,street_direction"
+    "$group": GROUP_FIELDS,
+    "$limit": String(QUERY_LIMIT),
+    "$order": "street_name,street_type,street_direction,street_address"
   });
 
   return `${API_URL}?${params.toString()}`;
@@ -270,8 +283,15 @@ async function searchAddresses(parsed) {
       return;
     }
 
-    renderSuggestions(addresses);
-    setStatus(`${addresses.length} matching ${addresses.length === 1 ? "address" : "addresses"} found. Use the arrow keys or choose one below.`);
+    const hasMoreMatches = addresses.length > DISPLAY_LIMIT;
+    const visibleAddresses = addresses.slice(0, DISPLAY_LIMIT);
+    renderSuggestions(visibleAddresses);
+
+    if (hasMoreMatches) {
+      setStatus(`Showing the first ${DISPLAY_LIMIT} matching addresses. More matches are available; keep typing to narrow the list.`);
+    } else {
+      setStatus(`${visibleAddresses.length} matching ${visibleAddresses.length === 1 ? "address" : "addresses"} found. Use the arrow keys or choose one below.`);
+    }
   } catch (error) {
     if (error.name === "AbortError" || sequence !== requestSequence) {
       return;
@@ -300,7 +320,7 @@ function queueSearch() {
   }
 
   if (!hasEnoughStreetName(parsed.streetName)) {
-    setStatus("Keep typing: enter at least two letters of the street name.");
+    setStatus("Keep typing: enter at least three letters of the street name.");
     return;
   }
 
