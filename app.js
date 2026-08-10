@@ -184,6 +184,7 @@ function closeSuggestions() {
   suggestions = [];
   activeIndex = -1;
   listbox.replaceChildren();
+  listbox.scrollTop = 0;
   listbox.hidden = true;
   input.setAttribute("aria-expanded", "false");
   input.removeAttribute("aria-activedescendant");
