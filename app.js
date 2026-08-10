@@ -1,8 +1,7 @@
 "use strict";
 
 const API_URL = "https://data.winnipeg.ca/resource/cam2-ii3u.json";
-const DISPLAY_LIMIT = 10;
-const QUERY_LIMIT = DISPLAY_LIMIT + 1;
+const RESULT_LIMIT = 25;
 const DEBOUNCE_DELAY = 300;
 const MIN_STREET_NAME_LENGTH = 3;
 
@@ -165,7 +164,7 @@ function buildQuery(parsed) {
     "$select": SELECT_FIELDS,
     "$where": clauses.join(" AND "),
     "$group": GROUP_FIELDS,
-    "$limit": String(QUERY_LIMIT),
+    "$limit": String(RESULT_LIMIT),
     "$order": "street_name,street_type,street_direction,street_address"
   });
 
@@ -283,15 +282,8 @@ async function searchAddresses(parsed) {
       return;
     }
 
-    const hasMoreMatches = addresses.length > DISPLAY_LIMIT;
-    const visibleAddresses = addresses.slice(0, DISPLAY_LIMIT);
-    renderSuggestions(visibleAddresses);
-
-    if (hasMoreMatches) {
-      setStatus(`Showing the first ${DISPLAY_LIMIT} matching addresses. More matches are available; keep typing to narrow the list.`);
-    } else {
-      setStatus(`${visibleAddresses.length} matching ${visibleAddresses.length === 1 ? "address" : "addresses"} found. Use the arrow keys or choose one below.`);
-    }
+    renderSuggestions(addresses);
+    setStatus(`${addresses.length} matching ${addresses.length === 1 ? "address" : "addresses"} found. Use the arrow keys or choose one below.`);
   } catch (error) {
     if (error.name === "AbortError" || sequence !== requestSequence) {
       return;

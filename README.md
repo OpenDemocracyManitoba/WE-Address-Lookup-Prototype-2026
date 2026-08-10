@@ -24,7 +24,7 @@ The older `ward` field is neither requested nor displayed.
 
 ## Socrata query strategy
 
-Every request uses `$select`, `$where`, `$group`, `$limit=11`, and `$order`. The filter requires an exact `street_number` plus a prefix match on `street_name`. It adds exact street-type and direction filters only when the user supplied those optional parts. Grouping collapses apartment and condo units that share one civic address. The eleventh result is used only to detect that more than 10 addresses match; the interface then asks the user to keep typing rather than silently implying the list is complete.
+Every request uses `$select`, `$where`, `$group`, `$limit=25`, and `$order`. The filter requires an exact `street_number` plus a prefix match on `street_name`. It adds exact street-type and direction filters only when the user supplied those optional parts. Grouping collapses apartment and condo units that share one civic address. The 25-result cap is above the largest result set found in the current dataset for an exact street number plus a three-character street-name prefix.
 
 The current live dataset exposes the unit-free official civic address as `street_address`, although the original prototype brief referred to `display_address`. The query uses Socrata's `street_address as display_address` alias. The displayed value therefore still comes from the City's official field and is never copied from the user's input. Unit-level `full_address` values are intentionally not used because election wards are determined by the civic address.
 
@@ -50,6 +50,6 @@ The browser sends the parsed address terms only to the City of Winnipeg Open Dat
 ## Prototype limitations
 
 - Availability and accuracy depend on the City dataset and Socrata service.
-- Up to 10 alphabetical prefix matches are displayed for one exact street number. When more matches exist, the interface explicitly asks the user to keep typing.
+- Up to 25 alphabetical prefix matches are displayed for one exact street number. The largest matching set found during validation of the current dataset contained 23 civic addresses.
 - Unit or apartment numbers are intentionally not parsed; the civic street address is what determines the displayed wards.
 - The City API may omit ward information for some records. The interface reports missing values as `Not available`.
