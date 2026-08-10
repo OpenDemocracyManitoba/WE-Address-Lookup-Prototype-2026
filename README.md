@@ -12,6 +12,12 @@ python -m http.server 8000
 
 Then open `http://localhost:8000`.
 
+The optional automated tests use Node.js without third-party packages:
+
+```text
+npm test
+```
+
 ## How the lookup works
 
 After the user enters a street number and at least three street-name characters, the page waits 300 ms and calls the City of Winnipeg [Addresses dataset](https://data.winnipeg.ca/resource/cam2-ii3u.json) directly with `fetch()`. Three characters is also the length of the shortest street names currently present in the dataset. Selecting one of the returned official addresses displays:
@@ -24,7 +30,7 @@ The older `ward` field is neither requested nor displayed.
 
 ## Socrata query strategy
 
-Every request uses `$select`, `$where`, `$group`, `$limit=25`, and `$order`. The filter requires an exact `street_number` plus a prefix match on `street_name`. It adds exact street-type and direction filters only when the user supplied those optional parts. Grouping collapses apartment and condo units that share one civic address. The 25-result cap is above the largest result set found in the current dataset for an exact street number plus a three-character street-name prefix.
+Every request uses `$select`, `$where`, `$group`, `$limit=25`, and `$order`. The filter requires an exact `street_number` and `street_number_suffix` plus a prefix match on `street_name`. An input without a civic-number suffix matches only an unsuffixed address. The query adds exact street-type and direction filters only when the user supplied those optional parts. Grouping collapses apartment and condo units that share one civic address. The 25-result cap is above the largest result set found in the current dataset for an exact street number plus a three-character street-name prefix.
 
 The current live dataset exposes the unit-free official civic address as `street_address`, although the original prototype brief referred to `display_address`. The query uses Socrata's `street_address as display_address` alias. The displayed value therefore still comes from the City's official field and is never copied from the user's input. Unit-level `full_address` values are intentionally not used because election wards are determined by the civic address.
 
@@ -35,9 +41,12 @@ Requests are debounced. An `AbortController` cancels superseded calls, and a seq
 Input is case-insensitive and repeated whitespace is collapsed. The parser separates:
 
 1. a required street number;
-2. a required street-name prefix;
-3. an optional street type;
-4. an optional `N`, `S`, `E`, or `W` direction.
+2. an optional civic-number suffix;
+3. a required street-name prefix;
+4. an optional street type;
+5. an optional `N`, `S`, `E`, or `W` direction.
+
+Civic-number suffixes may be entered in compact or spaced forms. For example, `3A Elkhorn` and `3 A Elkhorn` both search for suffix `A`. Fractional suffixes such as `3 1/2 Elkhorn`, `3 1/2A Elkhorn`, and `3 1/2 A Elkhorn` are also accepted.
 
 All street types and aliases specified in the brief are normalized to City abbreviations. For example, `place` becomes `PL`, `boulevard` becomes `BLVD`, `parc` becomes `PK`, and `terrasse` becomes `TERR`. If the type is omitted, no type condition is added, so `1 Portage`, `1 Portage Ave`, and `1 Portage Avenue` can find the same record.
 

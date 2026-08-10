@@ -1,0 +1,7 @@
+{
+  "name": "winnipeg-election-ward-lookup-prototype",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}
