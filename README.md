@@ -39,9 +39,9 @@ Input is case-insensitive and repeated whitespace is collapsed. The parser separ
 3. an optional street type;
 4. an optional `N`, `S`, `E`, or `W` direction.
 
-All street types and aliases specified in the brief are normalized to City abbreviations. For example, `place` becomes `PL`, `boulevard` becomes `BLVD`, `parc` becomes `PK`, and `terrasse` becomes `TERR`. If the type is omitted, no type condition is added, so `72 Epsom`, `72 Epsom Pl`, and `72 Epsom Place` can find the same record.
+All street types and aliases specified in the brief are normalized to City abbreviations. For example, `place` becomes `PL`, `boulevard` becomes `BLVD`, `parc` becomes `PK`, and `terrasse` becomes `TERR`. If the type is omitted, no type condition is added, so `1 Portage`, `1 Portage Ave`, and `1 Portage Avenue` can find the same record.
 
-A lone direction letter after the number is treated as the beginning of a street name. This makes `72 E` search for streets beginning with E instead of mistakenly treating E as a direction.
+A lone direction letter after the number is treated as the beginning of a street name. This makes `1 P` search for streets beginning with P instead of mistakenly treating a lone letter as a direction.
 
 ## Privacy
 
