@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Find City Council and school trustee wards for a Winnipeg address.">
+    <title>Find your Winnipeg election wards</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="lookup-card" aria-labelledby="page-title">
+        <header>
+          <p class="eyebrow">Winnipeg civic elections</p>
+          <h1 id="page-title">Find your Winnipeg election wards</h1>
+          <p class="intro">Start with your street number and street name, then choose your official City address.</p>
+        </header>
+
+        <div class="field">
+          <label for="address-input">Winnipeg street address</label>
+          <div class="combobox-wrap">
+            <input
+              id="address-input"
+              type="text"
+              inputmode="text"
+              autocomplete="off"
+              autocapitalize="words"
+              spellcheck="false"
+              placeholder="For example, 72 Epsom"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-controls="address-listbox"
+              aria-expanded="false"
+              aria-describedby="search-help search-status"
+            >
+            <ul id="address-listbox" class="suggestions" role="listbox" hidden></ul>
+          </div>
+          <p id="search-help" class="help">Enter a street number and at least the first letter of the street name.</p>
+          <p id="search-status" class="status" role="status" aria-live="polite"></p>
+        </div>
+
+        <section id="result" class="result" aria-labelledby="result-address" aria-live="polite" hidden>
+          <p class="result-label">Official City address</p>
+          <h2 id="result-address"></h2>
+
+          <dl class="ward-details">
+            <div>
+              <dt>City Council</dt>
+              <dd id="council-ward"></dd>
+            </div>
+            <div>
+              <dt>School Trustee</dt>
+              <dd id="school-ward"></dd>
+            </div>
+          </dl>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
