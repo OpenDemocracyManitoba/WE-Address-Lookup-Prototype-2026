@@ -1,0 +1,458 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+
+import {
+  API_ENDPOINT,
+  LookupController,
+  buildQuery,
+  dedupeAndSortRows,
+  errorPhaseForStatus,
+  escapeSoqlLiteral,
+  formatSchoolTrustee,
+  formatTrusteeWard,
+  isSearchEligible,
+  normalizeAuthoritativeRow,
+  normalizeInput,
+  parseAddress,
+  statusMessage,
+} from "../app.js";
+
+function candidate(input, index = 0) {
+  const parsed = parseAddress(input);
+  assert.equal(parsed.eligible, true, `${input} should be eligible`);
+  return parsed.candidates[index];
+}
+
+function queryParts(input) {
+  const parsed = parseAddress(input);
+  const url = new URL(buildQuery(parsed.candidates));
+  return { parsed, url, where: url.searchParams.get("$where") };
+}
+
+function rawRow(overrides = {}) {
+  return {
+    display_address: "1 PORTAGE AVE E",
+    street_number: "1",
+    street_name: "PORTAGE",
+    street_type: "AVE",
+    street_direction: "E",
+    school_division: "Winnipeg",
+    school_division_ward: "5",
+    ward_as_of_september_17: "Fort Rouge - East Fort Garry",
+    ...overrides,
+  };
+}
+
+class FakeClock {
+  now = 0;
+  nextId = 1;
+  timers = new Map();
+
+  setTimeout = (callback, delay) => {
+    const id = this.nextId++;
+    this.timers.set(id, { at: this.now + delay, callback });
+    return id;
+  };
+
+  clearTimeout = (id) => this.timers.delete(id);
+
+  tick(milliseconds) {
+    const end = this.now + milliseconds;
+    while (true) {
+      const due = [...this.timers.entries()]
+        .filter(([, timer]) => timer.at <= end)
+        .sort((a, b) => a[1].at - b[1].at || a[0] - b[0])[0];
+      if (!due) break;
+      this.now = due[1].at;
+      this.timers.delete(due[0]);
+      due[1].callback();
+    }
+    this.now = end;
+  }
+}
+
+function deferred() {
+  let resolve;
+  let reject;
+  const promise = new Promise((res, rej) => { resolve = res; reject = rej; });
+  return { promise, resolve, reject };
+}
+
+function response(status, payload) {
+  return {
+    ok: status >= 200 && status < 300,
+    status,
+    json: async () => payload,
+  };
+}
+
+function createController(fetchFn, options = {}) {
+  const clock = new FakeClock();
+  const states = [];
+  const controller = new LookupController({
+    fetchFn,
+    debounceMs: 300,
+    timeoutMs: 1_000,
+    setTimeoutFn: clock.setTimeout,
+    clearTimeoutFn: clock.clearTimeout,
+    onChange: (state) => states.push({
+      phase: state.phase,
+      popupOpen: state.popupOpen,
+      activeIndex: state.activeIndex,
+      normalizedInput: state.normalizedInput,
+      results: [...state.results],
+    }),
+    ...options,
+  });
+  return { clock, controller, states };
+}
+
+const flush = () => new Promise((resolve) => setImmediate(resolve));
+
+test("normalization trims, collapses whitespace, uppercases, and normalizes apostrophes", () => {
+  assert.equal(normalizeInput("  12   d’Arcy  "), "12 D'ARCY");
+  assert.equal(normalizeInput("1 o‘connor"), "1 O'CONNOR");
+});
+
+test("normalization preserves supported hyphens, slashes, apostrophes, and periods", () => {
+  assert.equal(normalizeInput("1 Dr. David-Friesen 1/2"), "1 DR. DAVID-FRIESEN 1/2");
+});
+
+test("normalization neutralizes controls and unsupported query punctuation", () => {
+  assert.equal(normalizeInput("1 POR%\u0000_TA;GE"), "1 POR TA GE");
+});
+
+test("eligibility enforces a number and three alphanumeric street-name characters", () => {
+  for (const value of ["1", "1 ", "1 P", "1 Po", "1 .-'", "Portage"]) {
+    assert.equal(isSearchEligible(value), false, value);
+  }
+  assert.equal(isSearchEligible("1 Por"), true);
+  assert.equal(isSearchEligible("1 P-O-R"), true);
+});
+
+test("ordinary addresses parse into exact structured fields", () => {
+  assert.deepEqual(candidate("1 Portage"), {
+    streetNumber: 1, streetNumberSuffix: null, streetName: "PORTAGE",
+    streetType: null, streetDirection: null, preference: 0,
+  });
+  assert.deepEqual(candidate("510 Main St"), {
+    streetNumber: 510, streetNumberSuffix: null, streetName: "MAIN",
+    streetType: "ST", streetDirection: null, preference: 0,
+  });
+  assert.deepEqual(candidate("510 Main Street"), candidate("510 Main St"));
+  assert.deepEqual(candidate("1 Portage Avenue"), candidate("1 Portage Ave"));
+});
+
+test("explicit street type and direction are parsed only from trailing positions", () => {
+  assert.deepEqual(candidate("1000 Garfield Street N"), {
+    streetNumber: 1000, streetNumberSuffix: null, streetName: "GARFIELD",
+    streetType: "ST", streetDirection: "N", preference: 0,
+  });
+  assert.equal(candidate("1 Dr. David Friesen Dr").streetName, "DR. DAVID FRIESEN");
+  assert.equal(candidate("1 Dr. David Friesen Dr").streetType, "DR");
+  assert.equal(candidate("1 Portage Ave.").streetType, "AVE");
+});
+
+test("current ALLEY, BEND, and NW grammar fixtures parse", () => {
+  assert.equal(candidate("10 ADARA ALLEY").streetType, "ALLEY");
+  assert.equal(candidate("100 BRIXHAM BEND").streetType, "BEND");
+  assert.deepEqual(candidate("29 SERVICE 3 ST NW"), {
+    streetNumber: 29, streetNumberSuffix: null, streetName: "SERVICE 3",
+    streetType: "ST", streetDirection: "NW", preference: 0,
+  });
+});
+
+test("compact civic suffix is separated from numeric street number", () => {
+  const parsed = parseAddress("3A ELKHORN ST");
+  assert.equal(parsed.candidates[0].streetNumber, 3);
+  assert.equal(parsed.candidates[0].streetNumberSuffix, "A");
+  assert.equal(parsed.candidates[0].streetName, "ELKHORN");
+});
+
+test("spaced letter suffix produces bounded suffix and street-name readings", () => {
+  const parsed = parseAddress("3 A ELKHORN ST");
+  assert.equal(parsed.candidates.length, 2);
+  assert.equal(parsed.candidates[0].streetNumberSuffix, "A");
+  assert.equal(parsed.candidates[0].streetName, "ELKHORN");
+  assert.equal(parsed.candidates[1].streetNumberSuffix, null);
+  assert.equal(parsed.candidates[1].streetName, "A ELKHORN");
+});
+
+test("1/2 and 1/2A suffix forms parse in compact and spaced forms", () => {
+  assert.equal(candidate("371/2 LIPTON ST").streetNumberSuffix, "1/2");
+  assert.equal(candidate("37 1/2 LIPTON ST").streetNumberSuffix, "1/2");
+  assert.equal(candidate("891/2A BRAEMAR AVE").streetNumberSuffix, "1/2A");
+  assert.equal(candidate("89 1/2 A BRAEMAR AVE").streetNumberSuffix, "1/2A");
+  assert.equal(candidate("891/2A BRAEMAR AVE").streetNumber, 89);
+});
+
+test("omitted suffix adds no suffix restriction", () => {
+  const { where } = queryParts("3 Elkhorn");
+  assert.doesNotMatch(where, /street_number_suffix/);
+});
+
+test("direction-like trailing token without type yields literal-first ambiguity", () => {
+  const parsed = parseAddress("50 Wildwood E");
+  assert.equal(parsed.candidates.length, 2);
+  assert.deepEqual(parsed.candidates.map((item) => [item.streetName, item.streetDirection]), [
+    ["WILDWOOD E", null], ["WILDWOOD", "E"],
+  ]);
+  const garfield = parseAddress("1000 Garfield N");
+  assert.deepEqual(garfield.candidates.map((item) => [item.streetName, item.streetDirection]), [
+    ["GARFIELD N", null], ["GARFIELD", "N"],
+  ]);
+});
+
+test("direction remains in street name when an explicit trailing type follows", () => {
+  assert.deepEqual(candidate("50 Wildwood E Park"), {
+    streetNumber: 50, streetNumberSuffix: null, streetName: "WILDWOOD E",
+    streetType: "PK", streetDirection: null, preference: 0,
+  });
+});
+
+test("SoQL escaping doubles every apostrophe", () => {
+  assert.equal(escapeSoqlLiteral("O'BRIEN'S"), "O''BRIEN''S");
+});
+
+test("query has exact numeric number, prefix match, and optional filters", () => {
+  const { url, where } = queryParts("1000 Garfield Street N");
+  assert.equal(url.origin + url.pathname, API_ENDPOINT);
+  assert.match(where, /^street_number = 1000 AND/);
+  assert.match(where, /upper\(street_name\) like 'GARFIELD%'/);
+  assert.match(where, /upper\(street_type\) = 'ST'/);
+  assert.match(where, /upper\(street_direction\) = 'N'/);
+  assert.doesNotMatch(where, /street_number = '1000'/);
+});
+
+test("query separates a combined suffix from the numeric field", () => {
+  const { where } = queryParts("3A ELKHORN ST");
+  assert.match(where, /street_number = 3/);
+  assert.match(where, /upper\(street_number_suffix\) = 'A'/);
+  assert.doesNotMatch(where, /3A/);
+});
+
+test("query URL-encodes safe apostrophe literals", () => {
+  const { url, where } = queryParts("12 O'Brien St");
+  assert.match(url.href, /%24where=/);
+  assert.match(where, /O''BRIEN%/);
+  assert.doesNotMatch(url.search.slice(1), / O'BRIEN/);
+});
+
+test("query includes select, where, group, order and excludes forbidden fields", () => {
+  const { url } = queryParts("1 Portage");
+  for (const key of ["$select", "$where", "$group", "$order"]) assert.ok(url.searchParams.has(key));
+  assert.match(url.searchParams.get("$select"), /street_address as display_address/);
+  assert.match(url.searchParams.get("$group"), /street_number_suffix/);
+  const all = [...url.searchParams.values()].join(" ");
+  assert.doesNotMatch(all, /full_address/);
+  assert.doesNotMatch(all, /(?:^|,)ward(?:,|$)/);
+  assert.match(all, /ward_as_of_september_17/);
+  assert.equal(url.searchParams.has("$limit"), false);
+});
+
+test("ambiguous candidates are combined with bounded OR alternatives", () => {
+  const { parsed, where } = queryParts("50 Wildwood E");
+  assert.equal(parsed.candidates.length, 2);
+  assert.equal((where.match(/ OR /g) || []).length, 1);
+  assert.match(where, /WILDWOOD E%/);
+  assert.match(where, /street_direction\) = 'E'/);
+});
+
+test("authoritative row uses the official display alias, not input", () => {
+  const row = normalizeAuthoritativeRow(rawRow());
+  assert.equal(row.displayAddress, "1 PORTAGE AVE E");
+  assert.equal(row.streetNumber, 1);
+  assert.equal(row.councilWard, "Fort Rouge - East Fort Garry");
+});
+
+test("identical grouped rows collapse but conflicting election tuples remain", () => {
+  const first = rawRow();
+  const conflict = rawRow({ school_division_ward: "6" });
+  const rows = dedupeAndSortRows([first, { ...first }, conflict]);
+  assert.equal(rows.length, 2);
+  assert.deepEqual(rows.map((row) => row.schoolDivisionWard), ["5", "6"]);
+});
+
+test("merged ambiguous results sort literal interpretation first and remain stable", () => {
+  const candidates = parseAddress("50 Wildwood E").candidates;
+  const rows = dedupeAndSortRows([
+    rawRow({ display_address: "50 WILDWOOD ST E", street_number: "50", street_name: "WILDWOOD", street_type: "ST", street_direction: "E" }),
+    rawRow({ display_address: "50 WILDWOOD E PK", street_number: "50", street_name: "WILDWOOD E", street_type: "PK", street_direction: undefined }),
+  ], candidates);
+  assert.deepEqual(rows.map((row) => row.displayAddress), ["50 WILDWOOD E PK", "50 WILDWOOD ST E"]);
+});
+
+test("numeric trustee ward gets one Ward prefix and named values stay verbatim", () => {
+  assert.equal(formatTrusteeWard("5"), "Ward 5");
+  for (const named of ["East Ward", "West Ward", "Centre Ward", "Rosser"]) {
+    assert.equal(formatTrusteeWard(named), named);
+  }
+});
+
+test("missing election values are visibly represented", () => {
+  assert.equal(formatTrusteeWard(null), "Not available");
+  assert.equal(formatSchoolTrustee(null, null), "Not available — Not available");
+  assert.equal(normalizeAuthoritativeRow(rawRow({ ward_as_of_september_17: null })).councilWard, null);
+});
+
+test("HTTP outcomes map to distinct phases and user messages", () => {
+  assert.equal(errorPhaseForStatus(400), "error400");
+  assert.equal(errorPhaseForStatus(429), "error429");
+  assert.equal(errorPhaseForStatus(503), "errorServer");
+  assert.match(statusMessage({ phase: "error400" }), /could not be searched/);
+  assert.match(statusMessage({ phase: "error429" }), /busy/);
+  assert.match(statusMessage({ phase: "errorServer" }), /temporarily unavailable/);
+  assert.match(statusMessage({ phase: "errorNetwork" }), /could not be reached/);
+});
+
+test("debounce replacement issues only the newest request", async () => {
+  const calls = [];
+  const { clock, controller } = createController(async (url) => {
+    calls.push(url);
+    return response(200, []);
+  });
+  controller.inputChanged("15 Mar");
+  clock.tick(200);
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  assert.equal(calls.length, 1);
+  assert.match(new URL(calls[0]).searchParams.get("$where"), /street_number = 1/);
+});
+
+test("input replacement aborts the active request", async () => {
+  let signal;
+  const pending = deferred();
+  const { clock, controller } = createController((url, options) => {
+    signal = options.signal;
+    return pending.promise;
+  });
+  controller.inputChanged("15 Mar");
+  clock.tick(300);
+  assert.equal(signal.aborted, false);
+  controller.inputChanged("1 Por");
+  assert.equal(signal.aborted, true);
+  pending.resolve(response(200, []));
+  await flush();
+});
+
+test("a stale response cannot render after rapid replacement", async () => {
+  const requests = [];
+  const { clock, controller } = createController(() => {
+    const item = deferred();
+    requests.push(item);
+    return item.promise;
+  });
+  controller.inputChanged("15 Mar");
+  clock.tick(300);
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  requests[1].resolve(response(200, [rawRow()]));
+  await flush();
+  requests[0].resolve(response(200, [rawRow({ display_address: "15 MARION ST", street_number: "15", street_name: "MARION", street_type: "ST" })]));
+  await flush();
+  assert.equal(controller.state.results.length, 1);
+  assert.equal(controller.state.results[0].displayAddress, "1 PORTAGE AVE E");
+});
+
+test("timeout aborts and exits loading with retry guidance", async () => {
+  const { clock, controller } = createController((url, { signal }) => new Promise((resolve, reject) => {
+    signal.addEventListener("abort", () => reject(new DOMException("Aborted", "AbortError")));
+  }));
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  assert.equal(controller.state.phase, "loading");
+  clock.tick(1_000);
+  await flush();
+  assert.equal(controller.state.phase, "errorTimeout");
+  assert.equal(controller.state.requestActive, false);
+  assert.match(statusMessage(controller.state), /too long/);
+});
+
+for (const [name, fetchFn, expected] of [
+  ["HTTP 400", async () => response(400, []), "error400"],
+  ["HTTP 429", async () => response(429, []), "error429"],
+  ["HTTP 5xx", async () => response(503, []), "errorServer"],
+  ["network failure", async () => { throw new TypeError("offline"); }, "errorNetwork"],
+  ["non-array payload", async () => response(200, { error: true }), "errorUnexpected"],
+  ["malformed JSON", async () => ({ ok: true, status: 200, json: async () => { throw new SyntaxError("bad json"); } }), "errorUnexpected"],
+]) {
+  test(`${name} produces ${expected} without stale suggestions`, async () => {
+    const { clock, controller } = createController(fetchFn);
+    controller.inputChanged("1 Por");
+    clock.tick(300);
+    await flush();
+    assert.equal(controller.state.phase, expected);
+    assert.equal(controller.state.popupOpen, false);
+    assert.equal(controller.state.results.length, 0);
+    assert.equal(controller.state.activeIndex, -1);
+  });
+}
+
+test("outside dismissal during debounce prevents reopening", () => {
+  let calls = 0;
+  const { clock, controller } = createController(async () => { calls += 1; return response(200, []); });
+  controller.inputChanged("1 Por");
+  controller.dismiss();
+  clock.tick(500);
+  assert.equal(calls, 0);
+  assert.equal(controller.state.popupOpen, false);
+  assert.equal(statusMessage(controller.state), "");
+});
+
+test("outside dismissal during request prevents completion from reopening", async () => {
+  const pending = deferred();
+  const { clock, controller } = createController(() => pending.promise);
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  controller.dismiss();
+  pending.resolve(response(200, [rawRow()]));
+  await flush();
+  assert.equal(controller.state.popupOpen, false);
+  assert.equal(controller.state.results.length, 0);
+});
+
+test("completed results cache reopens on valid refocus", async () => {
+  const { clock, controller } = createController(async () => response(200, [rawRow()]));
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  assert.equal(controller.state.popupOpen, true);
+  controller.dismiss();
+  assert.equal(controller.state.popupOpen, false);
+  controller.refocus();
+  assert.equal(controller.state.popupOpen, true);
+  assert.equal(controller.state.phase, "results");
+  assert.match(statusMessage(controller.state), /1 matching official address/);
+});
+
+test("keyboard navigation starts only on demand, wraps, and selection keeps official row", async () => {
+  const second = rawRow({ display_address: "1 PORTAGE AVE", street_direction: undefined });
+  const { clock, controller } = createController(async () => response(200, [rawRow(), second]));
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  assert.equal(controller.state.activeIndex, -1);
+  controller.moveActive(-1);
+  assert.equal(controller.state.activeIndex, 1);
+  controller.moveActive(1);
+  assert.equal(controller.state.activeIndex, 0);
+  const selected = controller.select(0);
+  assert.equal(controller.state.rawInput, selected.displayAddress);
+  assert.equal(controller.state.popupOpen, false);
+  assert.equal(controller.state.activeIndex, -1);
+  assert.equal(controller.state.results.length, 0);
+});
+
+test("dismissal clears active accessibility state and advances scroll reset revision", async () => {
+  const { clock, controller } = createController(async () => response(200, [rawRow()]));
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  controller.moveActive(1);
+  const before = controller.state.scrollRevision;
+  controller.dismiss();
+  assert.equal(controller.state.activeIndex, -1);
+  assert.equal(controller.state.popupOpen, false);
+  assert.ok(controller.state.scrollRevision > before);
+});
