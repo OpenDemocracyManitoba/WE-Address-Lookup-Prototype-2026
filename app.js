@@ -291,6 +291,11 @@ function dedupeAndSortNormalizedRows(rows, candidates) {
 }
 
 export function dedupeAndSortRows(rows, candidates = []) {
+  // Maintenance note: callers currently provide either complete raw Socrata rows
+  // or complete normalized rows. A hybrid row with `displayAddress` but remaining
+  // snake_case fields would bypass normalization and could collapse election-value
+  // conflicts during deduplication. No current application path creates that shape;
+  // revisit this boundary only if rows begin being normalized incrementally.
   const normalizedRows = [];
   for (const row of rows ?? []) {
     const normalized = row?.displayAddress ? row : normalizeAuthoritativeRow(row);
