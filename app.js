@@ -347,6 +347,9 @@ export function statusMessage(state) {
   if (state.phase === "results" && state.popupOpen) {
     return `${state.results.length} matching official ${state.results.length === 1 ? "address" : "addresses"}. Use the arrow keys or choose an address.`;
   }
+  if (state.phase === "selected" && state.selected) {
+    return `Election information shown for ${state.selected.displayAddress}. City Council: ${formatCouncilWard(state.selected.councilWard)}. School Trustee: ${formatSchoolTrustee(state.selected.schoolDivision, state.selected.schoolDivisionWard)}.`;
+  }
   return messages[state.phase] ?? "";
 }
 
@@ -631,6 +634,7 @@ function startBrowserApp() {
     if (resultsChanged || lastPopupOpen !== state.popupOpen) list.scrollTop = 0;
     lastPopupOpen = state.popupOpen;
     searchArea.dataset.popupOpen = String(state.popupOpen);
+    status.classList.toggle("selected-announcement", state.phase === "selected");
     status.textContent = statusMessage(state);
     retryButton.hidden = !isRetryablePhase(state.phase);
 

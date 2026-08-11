@@ -390,9 +390,24 @@ test("missing election values are visibly represented", () => {
   assert.equal(normalizeAuthoritativeRow(rawRow({ ward_as_of_september_17: null })).councilWard, null);
 });
 
-test("selected-result status stays empty because the result section contains the details", () => {
+test("selected-result status announces the official address and visible election values", () => {
   const selected = normalizeAuthoritativeRow(rawRow());
-  assert.equal(statusMessage({ phase: "selected", selected }), "");
+  assert.equal(
+    statusMessage({ phase: "selected", selected }),
+    "Election information shown for 1 PORTAGE AVE E. City Council: Fort Rouge - East Fort Garry. School Trustee: Winnipeg — Ward 5.",
+  );
+});
+
+test("selected-result status represents missing values like the visible result", () => {
+  const selected = normalizeAuthoritativeRow(rawRow({
+    ward_as_of_september_17: null,
+    school_division: null,
+    school_division_ward: null,
+  }));
+  assert.equal(
+    statusMessage({ phase: "selected", selected }),
+    "Election information shown for 1 PORTAGE AVE E. City Council: Not available. School Trustee: Not available — Not available.",
+  );
 });
 
 test("header copy, address description, and help markup match the interface", () => {

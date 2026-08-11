@@ -206,6 +206,7 @@ input:focus-visible {
   display: none;
 }
 
+.status.selected-announcement,
 .search-area[data-popup-open="true"] .status {
   position: absolute;
   width: 1px;
