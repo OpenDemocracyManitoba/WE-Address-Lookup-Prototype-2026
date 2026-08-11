@@ -15,19 +15,44 @@ const RESULT_FIELDS = Object.freeze([
 ]);
 
 const STREET_TYPES = Object.freeze({
-  ALLEY: ["ALLEY"], AVE: ["AVE", "AVENUE"], BAY: ["BAY"], BEND: ["BEND"],
-  BLVD: ["BLVD", "BOULEVARD"], CIR: ["CIR", "CIRCLE"], CLOSE: ["CLOSE"],
-  COMMON: ["COMMON"], COVE: ["COVE"], CRES: ["CRES", "CRESCENT"],
-  CROSS: ["CROSS"], CRT: ["CRT", "COURT"], DR: ["DR", "DRIVE"],
-  FWY: ["FWY", "FREEWAY"], GATE: ["GATE"], GDN: ["GDN", "GARDEN"],
-  GDNS: ["GDNS", "GARDENS"], GROVE: ["GROVE"], HWY: ["HWY", "HIGHWAY"],
-  KEY: ["KEY"], LANE: ["LANE"], MEWS: ["MEWS"], PATH: ["PATH"],
-  PK: ["PK", "PARK", "PARC"], PKY: ["PKY", "PARKWAY"],
-  PL: ["PL", "PLACE"], PROM: ["PROM", "PROMENADE"],
-  PT: ["PT", "POINT", "POINTE"], RD: ["RD", "ROAD"], RIDGE: ["RIDGE"],
-  ROW: ["ROW"], RUN: ["RUN"], SQ: ["SQ", "SQUARE", "SQUARES"],
-  ST: ["ST", "STREET"], TERR: ["TERR", "TERRACE", "TERRASSE"],
-  TRAIL: ["TRAIL"], WALK: ["WALK", "WALKWAY"], WAY: ["WAY"],
+  ALLEY: ["ALLEY"],
+  AVE: ["AVE", "AVENUE"],
+  BAY: ["BAY"],
+  BEND: ["BEND"],
+  BLVD: ["BLVD", "BOULEVARD"],
+  CIR: ["CIR", "CIRCLE"],
+  CLOSE: ["CLOSE"],
+  COMMON: ["COMMON"],
+  COVE: ["COVE"],
+  CRES: ["CRES", "CRESCENT"],
+  CROSS: ["CROSS"],
+  CRT: ["CRT", "COURT"],
+  DR: ["DR", "DRIVE"],
+  FWY: ["FWY", "FREEWAY"],
+  GATE: ["GATE"],
+  GDN: ["GDN", "GARDEN"],
+  GDNS: ["GDNS", "GARDENS"],
+  GROVE: ["GROVE"],
+  HWY: ["HWY", "HIGHWAY"],
+  KEY: ["KEY"],
+  LANE: ["LANE"],
+  MEWS: ["MEWS"],
+  PATH: ["PATH"],
+  PK: ["PK", "PARK", "PARC"],
+  PKY: ["PKY", "PARKWAY"],
+  PL: ["PL", "PLACE"],
+  PROM: ["PROM", "PROMENADE"],
+  PT: ["PT", "POINT", "POINTE"],
+  RD: ["RD", "ROAD"],
+  RIDGE: ["RIDGE"],
+  ROW: ["ROW"],
+  RUN: ["RUN"],
+  SQ: ["SQ", "SQUARE", "SQUARES"],
+  ST: ["ST", "STREET"],
+  TERR: ["TERR", "TERRACE", "TERRASSE"],
+  TRAIL: ["TRAIL"],
+  WALK: ["WALK", "WALKWAY"],
+  WAY: ["WAY"],
 });
 
 const TYPE_LOOKUP = new Map(
@@ -60,20 +85,25 @@ export function normalizeInput(value) {
 }
 
 export function normalizeStreetType(token) {
-  const cleaned = String(token ?? "").replace(/\.+$/g, "").toUpperCase();
+  const cleaned = String(token ?? "")
+    .replace(/\.+$/g, "")
+    .toUpperCase();
   return TYPE_LOOKUP.get(cleaned) ?? null;
 }
 
 function normalizeSuffix(value) {
-  const compact = String(value ?? "").replace(/\s+/g, "").toUpperCase();
+  const compact = String(value ?? "")
+    .replace(/\s+/g, "")
+    .toUpperCase();
   return SUFFIXES.has(compact) ? compact : null;
 }
 
-function makeCandidate(streetNumber, suffix, nameTokens, {
-  streetType = null,
-  streetDirection = null,
-  preference = 0,
-} = {}) {
+function makeCandidate(
+  streetNumber,
+  suffix,
+  nameTokens,
+  { streetType = null, streetDirection = null, preference = 0 } = {},
+) {
   const streetName = nameTokens.join(" ");
   if (alphanumericCount(streetName) < 3) return null;
   return Object.freeze({
@@ -89,7 +119,9 @@ function makeCandidate(streetNumber, suffix, nameTokens, {
 function interpretedTail(tokens) {
   const finalDirection = DIRECTIONS.has(tokens.at(-1)) ? tokens.at(-1) : null;
   const finalType = normalizeStreetType(tokens.at(-1));
-  const typeBeforeDirection = finalDirection ? normalizeStreetType(tokens.at(-2)) : null;
+  const typeBeforeDirection = finalDirection
+    ? normalizeStreetType(tokens.at(-2))
+    : null;
 
   if (finalDirection && typeBeforeDirection) {
     return {
@@ -118,20 +150,28 @@ function interpretedTail(tokens) {
   return null;
 }
 
-function generateTailCandidates(streetNumber, suffix, tail, preferenceBase = 0) {
+function generateTailCandidates(
+  streetNumber,
+  suffix,
+  tail,
+  preferenceBase = 0,
+) {
   const tokens = Object.freeze(tail.split(" ").filter(Boolean));
   if (!tokens.length) return Object.freeze([]);
 
   const interpretation = interpretedTail(tokens);
   const interpreted = interpretation
     ? makeCandidate(streetNumber, suffix, interpretation.nameTokens, {
-      streetType: interpretation.streetType,
-      streetDirection: interpretation.streetDirection,
-      preference: preferenceBase + (interpretation.preferInterpretation ? 0 : 1),
-    })
+        streetType: interpretation.streetType,
+        streetDirection: interpretation.streetDirection,
+        preference:
+          preferenceBase + (interpretation.preferInterpretation ? 0 : 1),
+      })
     : null;
   const literal = makeCandidate(streetNumber, suffix, tokens, {
-    preference: preferenceBase + (interpretation?.preferInterpretation && interpreted ? 1 : 0),
+    preference:
+      preferenceBase +
+      (interpretation?.preferInterpretation && interpreted ? 1 : 0),
   });
   const unique = new Map();
   for (const candidate of [literal, interpreted]) {
@@ -141,13 +181,22 @@ function generateTailCandidates(streetNumber, suffix, tail, preferenceBase = 0) 
 }
 
 function candidateKey(candidate) {
-  return [candidate.streetNumber, candidate.streetNumberSuffix, candidate.streetName,
-    candidate.streetType, candidate.streetDirection].map((value) => value ?? "").join("\u001f");
+  return [
+    candidate.streetNumber,
+    candidate.streetNumberSuffix,
+    candidate.streetName,
+    candidate.streetType,
+    candidate.streetDirection,
+  ]
+    .map((value) => value ?? "")
+    .join("\u001f");
 }
 
 export function parseAddress(value) {
   const normalizedInput = normalizeInput(value);
-  const numberMatch = normalizedInput.match(/^(\d+)(1\/2[A-N]?|[A-N])(?:\s+|$)(.*)$/u);
+  const numberMatch = normalizedInput.match(
+    /^(\d+)(1\/2[A-N]?|[A-N])(?:\s+|$)(.*)$/u,
+  );
   let streetNumber;
   let tail;
   const readings = [];
@@ -159,36 +208,73 @@ export function parseAddress(value) {
     if (suffix && tail) readings.push({ suffix, tail, preference: 0 });
   } else {
     const plainMatch = normalizedInput.match(/^(\d+)(?:\s+(.*))?$/u);
-    if (!plainMatch) return { normalizedInput, streetNumber: null, candidates: [], eligible: false };
+    if (!plainMatch)
+      return {
+        normalizedInput,
+        streetNumber: null,
+        candidates: [],
+        eligible: false,
+      };
     streetNumber = Number(plainMatch[1]);
     tail = plainMatch[2] ?? "";
     if (tail) {
       const tokens = tail.split(" ");
-      const twoTokenSuffix = tokens.length > 2 ? normalizeSuffix(`${tokens[0]}${tokens[1]}`) : null;
+      const twoTokenSuffix =
+        tokens.length > 2 ? normalizeSuffix(`${tokens[0]}${tokens[1]}`) : null;
       const oneTokenSuffix = normalizeSuffix(tokens[0]);
       if (twoTokenSuffix && tokens.slice(2).length) {
-        readings.push({ suffix: twoTokenSuffix, tail: tokens.slice(2).join(" "), preference: 0 });
+        readings.push({
+          suffix: twoTokenSuffix,
+          tail: tokens.slice(2).join(" "),
+          preference: 0,
+        });
       } else if (oneTokenSuffix && tokens.slice(1).length) {
-        readings.push({ suffix: oneTokenSuffix, tail: tokens.slice(1).join(" "), preference: 0 });
+        readings.push({
+          suffix: oneTokenSuffix,
+          tail: tokens.slice(1).join(" "),
+          preference: 0,
+        });
       }
-      readings.push({ suffix: null, tail, preference: readings.length ? 10 : 0 });
+      readings.push({
+        suffix: null,
+        tail,
+        preference: readings.length ? 10 : 0,
+      });
     }
   }
 
   if (!Number.isSafeInteger(streetNumber)) {
-    return { normalizedInput, streetNumber: null, candidates: [], eligible: false };
+    return {
+      normalizedInput,
+      streetNumber: null,
+      candidates: [],
+      eligible: false,
+    };
   }
 
   const unique = new Map();
   for (const reading of readings) {
-    for (const candidate of generateTailCandidates(streetNumber, reading.suffix, reading.tail, reading.preference)) {
+    for (const candidate of generateTailCandidates(
+      streetNumber,
+      reading.suffix,
+      reading.tail,
+      reading.preference,
+    )) {
       const key = candidateKey(candidate);
       const existing = unique.get(key);
-      if (!existing || candidate.preference < existing.preference) unique.set(key, candidate);
+      if (!existing || candidate.preference < existing.preference)
+        unique.set(key, candidate);
     }
   }
-  const candidates = Object.freeze([...unique.values()].sort((a, b) => a.preference - b.preference));
-  return { normalizedInput, streetNumber, candidates, eligible: candidates.length > 0 };
+  const candidates = Object.freeze(
+    [...unique.values()].sort((a, b) => a.preference - b.preference),
+  );
+  return {
+    normalizedInput,
+    streetNumber,
+    candidates,
+    eligible: candidates.length > 0,
+  };
 }
 
 export function isSearchEligible(value) {
@@ -204,13 +290,19 @@ function candidatePredicate(candidate) {
     `upper(street_name) like '${escapeSoqlLiteral(candidate.streetName)}%'`,
   ];
   if (candidate.streetNumberSuffix) {
-    predicates.push(`upper(street_number_suffix) = '${escapeSoqlLiteral(candidate.streetNumberSuffix)}'`);
+    predicates.push(
+      `upper(street_number_suffix) = '${escapeSoqlLiteral(candidate.streetNumberSuffix)}'`,
+    );
   }
   if (candidate.streetType) {
-    predicates.push(`upper(street_type) = '${escapeSoqlLiteral(candidate.streetType)}'`);
+    predicates.push(
+      `upper(street_type) = '${escapeSoqlLiteral(candidate.streetType)}'`,
+    );
   }
   if (candidate.streetDirection) {
-    predicates.push(`upper(street_direction) = '${escapeSoqlLiteral(candidate.streetDirection)}'`);
+    predicates.push(
+      `upper(street_direction) = '${escapeSoqlLiteral(candidate.streetDirection)}'`,
+    );
   }
   return `(${predicates.join(" AND ")})`;
 }
@@ -220,16 +312,28 @@ export function buildQuery(candidates, endpoint = API_ENDPOINT) {
     throw new TypeError("At least one parsed candidate is required.");
   }
   const streetNumber = candidates[0].streetNumber;
-  if (!Number.isSafeInteger(streetNumber) || streetNumber < 0 || candidates.some((item) => item.streetNumber !== streetNumber)) {
+  if (
+    !Number.isSafeInteger(streetNumber) ||
+    streetNumber < 0 ||
+    candidates.some((item) => item.streetNumber !== streetNumber)
+  ) {
     throw new TypeError("Candidates must share one numeric civic number.");
   }
-  const alternatives = [...new Map(candidates.map((item) => [candidateKey(item), item])).values()];
+  const alternatives = [
+    ...new Map(candidates.map((item) => [candidateKey(item), item])).values(),
+  ];
   const where = `street_number = ${streetNumber} AND (${alternatives.map(candidatePredicate).join(" OR ")})`;
   const params = new URLSearchParams();
-  params.set("$select", `street_address as display_address,${RESULT_FIELDS.slice(1).join(",")}`);
+  params.set(
+    "$select",
+    `street_address as display_address,${RESULT_FIELDS.slice(1).join(",")}`,
+  );
   params.set("$where", where);
   params.set("$group", RESULT_FIELDS.join(","));
-  params.set("$order", RESULT_FIELDS.slice(1).concat("street_address").join(","));
+  params.set(
+    "$order",
+    RESULT_FIELDS.slice(1).concat("street_address").join(","),
+  );
   return `${endpoint}?${params.toString()}`;
 }
 
@@ -239,8 +343,13 @@ function cleanApiString(value) {
 
 export function normalizeAuthoritativeRow(row) {
   if (!row || typeof row !== "object" || Array.isArray(row)) return null;
-  const displayAddress = cleanApiString(row.display_address ?? row.street_address);
-  const streetNumberValue = typeof row.street_number === "number" ? row.street_number : Number(row.street_number);
+  const displayAddress = cleanApiString(
+    row.display_address ?? row.street_address,
+  );
+  const streetNumberValue =
+    typeof row.street_number === "number"
+      ? row.street_number
+      : Number(row.street_number);
   if (!displayAddress || !Number.isFinite(streetNumberValue)) return null;
   return {
     displayAddress,
@@ -256,19 +365,46 @@ export function normalizeAuthoritativeRow(row) {
 }
 
 function rowKey(row) {
-  return [row.displayAddress, row.streetNumber, row.streetNumberSuffix, row.streetName,
-    row.streetType, row.streetDirection, row.schoolDivision, row.schoolDivisionWard,
-    row.councilWard].map((value) => value ?? "").join("\u001f");
+  return [
+    row.displayAddress,
+    row.streetNumber,
+    row.streetNumberSuffix,
+    row.streetName,
+    row.streetType,
+    row.streetDirection,
+    row.schoolDivision,
+    row.schoolDivisionWard,
+    row.councilWard,
+  ]
+    .map((value) => value ?? "")
+    .join("\u001f");
 }
 
 function candidateMatchRank(row, candidates) {
   let best = Number.MAX_SAFE_INTEGER;
   for (const candidate of candidates ?? []) {
     if (row.streetNumber !== candidate.streetNumber) continue;
-    if (!String(row.streetName ?? "").toUpperCase().startsWith(candidate.streetName)) continue;
-    if (candidate.streetNumberSuffix && row.streetNumberSuffix?.toUpperCase() !== candidate.streetNumberSuffix) continue;
-    if (candidate.streetType && row.streetType?.toUpperCase() !== candidate.streetType) continue;
-    if (candidate.streetDirection && row.streetDirection?.toUpperCase() !== candidate.streetDirection) continue;
+    if (
+      !String(row.streetName ?? "")
+        .toUpperCase()
+        .startsWith(candidate.streetName)
+    )
+      continue;
+    if (
+      candidate.streetNumberSuffix &&
+      row.streetNumberSuffix?.toUpperCase() !== candidate.streetNumberSuffix
+    )
+      continue;
+    if (
+      candidate.streetType &&
+      row.streetType?.toUpperCase() !== candidate.streetType
+    )
+      continue;
+    if (
+      candidate.streetDirection &&
+      row.streetDirection?.toUpperCase() !== candidate.streetDirection
+    )
+      continue;
     best = Math.min(best, candidate.preference);
   }
   return best;
@@ -277,13 +413,29 @@ function candidateMatchRank(row, candidates) {
 function dedupeAndSortNormalizedRows(rows, candidates) {
   const unique = new Map();
   for (const row of rows) unique.set(rowKey(row), row);
-  const collator = new Intl.Collator("en-CA", { numeric: true, sensitivity: "base" });
+  const collator = new Intl.Collator("en-CA", {
+    numeric: true,
+    sensitivity: "base",
+  });
   return [...unique.values()].sort((a, b) => {
-    const rankDifference = candidateMatchRank(a, candidates) - candidateMatchRank(b, candidates);
+    const rankDifference =
+      candidateMatchRank(a, candidates) - candidateMatchRank(b, candidates);
     if (rankDifference) return rankDifference;
-    for (const key of ["streetNumber", "streetNumberSuffix", "streetName", "streetType", "streetDirection",
-      "displayAddress", "councilWard", "schoolDivision", "schoolDivisionWard"]) {
-      const difference = collator.compare(String(a[key] ?? ""), String(b[key] ?? ""));
+    for (const key of [
+      "streetNumber",
+      "streetNumberSuffix",
+      "streetName",
+      "streetType",
+      "streetDirection",
+      "displayAddress",
+      "councilWard",
+      "schoolDivision",
+      "schoolDivisionWard",
+    ]) {
+      const difference = collator.compare(
+        String(a[key] ?? ""),
+        String(b[key] ?? ""),
+      );
       if (difference) return difference;
     }
     return 0;
@@ -291,14 +443,11 @@ function dedupeAndSortNormalizedRows(rows, candidates) {
 }
 
 export function dedupeAndSortRows(rows, candidates = []) {
-  // Maintenance note: callers currently provide either complete raw Socrata rows
-  // or complete normalized rows. A hybrid row with `displayAddress` but remaining
-  // snake_case fields would bypass normalization and could collapse election-value
-  // conflicts during deduplication. No current application path creates that shape;
-  // revisit this boundary only if rows begin being normalized incrementally.
   const normalizedRows = [];
   for (const row of rows ?? []) {
-    const normalized = row?.displayAddress ? row : normalizeAuthoritativeRow(row);
+    const normalized = row?.displayAddress
+      ? row
+      : normalizeAuthoritativeRow(row);
     if (normalized) normalizedRows.push(normalized);
   }
   return dedupeAndSortNormalizedRows(normalizedRows, candidates);
@@ -333,16 +482,24 @@ export function isRetryablePhase(phase) {
 
 export function statusMessage(state) {
   const messages = {
-    guidance: "Keep typing: enter a civic number and at least three letters of the street name.",
+    guidance:
+      "Keep typing: enter a civic number and at least three letters of the street name.",
     pending: "Looking up official City addresses…",
     loading: "Looking up official City addresses…",
-    empty: "No matching Winnipeg addresses found. Try omitting the street type or entering less of the street name.",
-    error400: "That address could not be searched. Check the civic number and street name, then try again.",
-    error429: "The City address service is busy. Wait a moment, then try again.",
-    errorServer: "The City address service is temporarily unavailable. Try again shortly.",
-    errorTimeout: "The City address service took too long to respond. Try again.",
-    errorNetwork: "The City address service could not be reached. Check your connection and try again.",
-    errorUnexpected: "The City address service returned an unexpected response. Try again.",
+    empty:
+      "No matching Winnipeg addresses found. Try omitting the street type or entering less of the street name.",
+    error400:
+      "That address could not be searched. Check the civic number and street name, then try again.",
+    error429:
+      "The City address service is busy. Wait a moment, then try again.",
+    errorServer:
+      "The City address service is temporarily unavailable. Try again shortly.",
+    errorTimeout:
+      "The City address service took too long to respond. Try again.",
+    errorNetwork:
+      "The City address service could not be reached. Check your connection and try again.",
+    errorUnexpected:
+      "The City address service returned an unexpected response. Try again.",
   };
   if (state.phase === "results" && state.popupOpen) {
     return `${state.results.length} matching official ${state.results.length === 1 ? "address" : "addresses"}. Use the arrow keys or choose an address.`;
@@ -375,8 +532,13 @@ export class LookupController {
     this.generation = 0;
     this.cache = null;
     this.state = {
-      rawInput: "", normalizedInput: "", results: [], popupOpen: false,
-      activeIndex: -1, phase: "idle", selected: null,
+      rawInput: "",
+      normalizedInput: "",
+      results: [],
+      popupOpen: false,
+      activeIndex: -1,
+      phase: "idle",
+      selected: null,
     };
   }
 
@@ -417,14 +579,22 @@ export class LookupController {
     if (parsed.eligible) {
       this.pendingTimer = this.setTimeoutFn(() => {
         this.pendingTimer = null;
-        void this.startSearch(generation, parsed.normalizedInput, parsed.candidates);
+        void this.startSearch(
+          generation,
+          parsed.normalizedInput,
+          parsed.candidates,
+        );
       }, this.debounceMs);
     }
     this.emit();
   }
 
   async startSearch(generation, normalizedInput, candidates) {
-    if (generation !== this.generation || normalizedInput !== this.state.normalizedInput) return;
+    if (
+      generation !== this.generation ||
+      normalizedInput !== this.state.normalizedInput
+    )
+      return;
     const abortController = new AbortController();
     this.abortController = abortController;
     this.state.phase = "loading";
@@ -436,7 +606,9 @@ export class LookupController {
     }, this.timeoutMs);
 
     try {
-      const response = await this.fetchFn(buildQuery(candidates), { signal: abortController.signal });
+      const response = await this.fetchFn(buildQuery(candidates), {
+        signal: abortController.signal,
+      });
       if (!this.isCurrent(generation, normalizedInput, abortController)) return;
       if (!response.ok) {
         this.finishError(errorPhaseForStatus(response.status));
@@ -475,7 +647,11 @@ export class LookupController {
   retry() {
     if (!isRetryablePhase(this.state.phase)) return false;
     const parsed = parseAddress(this.state.rawInput);
-    if (!parsed.eligible || parsed.normalizedInput !== this.state.normalizedInput) return false;
+    if (
+      !parsed.eligible ||
+      parsed.normalizedInput !== this.state.normalizedInput
+    )
+      return false;
 
     this.invalidate();
     this.cache = null;
@@ -486,14 +662,20 @@ export class LookupController {
       activeIndex: -1,
       selected: null,
     };
-    void this.startSearch(this.generation, parsed.normalizedInput, parsed.candidates);
+    void this.startSearch(
+      this.generation,
+      parsed.normalizedInput,
+      parsed.candidates,
+    );
     return true;
   }
 
   isCurrent(generation, normalizedInput, abortController) {
-    return generation === this.generation
-      && normalizedInput === this.state.normalizedInput
-      && abortController === this.abortController;
+    return (
+      generation === this.generation &&
+      normalizedInput === this.state.normalizedInput &&
+      abortController === this.abortController
+    );
   }
 
   clearRequestTimer() {
@@ -521,11 +703,14 @@ export class LookupController {
   }
 
   activateInput() {
-    if (this.state.selected
-      || this.abortController !== null
-      || this.pendingTimer !== null
-      || this.state.popupOpen
-      || this.state.phase !== "idle") return false;
+    if (
+      this.state.selected ||
+      this.abortController !== null ||
+      this.pendingTimer !== null ||
+      this.state.popupOpen ||
+      this.state.phase !== "idle"
+    )
+      return false;
     if (this.cache?.normalizedInput === this.state.normalizedInput) {
       this.state.results = this.cache.results;
       this.state.popupOpen = this.cache.results.length > 0;
@@ -541,8 +726,10 @@ export class LookupController {
   moveActive(delta) {
     if (!this.state.popupOpen || !this.state.results.length) return false;
     const count = this.state.results.length;
-    if (this.state.activeIndex < 0) this.state.activeIndex = delta > 0 ? 0 : count - 1;
-    else this.state.activeIndex = (this.state.activeIndex + delta + count) % count;
+    if (this.state.activeIndex < 0)
+      this.state.activeIndex = delta > 0 ? 0 : count - 1;
+    else
+      this.state.activeIndex = (this.state.activeIndex + delta + count) % count;
     this.emit();
     return true;
   }
@@ -610,7 +797,10 @@ function startBrowserApp() {
         const option = document.createElement("li");
         option.id = `address-option-${index}`;
         option.setAttribute("role", "option");
-        option.setAttribute("aria-selected", String(index === state.activeIndex));
+        option.setAttribute(
+          "aria-selected",
+          String(index === state.activeIndex),
+        );
         option.dataset.index = String(index);
         option.textContent = row.displayAddress;
         list.append(option);
@@ -618,7 +808,10 @@ function startBrowserApp() {
       lastResults = state.results;
     } else {
       [...list.children].forEach((option, index) => {
-        option.setAttribute("aria-selected", String(index === state.activeIndex));
+        option.setAttribute(
+          "aria-selected",
+          String(index === state.activeIndex),
+        );
       });
     }
 
@@ -634,7 +827,10 @@ function startBrowserApp() {
     if (resultsChanged || lastPopupOpen !== state.popupOpen) list.scrollTop = 0;
     lastPopupOpen = state.popupOpen;
     searchArea.dataset.popupOpen = String(state.popupOpen);
-    status.classList.toggle("selected-announcement", state.phase === "selected");
+    status.classList.toggle(
+      "selected-announcement",
+      state.phase === "selected",
+    );
     status.textContent = statusMessage(state);
     retryButton.hidden = !isRetryablePhase(state.phase);
 
@@ -642,13 +838,17 @@ function startBrowserApp() {
     if (state.selected) {
       resultAddress.textContent = state.selected.displayAddress;
       councilWard.textContent = formatCouncilWard(state.selected.councilWard);
-      trusteeWard.textContent = formatSchoolTrustee(state.selected.schoolDivision, state.selected.schoolDivisionWard);
+      trusteeWard.textContent = formatSchoolTrustee(
+        state.selected.schoolDivision,
+        state.selected.schoolDivisionWard,
+      );
     } else {
       resultAddress.textContent = "";
       councilWard.textContent = "";
       trusteeWard.textContent = "";
     }
-    if (state.popupOpen) requestAnimationFrame(() => positionPopup(input, wrap, list));
+    if (state.popupOpen)
+      requestAnimationFrame(() => positionPopup(input, wrap, list));
   };
 
   const controller = new LookupController({ onChange: render });
@@ -658,13 +858,17 @@ function startBrowserApp() {
   input.addEventListener("focus", () => controller.activateInput());
   input.addEventListener("click", () => controller.activateInput());
   input.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowDown" && controller.moveActive(1)) event.preventDefault();
-    else if (event.key === "ArrowUp" && controller.moveActive(-1)) event.preventDefault();
-    else if (event.key === "Enter" && controller.selectActiveOrFirst()) event.preventDefault();
+    if (event.key === "ArrowDown" && controller.moveActive(1))
+      event.preventDefault();
+    else if (event.key === "ArrowUp" && controller.moveActive(-1))
+      event.preventDefault();
+    else if (event.key === "Enter" && controller.selectActiveOrFirst())
+      event.preventDefault();
     else if (event.key === "Escape") {
       event.preventDefault();
       controller.dismiss();
-    } else if (event.key === "Tab" && !isRetryablePhase(controller.state.phase)) controller.dismiss();
+    } else if (event.key === "Tab" && !isRetryablePhase(controller.state.phase))
+      controller.dismiss();
   });
 
   retryButton.addEventListener("click", () => {
@@ -678,17 +882,30 @@ function startBrowserApp() {
     input.blur();
   });
 
-  document.addEventListener("pointerdown", (event) => {
-    if (!searchArea.contains(event.target)) controller.dismiss();
-  }, true);
+  document.addEventListener(
+    "pointerdown",
+    (event) => {
+      if (!searchArea.contains(event.target)) controller.dismiss();
+    },
+    true,
+  );
   document.addEventListener("focusin", (event) => {
-    if (event.target !== input && event.target !== retryButton && !list.contains(event.target)) controller.dismiss();
+    if (
+      event.target !== input &&
+      event.target !== retryButton &&
+      !list.contains(event.target)
+    )
+      controller.dismiss();
   });
 
   const reposition = () => positionPopup(input, wrap, list);
   window.addEventListener("resize", reposition, { passive: true });
-  window.visualViewport?.addEventListener("resize", reposition, { passive: true });
-  window.visualViewport?.addEventListener("scroll", reposition, { passive: true });
+  window.visualViewport?.addEventListener("resize", reposition, {
+    passive: true,
+  });
+  window.visualViewport?.addEventListener("scroll", reposition, {
+    passive: true,
+  });
 }
 
 if (typeof document !== "undefined") startBrowserApp();
