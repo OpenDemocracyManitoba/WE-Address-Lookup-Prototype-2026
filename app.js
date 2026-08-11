@@ -326,11 +326,6 @@ export function isRetryablePhase(phase) {
   return RETRYABLE_ERROR_PHASES.has(phase);
 }
 
-export function selectedResultStatus(selected) {
-  if (!selected) return "";
-  return `Election information shown for ${selected.displayAddress}. City Council: ${formatCouncilWard(selected.councilWard)}. School Trustee: ${formatSchoolTrustee(selected.schoolDivision, selected.schoolDivisionWard)}.`;
-}
-
 export function statusMessage(state) {
   const messages = {
     guidance: "Keep typing: enter a civic number and at least three letters of the street name.",
@@ -347,7 +342,6 @@ export function statusMessage(state) {
   if (state.phase === "results" && state.popupOpen) {
     return `${state.results.length} matching official ${state.results.length === 1 ? "address" : "addresses"}. Use the arrow keys or choose an address.`;
   }
-  if (state.phase === "selected" && state.selected) return selectedResultStatus(state.selected);
   return messages[state.phase] ?? "";
 }
 
@@ -545,6 +539,12 @@ export class LookupController {
     return true;
   }
 
+  selectActiveOrFirst() {
+    if (!this.state.popupOpen || !this.state.results.length) return null;
+    const index = this.state.activeIndex >= 0 ? this.state.activeIndex : 0;
+    return this.select(index);
+  }
+
   select(index) {
     const selected = this.state.results[index];
     if (!selected) return null;
@@ -651,10 +651,8 @@ function startBrowserApp() {
   input.addEventListener("keydown", (event) => {
     if (event.key === "ArrowDown" && controller.moveActive(1)) event.preventDefault();
     else if (event.key === "ArrowUp" && controller.moveActive(-1)) event.preventDefault();
-    else if (event.key === "Enter" && controller.state.activeIndex >= 0) {
-      event.preventDefault();
-      controller.select(controller.state.activeIndex);
-    } else if (event.key === "Escape") {
+    else if (event.key === "Enter" && controller.selectActiveOrFirst()) event.preventDefault();
+    else if (event.key === "Escape") {
       event.preventDefault();
       controller.dismiss();
     } else if (event.key === "Tab" && !isRetryablePhase(controller.state.phase)) controller.dismiss();

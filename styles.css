@@ -60,7 +60,6 @@ body {
 }
 
 h1 {
-  max-width: 14ch;
   margin: 0;
   font-size: clamp(2rem, 7vw, 3.25rem);
   line-height: 1.04;
@@ -68,7 +67,6 @@ h1 {
 }
 
 .lede {
-  max-width: 58ch;
   margin: 1rem 0 0;
   color: var(--muted);
   font-size: clamp(1rem, 2.7vw, 1.1rem);
@@ -169,7 +167,6 @@ input:focus-visible {
   background: var(--brand);
 }
 
-.field-help,
 .status {
   margin: 0.55rem 0 0;
   color: var(--muted);
@@ -302,7 +299,6 @@ input:focus-visible {
 
   .eyebrow,
   .lede,
-  .field-help,
   .privacy-note {
     display: none;
   }
@@ -312,7 +308,6 @@ input:focus-visible {
   }
 
   h1 {
-    max-width: none;
     font-size: 1.55rem;
   }
 

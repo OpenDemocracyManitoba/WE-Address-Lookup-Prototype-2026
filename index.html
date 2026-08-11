@@ -1,19 +1,28 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="Find City Council and school trustee wards for an official Winnipeg civic address.">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Find City Council and school trustee wards for an official Winnipeg civic address."
+    />
     <title>Find your Winnipeg election wards</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="page-shell">
       <section class="lookup" aria-labelledby="page-title">
         <header class="intro">
-          <p class="eyebrow">Winnipeg civic elections</p>
-          <h1 id="page-title">Find your Winnipeg election wards</h1>
-          <p class="lede">Enter a civic street address, then choose the official City of Winnipeg address. Do not include an apartment or unit number.</p>
+          <p class="eyebrow">Winnipeg 2026 Civic and School Trustee Election</p>
+          <h1 id="page-title">Find Your Election Wards</h1>
+          <p class="lede">
+            Enter a civic street address, then choose the official City of
+            Winnipeg address. Do not include an apartment or unit number.
+          </p>
         </header>
 
         <div class="search-area" id="search-area">
@@ -32,16 +41,33 @@
               aria-autocomplete="list"
               aria-controls="address-suggestions"
               aria-expanded="false"
-              aria-describedby="address-help address-status"
-            >
-            <ul id="address-suggestions" class="suggestions" role="listbox" hidden></ul>
+              aria-describedby="address-status"
+            />
+            <ul
+              id="address-suggestions"
+              class="suggestions"
+              role="listbox"
+              hidden
+            ></ul>
           </div>
-          <p class="field-help" id="address-help">Street number and at least three letters of the street name.</p>
-          <p class="status" id="address-status" role="status" aria-live="polite" aria-atomic="true"></p>
-          <button class="retry-button" id="retry-button" type="button" hidden>Retry address search</button>
+          <p
+            class="status"
+            id="address-status"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          ></p>
+          <button class="retry-button" id="retry-button" type="button" hidden>
+            Retry address search
+          </button>
         </div>
 
-        <section class="result" id="election-result" aria-labelledby="result-address" hidden>
+        <section
+          class="result"
+          id="election-result"
+          aria-labelledby="result-address"
+          hidden
+        >
           <p class="result-kicker">Official civic address</p>
           <h2 id="result-address"></h2>
           <dl class="result-grid">
@@ -58,7 +84,8 @@
 
         <footer class="privacy-note">
           <strong>Your address stays private.</strong>
-          Searches go directly to the City of Winnipeg address service and are not stored by this page.
+          Searches go directly to the City of Winnipeg address service and are
+          not stored by this page.
         </footer>
       </section>
     </main>

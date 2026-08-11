@@ -17,7 +17,6 @@ import {
   normalizeAuthoritativeRow,
   normalizeInput,
   parseAddress,
-  selectedResultStatus,
   statusMessage,
 } from "../app.js";
 
@@ -391,24 +390,25 @@ test("missing election values are visibly represented", () => {
   assert.equal(normalizeAuthoritativeRow(rawRow({ ward_as_of_september_17: null })).councilWard, null);
 });
 
-test("selected-result status announces the official address and all visible election values", () => {
+test("selected-result status stays empty because the result section contains the details", () => {
   const selected = normalizeAuthoritativeRow(rawRow());
-  assert.equal(selectedResultStatus(selected), "Election information shown for 1 PORTAGE AVE E. City Council: Fort Rouge - East Fort Garry. School Trustee: Winnipeg — Ward 5.");
-  assert.equal(statusMessage({ phase: "selected", selected }), selectedResultStatus(selected));
+  assert.equal(statusMessage({ phase: "selected", selected }), "");
 });
 
-test("selected-result status represents missing values exactly like the visible result", () => {
-  const selected = normalizeAuthoritativeRow(rawRow({
-    ward_as_of_september_17: null,
-    school_division: null,
-    school_division_ward: null,
-  }));
-  assert.equal(selectedResultStatus(selected), "Election information shown for 1 PORTAGE AVE E. City Council: Not available. School Trustee: Not available — Not available.");
+test("header copy, address description, and help markup match the interface", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
+  assert.match(html, /<p class="eyebrow">Winnipeg 2026 Civic and School Trustee Election<\/p>/);
+  assert.match(html, /<h1 id="page-title">Find Your Election Wards<\/h1>/);
+  assert.match(html, /aria-describedby="address-status"/);
+  assert.doesNotMatch(html, /id="address-help"/);
+  assert.doesNotMatch(css.match(/h1\s*{[^}]*}/)?.[0] ?? "", /max-width\s*:/);
+  assert.doesNotMatch(css.match(/\.lede\s*{[^}]*}/)?.[0] ?? "", /max-width\s*:/);
 });
 
 test("retry control markup is a hidden native button alongside the single live status", () => {
   const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
-  assert.match(html, /<button class="retry-button" id="retry-button" type="button" hidden>Retry address search<\/button>/);
+  assert.match(html, /<button class="retry-button" id="retry-button" type="button" hidden>\s*Retry address search\s*<\/button>/);
   assert.equal((html.match(/role="status"/g) || []).length, 1);
 });
 
@@ -760,11 +760,33 @@ test("keyboard navigation starts only on demand, wraps, and selection keeps offi
   assert.equal(controller.state.activeIndex, 1);
   controller.moveActive(1);
   assert.equal(controller.state.activeIndex, 0);
-  const selected = controller.select(0);
+  const selected = controller.selectActiveOrFirst();
   assert.equal(controller.state.rawInput, selected.displayAddress);
   assert.equal(controller.state.popupOpen, false);
   assert.equal(controller.state.activeIndex, -1);
   assert.equal(controller.state.results.length, 0);
+});
+
+test("Enter selection chooses the first result when no option is active", async () => {
+  const second = rawRow({ display_address: "1 PORTAGE AVE", street_direction: undefined });
+  const { clock, controller } = createController(async () => response(200, [rawRow(), second]));
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+
+  assert.equal(controller.state.activeIndex, -1);
+  const expected = controller.state.results[0];
+  const selected = controller.selectActiveOrFirst();
+  assert.equal(selected, expected);
+  assert.equal(controller.state.selected, expected);
+  assert.equal(controller.state.popupOpen, false);
+});
+
+test("Enter selection does nothing when suggestions are not open", () => {
+  const { controller } = createController(async () => response(200, []));
+  assert.equal(controller.selectActiveOrFirst(), null);
+  assert.equal(controller.state.phase, "idle");
+  assert.equal(controller.state.selected, null);
 });
 
 test("selection remains closed on later input activation", async () => {
