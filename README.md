@@ -40,6 +40,8 @@ Civic suffixes are kept separate from the numeric number. Compact `3A` and space
 
 All current official street types are recognized in trailing position, with conservative long-form aliases such as `avenue` to `AVE`, `street` to `ST`, `park`/`parc` to `PK`, and `terrace`/`terrasse` to `TERR`. A period on a trailing type such as `Ave.` is ignored, while periods in names such as `DR. DAVID FRIESEN` are preserved. Current directions are `N`, `S`, `E`, `W`, `NW`, and `SW`.
 
+Tail parsing generates a small immutable candidate set instead of destructively removing tokens. A recognized trailing type, or type plus direction, keeps the established structured interpretation first and adds at most one literal full-tail street-name fallback. This allows names ending in type-like words, such as `ASSINIBOINE PARK` and `COURT`, without adding address-specific exceptions. Identical candidates are deduplicated. Combined with the two bounded civic-suffix readings, any input produces at most four candidates.
+
 A direction after an explicit type is unambiguous. A trailing direction-like token without a type produces at most two direction interpretations: literal street name first, then a direction-filtered reading. This lets `50 Wildwood E` find the literal `WILDWOOD E` name while `1000 Garfield N` can find `GARFIELD ST N`. With `50 Wildwood E Park`, `E` remains part of the name and `Park` maps to `PK`.
 
 The SoQL predicate holds `street_number` as an exact numeric comparison outside the bounded alternatives. Each alternative uses a case-insensitive `street_name` prefix and only adds exact suffix, type, or direction filters when supplied. Results are grouped by every selected source field and deterministically ordered. No result limit is imposed, so every grouped result from the complete exact-number/prefix query is displayed.
@@ -50,7 +52,7 @@ Eligible input is debounced for 300 ms. Every edit cancels the debounce, aborts 
 
 Escape, Tab, and deliberate outside interaction cancel pending work, invalidate completion, close the popup, clear the active option, and reset list scrolling. Completed results for unchanged input may remain in a one-input memory cache and reopen on refocus; selection clears that cache. Nothing is written to cookies, local storage, session storage, analytics, or telemetry.
 
-The input implements the standard combobox/listbox pattern. Arrow keys wrap through options while DOM focus stays on the input; Enter selects the active option, Escape dismisses, and Tab follows normal focus order. No option is active until keyboard navigation begins. Pointer and touch use native click activation, never `pointerdown`; selecting by pointer blurs the input so a soft keyboard can close.
+The input implements the standard combobox/listbox pattern. Arrow keys wrap through options while DOM focus stays on the input; Enter selects the active option, Escape dismisses, and Tab follows normal focus order. No option is active until keyboard navigation begins. Pointer and touch use native click activation, never `pointerdown`; selecting by pointer blurs the input so a soft keyboard can close. After selection, the existing atomic live status announces the official address, City Council ward, school division, and trustee ward while keyboard focus remains on the combobox. Missing values use the same `Not available` labels as the visible result.
 
 The popup is scrollable with contained overscroll, vertical touch panning, and momentum scrolling where supported. It measures usable visual-viewport space above and below the input, opens on the better side, and constrains its height to that space. Results, replacement, and closure reset the list to the top. Narrow and short-landscape styles prevent horizontal overflow and preserve room for the list.
 
@@ -58,8 +60,12 @@ The popup is scrollable with contained overscroll, vertical touch panning, and m
 
 The interface distinguishes insufficient input, loading, no results, invalid searches (HTTP 400), a busy service (429), temporary server errors (5xx), timeouts, network/CORS failures, malformed JSON, and unexpected non-array payloads. Superseded or intentionally aborted work is silent.
 
+Transient service, timeout, transport, and unexpected-payload errors display a native **Retry address search** button. Retry immediately reruns the unchanged eligible input through the controller's normal request path, including generation validation, cancellation, timeout, and stale-response protection, then returns focus to the combobox. The control is hidden for HTTP 400, insufficient input, successful results, and all other non-applicable states.
+
 This is a browser-only prototype and depends on City endpoint availability and its CORS policy. It accepts civic street addresses only, not unit numbers, postal codes, intersections, geolocation, or free-form place names. It displays the official election values as supplied and does not resolve conflicting grouped records.
 
 ## Live-service validation context
 
 The schema and vocabularies were checked against the official endpoint on August 10, 2026. `street_number` remained numeric; all required fields existed; suffixes were blank, `1/2`, `1/2A`, and letters `A` through `N`; street directions were blank, `E`, `N`, `NW`, `S`, `SW`, and `W`; and the official nonblank street types matched the supported type table in `app.js`.
+
+Live browser validation on August 11, 2026 covered the confirmed `ASSINIBOINE PARK` and `COURT` ambiguity cases, established type/direction regressions, compact and spaced suffix parsing, keyboard selection and its complete live announcement, desktop and mobile layouts, constrained list scrolling, and browser console diagnostics.

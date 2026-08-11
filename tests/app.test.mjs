@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
 import {
   API_ENDPOINT,
@@ -8,12 +9,15 @@ import {
   dedupeAndSortRows,
   errorPhaseForStatus,
   escapeSoqlLiteral,
+  formatCouncilWard,
   formatSchoolTrustee,
   formatTrusteeWard,
   isSearchEligible,
+  isRetryablePhase,
   normalizeAuthoritativeRow,
   normalizeInput,
   parseAddress,
+  selectedResultStatus,
   statusMessage,
 } from "../app.js";
 
@@ -143,6 +147,42 @@ test("ordinary addresses parse into exact structured fields", () => {
   assert.deepEqual(candidate("1 Portage Avenue"), candidate("1 Portage Ave"));
 });
 
+test("recognized trailing types preserve one bounded literal street-name fallback", () => {
+  const parsed = parseAddress("300 Assiniboine Park");
+  assert.equal(parsed.candidates.length, 2);
+  assert.deepEqual(parsed.candidates.map((item) => ({
+    streetName: item.streetName,
+    streetType: item.streetType,
+    streetDirection: item.streetDirection,
+    preference: item.preference,
+  })), [
+    { streetName: "ASSINIBOINE", streetType: "PK", streetDirection: null, preference: 0 },
+    { streetName: "ASSINIBOINE PARK", streetType: null, streetDirection: null, preference: 1 },
+  ]);
+  assert.equal(Object.isFrozen(parsed.candidates), true);
+  assert.equal(parsed.candidates.every(Object.isFrozen), true);
+});
+
+test("confirmed PARK and COURT partial, ambiguous, and explicit-type inputs stay eligible", () => {
+  for (const input of [
+    "300 Ass",
+    "300 Assiniboine Park",
+    "300 Assiniboine Park Dr",
+    "1021 Cou",
+    "1021 Court",
+    "1021 Court Ave",
+  ]) {
+    assert.equal(parseAddress(input).eligible, true, input);
+  }
+  assert.deepEqual(parseAddress("1021 Court").candidates.map((item) => [
+    item.streetName, item.streetType, item.preference,
+  ]), [["COURT", null, 0]]);
+
+  const parkWhere = queryParts("300 Assiniboine Park").where;
+  assert.match(parkWhere, /upper\(street_name\) like 'ASSINIBOINE%'.*upper\(street_type\) = 'PK'/);
+  assert.match(parkWhere, /upper\(street_name\) like 'ASSINIBOINE PARK%'/);
+});
+
 test("explicit street type and direction are parsed only from trailing positions", () => {
   assert.deepEqual(candidate("1000 Garfield Street N"), {
     streetNumber: 1000, streetNumberSuffix: null, streetName: "GARFIELD",
@@ -171,11 +211,11 @@ test("compact civic suffix is separated from numeric street number", () => {
 
 test("spaced letter suffix produces bounded suffix and street-name readings", () => {
   const parsed = parseAddress("3 A ELKHORN ST");
-  assert.equal(parsed.candidates.length, 2);
+  assert.equal(parsed.candidates.length, 4);
   assert.equal(parsed.candidates[0].streetNumberSuffix, "A");
   assert.equal(parsed.candidates[0].streetName, "ELKHORN");
-  assert.equal(parsed.candidates[1].streetNumberSuffix, null);
-  assert.equal(parsed.candidates[1].streetName, "A ELKHORN");
+  assert.equal(parsed.candidates[2].streetNumberSuffix, null);
+  assert.equal(parsed.candidates[2].streetName, "A ELKHORN");
 });
 
 test("1/2 and 1/2A suffix forms parse in compact and spaced forms", () => {
@@ -290,9 +330,31 @@ test("numeric trustee ward gets one Ward prefix and named values stay verbatim",
 });
 
 test("missing election values are visibly represented", () => {
+  assert.equal(formatCouncilWard(null), "Not available");
   assert.equal(formatTrusteeWard(null), "Not available");
   assert.equal(formatSchoolTrustee(null, null), "Not available — Not available");
   assert.equal(normalizeAuthoritativeRow(rawRow({ ward_as_of_september_17: null })).councilWard, null);
+});
+
+test("selected-result status announces the official address and all visible election values", () => {
+  const selected = normalizeAuthoritativeRow(rawRow());
+  assert.equal(selectedResultStatus(selected), "Election information shown for 1 PORTAGE AVE E. City Council: Fort Rouge - East Fort Garry. School Trustee: Winnipeg — Ward 5.");
+  assert.equal(statusMessage({ phase: "selected", selected }), selectedResultStatus(selected));
+});
+
+test("selected-result status represents missing values exactly like the visible result", () => {
+  const selected = normalizeAuthoritativeRow(rawRow({
+    ward_as_of_september_17: null,
+    school_division: null,
+    school_division_ward: null,
+  }));
+  assert.equal(selectedResultStatus(selected), "Election information shown for 1 PORTAGE AVE E. City Council: Not available. School Trustee: Not available — Not available.");
+});
+
+test("retry control markup is a hidden native button alongside the single live status", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  assert.match(html, /<button class="retry-button" id="retry-button" type="button" hidden>Retry address search<\/button>/);
+  assert.equal((html.match(/role="status"/g) || []).length, 1);
 });
 
 test("HTTP outcomes map to distinct phases and user messages", () => {
@@ -303,6 +365,15 @@ test("HTTP outcomes map to distinct phases and user messages", () => {
   assert.match(statusMessage({ phase: "error429" }), /busy/);
   assert.match(statusMessage({ phase: "errorServer" }), /temporarily unavailable/);
   assert.match(statusMessage({ phase: "errorNetwork" }), /could not be reached/);
+});
+
+test("only transient service, transport, timeout, and payload failures are retryable", () => {
+  for (const phase of ["error429", "errorServer", "errorTimeout", "errorNetwork", "errorUnexpected"]) {
+    assert.equal(isRetryablePhase(phase), true, phase);
+  }
+  for (const phase of ["error400", "guidance", "loading", "empty", "results", "selected"]) {
+    assert.equal(isRetryablePhase(phase), false, phase);
+  }
 });
 
 test("debounce replacement issues only the newest request", async () => {
@@ -388,6 +459,75 @@ for (const [name, fetchFn, expected] of [
     assert.equal(controller.state.activeIndex, -1);
   });
 }
+
+test("first-class retry reruns an unchanged eligible query and can succeed", async () => {
+  let calls = 0;
+  const { clock, controller } = createController(async () => {
+    calls += 1;
+    return calls === 1 ? response(503, []) : response(200, [rawRow()]);
+  });
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  assert.equal(controller.state.phase, "errorServer");
+
+  assert.equal(controller.retry(), true);
+  assert.equal(controller.state.phase, "loading");
+  await flush();
+  assert.equal(calls, 2);
+  assert.equal(controller.state.phase, "results");
+  assert.equal(controller.state.results[0].displayAddress, "1 PORTAGE AVE E");
+});
+
+test("retry refuses non-retryable or no-longer-eligible state", async () => {
+  const { clock, controller } = createController(async () => response(400, []));
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  assert.equal(controller.state.phase, "error400");
+  assert.equal(controller.retry(), false);
+
+  controller.state.phase = "errorNetwork";
+  controller.state.rawInput = "1 Po";
+  controller.state.normalizedInput = "1 PO";
+  assert.equal(controller.retry(), false);
+});
+
+test("editing during retry aborts it and stale retry completion cannot replace the new query", async () => {
+  const retriedRequest = deferred();
+  let retriedSignal;
+  let calls = 0;
+  const { clock, controller } = createController((url, options) => {
+    calls += 1;
+    if (calls === 1) return Promise.resolve(response(503, []));
+    if (calls === 2) {
+      retriedSignal = options.signal;
+      return retriedRequest.promise;
+    }
+    return Promise.resolve(response(200, [rawRow()]));
+  });
+
+  controller.inputChanged("15 Mar");
+  clock.tick(300);
+  await flush();
+  assert.equal(controller.state.phase, "errorServer");
+  controller.retry();
+  assert.equal(retriedSignal.aborted, false);
+
+  controller.inputChanged("1 Por");
+  assert.equal(retriedSignal.aborted, true);
+  clock.tick(300);
+  await flush();
+  retriedRequest.resolve(response(200, [rawRow({
+    display_address: "15 MARION ST",
+    street_number: "15",
+    street_name: "MARION",
+    street_type: "ST",
+  })]));
+  await flush();
+  assert.equal(controller.state.results.length, 1);
+  assert.equal(controller.state.results[0].displayAddress, "1 PORTAGE AVE E");
+});
 
 test("outside dismissal during debounce prevents reopening", () => {
   let calls = 0;

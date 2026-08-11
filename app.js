@@ -37,6 +37,13 @@ const TYPE_LOOKUP = new Map(
 );
 const DIRECTIONS = new Set(["N", "S", "E", "W", "NW", "SW"]);
 const SUFFIXES = new Set(["1/2", "1/2A", ..."ABCDEFGHIJKLMN"]);
+const RETRYABLE_ERROR_PHASES = new Set([
+  "error429",
+  "errorServer",
+  "errorTimeout",
+  "errorNetwork",
+  "errorUnexpected",
+]);
 
 function alphanumericCount(value) {
   return (value.match(/[\p{L}\p{N}]/gu) || []).length;
@@ -62,47 +69,75 @@ function normalizeSuffix(value) {
   return SUFFIXES.has(compact) ? compact : null;
 }
 
-function parseTail(streetNumber, suffix, tail, preferenceBase = 0) {
-  const tokens = tail.split(" ").filter(Boolean);
-  if (!tokens.length) return [];
+function makeCandidate(streetNumber, suffix, nameTokens, {
+  streetType = null,
+  streetDirection = null,
+  preference = 0,
+} = {}) {
+  const streetName = nameTokens.join(" ");
+  if (alphanumericCount(streetName) < 3) return null;
+  return Object.freeze({
+    streetNumber,
+    streetNumberSuffix: suffix,
+    streetName,
+    streetType,
+    streetDirection,
+    preference,
+  });
+}
 
-  let streetType = null;
-  let streetDirection = null;
+function interpretedTail(tokens) {
   const finalDirection = DIRECTIONS.has(tokens.at(-1)) ? tokens.at(-1) : null;
   const finalType = normalizeStreetType(tokens.at(-1));
-  const beforeDirectionType = finalDirection ? normalizeStreetType(tokens.at(-2)) : null;
+  const typeBeforeDirection = finalDirection ? normalizeStreetType(tokens.at(-2)) : null;
 
-  if (finalDirection && beforeDirectionType) {
-    streetDirection = finalDirection;
-    streetType = beforeDirectionType;
-    tokens.splice(-2, 2);
-  } else if (finalType) {
-    streetType = finalType;
-    tokens.pop();
-  }
-
-  const makeCandidate = (nameTokens, direction, preference) => {
-    const streetName = nameTokens.join(" ");
-    if (alphanumericCount(streetName) < 3) return null;
+  if (finalDirection && typeBeforeDirection) {
     return {
-      streetNumber,
-      streetNumberSuffix: suffix,
-      streetName,
-      streetType,
-      streetDirection: direction,
-      preference,
+      nameTokens: tokens.slice(0, -2),
+      streetType: typeBeforeDirection,
+      streetDirection: finalDirection,
+      preferInterpretation: true,
     };
-  };
-
-  if (!streetType && finalDirection) {
-    return [
-      makeCandidate(tokens, null, preferenceBase),
-      makeCandidate(tokens.slice(0, -1), finalDirection, preferenceBase + 1),
-    ].filter(Boolean);
   }
+  if (finalType) {
+    return {
+      nameTokens: tokens.slice(0, -1),
+      streetType: finalType,
+      streetDirection: null,
+      preferInterpretation: true,
+    };
+  }
+  if (finalDirection) {
+    return {
+      nameTokens: tokens.slice(0, -1),
+      streetType: null,
+      streetDirection: finalDirection,
+      preferInterpretation: false,
+    };
+  }
+  return null;
+}
 
-  const candidate = makeCandidate(tokens, streetDirection, preferenceBase);
-  return candidate ? [candidate] : [];
+function generateTailCandidates(streetNumber, suffix, tail, preferenceBase = 0) {
+  const tokens = Object.freeze(tail.split(" ").filter(Boolean));
+  if (!tokens.length) return Object.freeze([]);
+
+  const interpretation = interpretedTail(tokens);
+  const interpreted = interpretation
+    ? makeCandidate(streetNumber, suffix, interpretation.nameTokens, {
+      streetType: interpretation.streetType,
+      streetDirection: interpretation.streetDirection,
+      preference: preferenceBase + (interpretation.preferInterpretation ? 0 : 1),
+    })
+    : null;
+  const literal = makeCandidate(streetNumber, suffix, tokens, {
+    preference: preferenceBase + (interpretation?.preferInterpretation && interpreted ? 1 : 0),
+  });
+  const unique = new Map();
+  for (const candidate of [literal, interpreted]) {
+    if (candidate) unique.set(candidateKey(candidate), candidate);
+  }
+  return Object.freeze([...unique.values()]);
 }
 
 function candidateKey(candidate) {
@@ -142,13 +177,13 @@ export function parseAddress(value) {
 
   const unique = new Map();
   for (const reading of readings) {
-    for (const candidate of parseTail(streetNumber, reading.suffix, reading.tail, reading.preference)) {
+    for (const candidate of generateTailCandidates(streetNumber, reading.suffix, reading.tail, reading.preference)) {
       const key = candidateKey(candidate);
       const existing = unique.get(key);
       if (!existing || candidate.preference < existing.preference) unique.set(key, candidate);
     }
   }
-  const candidates = [...unique.values()].sort((a, b) => a.preference - b.preference);
+  const candidates = Object.freeze([...unique.values()].sort((a, b) => a.preference - b.preference));
   return { normalizedInput, streetNumber, candidates, eligible: candidates.length > 0 };
 }
 
@@ -260,6 +295,10 @@ export function formatTrusteeWard(value) {
   return /^\d+$/.test(cleaned) ? `Ward ${cleaned}` : cleaned;
 }
 
+export function formatCouncilWard(value) {
+  return cleanApiString(value) ?? "Not available";
+}
+
 export function formatSchoolTrustee(division, ward) {
   const divisionLabel = cleanApiString(division) ?? "Not available";
   const wardLabel = formatTrusteeWard(ward);
@@ -271,6 +310,15 @@ export function errorPhaseForStatus(status) {
   if (status === 429) return "error429";
   if (status >= 500) return "errorServer";
   return "errorNetwork";
+}
+
+export function isRetryablePhase(phase) {
+  return RETRYABLE_ERROR_PHASES.has(phase);
+}
+
+export function selectedResultStatus(selected) {
+  if (!selected) return "";
+  return `Election information shown for ${selected.displayAddress}. City Council: ${formatCouncilWard(selected.councilWard)}. School Trustee: ${formatSchoolTrustee(selected.schoolDivision, selected.schoolDivisionWard)}.`;
 }
 
 export function statusMessage(state) {
@@ -289,7 +337,7 @@ export function statusMessage(state) {
   if (state.phase === "results" && state.popupOpen) {
     return `${state.results.length} matching official ${state.results.length === 1 ? "address" : "addresses"}. Use the arrow keys or choose an address.`;
   }
-  if (state.phase === "selected" && state.selected) return `Election information shown for ${state.selected.displayAddress}.`;
+  if (state.phase === "selected" && state.selected) return selectedResultStatus(state.selected);
   return messages[state.phase] ?? "";
 }
 
@@ -417,6 +465,27 @@ export class LookupController {
     }
   }
 
+  retry() {
+    if (!isRetryablePhase(this.state.phase)) return false;
+    const parsed = parseAddress(this.state.rawInput);
+    if (!parsed.eligible || parsed.normalizedInput !== this.state.normalizedInput) return false;
+
+    this.invalidate();
+    this.cache = null;
+    this.state = {
+      ...this.state,
+      candidates: parsed.candidates,
+      results: [],
+      popupOpen: false,
+      activeIndex: -1,
+      selected: null,
+      requestActive: false,
+      scrollRevision: this.state.scrollRevision + 1,
+    };
+    void this.startSearch(this.generation, parsed.normalizedInput, parsed.candidates);
+    return true;
+  }
+
   isCurrent(generation, normalizedInput, abortController) {
     return generation === this.generation
       && normalizedInput === this.state.normalizedInput
@@ -452,6 +521,7 @@ export class LookupController {
 
   refocus() {
     if (this.state.selected) return;
+    if (this.state.requestActive || this.pendingTimer !== null) return;
     if (this.cache?.normalizedInput === this.state.normalizedInput) {
       this.state.results = this.cache.results;
       this.state.popupOpen = this.cache.results.length > 0;
@@ -514,6 +584,7 @@ function startBrowserApp() {
   const searchArea = document.querySelector("#search-area");
   const list = document.querySelector("#address-suggestions");
   const status = document.querySelector("#address-status");
+  const retryButton = document.querySelector("#retry-button");
   const result = document.querySelector("#election-result");
   const resultAddress = document.querySelector("#result-address");
   const councilWard = document.querySelector("#council-ward");
@@ -559,11 +630,12 @@ function startBrowserApp() {
     lastPopupOpen = state.popupOpen;
     searchArea.dataset.popupOpen = String(state.popupOpen);
     status.textContent = statusMessage(state);
+    retryButton.hidden = !isRetryablePhase(state.phase);
 
     result.hidden = !state.selected;
     if (state.selected) {
       resultAddress.textContent = state.selected.displayAddress;
-      councilWard.textContent = state.selected.councilWard ?? "Not available";
+      councilWard.textContent = formatCouncilWard(state.selected.councilWard);
       trusteeWard.textContent = formatSchoolTrustee(state.selected.schoolDivision, state.selected.schoolDivisionWard);
     } else {
       resultAddress.textContent = "";
@@ -587,7 +659,11 @@ function startBrowserApp() {
     } else if (event.key === "Escape") {
       event.preventDefault();
       controller.dismiss();
-    } else if (event.key === "Tab") controller.dismiss();
+    } else if (event.key === "Tab" && !isRetryablePhase(controller.state.phase)) controller.dismiss();
+  });
+
+  retryButton.addEventListener("click", () => {
+    if (controller.retry()) input.focus({ preventScroll: true });
   });
 
   list.addEventListener("click", (event) => {
@@ -601,7 +677,7 @@ function startBrowserApp() {
     if (!searchArea.contains(event.target)) controller.dismiss();
   }, true);
   document.addEventListener("focusin", (event) => {
-    if (event.target !== input && !list.contains(event.target)) controller.dismiss();
+    if (event.target !== input && event.target !== retryButton && !list.contains(event.target)) controller.dismiss();
   });
 
   const reposition = () => positionPopup(input, wrap, list);
@@ -612,4 +688,13 @@ function startBrowserApp() {
 
 if (typeof document !== "undefined") startBrowserApp();
 
-export { API_ENDPOINT, DEBOUNCE_MS, REQUEST_TIMEOUT_MS, RESULT_FIELDS, STREET_TYPES, DIRECTIONS, SUFFIXES };
+export {
+  API_ENDPOINT,
+  DEBOUNCE_MS,
+  REQUEST_TIMEOUT_MS,
+  RESULT_FIELDS,
+  STREET_TYPES,
+  DIRECTIONS,
+  SUFFIXES,
+  RETRYABLE_ERROR_PHASES,
+};

@@ -182,6 +182,33 @@ input:focus-visible {
   font-weight: 650;
 }
 
+.retry-button {
+  min-height: 2.75rem;
+  margin-top: 0.45rem;
+  padding: 0.55rem 0.9rem;
+  border: 2px solid var(--brand);
+  border-radius: 0.4rem;
+  color: var(--brand-dark);
+  background: var(--surface);
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.retry-button:hover {
+  color: #fff;
+  background: var(--brand);
+}
+
+.retry-button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.retry-button[hidden] {
+  display: none;
+}
+
 .search-area[data-popup-open="true"] .status {
   position: absolute;
   width: 1px;
