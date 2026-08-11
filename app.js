@@ -518,18 +518,22 @@ export class LookupController {
     this.emit();
   }
 
-  refocus() {
-    if (this.state.selected) return;
-    if (this.abortController !== null || this.pendingTimer !== null) return;
+  activateInput() {
+    if (this.state.selected
+      || this.abortController !== null
+      || this.pendingTimer !== null
+      || this.state.popupOpen
+      || this.state.phase !== "idle") return false;
     if (this.cache?.normalizedInput === this.state.normalizedInput) {
       this.state.results = this.cache.results;
       this.state.popupOpen = this.cache.results.length > 0;
       this.state.activeIndex = -1;
       this.state.phase = this.cache.results.length ? "results" : "empty";
       this.emit();
-      return;
+      return true;
     }
     this.inputChanged(this.state.rawInput);
+    return true;
   }
 
   moveActive(delta) {
@@ -642,7 +646,8 @@ function startBrowserApp() {
   render(controller.state);
 
   input.addEventListener("input", () => controller.inputChanged(input.value));
-  input.addEventListener("focus", () => controller.refocus());
+  input.addEventListener("focus", () => controller.activateInput());
+  input.addEventListener("click", () => controller.activateInput());
   input.addEventListener("keydown", (event) => {
     if (event.key === "ArrowDown" && controller.moveActive(1)) event.preventDefault();
     else if (event.key === "ArrowUp" && controller.moveActive(-1)) event.preventDefault();

@@ -549,9 +549,9 @@ for (const [name, fetchFn, expected] of [
   });
 }
 
-test("first-class retry reruns an unchanged eligible query and can succeed", async () => {
+test("activation preserves a retryable error until explicit retry runs exactly once", async () => {
   let calls = 0;
-  const { clock, controller } = createController(async () => {
+  const { clock, controller, states } = createController(async () => {
     calls += 1;
     return calls === 1 ? response(503, []) : response(200, [rawRow()]);
   });
@@ -559,6 +559,15 @@ test("first-class retry reruns an unchanged eligible query and can succeed", asy
   clock.tick(300);
   await flush();
   assert.equal(controller.state.phase, "errorServer");
+  const stateCount = states.length;
+
+  assert.equal(controller.activateInput(), false);
+  assert.equal(controller.activateInput(), false);
+  clock.tick(1_000);
+  await flush();
+  assert.equal(calls, 1);
+  assert.equal(controller.state.phase, "errorServer");
+  assert.equal(states.length, stateCount);
 
   assert.equal(controller.retry(), true);
   assert.equal(controller.state.phase, "loading");
@@ -566,6 +575,33 @@ test("first-class retry reruns an unchanged eligible query and can succeed", asy
   assert.equal(calls, 2);
   assert.equal(controller.state.phase, "results");
   assert.equal(controller.state.results[0].displayAddress, "1 PORTAGE AVE E");
+});
+
+test("activation preserves non-retryable HTTP 400 without another request", async () => {
+  let calls = 0;
+  const { clock, controller, states } = createController(async () => {
+    calls += 1;
+    return response(400, []);
+  });
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  assert.equal(controller.state.phase, "error400");
+  const stateCount = states.length;
+
+  assert.equal(controller.activateInput(), false);
+  clock.tick(1_000);
+  await flush();
+  assert.equal(calls, 1);
+  assert.equal(controller.state.phase, "error400");
+  assert.equal(states.length, stateCount);
+  assert.equal(controller.retry(), false);
+
+  controller.inputChanged("15 Mar");
+  assert.equal(controller.state.phase, "pending");
+  clock.tick(300);
+  await flush();
+  assert.equal(calls, 2);
 });
 
 test("retry refuses non-retryable or no-longer-eligible state", async () => {
@@ -641,39 +677,76 @@ test("outside dismissal during request prevents completion from reopening", asyn
   assert.equal(controller.state.results.length, 0);
 });
 
-test("completed results cache reopens on valid refocus", async () => {
-  const { clock, controller } = createController(async () => response(200, [rawRow()]));
+test("activating an unchanged dismissed result cache reopens it once without fetching", async () => {
+  let calls = 0;
+  const { clock, controller, states } = createController(async () => {
+    calls += 1;
+    return response(200, [rawRow()]);
+  });
   controller.inputChanged("1 Por");
   clock.tick(300);
   await flush();
   assert.equal(controller.state.popupOpen, true);
+  controller.moveActive(1);
+  assert.equal(controller.state.activeIndex, 0);
   controller.dismiss();
   assert.equal(controller.state.popupOpen, false);
-  controller.refocus();
+  const stateCount = states.length;
+
+  assert.equal(controller.activateInput(), true);
   assert.equal(controller.state.popupOpen, true);
   assert.equal(controller.state.phase, "results");
+  assert.equal(controller.state.activeIndex, -1);
   assert.match(statusMessage(controller.state), /1 matching official address/);
+  assert.equal(calls, 1);
+  assert.equal(states.length, stateCount + 1);
+
+  assert.equal(controller.activateInput(), false);
+  assert.equal(calls, 1);
+  assert.equal(states.length, stateCount + 1);
 });
 
-test("refocus does not duplicate pending debounce or active request work", async () => {
+test("activation does not duplicate pending debounce or active request work", async () => {
   const pending = deferred();
   let calls = 0;
-  const { clock, controller } = createController(() => {
+  const { clock, controller, states } = createController(() => {
     calls += 1;
     return pending.promise;
   });
 
   controller.inputChanged("1 Por");
   assert.equal(clock.timers.size, 1);
-  controller.refocus();
+  const pendingStateCount = states.length;
+  assert.equal(controller.activateInput(), false);
   assert.equal(clock.timers.size, 1);
+  assert.equal(states.length, pendingStateCount);
   clock.tick(300);
   assert.equal(calls, 1);
 
-  controller.refocus();
+  const loadingStateCount = states.length;
+  assert.equal(controller.activateInput(), false);
   assert.equal(calls, 1);
+  assert.equal(states.length, loadingStateCount);
   pending.resolve(response(200, []));
   await flush();
+});
+
+test("activation resumes an idle dismissed search through one normal debounce", async () => {
+  let calls = 0;
+  const { clock, controller } = createController(async () => {
+    calls += 1;
+    return response(200, []);
+  });
+  controller.inputChanged("1 Por");
+  controller.dismiss();
+
+  assert.equal(controller.activateInput(), true);
+  assert.equal(controller.state.phase, "pending");
+  assert.equal(controller.activateInput(), false);
+  assert.equal(clock.timers.size, 1);
+  clock.tick(300);
+  await flush();
+  assert.equal(calls, 1);
 });
 
 test("keyboard navigation starts only on demand, wraps, and selection keeps official row", async () => {
@@ -692,6 +765,26 @@ test("keyboard navigation starts only on demand, wraps, and selection keeps offi
   assert.equal(controller.state.popupOpen, false);
   assert.equal(controller.state.activeIndex, -1);
   assert.equal(controller.state.results.length, 0);
+});
+
+test("selection remains closed on later input activation", async () => {
+  let calls = 0;
+  const { clock, controller, states } = createController(async () => {
+    calls += 1;
+    return response(200, [rawRow()]);
+  });
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  controller.select(0);
+  const stateCount = states.length;
+
+  assert.equal(controller.activateInput(), false);
+  assert.equal(controller.state.phase, "selected");
+  assert.equal(controller.state.popupOpen, false);
+  assert.equal(controller.state.results.length, 0);
+  assert.equal(calls, 1);
+  assert.equal(states.length, stateCount);
 });
 
 test("dismissal clears active accessibility state", async () => {
