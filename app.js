@@ -175,6 +175,10 @@ export function parseAddress(value) {
     }
   }
 
+  if (!Number.isSafeInteger(streetNumber)) {
+    return { normalizedInput, streetNumber: null, candidates: [], eligible: false };
+  }
+
   const unique = new Map();
   for (const reading of readings) {
     for (const candidate of generateTailCandidates(streetNumber, reading.suffix, reading.tail, reading.preference)) {
@@ -270,12 +274,9 @@ function candidateMatchRank(row, candidates) {
   return best;
 }
 
-export function dedupeAndSortRows(rows, candidates = []) {
+function dedupeAndSortNormalizedRows(rows, candidates) {
   const unique = new Map();
-  for (const raw of rows ?? []) {
-    const row = raw?.displayAddress ? raw : normalizeAuthoritativeRow(raw);
-    if (row) unique.set(rowKey(row), row);
-  }
+  for (const row of rows) unique.set(rowKey(row), row);
   const collator = new Intl.Collator("en-CA", { numeric: true, sensitivity: "base" });
   return [...unique.values()].sort((a, b) => {
     const rankDifference = candidateMatchRank(a, candidates) - candidateMatchRank(b, candidates);
@@ -287,6 +288,15 @@ export function dedupeAndSortRows(rows, candidates = []) {
     }
     return 0;
   });
+}
+
+export function dedupeAndSortRows(rows, candidates = []) {
+  const normalizedRows = [];
+  for (const row of rows ?? []) {
+    const normalized = row?.displayAddress ? row : normalizeAuthoritativeRow(row);
+    if (normalized) normalizedRows.push(normalized);
+  }
+  return dedupeAndSortNormalizedRows(normalizedRows, candidates);
 }
 
 export function formatTrusteeWard(value) {
@@ -363,8 +373,8 @@ export class LookupController {
     this.generation = 0;
     this.cache = null;
     this.state = {
-      rawInput: "", normalizedInput: "", candidates: [], results: [], popupOpen: false,
-      activeIndex: -1, phase: "idle", selected: null, requestActive: false, scrollRevision: 0,
+      rawInput: "", normalizedInput: "", results: [], popupOpen: false,
+      activeIndex: -1, phase: "idle", selected: null,
     };
   }
 
@@ -379,7 +389,6 @@ export class LookupController {
     this.requestTimer = null;
     if (this.abortController) this.abortController.abort();
     this.abortController = null;
-    this.state.requestActive = false;
   }
 
   invalidate() {
@@ -396,14 +405,11 @@ export class LookupController {
       ...this.state,
       rawInput,
       normalizedInput: parsed.normalizedInput,
-      candidates: parsed.candidates,
       results: [],
       popupOpen: false,
       activeIndex: -1,
       selected: null,
       phase: parsed.eligible ? "pending" : "guidance",
-      requestActive: false,
-      scrollRevision: this.state.scrollRevision + 1,
     };
     const generation = this.generation;
     if (parsed.eligible) {
@@ -420,7 +426,6 @@ export class LookupController {
     const abortController = new AbortController();
     this.abortController = abortController;
     this.state.phase = "loading";
-    this.state.requestActive = true;
     this.emit();
     let timedOut = false;
     this.requestTimer = this.setTimeoutFn(() => {
@@ -439,7 +444,9 @@ export class LookupController {
       try {
         payload = await response.json();
       } catch {
-        if (this.isCurrent(generation, normalizedInput, abortController)) this.finishError("errorUnexpected");
+        if (this.isCurrent(generation, normalizedInput, abortController)) {
+          this.finishError(timedOut ? "errorTimeout" : "errorUnexpected");
+        }
         return;
       }
       if (!this.isCurrent(generation, normalizedInput, abortController)) return;
@@ -455,8 +462,6 @@ export class LookupController {
       this.state.popupOpen = results.length > 0;
       this.state.activeIndex = -1;
       this.state.phase = results.length ? "results" : "empty";
-      this.state.requestActive = false;
-      this.state.scrollRevision += 1;
       this.emit();
     } catch (error) {
       if (!this.isCurrent(generation, normalizedInput, abortController)) return;
@@ -474,13 +479,10 @@ export class LookupController {
     this.cache = null;
     this.state = {
       ...this.state,
-      candidates: parsed.candidates,
       results: [],
       popupOpen: false,
       activeIndex: -1,
       selected: null,
-      requestActive: false,
-      scrollRevision: this.state.scrollRevision + 1,
     };
     void this.startSearch(this.generation, parsed.normalizedInput, parsed.candidates);
     return true;
@@ -504,8 +506,6 @@ export class LookupController {
     this.state.popupOpen = false;
     this.state.activeIndex = -1;
     this.state.phase = phase;
-    this.state.requestActive = false;
-    this.state.scrollRevision += 1;
     this.emit();
   }
 
@@ -515,19 +515,17 @@ export class LookupController {
     this.state.popupOpen = false;
     this.state.activeIndex = -1;
     this.state.phase = "idle";
-    this.state.scrollRevision += 1;
     this.emit();
   }
 
   refocus() {
     if (this.state.selected) return;
-    if (this.state.requestActive || this.pendingTimer !== null) return;
+    if (this.abortController !== null || this.pendingTimer !== null) return;
     if (this.cache?.normalizedInput === this.state.normalizedInput) {
       this.state.results = this.cache.results;
       this.state.popupOpen = this.cache.results.length > 0;
       this.state.activeIndex = -1;
       this.state.phase = this.cache.results.length ? "results" : "empty";
-      this.state.scrollRevision += 1;
       this.emit();
       return;
     }
@@ -555,7 +553,6 @@ export class LookupController {
     this.state.activeIndex = -1;
     this.state.selected = selected;
     this.state.phase = "selected";
-    this.state.scrollRevision += 1;
     this.emit();
     return selected;
   }
@@ -591,7 +588,6 @@ function startBrowserApp() {
   const trusteeWard = document.querySelector("#trustee-ward");
   let lastResults = null;
   let lastPopupOpen = false;
-  let lastScrollRevision = -1;
 
   const render = (state) => {
     if (input.value !== state.rawInput) input.value = state.rawInput;
@@ -623,10 +619,7 @@ function startBrowserApp() {
     } else {
       input.removeAttribute("aria-activedescendant");
     }
-    if (state.scrollRevision !== lastScrollRevision || lastPopupOpen !== state.popupOpen) {
-      list.scrollTop = 0;
-      lastScrollRevision = state.scrollRevision;
-    }
+    if (resultsChanged || lastPopupOpen !== state.popupOpen) list.scrollTop = 0;
     lastPopupOpen = state.popupOpen;
     searchArea.dataset.popupOpen = String(state.popupOpen);
     status.textContent = statusMessage(state);

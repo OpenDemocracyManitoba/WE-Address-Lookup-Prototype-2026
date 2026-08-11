@@ -30,6 +30,12 @@ The query aliases authoritative `street_address` to `display_address`. It does n
 
 Each request selects and groups only these civic and election fields: `street_address`, `street_number`, `street_number_suffix`, `street_name`, `street_type`, `street_direction`, `school_division`, `school_division_ward`, and `ward_as_of_september_17`. Grouping the complete tuple collapses duplicate unit rows into one civic suggestion while preserving rows whose official election values conflict. The client deduplicates only identical authoritative tuples and applies a stable final sort.
 
+### Known Regent trustee-ward conflict
+
+The City dataset returns two authoritative grouped records for `1615 REGENT AVE W`. Both records have the same municipal ward, but their school trustee values are **Ward 1** and **Ward 2**. The address is a shopping-centre property with zero dwelling units, and its underlying units span the two trustee wards. Because school-trustee voters must reside in the ward, no eligible 2026 voter can live at this address and receive the wrong trustee ward from this conflict.
+
+The prototype intentionally preserves both City records in deterministic order. It does not invent a preferred record or add address-specific resolution logic. Unique-address grouping or a dedicated conflict presentation remains a possible future product enhancement if a conflict with consequences for eligible voters is discovered.
+
 ## Parsing and query behavior
 
 Input is trimmed, internal whitespace is collapsed, common curly apostrophes are normalized, and comparisons are uppercase. Supported periods, apostrophes, hyphens, slashes, letters, and digits remain intact. Unsupported query punctuation and control characters are neutralized. Every SoQL string literal doubles apostrophes, and `URLSearchParams` encodes `$select`, `$where`, `$group`, and `$order`.

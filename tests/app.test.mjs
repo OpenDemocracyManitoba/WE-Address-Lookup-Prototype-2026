@@ -47,6 +47,29 @@ function rawRow(overrides = {}) {
   };
 }
 
+const REGENT_TRUSTEE_CONFLICT_ROWS = Object.freeze([
+  Object.freeze(rawRow({
+    display_address: "1615 REGENT AVE W",
+    street_number: "1615",
+    street_name: "REGENT",
+    street_type: "AVE",
+    street_direction: "W",
+    school_division: "River East - Transcona",
+    school_division_ward: "1",
+    ward_as_of_september_17: "Elmwood - East Kildonan",
+  })),
+  Object.freeze(rawRow({
+    display_address: "1615 REGENT AVE W",
+    street_number: "1615",
+    street_name: "REGENT",
+    street_type: "AVE",
+    street_direction: "W",
+    school_division: "River East - Transcona",
+    school_division_ward: "2",
+    ward_as_of_september_17: "Elmwood - East Kildonan",
+  })),
+]);
+
 class FakeClock {
   now = 0;
   nextId = 1;
@@ -132,6 +155,19 @@ test("eligibility enforces a number and three alphanumeric street-name character
   }
   assert.equal(isSearchEligible("1 Por"), true);
   assert.equal(isSearchEligible("1 P-O-R"), true);
+});
+
+test("eligibility accepts the safe-integer boundary and rejects larger civic numbers", () => {
+  const largestSafe = parseAddress("9007199254740991 Main");
+  assert.equal(largestSafe.eligible, true);
+  assert.equal(largestSafe.streetNumber, Number.MAX_SAFE_INTEGER);
+
+  for (const input of ["9007199254740992 Main", "99999999999999999999 Main"]) {
+    const parsed = parseAddress(input);
+    assert.equal(parsed.eligible, false, input);
+    assert.equal(parsed.streetNumber, null, input);
+    assert.deepEqual(parsed.candidates, [], input);
+  }
 });
 
 test("ordinary addresses parse into exact structured fields", () => {
@@ -313,6 +349,25 @@ test("identical grouped rows collapse but conflicting election tuples remain", (
   assert.deepEqual(rows.map((row) => row.schoolDivisionWard), ["5", "6"]);
 });
 
+test("1615 REGENT AVE W intentionally retains both trustee wards in deterministic order", () => {
+  const normalized = REGENT_TRUSTEE_CONFLICT_ROWS.map(normalizeAuthoritativeRow);
+  assert.equal(normalized.every(Boolean), true);
+
+  const rows = dedupeAndSortRows([normalized[1], normalized[0], { ...normalized[0] }]);
+  assert.equal(rows.length, 2);
+  assert.deepEqual(rows.map((row) => row.displayAddress), [
+    "1615 REGENT AVE W",
+    "1615 REGENT AVE W",
+  ]);
+  assert.deepEqual(rows.map((row) => row.councilWard), [
+    "Elmwood - East Kildonan",
+    "Elmwood - East Kildonan",
+  ]);
+  assert.deepEqual(rows.map((row) => row.schoolDivisionWard), ["1", "2"]);
+  // This zero-dwelling shopping-centre address cannot house an eligible trustee voter,
+  // so preserving both City tuples is more accurate than inventing a resolution.
+});
+
 test("merged ambiguous results sort literal interpretation first and remain stable", () => {
   const candidates = parseAddress("50 Wildwood E").candidates;
   const rows = dedupeAndSortRows([
@@ -436,8 +491,42 @@ test("timeout aborts and exits loading with retry guidance", async () => {
   clock.tick(1_000);
   await flush();
   assert.equal(controller.state.phase, "errorTimeout");
-  assert.equal(controller.state.requestActive, false);
+  assert.equal(controller.abortController, null);
   assert.match(statusMessage(controller.state), /too long/);
+});
+
+test("timeout while reading the response body produces errorTimeout", async () => {
+  const { clock, controller } = createController(async (url, { signal }) => ({
+    ok: true,
+    status: 200,
+    json: () => new Promise((resolve, reject) => {
+      signal.addEventListener("abort", () => reject(new DOMException("Aborted", "AbortError")));
+    }),
+  }));
+
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  assert.equal(controller.state.phase, "loading");
+  clock.tick(1_000);
+  await flush();
+  assert.equal(controller.state.phase, "errorTimeout");
+  assert.notEqual(controller.state.phase, "errorUnexpected");
+});
+
+test("an unsafe civic number stays in guidance and never schedules a request", () => {
+  let calls = 0;
+  const { clock, controller } = createController(async () => {
+    calls += 1;
+    return response(200, []);
+  });
+
+  controller.inputChanged("99999999999999999999 Main");
+  clock.tick(2_000);
+  assert.equal(calls, 0);
+  assert.equal(controller.state.phase, "guidance");
+  assert.equal(isRetryablePhase(controller.state.phase), false);
+  assert.equal(controller.retry(), false);
 });
 
 for (const [name, fetchFn, expected] of [
@@ -566,6 +655,27 @@ test("completed results cache reopens on valid refocus", async () => {
   assert.match(statusMessage(controller.state), /1 matching official address/);
 });
 
+test("refocus does not duplicate pending debounce or active request work", async () => {
+  const pending = deferred();
+  let calls = 0;
+  const { clock, controller } = createController(() => {
+    calls += 1;
+    return pending.promise;
+  });
+
+  controller.inputChanged("1 Por");
+  assert.equal(clock.timers.size, 1);
+  controller.refocus();
+  assert.equal(clock.timers.size, 1);
+  clock.tick(300);
+  assert.equal(calls, 1);
+
+  controller.refocus();
+  assert.equal(calls, 1);
+  pending.resolve(response(200, []));
+  await flush();
+});
+
 test("keyboard navigation starts only on demand, wraps, and selection keeps official row", async () => {
   const second = rawRow({ display_address: "1 PORTAGE AVE", street_direction: undefined });
   const { clock, controller } = createController(async () => response(200, [rawRow(), second]));
@@ -584,15 +694,13 @@ test("keyboard navigation starts only on demand, wraps, and selection keeps offi
   assert.equal(controller.state.results.length, 0);
 });
 
-test("dismissal clears active accessibility state and advances scroll reset revision", async () => {
+test("dismissal clears active accessibility state", async () => {
   const { clock, controller } = createController(async () => response(200, [rawRow()]));
   controller.inputChanged("1 Por");
   clock.tick(300);
   await flush();
   controller.moveActive(1);
-  const before = controller.state.scrollRevision;
   controller.dismiss();
   assert.equal(controller.state.activeIndex, -1);
   assert.equal(controller.state.popupOpen, false);
-  assert.ok(controller.state.scrollRevision > before);
 });
