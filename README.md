@@ -26,7 +26,7 @@ Searches go directly from the browser to the City of Winnipeg Open Data Socrata 
 
 `https://data.winnipeg.ca/resource/cam2-ii3u.json`
 
-The page footer uses the prescribed City acknowledgement and links to the [Open Government Licence – Winnipeg](https://data.winnipeg.ca/open-data-licence).
+The page footer acknowledges the use of [open data](https://en.wikipedia.org/wiki/Open_data) and links to the [City of Winnipeg Open Government Licence](https://data.winnipeg.ca/open-data-licence).
 
 The query aliases authoritative `street_address` to `display_address`. It does not request `full_address`, because that field includes unit-level apartment and condominium records. It uses `ward_as_of_september_17` for City Council rather than the legacy `ward` field. The school result comes from `school_division` and `school_division_ward`.
 
@@ -84,6 +84,46 @@ The interface distinguishes insufficient input, loading, no results, invalid sea
 Transient service, timeout, transport, and unexpected-payload errors display a native **Retry address search** button. Focusing or clicking the input preserves the displayed error without starting another request, including while moving focus between the input and Retry button. Retry immediately reruns the unchanged eligible input through the controller's normal request path, including generation validation, cancellation, timeout, and stale-response protection, then returns focus to the combobox. The control is hidden for HTTP 400, insufficient input, successful results, and all other non-applicable states.
 
 This is a browser-only prototype and depends on City endpoint availability and its CORS policy. It accepts civic street addresses only, not unit numbers, postal codes, intersections, geolocation, or free-form place names. It displays the official election values as supplied and does not resolve conflicting grouped records.
+
+## Production-readiness review recommendations
+
+The prototype's parsing, controller, geometry, edge cases, accessibility implementation, and code complexity have already received substantial review. Before producing the final application, prioritize the following additional forms of analysis because they address risks that unit-level correctness review cannot settle.
+
+### 1. Independent election-domain and data audit
+
+Build a reference set that covers every council and trustee ward, boundary properties, civic suffixes, multi-unit properties, missing values, and known conflicts. Have an election-domain expert compare its expected results with an authoritative source independent of the application's normal lookup path.
+
+Turn the current manual schema and vocabulary validation into repeatable checks for required fields, allowed values, dataset freshness, unexpectedly missing election values, and new authoritative conflicts. Define who reviews and resolves an alert before updated data reaches production.
+
+### 2. Production architecture and resilience analysis
+
+Make an explicit choice between direct browser requests, a periodically refreshed static address index, and a caching or proxy service. Compare them on privacy, operational ownership, City-service dependency, CORS exposure, throttling, freshness, latency, and election-day traffic.
+
+Measure representative and worst-case query latency, grouped result counts, and payload sizes. Define synthetic monitoring, alerts, an outage message, and a fallback or recovery policy. Also prove that every eligible grouped query remains below Socrata's documented [default result limit of 1,000](https://dev.socrata.com/docs/paging.html), or implement an explicit limit and paging strategy.
+
+### 3. Privacy, threat-model, and deployment-security review
+
+Document where civic-address query components may be visible or retained, including the City service, browser history and cache, hosting infrastructure, any future proxy, and any future telemetry. Confirm that the visible privacy statement accurately describes the final architecture.
+
+For deployment, review the Content Security Policy, `frame-ancestors`, HSTS, `X-Content-Type-Options`, `Permissions-Policy`, referrer behavior, and cache policy. The current static application has a small attack surface, so a lightweight threat model should be sufficient unless production adds a backend, analytics, administration, or other third-party code.
+
+### 4. Licensing, policy, and election-content review
+
+The footer includes the required City data acknowledgement. A broader policy review should still confirm non-endorsement and official/unofficial presentation, links to authoritative election information, correction and escalation language, applicable bilingual and plain-language expectations, records and privacy requirements, and the response to authoritative data changes during the election period.
+
+### 5. Automated real-browser integration and compatibility testing
+
+Add tests that exercise the actual DOM rendering and event wiring in `app.js`, not only the controller and static source text. Cover Chromium, Firefox, and WebKit behavior for typing, debounce, request cancellation, keyboard and pointer selection, retry, focus transitions, popup positioning, viewport changes, and selected-result rendering.
+
+Keep deterministic mocked browser tests separate from a small live-service smoke test so City-service availability does not make the main suite unreliable.
+
+### 6. Usability and trust testing
+
+Test with representative Winnipeg residents to learn whether people understand "civic address," why unit numbers are excluded, the difference between council and trustee wards, duplicate-looking authoritative options, error recovery, and the degree of confidence they place in the result. Include participants using mobile devices and assistive technology.
+
+### Optional supporting analysis
+
+Property-based parser fuzzing, mutation testing, HTML and CSS validation, and static analysis could add useful secondary confidence. They are lower priority than the domain, data, resilience, privacy, policy, browser-integration, and usability work above. Another broad refactoring review, dependency audit, or heavyweight penetration test is unlikely to add comparable value while the application remains a small dependency-free static site.
 
 ## Live-service validation context
 

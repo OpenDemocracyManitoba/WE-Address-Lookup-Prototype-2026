@@ -601,11 +601,26 @@ test("retry control markup is a hidden native button alongside the single live s
 
 test("footer preserves the privacy notice and acknowledges the City data licence", () => {
   const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
-  assert.match(html, /<strong>Your address stays private\.<\/strong>/);
+  assert.match(html, /<footer class="page-footer">/);
   assert.match(
     html,
-    /Contains information licensed under the\s*<a href="https:\/\/data\.winnipeg\.ca\/open-data-licence">Open Government Licence – Winnipeg<\/a>\./,
+    /<p class="footer-note privacy-note">\s*<strong>Privacy:<\/strong> Your address is not stored by this tool\.\s*Searches go directly to the\s*<a href="https:\/\/data\.winnipeg\.ca\/City-Planning\/Addresses\/cam2-ii3u"\s*>City of Winnipeg address service<\/a\s*>\./,
   );
+  assert.match(
+    html,
+    /<p class="footer-note attribution-note">\s*<strong>Data attribution:<\/strong> This tool uses\s*<a href="https:\/\/en\.wikipedia\.org\/wiki\/Open_data">open data<\/a>\s*licenced under the\s*<a href="https:\/\/data\.winnipeg\.ca\/open-data-licence"\s*>City of Winnipeg Open Government Licence<\/a\s*>\./,
+  );
+  assert.match(html, /<\/p>\s*<p class="footer-note attribution-note">/);
+});
+
+test("visually hidden popup status retains its normal-flow layout space", () => {
+  const css = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
+  const hiddenStatusRule = css.match(
+    /\.status\.selected-announcement,\s*\.search-area\[data-popup-open="true"\] \.status\s*{[^}]*}/,
+  )?.[0] ?? "";
+  assert.match(hiddenStatusRule, /clip-path:\s*inset\(50%\)/);
+  assert.doesNotMatch(hiddenStatusRule, /position:\s*absolute/);
+  assert.doesNotMatch(hiddenStatusRule, /margin:\s*-1px/);
 });
 
 test("HTTP outcomes map to distinct phases and user messages", () => {

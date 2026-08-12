@@ -213,13 +213,7 @@ input:focus-visible {
 
 .status.selected-announcement,
 .search-area[data-popup-open="true"] .status {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
   overflow: hidden;
-  clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;
 }
@@ -227,7 +221,7 @@ input:focus-visible {
 .result {
   position: relative;
   z-index: 1;
-  margin-top: 1.6rem;
+  margin-top: 0.5rem;
   padding: clamp(1.25rem, 5vw, 2rem);
   border: 1px solid #bdd2d8;
   border-top: 0.35rem solid var(--brand);
@@ -269,32 +263,48 @@ input:focus-visible {
   overflow-wrap: anywhere;
 }
 
-.privacy-note {
+.page-footer {
   margin-top: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--soft-line);
   color: var(--muted);
   font-size: 0.86rem;
 }
 
-.privacy-note p {
+.page-footer p {
   margin: 0;
 }
 
-.privacy-note .data-attribution {
-  margin-top: 1rem;
+.page-footer .footer-note {
+  padding: 0.7rem 0.8rem;
+  border-left: 0.2rem solid #8eb8c2;
+  color: #40555f;
+  background: #e8f1f3;
+  font-size: 0.8rem;
+  line-height: 1.4;
 }
 
-.privacy-note strong {
+.page-footer .footer-note:first-child {
+  border-radius: 0 0.3rem 0 0;
+}
+
+.page-footer .footer-note:last-child {
+  border-radius: 0 0 0.3rem 0;
+}
+
+.page-footer strong {
   color: var(--ink);
 }
 
-.privacy-note a {
+.page-footer .footer-note strong {
+  color: var(--brand-dark);
+}
+
+.page-footer a {
   color: var(--brand-dark);
   text-underline-offset: 0.14em;
 }
 
-.privacy-note a:focus-visible {
+.page-footer a:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
@@ -312,6 +322,12 @@ input:focus-visible {
   .result-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+}
+
+@media (max-width: 23.125rem) {
+  h1 {
+    font-size: clamp(1.7rem, 8.6vw, 2rem);
   }
 }
 
@@ -349,7 +365,7 @@ input:focus-visible {
     margin-top: 0.3rem;
   }
 
-  .privacy-note {
+  .page-footer {
     margin-top: 0.75rem;
     padding-top: 0.6rem;
     font-size: 0.78rem;
