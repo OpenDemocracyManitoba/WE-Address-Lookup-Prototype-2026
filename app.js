@@ -82,7 +82,8 @@ function startBrowserApp() {
       "selected-announcement",
       state.phase === "selected",
     );
-    status.textContent = statusMessage(state);
+    const nextStatus = statusMessage(state);
+    if (status.textContent !== nextStatus) status.textContent = nextStatus;
     retryButton.hidden = !isRetryablePhase(state.phase);
 
     result.hidden = !state.selected;
@@ -109,6 +110,7 @@ function startBrowserApp() {
   input.addEventListener("focus", () => controller.activateInput());
   input.addEventListener("click", () => controller.activateInput());
   input.addEventListener("keydown", (event) => {
+    if (event.isComposing) return;
     if (event.key === "ArrowDown" && controller.moveActive(1))
       event.preventDefault();
     else if (event.key === "ArrowUp" && controller.moveActive(-1))
@@ -151,6 +153,7 @@ function startBrowserApp() {
 
   const reposition = () => positionPopup(input, wrap, list);
   window.addEventListener("resize", reposition, { passive: true });
+  window.addEventListener("scroll", reposition, { passive: true });
   window.visualViewport?.addEventListener("resize", reposition, {
     passive: true,
   });
