@@ -250,6 +250,7 @@ export class LookupController {
   }
 
   dismiss() {
+    if (this.state.phase === "selected") return;
     this.invalidate();
     this.updateState({ ...clearedSuggestions(), phase: "idle" });
   }

@@ -1080,6 +1080,25 @@ test("selection remains closed on later input activation", async () => {
   assert.equal(states.length, stateCount);
 });
 
+test("outside dismissal preserves the selected result state", async () => {
+  const { clock, controller, states } = createController(async () =>
+    response(200, [rawRow()]),
+  );
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  controller.select(0);
+  const selectedState = controller.state;
+  const stateCount = states.length;
+
+  controller.dismiss();
+
+  assert.equal(controller.state, selectedState);
+  assert.equal(controller.state.phase, "selected");
+  assert.match(statusMessage(controller.state), /Election information shown/);
+  assert.equal(states.length, stateCount);
+});
+
 test("dismissal clears active accessibility state", async () => {
   const { clock, controller } = createController(async () => response(200, [rawRow()]));
   controller.inputChanged("1 Por");
