@@ -72,6 +72,6 @@ This is a browser-only prototype and depends on City endpoint availability and i
 
 ## Live-service validation context
 
-The schema and vocabularies were checked against the official endpoint on August 10, 2026. `street_number` remained numeric; all required fields existed; suffixes were blank, `1/2`, `1/2A`, and letters `A` through `N`; street directions were blank, `E`, `N`, `NW`, `S`, `SW`, and `W`; and the official nonblank street types matched the supported type table in `app.js`.
+The schema and vocabularies were checked against the official endpoint on August 10, 2026. `street_number` remained numeric; all required fields existed; suffixes were blank, `1/2`, `1/2A`, and letters `A` through `N`; street directions were blank, `E`, `N`, `NW`, `S`, `SW`, and `W`; and the official nonblank street types matched the supported type table in `address-data.js`.
 
 Live browser validation on August 11, 2026 covered the confirmed `ASSINIBOINE PARK` and `COURT` ambiguity cases, established type/direction regressions, compact and spaced suffix parsing, keyboard selection and its complete live announcement, desktop and mobile layouts, constrained list scrolling, and browser console diagnostics.

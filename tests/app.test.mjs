@@ -4,21 +4,23 @@ import { readFileSync } from "node:fs";
 
 import {
   API_ENDPOINT,
-  LookupController,
   buildQuery,
   dedupeAndSortRows,
-  errorPhaseForStatus,
   escapeSoqlLiteral,
   formatCouncilWard,
   formatSchoolTrustee,
   formatTrusteeWard,
   isSearchEligible,
-  isRetryablePhase,
   normalizeAuthoritativeRow,
   normalizeInput,
   parseAddress,
+} from "../address-data.js";
+import {
+  LookupController,
+  errorPhaseForStatus,
+  isRetryablePhase,
   statusMessage,
-} from "../app.js";
+} from "../lookup-controller.js";
 
 function candidate(input, index = 0) {
   const parsed = parseAddress(input);
