@@ -18,3 +18,16 @@ export function calculatePopupGeometry({
 
   return { side, maxHeight };
 }
+
+export class PopupGeometrySession {
+  #geometry = null;
+
+  get(dimensions) {
+    this.#geometry ??= calculatePopupGeometry(dimensions);
+    return this.#geometry;
+  }
+
+  reset() {
+    this.#geometry = null;
+  }
+}

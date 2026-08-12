@@ -22,7 +22,10 @@ import {
   isRetryablePhase,
   statusMessage,
 } from "../lookup-controller.js";
-import { calculatePopupGeometry } from "../popup-geometry.js";
+import {
+  calculatePopupGeometry,
+  PopupGeometrySession,
+} from "../popup-geometry.js";
 
 function candidate(input, index = 0) {
   const parsed = parseAddress(input);
@@ -191,6 +194,38 @@ test("popup preferred-below threshold includes its exact boundary", () => {
     viewportTop: 0,
     viewportHeight: 500,
   }), { side: "above", maxHeight: 264 });
+});
+
+test("popup geometry remains frozen until its session is reset", () => {
+  const session = new PopupGeometrySession();
+  const keyboardOpen = {
+    inputTop: 350,
+    inputBottom: 400,
+    viewportTop: 0,
+    viewportHeight: 500,
+  };
+  const keyboardClosed = {
+    inputTop: 350,
+    inputBottom: 400,
+    viewportTop: 0,
+    viewportHeight: 800,
+  };
+
+  assert.deepEqual(session.get(keyboardOpen), {
+    side: "above",
+    maxHeight: 334,
+  });
+  assert.deepEqual(session.get(keyboardClosed), {
+    side: "above",
+    maxHeight: 334,
+  });
+
+  session.reset();
+
+  assert.deepEqual(session.get(keyboardClosed), {
+    side: "below",
+    maxHeight: 384,
+  });
 });
 
 test("normalization trims, collapses whitespace, uppercases, and normalizes apostrophes", () => {
