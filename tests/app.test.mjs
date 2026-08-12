@@ -124,13 +124,7 @@ function createController(fetchFn, options = {}) {
     timeoutMs: 1_000,
     setTimeoutFn: clock.setTimeout,
     clearTimeoutFn: clock.clearTimeout,
-    onChange: (state) => states.push({
-      phase: state.phase,
-      popupOpen: state.popupOpen,
-      activeIndex: state.activeIndex,
-      normalizedInput: state.normalizedInput,
-      results: [...state.results],
-    }),
+    onChange: (state) => states.push(state),
     ...options,
   });
   return { clock, controller, states };
@@ -667,10 +661,12 @@ test("activation preserves a retryable error until explicit retry runs exactly o
 
   assert.equal(controller.retry(), true);
   assert.equal(controller.state.phase, "loading");
+  assert.equal(states.length, stateCount + 1);
   await flush();
   assert.equal(calls, 2);
   assert.equal(controller.state.phase, "results");
   assert.equal(controller.state.results[0].displayAddress, "1 PORTAGE AVE E");
+  assert.equal(states.length, stateCount + 2);
 });
 
 test("activation preserves non-retryable HTTP 400 without another request", async () => {
@@ -843,6 +839,58 @@ test("activation resumes an idle dismissed search through one normal debounce", 
   clock.tick(300);
   await flush();
   assert.equal(calls, 1);
+});
+
+test("emitted controller states remain stable after later transitions", async () => {
+  const { clock, controller, states } = createController(async () =>
+    response(200, [rawRow()]),
+  );
+
+  controller.inputChanged("1 Por");
+  const pendingState = states.at(-1);
+  clock.tick(300);
+  const loadingState = states.at(-1);
+  await flush();
+  const resultsState = states.at(-1);
+  controller.selectActiveOrFirst();
+
+  assert.deepEqual(states.map((state) => state.phase), [
+    "pending",
+    "loading",
+    "results",
+    "selected",
+  ]);
+  assert.equal(pendingState.phase, "pending");
+  assert.equal(loadingState.phase, "loading");
+  assert.equal(loadingState.results, pendingState.results);
+  assert.equal(resultsState.phase, "results");
+  assert.equal(resultsState.popupOpen, true);
+  assert.equal(resultsState.results.length, 1);
+  assert.notEqual(pendingState, loadingState);
+  assert.notEqual(loadingState, resultsState);
+});
+
+test("active-option updates replace state while retaining results identity", async () => {
+  const second = rawRow({
+    display_address: "1 PORTAGE AVE",
+    street_direction: undefined,
+  });
+  const { clock, controller, states } = createController(async () =>
+    response(200, [rawRow(), second]),
+  );
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+
+  const resultsState = controller.state;
+  const results = resultsState.results;
+  controller.moveActive(1);
+
+  assert.notEqual(controller.state, resultsState);
+  assert.equal(controller.state.results, results);
+  assert.equal(resultsState.activeIndex, -1);
+  assert.equal(controller.state.activeIndex, 0);
+  assert.equal(states.at(-1), controller.state);
 });
 
 test("keyboard navigation starts only on demand, wraps, and selection keeps official row", async () => {

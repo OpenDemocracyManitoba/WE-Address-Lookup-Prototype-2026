@@ -102,6 +102,11 @@ export class LookupController {
     this.onChange(this.state);
   }
 
+  updateState(patch) {
+    this.state = { ...this.state, ...patch };
+    this.emit();
+  }
+
   cancelWork() {
     if (this.pendingTimer !== null) this.clearTimeoutFn(this.pendingTimer);
     if (this.requestTimer !== null) this.clearTimeoutFn(this.requestTimer);
@@ -121,14 +126,6 @@ export class LookupController {
     this.invalidate();
     const parsed = parseAddress(rawInput);
     if (parsed.normalizedInput !== previousNormalized) this.cache = null;
-    this.state = {
-      ...this.state,
-      rawInput,
-      normalizedInput: parsed.normalizedInput,
-      ...clearedSuggestions(),
-      selected: null,
-      phase: parsed.eligible ? "pending" : "guidance",
-    };
     const generation = this.generation;
     if (parsed.eligible) {
       this.pendingTimer = this.setTimeoutFn(() => {
@@ -140,10 +137,21 @@ export class LookupController {
         );
       }, this.debounceMs);
     }
-    this.emit();
+    this.updateState({
+      rawInput,
+      normalizedInput: parsed.normalizedInput,
+      ...clearedSuggestions(),
+      selected: null,
+      phase: parsed.eligible ? "pending" : "guidance",
+    });
   }
 
-  async startSearch(generation, normalizedInput, candidates) {
+  async startSearch(
+    generation,
+    normalizedInput,
+    candidates,
+    resetSuggestions = false,
+  ) {
     if (
       generation !== this.generation ||
       normalizedInput !== this.state.normalizedInput
@@ -151,8 +159,10 @@ export class LookupController {
       return;
     const abortController = new AbortController();
     this.abortController = abortController;
-    this.state.phase = "loading";
-    this.emit();
+    const loadingState = resetSuggestions
+      ? { ...clearedSuggestions(), selected: null, phase: "loading" }
+      : { phase: "loading" };
+    this.updateState(loadingState);
     let timedOut = false;
     this.requestTimer = this.setTimeoutFn(() => {
       timedOut = true;
@@ -187,11 +197,12 @@ export class LookupController {
       this.clearRequestTimer();
       this.abortController = null;
       this.cache = { normalizedInput, results };
-      this.state.results = results;
-      this.state.popupOpen = results.length > 0;
-      this.state.activeIndex = -1;
-      this.state.phase = results.length ? "results" : "empty";
-      this.emit();
+      this.updateState({
+        results,
+        popupOpen: results.length > 0,
+        activeIndex: -1,
+        phase: results.length ? "results" : "empty",
+      });
     } catch (error) {
       if (!this.isCurrent(generation, normalizedInput, abortController)) return;
       if (timedOut) this.finishError("errorTimeout");
@@ -210,15 +221,11 @@ export class LookupController {
 
     this.invalidate();
     this.cache = null;
-    this.state = {
-      ...this.state,
-      ...clearedSuggestions(),
-      selected: null,
-    };
     void this.startSearch(
       this.generation,
       parsed.normalizedInput,
       parsed.candidates,
+      true,
     );
     return true;
   }
@@ -239,16 +246,12 @@ export class LookupController {
   finishError(phase) {
     this.clearRequestTimer();
     this.abortController = null;
-    Object.assign(this.state, clearedSuggestions());
-    this.state.phase = phase;
-    this.emit();
+    this.updateState({ ...clearedSuggestions(), phase });
   }
 
   dismiss() {
     this.invalidate();
-    Object.assign(this.state, clearedSuggestions());
-    this.state.phase = "idle";
-    this.emit();
+    this.updateState({ ...clearedSuggestions(), phase: "idle" });
   }
 
   activateInput() {
@@ -261,11 +264,12 @@ export class LookupController {
     )
       return false;
     if (this.cache?.normalizedInput === this.state.normalizedInput) {
-      this.state.results = this.cache.results;
-      this.state.popupOpen = this.cache.results.length > 0;
-      this.state.activeIndex = -1;
-      this.state.phase = this.cache.results.length ? "results" : "empty";
-      this.emit();
+      this.updateState({
+        results: this.cache.results,
+        popupOpen: this.cache.results.length > 0,
+        activeIndex: -1,
+        phase: this.cache.results.length ? "results" : "empty",
+      });
       return true;
     }
     this.inputChanged(this.state.rawInput);
@@ -275,11 +279,11 @@ export class LookupController {
   moveActive(delta) {
     if (!this.state.popupOpen || !this.state.results.length) return false;
     const count = this.state.results.length;
+    let activeIndex;
     if (this.state.activeIndex < 0)
-      this.state.activeIndex = delta > 0 ? 0 : count - 1;
-    else
-      this.state.activeIndex = (this.state.activeIndex + delta + count) % count;
-    this.emit();
+      activeIndex = delta > 0 ? 0 : count - 1;
+    else activeIndex = (this.state.activeIndex + delta + count) % count;
+    this.updateState({ activeIndex });
     return true;
   }
 
@@ -294,12 +298,13 @@ export class LookupController {
     if (!selected) return null;
     this.invalidate();
     this.cache = null;
-    this.state.rawInput = selected.displayAddress;
-    this.state.normalizedInput = normalizeInput(selected.displayAddress);
-    Object.assign(this.state, clearedSuggestions());
-    this.state.selected = selected;
-    this.state.phase = "selected";
-    this.emit();
+    this.updateState({
+      rawInput: selected.displayAddress,
+      normalizedInput: normalizeInput(selected.displayAddress),
+      ...clearedSuggestions(),
+      selected,
+      phase: "selected",
+    });
     return selected;
   }
 }
