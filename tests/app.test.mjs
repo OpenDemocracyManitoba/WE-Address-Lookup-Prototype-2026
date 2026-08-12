@@ -22,6 +22,7 @@ import {
   isRetryablePhase,
   statusMessage,
 } from "../lookup-controller.js";
+import { calculatePopupGeometry } from "../popup-geometry.js";
 
 function candidate(input, index = 0) {
   const parsed = parseAddress(input);
@@ -131,6 +132,66 @@ function createController(fetchFn, options = {}) {
 }
 
 const flush = () => new Promise((resolve) => setImmediate(resolve));
+
+test("popup opens below when the preferred space is available", () => {
+  assert.deepEqual(calculatePopupGeometry({
+    inputTop: 100,
+    inputBottom: 150,
+    viewportTop: 0,
+    viewportHeight: 800,
+  }), { side: "below", maxHeight: 634 });
+});
+
+test("popup opens above when below is constrained and above has more room", () => {
+  assert.deepEqual(calculatePopupGeometry({
+    inputTop: 350,
+    inputBottom: 400,
+    viewportTop: 0,
+    viewportHeight: 500,
+  }), { side: "above", maxHeight: 334 });
+});
+
+test("popup opens below when above and below space are equal", () => {
+  assert.deepEqual(calculatePopupGeometry({
+    inputTop: 240,
+    inputBottom: 260,
+    viewportTop: 0,
+    viewportHeight: 500,
+  }), { side: "below", maxHeight: 224 });
+});
+
+test("popup geometry accounts for a non-zero visual viewport offset", () => {
+  assert.deepEqual(calculatePopupGeometry({
+    inputTop: 250,
+    inputBottom: 300,
+    viewportTop: 100,
+    viewportHeight: 500,
+  }), { side: "below", maxHeight: 284 });
+});
+
+test("popup maximum height retains its minimum in a very short viewport", () => {
+  assert.deepEqual(calculatePopupGeometry({
+    inputTop: 30,
+    inputBottom: 70,
+    viewportTop: 0,
+    viewportHeight: 100,
+  }), { side: "below", maxHeight: 48 });
+});
+
+test("popup preferred-below threshold includes its exact boundary", () => {
+  assert.deepEqual(calculatePopupGeometry({
+    inputTop: 280,
+    inputBottom: 280,
+    viewportTop: 0,
+    viewportHeight: 500,
+  }), { side: "below", maxHeight: 204 });
+  assert.deepEqual(calculatePopupGeometry({
+    inputTop: 280.1,
+    inputBottom: 280.1,
+    viewportTop: 0,
+    viewportHeight: 500,
+  }), { side: "above", maxHeight: 264 });
+});
 
 test("normalization trims, collapses whitespace, uppercases, and normalizes apostrophes", () => {
   assert.equal(normalizeInput("  12   d’Arcy  "), "12 D'ARCY");

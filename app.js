@@ -7,26 +7,22 @@ import {
   LookupController,
   statusMessage,
 } from "./lookup-controller.js";
+import { calculatePopupGeometry } from "./popup-geometry.js";
 
 function positionPopup(input, wrap, list) {
   if (list.hidden) return;
   const viewport = window.visualViewport;
   const viewportTop = viewport?.offsetTop ?? 0;
   const viewportHeight = viewport?.height ?? window.innerHeight;
-  const viewportBottom = viewportTop + viewportHeight;
   const rect = input.getBoundingClientRect();
-  const margin = 10;
-  const below = Math.max(0, viewportBottom - rect.bottom - margin);
-  const above = Math.max(0, rect.top - viewportTop - margin);
-  const preferredMinimum = Math.min(240, viewportHeight * 0.42);
-  const hasPreferredRoomBelow = below >= preferredMinimum;
-  const belowHasAtLeastAsMuchRoom = below >= above;
-  const opensBelow = hasPreferredRoomBelow || belowHasAtLeastAsMuchRoom;
-  const side = opensBelow ? "below" : "above";
-  const available = side === "below" ? below : above;
-  const maximumHeight = Math.max(48, Math.floor(available - 6));
+  const { side, maxHeight } = calculatePopupGeometry({
+    inputTop: rect.top,
+    inputBottom: rect.bottom,
+    viewportTop,
+    viewportHeight,
+  });
   wrap.dataset.popupSide = side;
-  list.style.maxHeight = `${maximumHeight}px`;
+  list.style.maxHeight = `${maxHeight}px`;
 }
 
 function startBrowserApp() {
