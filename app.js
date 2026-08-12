@@ -160,18 +160,19 @@ function generateTailCandidates(
   if (!tokens.length) return Object.freeze([]);
 
   const interpretation = interpretedTail(tokens);
+  const interpretedTailIsPreferred =
+    interpretation?.preferInterpretation === true;
   const interpreted = interpretation
     ? makeCandidate(streetNumber, suffix, interpretation.nameTokens, {
         streetType: interpretation.streetType,
         streetDirection: interpretation.streetDirection,
-        preference:
-          preferenceBase + (interpretation.preferInterpretation ? 0 : 1),
+        preference: preferenceBase + (interpretedTailIsPreferred ? 0 : 1),
       })
     : null;
+  const literalPreferenceOffset =
+    interpretedTailIsPreferred && interpreted ? 1 : 0;
   const literal = makeCandidate(streetNumber, suffix, tokens, {
-    preference:
-      preferenceBase +
-      (interpretation?.preferInterpretation && interpreted ? 1 : 0),
+    preference: preferenceBase + literalPreferenceOffset,
   });
   const unique = new Map();
   for (const candidate of [literal, interpreted]) {
@@ -191,6 +192,8 @@ function candidateKey(candidate) {
     .map((value) => value ?? "")
     .join("\u001f");
 }
+
+const LITERAL_CIVIC_NUMBER_READING_FALLBACK_PREFERENCE = 10;
 
 export function parseAddress(value) {
   const normalizedInput = normalizeInput(value);
@@ -235,10 +238,13 @@ export function parseAddress(value) {
           preference: 0,
         });
       }
+      const hasSuffixReading = readings.length > 0;
       readings.push({
         suffix: null,
         tail,
-        preference: readings.length ? 10 : 0,
+        preference: hasSuffixReading
+          ? LITERAL_CIVIC_NUMBER_READING_FALLBACK_PREFERENCE
+          : 0,
       });
     }
   }
@@ -410,29 +416,31 @@ function candidateMatchRank(row, candidates) {
   return best;
 }
 
+const NORMALIZED_ROW_SORT_KEYS = Object.freeze([
+  "streetNumber",
+  "streetNumberSuffix",
+  "streetName",
+  "streetType",
+  "streetDirection",
+  "displayAddress",
+  "councilWard",
+  "schoolDivision",
+  "schoolDivisionWard",
+]);
+const NORMALIZED_ROW_COLLATOR = new Intl.Collator("en-CA", {
+  numeric: true,
+  sensitivity: "base",
+});
+
 function dedupeAndSortNormalizedRows(rows, candidates) {
   const unique = new Map();
   for (const row of rows) unique.set(rowKey(row), row);
-  const collator = new Intl.Collator("en-CA", {
-    numeric: true,
-    sensitivity: "base",
-  });
   return [...unique.values()].sort((a, b) => {
     const rankDifference =
       candidateMatchRank(a, candidates) - candidateMatchRank(b, candidates);
     if (rankDifference) return rankDifference;
-    for (const key of [
-      "streetNumber",
-      "streetNumberSuffix",
-      "streetName",
-      "streetType",
-      "streetDirection",
-      "displayAddress",
-      "councilWard",
-      "schoolDivision",
-      "schoolDivisionWard",
-    ]) {
-      const difference = collator.compare(
+    for (const key of NORMALIZED_ROW_SORT_KEYS) {
+      const difference = NORMALIZED_ROW_COLLATOR.compare(
         String(a[key] ?? ""),
         String(b[key] ?? ""),
       );
@@ -480,34 +488,43 @@ export function isRetryablePhase(phase) {
   return RETRYABLE_ERROR_PHASES.has(phase);
 }
 
+const STATUS_MESSAGES = Object.freeze({
+  guidance:
+    "Keep typing: enter a civic number and at least three letters of the street name.",
+  pending: "Looking up official City addresses…",
+  loading: "Looking up official City addresses…",
+  empty:
+    "No matching Winnipeg addresses found. Try omitting the street type or entering less of the street name.",
+  error400:
+    "That address could not be searched. Check the civic number and street name, then try again.",
+  error429:
+    "The City address service is busy. Wait a moment, then try again.",
+  errorServer:
+    "The City address service is temporarily unavailable. Try again shortly.",
+  errorTimeout:
+    "The City address service took too long to respond. Try again.",
+  errorNetwork:
+    "The City address service could not be reached. Check your connection and try again.",
+  errorUnexpected:
+    "The City address service returned an unexpected response. Try again.",
+});
+
 export function statusMessage(state) {
-  const messages = {
-    guidance:
-      "Keep typing: enter a civic number and at least three letters of the street name.",
-    pending: "Looking up official City addresses…",
-    loading: "Looking up official City addresses…",
-    empty:
-      "No matching Winnipeg addresses found. Try omitting the street type or entering less of the street name.",
-    error400:
-      "That address could not be searched. Check the civic number and street name, then try again.",
-    error429:
-      "The City address service is busy. Wait a moment, then try again.",
-    errorServer:
-      "The City address service is temporarily unavailable. Try again shortly.",
-    errorTimeout:
-      "The City address service took too long to respond. Try again.",
-    errorNetwork:
-      "The City address service could not be reached. Check your connection and try again.",
-    errorUnexpected:
-      "The City address service returned an unexpected response. Try again.",
-  };
   if (state.phase === "results" && state.popupOpen) {
     return `${state.results.length} matching official ${state.results.length === 1 ? "address" : "addresses"}. Use the arrow keys or choose an address.`;
   }
   if (state.phase === "selected" && state.selected) {
     return `Election information shown for ${state.selected.displayAddress}. City Council: ${formatCouncilWard(state.selected.councilWard)}. School Trustee: ${formatSchoolTrustee(state.selected.schoolDivision, state.selected.schoolDivisionWard)}.`;
   }
-  return messages[state.phase] ?? "";
+  return STATUS_MESSAGES[state.phase] ?? "";
+}
+
+function clearedSuggestions() {
+  return {
+    results: [],
+    popupOpen: false,
+    activeIndex: -1,
+  };
 }
 
 export class LookupController {
@@ -534,9 +551,7 @@ export class LookupController {
     this.state = {
       rawInput: "",
       normalizedInput: "",
-      results: [],
-      popupOpen: false,
-      activeIndex: -1,
+      ...clearedSuggestions(),
       phase: "idle",
       selected: null,
     };
@@ -569,9 +584,7 @@ export class LookupController {
       ...this.state,
       rawInput,
       normalizedInput: parsed.normalizedInput,
-      results: [],
-      popupOpen: false,
-      activeIndex: -1,
+      ...clearedSuggestions(),
       selected: null,
       phase: parsed.eligible ? "pending" : "guidance",
     };
@@ -657,9 +670,7 @@ export class LookupController {
     this.cache = null;
     this.state = {
       ...this.state,
-      results: [],
-      popupOpen: false,
-      activeIndex: -1,
+      ...clearedSuggestions(),
       selected: null,
     };
     void this.startSearch(
@@ -686,18 +697,14 @@ export class LookupController {
   finishError(phase) {
     this.clearRequestTimer();
     this.abortController = null;
-    this.state.results = [];
-    this.state.popupOpen = false;
-    this.state.activeIndex = -1;
+    Object.assign(this.state, clearedSuggestions());
     this.state.phase = phase;
     this.emit();
   }
 
   dismiss() {
     this.invalidate();
-    this.state.results = [];
-    this.state.popupOpen = false;
-    this.state.activeIndex = -1;
+    Object.assign(this.state, clearedSuggestions());
     this.state.phase = "idle";
     this.emit();
   }
@@ -747,9 +754,7 @@ export class LookupController {
     this.cache = null;
     this.state.rawInput = selected.displayAddress;
     this.state.normalizedInput = normalizeInput(selected.displayAddress);
-    this.state.results = [];
-    this.state.popupOpen = false;
-    this.state.activeIndex = -1;
+    Object.assign(this.state, clearedSuggestions());
     this.state.selected = selected;
     this.state.phase = "selected";
     this.emit();
@@ -768,10 +773,14 @@ function positionPopup(input, wrap, list) {
   const below = Math.max(0, viewportBottom - rect.bottom - margin);
   const above = Math.max(0, rect.top - viewportTop - margin);
   const preferredMinimum = Math.min(240, viewportHeight * 0.42);
-  const side = below >= preferredMinimum || below >= above ? "below" : "above";
+  const hasPreferredRoomBelow = below >= preferredMinimum;
+  const belowHasAtLeastAsMuchRoom = below >= above;
+  const opensBelow = hasPreferredRoomBelow || belowHasAtLeastAsMuchRoom;
+  const side = opensBelow ? "below" : "above";
   const available = side === "below" ? below : above;
+  const maximumHeight = Math.max(48, Math.floor(available - 6));
   wrap.dataset.popupSide = side;
-  list.style.maxHeight = `${Math.max(48, Math.floor(available - 6))}px`;
+  list.style.maxHeight = `${maximumHeight}px`;
 }
 
 function startBrowserApp() {
