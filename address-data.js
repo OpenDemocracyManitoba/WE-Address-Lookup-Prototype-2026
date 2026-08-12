@@ -340,6 +340,15 @@ export function normalizeAuthoritativeRow(row) {
   };
 }
 
+export function normalizeRawAuthoritativeRows(rows) {
+  const normalizedRows = [];
+  for (const row of rows) {
+    const normalized = normalizeAuthoritativeRow(row);
+    if (normalized) normalizedRows.push(normalized);
+  }
+  return normalizedRows;
+}
+
 function rowKey(row) {
   return [
     row.displayAddress,
@@ -401,7 +410,7 @@ const NORMALIZED_ROW_COLLATOR = new Intl.Collator("en-CA", {
   sensitivity: "base",
 });
 
-function dedupeAndSortNormalizedRows(rows, candidates) {
+export function dedupeAndSortNormalizedRows(rows, candidates = []) {
   const unique = new Map();
   for (const row of rows) unique.set(rowKey(row), row);
   return [...unique.values()].sort((a, b) => {
@@ -417,17 +426,6 @@ function dedupeAndSortNormalizedRows(rows, candidates) {
     }
     return 0;
   });
-}
-
-export function dedupeAndSortRows(rows, candidates = []) {
-  const normalizedRows = [];
-  for (const row of rows ?? []) {
-    const normalized = row?.displayAddress
-      ? row
-      : normalizeAuthoritativeRow(row);
-    if (normalized) normalizedRows.push(normalized);
-  }
-  return dedupeAndSortNormalizedRows(normalizedRows, candidates);
 }
 
 export function formatTrusteeWard(value) {

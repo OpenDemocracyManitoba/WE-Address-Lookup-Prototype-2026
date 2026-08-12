@@ -5,13 +5,14 @@ import { readFileSync } from "node:fs";
 import {
   API_ENDPOINT,
   buildQuery,
-  dedupeAndSortRows,
+  dedupeAndSortNormalizedRows,
   escapeSoqlLiteral,
   formatCouncilWard,
   formatSchoolTrustee,
   formatTrusteeWard,
   isSearchEligible,
   normalizeAuthoritativeRow,
+  normalizeRawAuthoritativeRows,
   normalizeInput,
   parseAddress,
 } from "../address-data.js";
@@ -370,10 +371,43 @@ test("authoritative row uses the official display alias, not input", () => {
   assert.equal(row.councilWard, "Fort Rouge - East Fort Garry");
 });
 
+test("raw authoritative rows normalize aliases, trimming, and missing values", () => {
+  const row = normalizeAuthoritativeRow(rawRow({
+    display_address: undefined,
+    street_address: "  1 PORTAGE AVE E  ",
+    street_number: 1,
+    street_number_suffix: " ",
+    street_name: "  PORTAGE ",
+    ward_as_of_september_17: null,
+  }));
+  assert.deepEqual(row, {
+    displayAddress: "1 PORTAGE AVE E",
+    streetNumber: 1,
+    streetNumberSuffix: null,
+    streetName: "PORTAGE",
+    streetType: "AVE",
+    streetDirection: "E",
+    schoolDivision: "Winnipeg",
+    schoolDivisionWard: "5",
+    councilWard: null,
+  });
+});
+
+test("malformed raw authoritative rows are rejected", () => {
+  assert.deepEqual(normalizeRawAuthoritativeRows([
+    null,
+    [],
+    {},
+    rawRow({ display_address: " ", street_address: undefined }),
+    rawRow({ street_number: "not numeric" }),
+    rawRow(),
+  ]), [normalizeAuthoritativeRow(rawRow())]);
+});
+
 test("identical grouped rows collapse but conflicting election tuples remain", () => {
-  const first = rawRow();
-  const conflict = rawRow({ school_division_ward: "6" });
-  const rows = dedupeAndSortRows([first, { ...first }, conflict]);
+  const first = normalizeAuthoritativeRow(rawRow());
+  const conflict = normalizeAuthoritativeRow(rawRow({ school_division_ward: "6" }));
+  const rows = dedupeAndSortNormalizedRows([first, { ...first }, conflict]);
   assert.equal(rows.length, 2);
   assert.deepEqual(rows.map((row) => row.schoolDivisionWard), ["5", "6"]);
 });
@@ -382,7 +416,7 @@ test("1615 REGENT AVE W intentionally retains both trustee wards in deterministi
   const normalized = REGENT_TRUSTEE_CONFLICT_ROWS.map(normalizeAuthoritativeRow);
   assert.equal(normalized.every(Boolean), true);
 
-  const rows = dedupeAndSortRows([normalized[1], normalized[0], { ...normalized[0] }]);
+  const rows = dedupeAndSortNormalizedRows([normalized[1], normalized[0], { ...normalized[0] }]);
   assert.equal(rows.length, 2);
   assert.deepEqual(rows.map((row) => row.displayAddress), [
     "1615 REGENT AVE W",
@@ -399,10 +433,11 @@ test("1615 REGENT AVE W intentionally retains both trustee wards in deterministi
 
 test("merged ambiguous results sort literal interpretation first and remain stable", () => {
   const candidates = parseAddress("50 Wildwood E").candidates;
-  const rows = dedupeAndSortRows([
+  const normalizedRows = normalizeRawAuthoritativeRows([
     rawRow({ display_address: "50 WILDWOOD ST E", street_number: "50", street_name: "WILDWOOD", street_type: "ST", street_direction: "E" }),
     rawRow({ display_address: "50 WILDWOOD E PK", street_number: "50", street_name: "WILDWOOD E", street_type: "PK", street_direction: undefined }),
-  ], candidates);
+  ]);
+  const rows = dedupeAndSortNormalizedRows(normalizedRows, candidates);
   assert.deepEqual(rows.map((row) => row.displayAddress), ["50 WILDWOOD E PK", "50 WILDWOOD ST E"]);
 });
 
@@ -572,6 +607,22 @@ test("an unsafe civic number stays in guidance and never schedules a request", (
   assert.equal(controller.state.phase, "guidance");
   assert.equal(isRetryablePhase(controller.state.phase), false);
   assert.equal(controller.retry(), false);
+});
+
+test("a successful payload with no valid authoritative rows produces an empty result", async () => {
+  const { clock, controller } = createController(async () => response(200, [
+    null,
+    {},
+    rawRow({ display_address: " ", street_address: undefined }),
+    rawRow({ street_number: "not numeric" }),
+  ]));
+
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  assert.equal(controller.state.phase, "empty");
+  assert.equal(controller.state.results.length, 0);
+  assert.equal(controller.state.popupOpen, false);
 });
 
 for (const [name, fetchFn, expected] of [
