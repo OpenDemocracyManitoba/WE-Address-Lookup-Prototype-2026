@@ -22,10 +22,7 @@ import {
   isRetryablePhase,
   statusMessage,
 } from "../lookup-controller.js";
-import {
-  calculatePopupGeometry,
-  PopupGeometrySession,
-} from "../popup-geometry.js";
+import { calculatePopupGeometry } from "../popup-geometry.js";
 
 function candidate(input, index = 0) {
   const parsed = parseAddress(input);
@@ -196,36 +193,22 @@ test("popup preferred-below threshold includes its exact boundary", () => {
   }), { side: "above", maxHeight: 264 });
 });
 
-test("popup geometry remains frozen until its session is reset", () => {
-  const session = new PopupGeometrySession();
-  const keyboardOpen = {
-    inputTop: 350,
-    inputBottom: 400,
-    viewportTop: 0,
-    viewportHeight: 500,
-  };
-  const keyboardClosed = {
+test("popup keeps its preferred side while recalculating available height", () => {
+  assert.deepEqual(calculatePopupGeometry({
     inputTop: 350,
     inputBottom: 400,
     viewportTop: 0,
     viewportHeight: 800,
-  };
+    preferredSide: "above",
+  }), { side: "above", maxHeight: 334 });
 
-  assert.deepEqual(session.get(keyboardOpen), {
-    side: "above",
-    maxHeight: 334,
-  });
-  assert.deepEqual(session.get(keyboardClosed), {
-    side: "above",
-    maxHeight: 334,
-  });
-
-  session.reset();
-
-  assert.deepEqual(session.get(keyboardClosed), {
-    side: "below",
-    maxHeight: 384,
-  });
+  assert.deepEqual(calculatePopupGeometry({
+    inputTop: 350,
+    inputBottom: 400,
+    viewportTop: 0,
+    viewportHeight: 500,
+    preferredSide: "below",
+  }), { side: "below", maxHeight: 84 });
 });
 
 test("normalization trims, collapses whitespace, uppercases, and normalizes apostrophes", () => {

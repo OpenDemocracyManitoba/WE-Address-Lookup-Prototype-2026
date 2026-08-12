@@ -3,6 +3,7 @@ export function calculatePopupGeometry({
   inputBottom,
   viewportTop,
   viewportHeight,
+  preferredSide,
 }) {
   const viewportBottom = viewportTop + viewportHeight;
   const margin = 10;
@@ -12,22 +13,9 @@ export function calculatePopupGeometry({
   const hasPreferredRoomBelow = below >= preferredMinimum;
   const belowHasAtLeastAsMuchRoom = below >= above;
   const opensBelow = hasPreferredRoomBelow || belowHasAtLeastAsMuchRoom;
-  const side = opensBelow ? "below" : "above";
+  const side = preferredSide ?? (opensBelow ? "below" : "above");
   const available = side === "below" ? below : above;
   const maxHeight = Math.max(48, Math.floor(available - 6));
 
   return { side, maxHeight };
-}
-
-export class PopupGeometrySession {
-  #geometry = null;
-
-  get(dimensions) {
-    this.#geometry ??= calculatePopupGeometry(dimensions);
-    return this.#geometry;
-  }
-
-  reset() {
-    this.#geometry = null;
-  }
 }

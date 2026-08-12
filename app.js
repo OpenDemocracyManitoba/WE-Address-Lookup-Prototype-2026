@@ -7,19 +7,20 @@ import {
   LookupController,
   statusMessage,
 } from "./lookup-controller.js";
-import { PopupGeometrySession } from "./popup-geometry.js";
+import { calculatePopupGeometry } from "./popup-geometry.js";
 
-function positionPopup(input, wrap, list, geometrySession) {
+function positionPopup(input, wrap, list) {
   if (list.hidden) return;
   const viewport = window.visualViewport;
   const viewportTop = viewport?.offsetTop ?? 0;
   const viewportHeight = viewport?.height ?? window.innerHeight;
   const rect = input.getBoundingClientRect();
-  const { side, maxHeight } = geometrySession.get({
+  const { side, maxHeight } = calculatePopupGeometry({
     inputTop: rect.top,
     inputBottom: rect.bottom,
     viewportTop,
     viewportHeight,
+    preferredSide: wrap.dataset.popupSide || undefined,
   });
   wrap.dataset.popupSide = side;
   list.style.maxHeight = `${maxHeight}px`;
@@ -36,7 +37,6 @@ function startBrowserApp() {
   const resultAddress = document.querySelector("#result-address");
   const councilWard = document.querySelector("#council-ward");
   const trusteeWard = document.querySelector("#trustee-ward");
-  const popupGeometry = new PopupGeometrySession();
   let lastResults = null;
   let lastPopupOpen = false;
 
@@ -68,7 +68,7 @@ function startBrowserApp() {
     }
 
     list.hidden = !state.popupOpen;
-    if (!state.popupOpen) popupGeometry.reset();
+    if (!state.popupOpen) delete wrap.dataset.popupSide;
     input.setAttribute("aria-expanded", String(state.popupOpen));
     if (state.popupOpen && state.activeIndex >= 0) {
       const activeId = `address-option-${state.activeIndex}`;
@@ -102,9 +102,7 @@ function startBrowserApp() {
       trusteeWard.textContent = "";
     }
     if (state.popupOpen)
-      requestAnimationFrame(() =>
-        positionPopup(input, wrap, list, popupGeometry),
-      );
+      requestAnimationFrame(() => positionPopup(input, wrap, list));
   };
 
   const controller = new LookupController({ onChange: render });
@@ -153,6 +151,16 @@ function startBrowserApp() {
       !list.contains(event.target)
     )
       controller.dismiss();
+  });
+
+  const reposition = () => positionPopup(input, wrap, list);
+  window.addEventListener("resize", reposition, { passive: true });
+  window.addEventListener("scroll", reposition, { passive: true });
+  window.visualViewport?.addEventListener("resize", reposition, {
+    passive: true,
+  });
+  window.visualViewport?.addEventListener("scroll", reposition, {
+    passive: true,
   });
 
   const dismissOnOrientationChange = () => controller.dismiss();
