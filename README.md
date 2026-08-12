@@ -54,6 +54,39 @@ A direction after an explicit type is unambiguous. A trailing direction-like tok
 
 The SoQL predicate holds `street_number` as an exact numeric comparison outside the bounded alternatives. Each alternative uses a case-insensitive `street_name` prefix and only adds exact suffix, type, or direction filters when supplied. Results are grouped by every selected source field and deterministically ordered. No result limit is imposed, so every grouped result from the complete exact-number/prefix query is displayed.
 
+## Proposed parsing rework (not implemented)
+
+The current parser treats completed input as a structured Winnipeg address. That provides precise handling of street types and directions, but it is more complex than the primary autocomplete interaction requires: residents are asked to enter a civic number and street name, then select an authoritative address before they need to finish typing its type or direction.
+
+The rework should preserve progressive name matching. It must not reduce every search to the first three characters because a query such as `15 MAR%` returns too many suggestions. As the resident continues from `15 MAR` to `15 MARI` and then `15 MARION`, the complete text entered for the name should continue to narrow the query.
+
+Instead of interpreting trailing tokens, generate a small ordered set of possible street-name prefixes by structure alone. For each civic-number and suffix reading, use the complete normalized tail first, then remove at most one and two trailing tokens. Keep only candidates with at least three alphanumeric name characters, remove duplicates, and cap the result at three name candidates per suffix reading. Examples:
+
+- `15 MAR` produces `MAR`.
+- `15 MARION` produces `MARION`.
+- `15 MARION ST` produces `MARION ST`, then `MARION`.
+- `15 MARION ST N` produces `MARION ST N`, `MARION ST`, then `MARION`.
+- `300 ASSINIBOINE PARK` produces `ASSINIBOINE PARK`, then `ASSINIBOINE`.
+- `50 WILDWOOD E` produces `WILDWOOD E`, then `WILDWOOD`.
+
+Each alternative would query only the exact numeric `street_number`, an optional exact `street_number_suffix`, and a case-insensitive `street_name` prefix. The parser would not identify, normalize, or constrain `street_type` or `street_direction`. Candidate order would still rank the most literal and longest interpretation first, so precise multi-word street-name matches appear ahead of broader fallbacks.
+
+This approach deliberately retains limited civic-suffix parsing. A suffix occurs before the street name and must not be consumed as its prefix; compact and spaced suffix ambiguity can continue to produce bounded alternative readings. With at most two suffix readings and three tail readings, an input would produce no more than six query alternatives.
+
+Street suffix, type, and direction fields must remain in the selected and grouped City data even though type and direction would no longer filter the search. They are part of an official address's identity, support deterministic display and deduplication, and distinguish authoritative results that the resident must choose between. Input normalization, SoQL escaping, authoritative-row validation, grouping, deterministic sorting, request cancellation, timeout handling, and combobox accessibility would also remain.
+
+The rework would remove the street-type alias table, direction vocabulary, semantic tail interpretations, and exact type and direction predicates. Its bounded trailing-token fallback assumes the supported input remains a civic street address containing at most a street type and direction after the name. Unit numbers, city or province names, postal codes, intersections, and free-form place names would remain out of scope.
+
+Before replacing the current parser, validate the proposal against the complete current City dataset and a realistic input corpus:
+
+- Confirm that progressive inputs become usefully narrower beyond three characters, including common prefixes such as `15 MAR`.
+- Confirm that every official target is returned for number-and-name input and for supported complete addresses containing a type and direction.
+- Measure typical and worst-case grouped result counts, payload sizes, and query lengths, and prove that no supported query can silently exceed the service's result limit.
+- Verify deterministic ranking for multi-word names, type-like and direction-like name endings, partial trailing tokens, apostrophes, periods, hyphens, and compact, spaced, fractional, and ambiguous civic suffixes.
+- Repeat keyboard and screen-reader testing with the broadest realistic result sets, since additional fallback matches can make an automatically active first option less likely to be the intended address.
+
+If these checks show unacceptable result breadth or ranking ambiguity, retain structured type and direction interpretation only as an optional narrowing layer. It should not be required to recall an otherwise valid authoritative result.
+
 ## Autocomplete behavior
 
 Eligible input is debounced for 300 ms. Every edit cancels the debounce, aborts an active Fetch request, clears its timeout, increments the request generation, and removes stale UI. Responses must match both the current generation and normalized input before they can render. Requests time out after 10 seconds, which bounds a slow City service without making normal API latency overly fragile.
