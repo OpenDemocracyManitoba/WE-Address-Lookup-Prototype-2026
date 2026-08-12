@@ -317,16 +317,22 @@ function cleanApiString(value) {
   return typeof value === "string" && value.trim() ? value.trim() : null;
 }
 
+function normalizeStreetNumber(value) {
+  if (typeof value === "number") {
+    return Number.isSafeInteger(value) && value >= 0 ? value : null;
+  }
+  if (typeof value !== "string" || !/^\d+$/u.test(value)) return null;
+  const streetNumber = Number(value);
+  return Number.isSafeInteger(streetNumber) ? streetNumber : null;
+}
+
 export function normalizeAuthoritativeRow(row) {
   if (!row || typeof row !== "object" || Array.isArray(row)) return null;
   const displayAddress = cleanApiString(
     row.display_address ?? row.street_address,
   );
-  const streetNumberValue =
-    typeof row.street_number === "number"
-      ? row.street_number
-      : Number(row.street_number);
-  if (!displayAddress || !Number.isFinite(streetNumberValue)) return null;
+  const streetNumberValue = normalizeStreetNumber(row.street_number);
+  if (!displayAddress || streetNumberValue === null) return null;
   return {
     displayAddress,
     streetNumber: streetNumberValue,

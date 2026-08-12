@@ -448,6 +448,58 @@ test("raw authoritative rows normalize aliases, trimming, and missing values", (
   });
 });
 
+test("authoritative street numbers accept non-negative safe integers and decimal strings", () => {
+  const validStreetNumbers = [
+    0,
+    1,
+    Number.MAX_SAFE_INTEGER,
+    "0",
+    "1",
+    "001",
+    String(Number.MAX_SAFE_INTEGER),
+  ];
+
+  for (const streetNumber of validStreetNumbers) {
+    assert.equal(
+      normalizeAuthoritativeRow(rawRow({ street_number: streetNumber })).streetNumber,
+      Number(streetNumber),
+      `expected ${String(streetNumber)} to be accepted`,
+    );
+  }
+});
+
+test("authoritative street numbers reject malformed or unsafe values", () => {
+  const invalidStreetNumbers = [
+    null,
+    undefined,
+    "",
+    " ",
+    -1,
+    "-1",
+    1.5,
+    "1.5",
+    "1e3",
+    "0x10",
+    Infinity,
+    -Infinity,
+    NaN,
+    Number.MAX_SAFE_INTEGER + 1,
+    String(Number.MAX_SAFE_INTEGER + 1),
+    true,
+    {},
+    [],
+    "not numeric",
+  ];
+
+  for (const streetNumber of invalidStreetNumbers) {
+    assert.equal(
+      normalizeAuthoritativeRow(rawRow({ street_number: streetNumber })),
+      null,
+      `expected ${String(streetNumber)} to be rejected`,
+    );
+  }
+});
+
 test("malformed raw authoritative rows are rejected", () => {
   assert.deepEqual(normalizeRawAuthoritativeRows([
     null,
