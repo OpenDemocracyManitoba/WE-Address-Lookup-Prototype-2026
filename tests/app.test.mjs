@@ -174,11 +174,11 @@ test("eligibility accepts the safe-integer boundary and rejects larger civic num
 test("ordinary addresses parse into exact structured fields", () => {
   assert.deepEqual(candidate("1 Portage"), {
     streetNumber: 1, streetNumberSuffix: null, streetName: "PORTAGE",
-    streetType: null, streetDirection: null, preference: 0,
+    streetType: null, streetDirection: null,
   });
   assert.deepEqual(candidate("510 Main St"), {
     streetNumber: 510, streetNumberSuffix: null, streetName: "MAIN",
-    streetType: "ST", streetDirection: null, preference: 0,
+    streetType: "ST", streetDirection: null,
   });
   assert.deepEqual(candidate("510 Main Street"), candidate("510 Main St"));
   assert.deepEqual(candidate("1 Portage Avenue"), candidate("1 Portage Ave"));
@@ -191,10 +191,9 @@ test("recognized trailing types preserve one bounded literal street-name fallbac
     streetName: item.streetName,
     streetType: item.streetType,
     streetDirection: item.streetDirection,
-    preference: item.preference,
   })), [
-    { streetName: "ASSINIBOINE", streetType: "PK", streetDirection: null, preference: 0 },
-    { streetName: "ASSINIBOINE PARK", streetType: null, streetDirection: null, preference: 1 },
+    { streetName: "ASSINIBOINE", streetType: "PK", streetDirection: null },
+    { streetName: "ASSINIBOINE PARK", streetType: null, streetDirection: null },
   ]);
   assert.equal(Object.isFrozen(parsed.candidates), true);
   assert.equal(parsed.candidates.every(Object.isFrozen), true);
@@ -212,8 +211,8 @@ test("confirmed PARK and COURT partial, ambiguous, and explicit-type inputs stay
     assert.equal(parseAddress(input).eligible, true, input);
   }
   assert.deepEqual(parseAddress("1021 Court").candidates.map((item) => [
-    item.streetName, item.streetType, item.preference,
-  ]), [["COURT", null, 0]]);
+    item.streetName, item.streetType,
+  ]), [["COURT", null]]);
 
   const parkWhere = queryParts("300 Assiniboine Park").where;
   assert.match(parkWhere, /upper\(street_name\) like 'ASSINIBOINE%'.*upper\(street_type\) = 'PK'/);
@@ -221,10 +220,12 @@ test("confirmed PARK and COURT partial, ambiguous, and explicit-type inputs stay
 });
 
 test("explicit street type and direction are parsed only from trailing positions", () => {
-  assert.deepEqual(candidate("1000 Garfield Street N"), {
-    streetNumber: 1000, streetNumberSuffix: null, streetName: "GARFIELD",
-    streetType: "ST", streetDirection: "N", preference: 0,
-  });
+  assert.deepEqual(parseAddress("1000 Garfield Street N").candidates.map((item) => [
+    item.streetName, item.streetType, item.streetDirection,
+  ]), [
+    ["GARFIELD", "ST", "N"],
+    ["GARFIELD STREET N", null, null],
+  ]);
   assert.equal(candidate("1 Dr. David Friesen Dr").streetName, "DR. DAVID FRIESEN");
   assert.equal(candidate("1 Dr. David Friesen Dr").streetType, "DR");
   assert.equal(candidate("1 Portage Ave.").streetType, "AVE");
@@ -235,7 +236,7 @@ test("current ALLEY, BEND, and NW grammar fixtures parse", () => {
   assert.equal(candidate("100 BRIXHAM BEND").streetType, "BEND");
   assert.deepEqual(candidate("29 SERVICE 3 ST NW"), {
     streetNumber: 29, streetNumberSuffix: null, streetName: "SERVICE 3",
-    streetType: "ST", streetDirection: "NW", preference: 0,
+    streetType: "ST", streetDirection: "NW",
   });
 });
 
@@ -248,19 +249,36 @@ test("compact civic suffix is separated from numeric street number", () => {
 
 test("spaced letter suffix produces bounded suffix and street-name readings", () => {
   const parsed = parseAddress("3 A ELKHORN ST");
-  assert.equal(parsed.candidates.length, 4);
-  assert.equal(parsed.candidates[0].streetNumberSuffix, "A");
-  assert.equal(parsed.candidates[0].streetName, "ELKHORN");
-  assert.equal(parsed.candidates[2].streetNumberSuffix, null);
-  assert.equal(parsed.candidates[2].streetName, "A ELKHORN");
+  assert.deepEqual(parsed.candidates.map((item) => [
+    item.streetNumberSuffix, item.streetName, item.streetType,
+  ]), [
+    ["A", "ELKHORN", "ST"],
+    ["A", "ELKHORN ST", null],
+    [null, "A ELKHORN", "ST"],
+    [null, "A ELKHORN ST", null],
+  ]);
 });
 
 test("1/2 and 1/2A suffix forms parse in compact and spaced forms", () => {
   assert.equal(candidate("371/2 LIPTON ST").streetNumberSuffix, "1/2");
-  assert.equal(candidate("37 1/2 LIPTON ST").streetNumberSuffix, "1/2");
   assert.equal(candidate("891/2A BRAEMAR AVE").streetNumberSuffix, "1/2A");
-  assert.equal(candidate("89 1/2 A BRAEMAR AVE").streetNumberSuffix, "1/2A");
   assert.equal(candidate("891/2A BRAEMAR AVE").streetNumber, 89);
+  assert.deepEqual(parseAddress("37 1/2 LIPTON ST").candidates.map((item) => [
+    item.streetNumberSuffix, item.streetName, item.streetType,
+  ]), [
+    ["1/2", "LIPTON", "ST"],
+    ["1/2", "LIPTON ST", null],
+    [null, "1/2 LIPTON", "ST"],
+    [null, "1/2 LIPTON ST", null],
+  ]);
+  assert.deepEqual(parseAddress("89 1/2 A BRAEMAR AVE").candidates.map((item) => [
+    item.streetNumberSuffix, item.streetName, item.streetType,
+  ]), [
+    ["1/2A", "BRAEMAR", "AVE"],
+    ["1/2A", "BRAEMAR AVE", null],
+    [null, "1/2 A BRAEMAR", "AVE"],
+    [null, "1/2 A BRAEMAR AVE", null],
+  ]);
 });
 
 test("omitted suffix adds no suffix restriction", () => {
@@ -283,7 +301,7 @@ test("direction-like trailing token without type yields literal-first ambiguity"
 test("direction remains in street name when an explicit trailing type follows", () => {
   assert.deepEqual(candidate("50 Wildwood E Park"), {
     streetNumber: 50, streetNumberSuffix: null, streetName: "WILDWOOD E",
-    streetType: "PK", streetDirection: null, preference: 0,
+    streetType: "PK", streetDirection: null,
   });
 });
 
@@ -327,12 +345,22 @@ test("query includes select, where, group, order and excludes forbidden fields",
   assert.equal(url.searchParams.has("$limit"), false);
 });
 
-test("ambiguous candidates are combined with bounded OR alternatives", () => {
+test("ambiguous candidates are combined in candidate order with duplicates removed", () => {
   const { parsed, where } = queryParts("50 Wildwood E");
   assert.equal(parsed.candidates.length, 2);
   assert.equal((where.match(/ OR /g) || []).length, 1);
   assert.match(where, /WILDWOOD E%/);
   assert.match(where, /street_direction\) = 'E'/);
+  assert.ok(where.indexOf("WILDWOOD E%") < where.indexOf("WILDWOOD%"));
+
+  const duplicateUrl = new URL(buildQuery([
+    parsed.candidates[0],
+    parsed.candidates[1],
+    parsed.candidates[0],
+  ]));
+  const duplicateWhere = duplicateUrl.searchParams.get("$where");
+  assert.equal((duplicateWhere.match(/ OR /g) || []).length, 1);
+  assert.ok(duplicateWhere.indexOf("WILDWOOD E%") < duplicateWhere.indexOf("WILDWOOD%"));
 });
 
 test("authoritative row uses the official display alias, not input", () => {

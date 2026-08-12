@@ -91,7 +91,7 @@ function makeCandidate(
   streetNumber,
   suffix,
   nameTokens,
-  { streetType = null, streetDirection = null, preference = 0 } = {},
+  { streetType = null, streetDirection = null } = {},
 ) {
   const streetName = nameTokens.join(" ");
   if (alphanumericCount(streetName) < 3) return null;
@@ -101,7 +101,6 @@ function makeCandidate(
     streetName,
     streetType,
     streetDirection,
-    preference,
   });
 }
 
@@ -139,12 +138,7 @@ function interpretedTail(tokens) {
   return null;
 }
 
-function generateTailCandidates(
-  streetNumber,
-  suffix,
-  tail,
-  preferenceBase = 0,
-) {
+function generateTailCandidates(streetNumber, suffix, tail) {
   const tokens = Object.freeze(tail.split(" ").filter(Boolean));
   if (!tokens.length) return Object.freeze([]);
 
@@ -155,17 +149,17 @@ function generateTailCandidates(
     ? makeCandidate(streetNumber, suffix, interpretation.nameTokens, {
         streetType: interpretation.streetType,
         streetDirection: interpretation.streetDirection,
-        preference: preferenceBase + (interpretedTailIsPreferred ? 0 : 1),
       })
     : null;
-  const literalPreferenceOffset =
-    interpretedTailIsPreferred && interpreted ? 1 : 0;
-  const literal = makeCandidate(streetNumber, suffix, tokens, {
-    preference: preferenceBase + literalPreferenceOffset,
-  });
+  const literal = makeCandidate(streetNumber, suffix, tokens);
+  const orderedCandidates = interpretedTailIsPreferred
+    ? [interpreted, literal]
+    : [literal, interpreted];
   const unique = new Map();
-  for (const candidate of [literal, interpreted]) {
-    if (candidate) unique.set(candidateKey(candidate), candidate);
+  for (const candidate of orderedCandidates) {
+    if (candidate && !unique.has(candidateKey(candidate))) {
+      unique.set(candidateKey(candidate), candidate);
+    }
   }
   return Object.freeze([...unique.values()]);
 }
@@ -182,8 +176,6 @@ function candidateKey(candidate) {
     .join("\u001f");
 }
 
-const LITERAL_CIVIC_NUMBER_READING_FALLBACK_PREFERENCE = 10;
-
 export function parseAddress(value) {
   const normalizedInput = normalizeInput(value);
   const numberMatch = normalizedInput.match(
@@ -197,7 +189,7 @@ export function parseAddress(value) {
     streetNumber = Number(numberMatch[1]);
     const suffix = normalizeSuffix(numberMatch[2]);
     tail = numberMatch[3];
-    if (suffix && tail) readings.push({ suffix, tail, preference: 0 });
+    if (suffix && tail) readings.push({ suffix, tail });
   } else {
     const plainMatch = normalizedInput.match(/^(\d+)(?:\s+(.*))?$/u);
     if (!plainMatch)
@@ -218,22 +210,16 @@ export function parseAddress(value) {
         readings.push({
           suffix: twoTokenSuffix,
           tail: tokens.slice(2).join(" "),
-          preference: 0,
         });
       } else if (oneTokenSuffix && tokens.slice(1).length) {
         readings.push({
           suffix: oneTokenSuffix,
           tail: tokens.slice(1).join(" "),
-          preference: 0,
         });
       }
-      const hasSuffixReading = readings.length > 0;
       readings.push({
         suffix: null,
         tail,
-        preference: hasSuffixReading
-          ? LITERAL_CIVIC_NUMBER_READING_FALLBACK_PREFERENCE
-          : 0,
       });
     }
   }
@@ -253,17 +239,12 @@ export function parseAddress(value) {
       streetNumber,
       reading.suffix,
       reading.tail,
-      reading.preference,
     )) {
       const key = candidateKey(candidate);
-      const existing = unique.get(key);
-      if (!existing || candidate.preference < existing.preference)
-        unique.set(key, candidate);
+      if (!unique.has(key)) unique.set(key, candidate);
     }
   }
-  const candidates = Object.freeze(
-    [...unique.values()].sort((a, b) => a.preference - b.preference),
-  );
+  const candidates = Object.freeze([...unique.values()]);
   return {
     normalizedInput,
     streetNumber,
@@ -376,8 +357,7 @@ function rowKey(row) {
 }
 
 function candidateMatchRank(row, candidates) {
-  let best = Number.MAX_SAFE_INTEGER;
-  for (const candidate of candidates ?? []) {
+  for (const [index, candidate] of (candidates ?? []).entries()) {
     if (row.streetNumber !== candidate.streetNumber) continue;
     if (
       !String(row.streetName ?? "")
@@ -400,9 +380,9 @@ function candidateMatchRank(row, candidates) {
       row.streetDirection?.toUpperCase() !== candidate.streetDirection
     )
       continue;
-    best = Math.min(best, candidate.preference);
+    return index;
   }
-  return best;
+  return Number.MAX_SAFE_INTEGER;
 }
 
 const NORMALIZED_ROW_SORT_KEYS = Object.freeze([
