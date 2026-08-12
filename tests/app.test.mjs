@@ -849,7 +849,7 @@ test("activating an unchanged dismissed result cache reopens it once without fet
   assert.equal(controller.activateInput(), true);
   assert.equal(controller.state.popupOpen, true);
   assert.equal(controller.state.phase, "results");
-  assert.equal(controller.state.activeIndex, -1);
+  assert.equal(controller.state.activeIndex, 0);
   assert.match(statusMessage(controller.state), /1 matching official address/);
   assert.equal(calls, 1);
   assert.equal(states.length, stateCount + 1);
@@ -913,7 +913,7 @@ test("emitted controller states remain stable after later transitions", async ()
   const loadingState = states.at(-1);
   await flush();
   const resultsState = states.at(-1);
-  controller.selectActiveOrFirst();
+  controller.selectActive();
 
   assert.deepEqual(states.map((state) => state.phase), [
     "pending",
@@ -949,47 +949,61 @@ test("active-option updates replace state while retaining results identity", asy
 
   assert.notEqual(controller.state, resultsState);
   assert.equal(controller.state.results, results);
-  assert.equal(resultsState.activeIndex, -1);
-  assert.equal(controller.state.activeIndex, 0);
+  assert.equal(resultsState.activeIndex, 0);
+  assert.equal(controller.state.activeIndex, 1);
   assert.equal(states.at(-1), controller.state);
 });
 
-test("keyboard navigation starts only on demand, wraps, and selection keeps official row", async () => {
+test("keyboard navigation starts from the automatic first option, wraps, and selection keeps official row", async () => {
   const second = rawRow({ display_address: "1 PORTAGE AVE", street_direction: undefined });
   const { clock, controller } = createController(async () => response(200, [rawRow(), second]));
   controller.inputChanged("1 Por");
   clock.tick(300);
   await flush();
-  assert.equal(controller.state.activeIndex, -1);
+  assert.equal(controller.state.activeIndex, 0);
   controller.moveActive(-1);
   assert.equal(controller.state.activeIndex, 1);
   controller.moveActive(1);
   assert.equal(controller.state.activeIndex, 0);
-  const selected = controller.selectActiveOrFirst();
+  const selected = controller.selectActive();
   assert.equal(controller.state.rawInput, selected.displayAddress);
   assert.equal(controller.state.popupOpen, false);
   assert.equal(controller.state.activeIndex, -1);
   assert.equal(controller.state.results.length, 0);
 });
 
-test("Enter selection chooses the first result when no option is active", async () => {
+test("Enter selection chooses the automatically active first result", async () => {
   const second = rawRow({ display_address: "1 PORTAGE AVE", street_direction: undefined });
   const { clock, controller } = createController(async () => response(200, [rawRow(), second]));
   controller.inputChanged("1 Por");
   clock.tick(300);
   await flush();
 
-  assert.equal(controller.state.activeIndex, -1);
+  assert.equal(controller.state.activeIndex, 0);
   const expected = controller.state.results[0];
-  const selected = controller.selectActiveOrFirst();
+  const selected = controller.selectActive();
   assert.equal(selected, expected);
   assert.equal(controller.state.selected, expected);
   assert.equal(controller.state.popupOpen, false);
 });
 
+test("active selection has no hidden first-result fallback", async () => {
+  const { clock, controller } = createController(async () =>
+    response(200, [rawRow()]),
+  );
+  controller.inputChanged("1 Por");
+  clock.tick(300);
+  await flush();
+  controller.updateState({ activeIndex: -1 });
+
+  assert.equal(controller.selectActive(), null);
+  assert.equal(controller.state.selected, null);
+  assert.equal(controller.state.popupOpen, true);
+});
+
 test("Enter selection does nothing when suggestions are not open", () => {
   const { controller } = createController(async () => response(200, []));
-  assert.equal(controller.selectActiveOrFirst(), null);
+  assert.equal(controller.selectActive(), null);
   assert.equal(controller.state.phase, "idle");
   assert.equal(controller.state.selected, null);
 });

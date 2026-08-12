@@ -200,7 +200,7 @@ export class LookupController {
       this.updateState({
         results,
         popupOpen: results.length > 0,
-        activeIndex: -1,
+        activeIndex: results.length ? 0 : -1,
         phase: results.length ? "results" : "empty",
       });
     } catch (error) {
@@ -267,7 +267,7 @@ export class LookupController {
       this.updateState({
         results: this.cache.results,
         popupOpen: this.cache.results.length > 0,
-        activeIndex: -1,
+        activeIndex: this.cache.results.length ? 0 : -1,
         phase: this.cache.results.length ? "results" : "empty",
       });
       return true;
@@ -287,10 +287,9 @@ export class LookupController {
     return true;
   }
 
-  selectActiveOrFirst() {
-    if (!this.state.popupOpen || !this.state.results.length) return null;
-    const index = this.state.activeIndex >= 0 ? this.state.activeIndex : 0;
-    return this.select(index);
+  selectActive() {
+    if (!this.state.popupOpen || this.state.activeIndex < 0) return null;
+    return this.select(this.state.activeIndex);
   }
 
   select(index) {

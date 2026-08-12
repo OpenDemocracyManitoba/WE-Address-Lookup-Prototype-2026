@@ -113,7 +113,7 @@ function startBrowserApp() {
       event.preventDefault();
     else if (event.key === "ArrowUp" && controller.moveActive(-1))
       event.preventDefault();
-    else if (event.key === "Enter" && controller.selectActiveOrFirst())
+    else if (event.key === "Enter" && controller.selectActive())
       event.preventDefault();
     else if (event.key === "Escape") {
       event.preventDefault();
