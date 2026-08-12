@@ -26,6 +26,8 @@ Searches go directly from the browser to the City of Winnipeg Open Data Socrata 
 
 `https://data.winnipeg.ca/resource/cam2-ii3u.json`
 
+The page footer uses the prescribed City acknowledgement and links to the [Open Government Licence – Winnipeg](https://data.winnipeg.ca/open-data-licence).
+
 The query aliases authoritative `street_address` to `display_address`. It does not request `full_address`, because that field includes unit-level apartment and condominium records. It uses `ward_as_of_september_17` for City Council rather than the legacy `ward` field. The school result comes from `school_division` and `school_division_ward`.
 
 Each request selects and groups only these civic and election fields: `street_address`, `street_number`, `street_number_suffix`, `street_name`, `street_type`, `street_direction`, `school_division`, `school_division_ward`, and `ward_as_of_september_17`. Grouping the complete tuple collapses duplicate unit rows into one civic suggestion while preserving rows whose official election values conflict. The client deduplicates only identical authoritative tuples and applies a stable final sort.

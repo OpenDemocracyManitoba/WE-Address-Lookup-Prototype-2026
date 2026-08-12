@@ -585,7 +585,7 @@ test("selected-result status represents missing values like the visible result",
 test("header copy, address description, and help markup match the interface", () => {
   const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const css = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
-  assert.match(html, /<p class="eyebrow">Winnipeg 2026 Civic and School Trustee Election<\/p>/);
+  assert.match(html, /<p class="eyebrow">2026 Winnipeg Election<\/p>/);
   assert.match(html, /<h1 id="page-title">Find Your Election Wards<\/h1>/);
   assert.match(html, /aria-describedby="address-status"/);
   assert.doesNotMatch(html, /id="address-help"/);
@@ -597,6 +597,15 @@ test("retry control markup is a hidden native button alongside the single live s
   const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   assert.match(html, /<button class="retry-button" id="retry-button" type="button" hidden>\s*Retry address search\s*<\/button>/);
   assert.equal((html.match(/role="status"/g) || []).length, 1);
+});
+
+test("footer preserves the privacy notice and acknowledges the City data licence", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  assert.match(html, /<strong>Your address stays private\.<\/strong>/);
+  assert.match(
+    html,
+    /Contains information licensed under the\s*<a href="https:\/\/data\.winnipeg\.ca\/open-data-licence">Open Government Licence – Winnipeg<\/a>\./,
+  );
 });
 
 test("HTTP outcomes map to distinct phases and user messages", () => {
