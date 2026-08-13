@@ -68,7 +68,7 @@ function startBrowserApp() {
     }
 
     list.hidden = !state.popupOpen;
-    if (!state.popupOpen) delete wrap.dataset.popupSide;
+    if (state.selected) delete wrap.dataset.popupSide;
     input.setAttribute("aria-expanded", String(state.popupOpen));
     if (state.popupOpen && state.activeIndex >= 0) {
       const activeId = `address-option-${state.activeIndex}`;
@@ -108,7 +108,12 @@ function startBrowserApp() {
   const controller = new LookupController({ onChange: render });
   render(controller.state);
 
-  input.addEventListener("input", () => controller.inputChanged(input.value));
+  const clearPopupSide = () => delete wrap.dataset.popupSide;
+
+  input.addEventListener("input", () => {
+    clearPopupSide();
+    controller.inputChanged(input.value);
+  });
   input.addEventListener("focus", () => controller.activateInput());
   input.addEventListener("click", () => controller.activateInput());
   input.addEventListener("keydown", (event) => {
@@ -163,7 +168,10 @@ function startBrowserApp() {
     passive: true,
   });
 
-  const dismissOnOrientationChange = () => controller.dismiss();
+  const dismissOnOrientationChange = () => {
+    clearPopupSide();
+    controller.dismiss();
+  };
   if (window.screen?.orientation?.addEventListener) {
     window.screen.orientation.addEventListener(
       "change",
