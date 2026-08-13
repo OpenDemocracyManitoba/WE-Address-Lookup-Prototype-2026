@@ -11,54 +11,8 @@ const RESULT_FIELDS = Object.freeze([
   "ward_as_of_september_17",
 ]);
 
-const STREET_TYPES = Object.freeze({
-  ALLEY: ["ALLEY"],
-  AVE: ["AVE", "AVENUE"],
-  BAY: ["BAY"],
-  BEND: ["BEND"],
-  BLVD: ["BLVD", "BOULEVARD"],
-  CIR: ["CIR", "CIRCLE"],
-  CLOSE: ["CLOSE"],
-  COMMON: ["COMMON"],
-  COVE: ["COVE"],
-  CRES: ["CRES", "CRESCENT"],
-  CROSS: ["CROSS"],
-  CRT: ["CRT", "COURT"],
-  DR: ["DR", "DRIVE"],
-  FWY: ["FWY", "FREEWAY"],
-  GATE: ["GATE"],
-  GDN: ["GDN", "GARDEN"],
-  GDNS: ["GDNS", "GARDENS"],
-  GROVE: ["GROVE"],
-  HWY: ["HWY", "HIGHWAY"],
-  KEY: ["KEY"],
-  LANE: ["LANE"],
-  MEWS: ["MEWS"],
-  PATH: ["PATH"],
-  PK: ["PK", "PARK", "PARC"],
-  PKY: ["PKY", "PARKWAY"],
-  PL: ["PL", "PLACE"],
-  PROM: ["PROM", "PROMENADE"],
-  PT: ["PT", "POINT", "POINTE"],
-  RD: ["RD", "ROAD"],
-  RIDGE: ["RIDGE"],
-  ROW: ["ROW"],
-  RUN: ["RUN"],
-  SQ: ["SQ", "SQUARE", "SQUARES"],
-  ST: ["ST", "STREET"],
-  TERR: ["TERR", "TERRACE", "TERRASSE"],
-  TRAIL: ["TRAIL"],
-  WALK: ["WALK", "WALKWAY"],
-  WAY: ["WAY"],
-});
-
-const TYPE_LOOKUP = new Map(
-  Object.entries(STREET_TYPES).flatMap(([cityValue, aliases]) =>
-    aliases.map((alias) => [alias, cityValue]),
-  ),
-);
-const DIRECTIONS = new Set(["N", "S", "E", "W", "NW", "SW"]);
 const SUFFIXES = new Set(["1/2", "1/2A", ..."ABCDEFGHIJKLMN"]);
+const MAX_TRAILING_TOKEN_DROPS = 2;
 function alphanumericCount(value) {
   return (value.match(/[\p{L}\p{N}]/gu) || []).length;
 }
@@ -73,13 +27,6 @@ export function normalizeInput(value) {
     .toLocaleUpperCase("en-CA");
 }
 
-export function normalizeStreetType(token) {
-  const cleaned = String(token ?? "")
-    .replace(/\.+$/g, "")
-    .toUpperCase();
-  return TYPE_LOOKUP.get(cleaned) ?? null;
-}
-
 function normalizeSuffix(value) {
   const compact = String(value ?? "")
     .replace(/\s+/g, "")
@@ -87,81 +34,32 @@ function normalizeSuffix(value) {
   return SUFFIXES.has(compact) ? compact : null;
 }
 
-function makeCandidate(
-  streetNumber,
-  suffix,
-  nameTokens,
-  { streetType = null, streetDirection = null } = {},
-) {
+function makeCandidate(streetNumber, suffix, nameTokens) {
   const streetName = nameTokens.join(" ");
   if (alphanumericCount(streetName) < 3) return null;
   return Object.freeze({
     streetNumber,
     streetNumberSuffix: suffix,
     streetName,
-    streetType,
-    streetDirection,
   });
-}
-
-function interpretedTail(tokens) {
-  const finalDirection = DIRECTIONS.has(tokens.at(-1)) ? tokens.at(-1) : null;
-  const finalType = normalizeStreetType(tokens.at(-1));
-  const typeBeforeDirection = finalDirection
-    ? normalizeStreetType(tokens.at(-2))
-    : null;
-
-  if (finalDirection && typeBeforeDirection) {
-    return {
-      nameTokens: tokens.slice(0, -2),
-      streetType: typeBeforeDirection,
-      streetDirection: finalDirection,
-      preferInterpretation: true,
-    };
-  }
-  if (finalType) {
-    return {
-      nameTokens: tokens.slice(0, -1),
-      streetType: finalType,
-      streetDirection: null,
-      preferInterpretation: true,
-    };
-  }
-  if (finalDirection) {
-    return {
-      nameTokens: tokens.slice(0, -1),
-      streetType: null,
-      streetDirection: finalDirection,
-      preferInterpretation: false,
-    };
-  }
-  return null;
 }
 
 function generateTailCandidates(streetNumber, suffix, tail) {
   const tokens = Object.freeze(tail.split(" ").filter(Boolean));
-  if (!tokens.length) return Object.freeze([]);
-
-  const interpretation = interpretedTail(tokens);
-  const interpretedTailIsPreferred =
-    interpretation?.preferInterpretation === true;
-  const interpreted = interpretation
-    ? makeCandidate(streetNumber, suffix, interpretation.nameTokens, {
-        streetType: interpretation.streetType,
-        streetDirection: interpretation.streetDirection,
-      })
-    : null;
-  const literal = makeCandidate(streetNumber, suffix, tokens);
-  const orderedCandidates = interpretedTailIsPreferred
-    ? [interpreted, literal]
-    : [literal, interpreted];
-  const unique = new Map();
-  for (const candidate of orderedCandidates) {
-    if (candidate && !unique.has(candidateKey(candidate))) {
-      unique.set(candidateKey(candidate), candidate);
-    }
+  const candidates = [];
+  for (
+    let dropped = 0;
+    dropped <= MAX_TRAILING_TOKEN_DROPS && dropped < tokens.length;
+    dropped += 1
+  ) {
+    const candidate = makeCandidate(
+      streetNumber,
+      suffix,
+      tokens.slice(0, tokens.length - dropped),
+    );
+    if (candidate) candidates.push(candidate);
   }
-  return Object.freeze([...unique.values()]);
+  return Object.freeze(candidates);
 }
 
 function candidateKey(candidate) {
@@ -169,8 +67,6 @@ function candidateKey(candidate) {
     candidate.streetNumber,
     candidate.streetNumberSuffix,
     candidate.streetName,
-    candidate.streetType,
-    candidate.streetDirection,
   ]
     .map((value) => value ?? "")
     .join("\u001f");
@@ -270,17 +166,19 @@ function candidatePredicate(candidate) {
       `upper(street_number_suffix) = '${escapeSoqlLiteral(candidate.streetNumberSuffix)}'`,
     );
   }
-  if (candidate.streetType) {
-    predicates.push(
-      `upper(street_type) = '${escapeSoqlLiteral(candidate.streetType)}'`,
-    );
-  }
-  if (candidate.streetDirection) {
-    predicates.push(
-      `upper(street_direction) = '${escapeSoqlLiteral(candidate.streetDirection)}'`,
-    );
-  }
   return `(${predicates.join(" AND ")})`;
+}
+
+function queryAlternatives(candidates) {
+  const shortestBySuffix = new Map();
+  for (const candidate of candidates) {
+    const suffixKey = candidate.streetNumberSuffix ?? "";
+    const current = shortestBySuffix.get(suffixKey);
+    if (!current || candidate.streetName.length < current.streetName.length) {
+      shortestBySuffix.set(suffixKey, candidate);
+    }
+  }
+  return [...shortestBySuffix.values()];
 }
 
 export function buildQuery(candidates, endpoint = API_ENDPOINT) {
@@ -295,9 +193,10 @@ export function buildQuery(candidates, endpoint = API_ENDPOINT) {
   ) {
     throw new TypeError("Candidates must share one numeric civic number.");
   }
-  const alternatives = [
+  const rankedCandidates = [
     ...new Map(candidates.map((item) => [candidateKey(item), item])).values(),
   ];
+  const alternatives = queryAlternatives(rankedCandidates);
   const where = `street_number = ${streetNumber} AND (${alternatives.map(candidatePredicate).join(" OR ")})`;
   const params = new URLSearchParams();
   params.set(
@@ -372,6 +271,16 @@ function rowKey(row) {
 }
 
 function candidateMatchRank(row, candidates) {
+  const literal = candidates?.[0];
+  if (literal) {
+    const inputAddresses = literal.streetNumberSuffix
+      ? [
+          `${literal.streetNumber}${literal.streetNumberSuffix} ${literal.streetName}`,
+          `${literal.streetNumber} ${literal.streetNumberSuffix} ${literal.streetName}`,
+        ]
+      : [`${literal.streetNumber} ${literal.streetName}`];
+    if (inputAddresses.includes(normalizeInput(row.displayAddress))) return -1;
+  }
   for (const [index, candidate] of (candidates ?? []).entries()) {
     if (row.streetNumber !== candidate.streetNumber) continue;
     if (
@@ -383,16 +292,6 @@ function candidateMatchRank(row, candidates) {
     if (
       candidate.streetNumberSuffix &&
       row.streetNumberSuffix?.toUpperCase() !== candidate.streetNumberSuffix
-    )
-      continue;
-    if (
-      candidate.streetType &&
-      row.streetType?.toUpperCase() !== candidate.streetType
-    )
-      continue;
-    if (
-      candidate.streetDirection &&
-      row.streetDirection?.toUpperCase() !== candidate.streetDirection
     )
       continue;
     return index;
@@ -452,8 +351,7 @@ export function formatSchoolTrustee(division, ward) {
 
 export {
   API_ENDPOINT,
+  MAX_TRAILING_TOKEN_DROPS,
   RESULT_FIELDS,
-  STREET_TYPES,
-  DIRECTIONS,
   SUFFIXES,
 };

@@ -245,35 +245,32 @@ test("eligibility accepts the safe-integer boundary and rejects larger civic num
   }
 });
 
-test("ordinary addresses parse into exact structured fields", () => {
+test("ordinary inputs produce progressively shorter literal name candidates", () => {
   assert.deepEqual(candidate("1 Portage"), {
     streetNumber: 1, streetNumberSuffix: null, streetName: "PORTAGE",
-    streetType: null, streetDirection: null,
   });
-  assert.deepEqual(candidate("510 Main St"), {
-    streetNumber: 510, streetNumberSuffix: null, streetName: "MAIN",
-    streetType: "ST", streetDirection: null,
-  });
-  assert.deepEqual(candidate("510 Main Street"), candidate("510 Main St"));
-  assert.deepEqual(candidate("1 Portage Avenue"), candidate("1 Portage Ave"));
+  assert.deepEqual(parseAddress("510 Main St").candidates.map((item) => item.streetName), [
+    "MAIN ST", "MAIN",
+  ]);
+  assert.deepEqual(parseAddress("510 Main Street").candidates.map((item) => item.streetName), [
+    "MAIN STREET", "MAIN",
+  ]);
+  assert.deepEqual(parseAddress("1 Portage Avenue").candidates.map((item) => item.streetName), [
+    "PORTAGE AVENUE", "PORTAGE",
+  ]);
 });
 
-test("recognized trailing types preserve one bounded literal street-name fallback", () => {
+test("type-like name endings stay literal-first with one bounded fallback", () => {
   const parsed = parseAddress("300 Assiniboine Park");
   assert.equal(parsed.candidates.length, 2);
-  assert.deepEqual(parsed.candidates.map((item) => ({
-    streetName: item.streetName,
-    streetType: item.streetType,
-    streetDirection: item.streetDirection,
-  })), [
-    { streetName: "ASSINIBOINE", streetType: "PK", streetDirection: null },
-    { streetName: "ASSINIBOINE PARK", streetType: null, streetDirection: null },
+  assert.deepEqual(parsed.candidates.map((item) => item.streetName), [
+    "ASSINIBOINE PARK", "ASSINIBOINE",
   ]);
   assert.equal(Object.isFrozen(parsed.candidates), true);
   assert.equal(parsed.candidates.every(Object.isFrozen), true);
 });
 
-test("confirmed PARK and COURT partial, ambiguous, and explicit-type inputs stay eligible", () => {
+test("PARK and COURT partial, ambiguous, and completed inputs stay eligible", () => {
   for (const input of [
     "300 Ass",
     "300 Assiniboine Park",
@@ -284,52 +281,47 @@ test("confirmed PARK and COURT partial, ambiguous, and explicit-type inputs stay
   ]) {
     assert.equal(parseAddress(input).eligible, true, input);
   }
-  assert.deepEqual(parseAddress("1021 Court").candidates.map((item) => [
-    item.streetName, item.streetType,
-  ]), [["COURT", null]]);
+  assert.deepEqual(parseAddress("1021 Court").candidates.map((item) => item.streetName), ["COURT"]);
 
   const parkWhere = queryParts("300 Assiniboine Park").where;
-  assert.match(parkWhere, /upper\(street_name\) like 'ASSINIBOINE%'.*upper\(street_type\) = 'PK'/);
-  assert.match(parkWhere, /upper\(street_name\) like 'ASSINIBOINE PARK%'/);
+  assert.match(parkWhere, /upper\(street_name\) like 'ASSINIBOINE%'/);
+  assert.doesNotMatch(parkWhere, /street_type|ASSINIBOINE PARK%/);
 });
 
-test("explicit street type and direction are parsed only from trailing positions", () => {
-  assert.deepEqual(parseAddress("1000 Garfield Street N").candidates.map((item) => [
-    item.streetName, item.streetType, item.streetDirection,
-  ]), [
-    ["GARFIELD", "ST", "N"],
-    ["GARFIELD STREET N", null, null],
+test("full official addresses drop at most their two trailing structural tokens", () => {
+  assert.deepEqual(parseAddress("1000 Garfield Street N").candidates.map((item) => item.streetName), [
+    "GARFIELD STREET N", "GARFIELD STREET", "GARFIELD",
   ]);
-  assert.equal(candidate("1 Dr. David Friesen Dr").streetName, "DR. DAVID FRIESEN");
-  assert.equal(candidate("1 Dr. David Friesen Dr").streetType, "DR");
-  assert.equal(candidate("1 Portage Ave.").streetType, "AVE");
+  assert.deepEqual(parseAddress("1 Dr. David Friesen Dr").candidates.map((item) => item.streetName), [
+    "DR. DAVID FRIESEN DR", "DR. DAVID FRIESEN", "DR. DAVID",
+  ]);
+  assert.deepEqual(parseAddress("1 Portage Ave.").candidates.map((item) => item.streetName), [
+    "PORTAGE AVE.", "PORTAGE",
+  ]);
 });
 
-test("current ALLEY, BEND, and NW grammar fixtures parse", () => {
-  assert.equal(candidate("10 ADARA ALLEY").streetType, "ALLEY");
-  assert.equal(candidate("100 BRIXHAM BEND").streetType, "BEND");
-  assert.deepEqual(candidate("29 SERVICE 3 ST NW"), {
-    streetNumber: 29, streetNumberSuffix: null, streetName: "SERVICE 3",
-    streetType: "ST", streetDirection: "NW",
-  });
+test("current ALLEY, BEND, and NW fixtures retain recall without vocabulary", () => {
+  assert.deepEqual(parseAddress("10 ADARA ALLEY").candidates.map((item) => item.streetName), ["ADARA ALLEY", "ADARA"]);
+  assert.deepEqual(parseAddress("100 BRIXHAM BEND").candidates.map((item) => item.streetName), ["BRIXHAM BEND", "BRIXHAM"]);
+  assert.deepEqual(parseAddress("29 SERVICE 3 ST NW").candidates.map((item) => item.streetName), [
+    "SERVICE 3 ST NW", "SERVICE 3 ST", "SERVICE 3",
+  ]);
 });
 
 test("compact civic suffix is separated from numeric street number", () => {
   const parsed = parseAddress("3A ELKHORN ST");
   assert.equal(parsed.candidates[0].streetNumber, 3);
   assert.equal(parsed.candidates[0].streetNumberSuffix, "A");
-  assert.equal(parsed.candidates[0].streetName, "ELKHORN");
+  assert.deepEqual(parsed.candidates.map((item) => item.streetName), ["ELKHORN ST", "ELKHORN"]);
 });
 
 test("spaced letter suffix produces bounded suffix and street-name readings", () => {
   const parsed = parseAddress("3 A ELKHORN ST");
-  assert.deepEqual(parsed.candidates.map((item) => [
-    item.streetNumberSuffix, item.streetName, item.streetType,
-  ]), [
-    ["A", "ELKHORN", "ST"],
-    ["A", "ELKHORN ST", null],
-    [null, "A ELKHORN", "ST"],
-    [null, "A ELKHORN ST", null],
+  assert.deepEqual(parsed.candidates.map((item) => [item.streetNumberSuffix, item.streetName]), [
+    ["A", "ELKHORN ST"],
+    ["A", "ELKHORN"],
+    [null, "A ELKHORN ST"],
+    [null, "A ELKHORN"],
   ]);
 });
 
@@ -337,21 +329,18 @@ test("1/2 and 1/2A suffix forms parse in compact and spaced forms", () => {
   assert.equal(candidate("371/2 LIPTON ST").streetNumberSuffix, "1/2");
   assert.equal(candidate("891/2A BRAEMAR AVE").streetNumberSuffix, "1/2A");
   assert.equal(candidate("891/2A BRAEMAR AVE").streetNumber, 89);
-  assert.deepEqual(parseAddress("37 1/2 LIPTON ST").candidates.map((item) => [
-    item.streetNumberSuffix, item.streetName, item.streetType,
-  ]), [
-    ["1/2", "LIPTON", "ST"],
-    ["1/2", "LIPTON ST", null],
-    [null, "1/2 LIPTON", "ST"],
-    [null, "1/2 LIPTON ST", null],
+  assert.deepEqual(parseAddress("37 1/2 LIPTON ST").candidates.map((item) => [item.streetNumberSuffix, item.streetName]), [
+    ["1/2", "LIPTON ST"],
+    ["1/2", "LIPTON"],
+    [null, "1/2 LIPTON ST"],
+    [null, "1/2 LIPTON"],
   ]);
-  assert.deepEqual(parseAddress("89 1/2 A BRAEMAR AVE").candidates.map((item) => [
-    item.streetNumberSuffix, item.streetName, item.streetType,
-  ]), [
-    ["1/2A", "BRAEMAR", "AVE"],
-    ["1/2A", "BRAEMAR AVE", null],
-    [null, "1/2 A BRAEMAR", "AVE"],
-    [null, "1/2 A BRAEMAR AVE", null],
+  assert.deepEqual(parseAddress("89 1/2 A BRAEMAR AVE").candidates.map((item) => [item.streetNumberSuffix, item.streetName]), [
+    ["1/2A", "BRAEMAR AVE"],
+    ["1/2A", "BRAEMAR"],
+    [null, "1/2 A BRAEMAR AVE"],
+    [null, "1/2 A BRAEMAR"],
+    [null, "1/2 A"],
   ]);
 });
 
@@ -360,36 +349,64 @@ test("omitted suffix adds no suffix restriction", () => {
   assert.doesNotMatch(where, /street_number_suffix/);
 });
 
-test("direction-like trailing token without type yields literal-first ambiguity", () => {
+test("direction-like trailing token yields literal-first structural fallback", () => {
   const parsed = parseAddress("50 Wildwood E");
   assert.equal(parsed.candidates.length, 2);
-  assert.deepEqual(parsed.candidates.map((item) => [item.streetName, item.streetDirection]), [
-    ["WILDWOOD E", null], ["WILDWOOD", "E"],
-  ]);
+  assert.deepEqual(parsed.candidates.map((item) => item.streetName), ["WILDWOOD E", "WILDWOOD"]);
   const garfield = parseAddress("1000 Garfield N");
-  assert.deepEqual(garfield.candidates.map((item) => [item.streetName, item.streetDirection]), [
-    ["GARFIELD N", null], ["GARFIELD", "N"],
+  assert.deepEqual(garfield.candidates.map((item) => item.streetName), ["GARFIELD N", "GARFIELD"]);
+});
+
+test("direction-like name ending remains available when a type follows", () => {
+  assert.deepEqual(parseAddress("50 Wildwood E Park").candidates.map((item) => item.streetName), [
+    "WILDWOOD E PARK", "WILDWOOD E", "WILDWOOD",
   ]);
 });
 
-test("direction remains in street name when an explicit trailing type follows", () => {
-  assert.deepEqual(candidate("50 Wildwood E Park"), {
-    streetNumber: 50, streetNumberSuffix: null, streetName: "WILDWOOD E",
-    streetType: "PK", streetDirection: null,
-  });
+test("progressive entry keeps narrowing instead of stopping at three characters", () => {
+  assert.deepEqual(parseAddress("15 Mar").candidates.map((item) => item.streetName), ["MAR"]);
+  assert.deepEqual(parseAddress("15 Mari").candidates.map((item) => item.streetName), ["MARI"]);
+  assert.deepEqual(parseAddress("15 Marion").candidates.map((item) => item.streetName), ["MARION"]);
+  assert.deepEqual(parseAddress("15 Marion S").candidates.map((item) => item.streetName), [
+    "MARION S", "MARION",
+  ]);
+  assert.deepEqual(parseAddress("15 Marion St N").candidates.map((item) => item.streetName), [
+    "MARION ST N", "MARION ST", "MARION",
+  ]);
+});
+
+test("multi-word names retain literal prefixes before bounded structural fallbacks", () => {
+  assert.deepEqual(parseAddress("1 Dr. David-Friesen Dr").candidates.map((item) => item.streetName), [
+    "DR. DAVID-FRIESEN DR", "DR. DAVID-FRIESEN",
+  ]);
+  assert.deepEqual(parseAddress("20 Rue des Meurons St").candidates.map((item) => item.streetName), [
+    "RUE DES MEURONS ST", "RUE DES MEURONS", "RUE DES",
+  ]);
+});
+
+test("candidate generation is bounded at six across ambiguous suffix readings", () => {
+  const parsed = parseAddress("3 A Alpha Beta St N");
+  assert.equal(parsed.candidates.length, 6);
+  assert.deepEqual(parsed.candidates.map((item) => [item.streetNumberSuffix, item.streetName]), [
+    ["A", "ALPHA BETA ST N"],
+    ["A", "ALPHA BETA ST"],
+    ["A", "ALPHA BETA"],
+    [null, "A ALPHA BETA ST N"],
+    [null, "A ALPHA BETA ST"],
+    [null, "A ALPHA BETA"],
+  ]);
 });
 
 test("SoQL escaping doubles every apostrophe", () => {
   assert.equal(escapeSoqlLiteral("O'BRIEN'S"), "O''BRIEN''S");
 });
 
-test("query has exact numeric number, prefix match, and optional filters", () => {
+test("query has exact numeric number and only the broadest required name prefix", () => {
   const { url, where } = queryParts("1000 Garfield Street N");
   assert.equal(url.origin + url.pathname, API_ENDPOINT);
   assert.match(where, /^street_number = 1000 AND/);
   assert.match(where, /upper\(street_name\) like 'GARFIELD%'/);
-  assert.match(where, /upper\(street_type\) = 'ST'/);
-  assert.match(where, /upper\(street_direction\) = 'N'/);
+  assert.doesNotMatch(where, /street_type|street_direction/);
   assert.doesNotMatch(where, /street_number = '1000'/);
 });
 
@@ -419,13 +436,12 @@ test("query includes select, where, group, order and excludes forbidden fields",
   assert.equal(url.searchParams.has("$limit"), false);
 });
 
-test("ambiguous candidates are combined in candidate order with duplicates removed", () => {
+test("rank candidates stay ordered while redundant query predicates are removed", () => {
   const { parsed, where } = queryParts("50 Wildwood E");
   assert.equal(parsed.candidates.length, 2);
-  assert.equal((where.match(/ OR /g) || []).length, 1);
-  assert.match(where, /WILDWOOD E%/);
-  assert.match(where, /street_direction\) = 'E'/);
-  assert.ok(where.indexOf("WILDWOOD E%") < where.indexOf("WILDWOOD%"));
+  assert.equal((where.match(/ OR /g) || []).length, 0);
+  assert.doesNotMatch(where, /WILDWOOD E%/);
+  assert.match(where, /WILDWOOD%/);
 
   const duplicateUrl = new URL(buildQuery([
     parsed.candidates[0],
@@ -433,8 +449,17 @@ test("ambiguous candidates are combined in candidate order with duplicates remov
     parsed.candidates[0],
   ]));
   const duplicateWhere = duplicateUrl.searchParams.get("$where");
-  assert.equal((duplicateWhere.match(/ OR /g) || []).length, 1);
-  assert.ok(duplicateWhere.indexOf("WILDWOOD E%") < duplicateWhere.indexOf("WILDWOOD%"));
+  assert.equal((duplicateWhere.match(/ OR /g) || []).length, 0);
+  assert.match(duplicateWhere, /WILDWOOD%/);
+});
+
+test("six rank candidates collapse to at most two suffix-aware query alternatives", () => {
+  const { parsed, where } = queryParts("3 A Alpha Beta St N");
+  assert.equal(parsed.candidates.length, 6);
+  assert.equal((where.match(/ OR /g) || []).length, 1);
+  assert.match(where, /upper\(street_name\) like 'ALPHA BETA%'.*street_number_suffix/);
+  assert.match(where, /upper\(street_name\) like 'A ALPHA BETA%'/);
+  assert.doesNotMatch(where, /ALPHA BETA ST/);
 });
 
 test("authoritative row uses the official display alias, not input", () => {
@@ -564,6 +589,26 @@ test("merged ambiguous results sort literal interpretation first and remain stab
   ]);
   const rows = dedupeAndSortNormalizedRows(normalizedRows, candidates);
   assert.deepEqual(rows.map((row) => row.displayAddress), ["50 WILDWOOD E PK", "50 WILDWOOD ST E"]);
+});
+
+test("an exact completed official address outranks a literal-name collision", () => {
+  const candidates = parseAddress("15 Marion St").candidates;
+  const normalizedRows = normalizeRawAuthoritativeRows([
+    rawRow({ display_address: "15 MARION ST AVE", street_number: "15", street_name: "MARION ST", street_type: "AVE", street_direction: undefined }),
+    rawRow({ display_address: "15 MARION ST", street_number: "15", street_name: "MARION", street_type: "ST", street_direction: undefined }),
+  ]);
+  const rows = dedupeAndSortNormalizedRows(normalizedRows, candidates);
+  assert.deepEqual(rows.map((row) => row.displayAddress), ["15 MARION ST", "15 MARION ST AVE"]);
+});
+
+test("exact completed civic-suffix address accepts the City's spaced display form", () => {
+  const candidates = parseAddress("1000 A Boston Ave").candidates;
+  const normalizedRows = normalizeRawAuthoritativeRows([
+    rawRow({ display_address: "1000 A BOSTON AVE", street_number: "1000", street_number_suffix: "A", street_name: "BOSTON", street_type: "AVE", street_direction: undefined }),
+    rawRow({ display_address: "1000 A BOSTON AVE RD", street_number: "1000", street_number_suffix: "A", street_name: "BOSTON AVE", street_type: "RD", street_direction: undefined }),
+  ]);
+  const rows = dedupeAndSortNormalizedRows(normalizedRows, candidates);
+  assert.deepEqual(rows.map((row) => row.displayAddress), ["1000 A BOSTON AVE", "1000 A BOSTON AVE RD"]);
 });
 
 test("numeric trustee ward gets one Ward prefix and named values stay verbatim", () => {
