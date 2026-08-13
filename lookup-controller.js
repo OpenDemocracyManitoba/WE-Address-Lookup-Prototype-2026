@@ -1,9 +1,8 @@
 import {
+  buildAddressResults,
   buildQuery,
-  dedupeAndSortNormalizedRows,
   formatCouncilWard,
   formatSchoolTrustee,
-  normalizeRawAuthoritativeRows,
   normalizeInput,
   parseAddress,
 } from "./address-data.js";
@@ -192,8 +191,11 @@ export class LookupController {
         this.finishError("errorUnexpected");
         return;
       }
-      const normalizedRows = normalizeRawAuthoritativeRows(payload);
-      const results = dedupeAndSortNormalizedRows(normalizedRows, candidates);
+      const results = buildAddressResults(
+        payload,
+        candidates,
+        normalizedInput,
+      );
       this.clearRequestTimer();
       this.abortController = null;
       this.cache = { normalizedInput, results };

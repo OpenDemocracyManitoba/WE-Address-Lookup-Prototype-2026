@@ -28,48 +28,29 @@ export function normalizeInput(value) {
 }
 
 function normalizeSuffix(value) {
-  const compact = String(value ?? "")
-    .replace(/\s+/g, "")
-    .toUpperCase();
-  return SUFFIXES.has(compact) ? compact : null;
-}
-
-function makeCandidate(streetNumber, suffix, nameTokens) {
-  const streetName = nameTokens.join(" ");
-  if (alphanumericCount(streetName) < 3) return null;
-  return Object.freeze({
-    streetNumber,
-    streetNumberSuffix: suffix,
-    streetName,
-  });
+  const suffix = String(value ?? "").toUpperCase();
+  return SUFFIXES.has(suffix) ? suffix : null;
 }
 
 function generateTailCandidates(streetNumber, suffix, tail) {
-  const tokens = Object.freeze(tail.split(" ").filter(Boolean));
+  const tokens = tail.split(" ");
   const candidates = [];
   for (
     let dropped = 0;
     dropped <= MAX_TRAILING_TOKEN_DROPS && dropped < tokens.length;
     dropped += 1
   ) {
-    const candidate = makeCandidate(
-      streetNumber,
-      suffix,
-      tokens.slice(0, tokens.length - dropped),
-    );
-    if (candidate) candidates.push(candidate);
+    const streetName = tokens.slice(0, tokens.length - dropped).join(" ");
+    if (alphanumericCount(streetName) >= 3) {
+      candidates.push(Object.freeze({
+        streetNumber,
+        streetNumberSuffix: suffix,
+        streetName,
+        trailingTokenDrops: dropped,
+      }));
+    }
   }
   return Object.freeze(candidates);
-}
-
-function candidateKey(candidate) {
-  return [
-    candidate.streetNumber,
-    candidate.streetNumberSuffix,
-    candidate.streetName,
-  ]
-    .map((value) => value ?? "")
-    .join("\u001f");
 }
 
 export function parseAddress(value) {
@@ -129,28 +110,19 @@ export function parseAddress(value) {
     };
   }
 
-  const unique = new Map();
-  for (const reading of readings) {
-    for (const candidate of generateTailCandidates(
+  const candidates = Object.freeze(readings.flatMap((reading) =>
+    generateTailCandidates(
       streetNumber,
       reading.suffix,
       reading.tail,
-    )) {
-      const key = candidateKey(candidate);
-      if (!unique.has(key)) unique.set(key, candidate);
-    }
-  }
-  const candidates = Object.freeze([...unique.values()]);
+    ),
+  ));
   return {
     normalizedInput,
     streetNumber,
     candidates,
     eligible: candidates.length > 0,
   };
-}
-
-export function isSearchEligible(value) {
-  return parseAddress(value).eligible;
 }
 
 export function escapeSoqlLiteral(value) {
@@ -193,10 +165,7 @@ export function buildQuery(candidates, endpoint = API_ENDPOINT) {
   ) {
     throw new TypeError("Candidates must share one numeric civic number.");
   }
-  const rankedCandidates = [
-    ...new Map(candidates.map((item) => [candidateKey(item), item])).values(),
-  ];
-  const alternatives = queryAlternatives(rankedCandidates);
+  const alternatives = queryAlternatives(candidates);
   const where = `street_number = ${streetNumber} AND (${alternatives.map(candidatePredicate).join(" OR ")})`;
   const params = new URLSearchParams();
   params.set(
@@ -245,58 +214,50 @@ export function normalizeAuthoritativeRow(row) {
   };
 }
 
-export function normalizeRawAuthoritativeRows(rows) {
-  const normalizedRows = [];
-  for (const row of rows) {
-    const normalized = normalizeAuthoritativeRow(row);
-    if (normalized) normalizedRows.push(normalized);
-  }
-  return normalizedRows;
-}
-
-function rowKey(row) {
-  return [
-    row.displayAddress,
-    row.streetNumber,
-    row.streetNumberSuffix,
-    row.streetName,
-    row.streetType,
-    row.streetDirection,
-    row.schoolDivision,
-    row.schoolDivisionWard,
-    row.councilWard,
-  ]
-    .map((value) => value ?? "")
-    .join("\u001f");
+function rowMatchesCandidate(row, candidate) {
+  return (
+    row.streetNumber === candidate.streetNumber &&
+    String(row.streetName ?? "")
+      .toUpperCase()
+      .startsWith(candidate.streetName) &&
+    (!candidate.streetNumberSuffix ||
+      row.streetNumberSuffix?.toUpperCase() === candidate.streetNumberSuffix)
+  );
 }
 
 function candidateMatchRank(row, candidates) {
-  const literal = candidates?.[0];
-  if (literal) {
-    const inputAddresses = literal.streetNumberSuffix
-      ? [
-          `${literal.streetNumber}${literal.streetNumberSuffix} ${literal.streetName}`,
-          `${literal.streetNumber} ${literal.streetNumberSuffix} ${literal.streetName}`,
-        ]
-      : [`${literal.streetNumber} ${literal.streetName}`];
-    if (inputAddresses.includes(normalizeInput(row.displayAddress))) return -1;
-  }
-  for (const [index, candidate] of (candidates ?? []).entries()) {
-    if (row.streetNumber !== candidate.streetNumber) continue;
-    if (
-      !String(row.streetName ?? "")
-        .toUpperCase()
-        .startsWith(candidate.streetName)
-    )
-      continue;
-    if (
-      candidate.streetNumberSuffix &&
-      row.streetNumberSuffix?.toUpperCase() !== candidate.streetNumberSuffix
-    )
-      continue;
-    return index;
-  }
-  return Number.MAX_SAFE_INTEGER;
+  const rank = candidates.findIndex((candidate) =>
+    rowMatchesCandidate(row, candidate),
+  );
+  return rank === -1 ? Number.MAX_SAFE_INTEGER : rank;
+}
+
+function candidateMatchTier(row, candidates) {
+  const tiers = candidates
+    .filter((candidate) => rowMatchesCandidate(row, candidate))
+    .map((candidate) => candidate.trailingTokenDrops ?? 0);
+  return tiers.length ? Math.min(...tiers) : Number.MAX_SAFE_INTEGER;
+}
+
+function comparableAddress(value) {
+  return normalizeInput(value).replace(
+    /^(\d+)\s+(1\/2[A-N]?|[A-N])\s+/u,
+    "$1$2 ",
+  );
+}
+
+function authoritativeInputVariants(row) {
+  const suffix = row.streetNumberSuffix ?? "";
+  const numbers = suffix
+    ? [`${row.streetNumber}${suffix}`, `${row.streetNumber}`]
+    : [`${row.streetNumber}`];
+  const name = row.streetName ?? "";
+  const type = row.streetType ?? "";
+  const direction = row.streetDirection ?? "";
+  return numbers.flatMap((number) => [
+    comparableAddress(`${number} ${name} ${type} ${direction}`),
+    comparableAddress(`${number} ${name} ${direction}`),
+  ]);
 }
 
 const NORMALIZED_ROW_SORT_KEYS = Object.freeze([
@@ -315,10 +276,11 @@ const NORMALIZED_ROW_COLLATOR = new Intl.Collator("en-CA", {
   sensitivity: "base",
 });
 
-export function dedupeAndSortNormalizedRows(rows, candidates = []) {
-  const unique = new Map();
-  for (const row of rows) unique.set(rowKey(row), row);
-  return [...unique.values()].sort((a, b) => {
+function sortNormalizedRows(rows, candidates) {
+  return [...rows].sort((a, b) => {
+    const tierDifference =
+      candidateMatchTier(a, candidates) - candidateMatchTier(b, candidates);
+    if (tierDifference) return tierDifference;
     const rankDifference =
       candidateMatchRank(a, candidates) - candidateMatchRank(b, candidates);
     if (rankDifference) return rankDifference;
@@ -331,6 +293,42 @@ export function dedupeAndSortNormalizedRows(rows, candidates = []) {
     }
     return 0;
   });
+}
+
+export function buildAddressResults(rawRows, candidates, normalizedInput) {
+  const sorted = sortNormalizedRows(
+    rawRows.map(normalizeAuthoritativeRow).filter(Boolean),
+    candidates,
+  );
+  const exactInput = comparableAddress(normalizedInput);
+  const exact = exactInput
+    ? sorted.filter((row) => comparableAddress(row.displayAddress) === exactInput)
+    : [];
+  const completions = exactInput
+    ? sorted.filter((row) =>
+        authoritativeInputVariants(row).some((variant) =>
+          variant.startsWith(exactInput),
+        ),
+      )
+    : [];
+  const strongestTier = sorted.reduce(
+    (tier, row) => Math.min(tier, candidateMatchTier(row, candidates)),
+    Number.MAX_SAFE_INTEGER,
+  );
+  const strongest = exact.length
+    ? exact
+    : completions.length
+      ? completions
+      : sorted.filter(
+          (row) => candidateMatchTier(row, candidates) === strongestTier,
+        );
+
+  const uniqueAddresses = new Map();
+  for (const row of strongest) {
+    const key = normalizeInput(row.displayAddress);
+    if (!uniqueAddresses.has(key)) uniqueAddresses.set(key, row);
+  }
+  return Object.freeze([...uniqueAddresses.values()]);
 }
 
 export function formatTrusteeWard(value) {
@@ -351,7 +349,4 @@ export function formatSchoolTrustee(division, ward) {
 
 export {
   API_ENDPOINT,
-  MAX_TRAILING_TOKEN_DROPS,
-  RESULT_FIELDS,
-  SUFFIXES,
 };

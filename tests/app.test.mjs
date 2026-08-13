@@ -4,15 +4,13 @@ import { readFileSync } from "node:fs";
 
 import {
   API_ENDPOINT,
+  buildAddressResults,
   buildQuery,
-  dedupeAndSortNormalizedRows,
   escapeSoqlLiteral,
   formatCouncilWard,
   formatSchoolTrustee,
   formatTrusteeWard,
-  isSearchEligible,
   normalizeAuthoritativeRow,
-  normalizeRawAuthoritativeRows,
   normalizeInput,
   parseAddress,
 } from "../address-data.js";
@@ -226,10 +224,10 @@ test("normalization neutralizes controls and unsupported query punctuation", () 
 
 test("eligibility enforces a number and three alphanumeric street-name characters", () => {
   for (const value of ["1", "1 ", "1 P", "1 Po", "1 .-'", "Portage"]) {
-    assert.equal(isSearchEligible(value), false, value);
+    assert.equal(parseAddress(value).eligible, false, value);
   }
-  assert.equal(isSearchEligible("1 Por"), true);
-  assert.equal(isSearchEligible("1 P-O-R"), true);
+  assert.equal(parseAddress("1 Por").eligible, true);
+  assert.equal(parseAddress("1 P-O-R").eligible, true);
 });
 
 test("eligibility accepts the safe-integer boundary and rejects larger civic numbers", () => {
@@ -248,6 +246,7 @@ test("eligibility accepts the safe-integer boundary and rejects larger civic num
 test("ordinary inputs produce progressively shorter literal name candidates", () => {
   assert.deepEqual(candidate("1 Portage"), {
     streetNumber: 1, streetNumberSuffix: null, streetName: "PORTAGE",
+    trailingTokenDrops: 0,
   });
   assert.deepEqual(parseAddress("510 Main St").candidates.map((item) => item.streetName), [
     "MAIN ST", "MAIN",
@@ -543,72 +542,150 @@ test("authoritative street numbers reject malformed or unsafe values", () => {
   }
 });
 
-test("malformed raw authoritative rows are rejected", () => {
-  assert.deepEqual(normalizeRawAuthoritativeRows([
-    null,
-    [],
-    {},
-    rawRow({ display_address: " ", street_address: undefined }),
-    rawRow({ street_number: "not numeric" }),
-    rawRow(),
-  ]), [normalizeAuthoritativeRow(rawRow())]);
-});
-
-test("identical grouped rows collapse but conflicting election tuples remain", () => {
-  const first = normalizeAuthoritativeRow(rawRow());
-  const conflict = normalizeAuthoritativeRow(rawRow({ school_division_ward: "6" }));
-  const rows = dedupeAndSortNormalizedRows([first, { ...first }, conflict]);
-  assert.equal(rows.length, 2);
-  assert.deepEqual(rows.map((row) => row.schoolDivisionWard), ["5", "6"]);
-});
-
-test("1615 REGENT AVE W intentionally retains both trustee wards in deterministic order", () => {
-  const normalized = REGENT_TRUSTEE_CONFLICT_ROWS.map(normalizeAuthoritativeRow);
-  assert.equal(normalized.every(Boolean), true);
-
-  const rows = dedupeAndSortNormalizedRows([normalized[1], normalized[0], { ...normalized[0] }]);
-  assert.equal(rows.length, 2);
-  assert.deepEqual(rows.map((row) => row.displayAddress), [
-    "1615 REGENT AVE W",
-    "1615 REGENT AVE W",
-  ]);
-  assert.deepEqual(rows.map((row) => row.councilWard), [
-    "Elmwood - East Kildonan",
-    "Elmwood - East Kildonan",
-  ]);
-  assert.deepEqual(rows.map((row) => row.schoolDivisionWard), ["1", "2"]);
-  // This zero-dwelling shopping-centre address cannot house an eligible trustee voter,
-  // so preserving both City tuples is more accurate than inventing a resolution.
-});
-
-test("merged ambiguous results sort literal interpretation first and remain stable", () => {
-  const candidates = parseAddress("50 Wildwood E").candidates;
-  const normalizedRows = normalizeRawAuthoritativeRows([
-    rawRow({ display_address: "50 WILDWOOD ST E", street_number: "50", street_name: "WILDWOOD", street_type: "ST", street_direction: "E" }),
-    rawRow({ display_address: "50 WILDWOOD E PK", street_number: "50", street_name: "WILDWOOD E", street_type: "PK", street_direction: undefined }),
-  ]);
-  const rows = dedupeAndSortNormalizedRows(normalizedRows, candidates);
-  assert.deepEqual(rows.map((row) => row.displayAddress), ["50 WILDWOOD E PK", "50 WILDWOOD ST E"]);
-});
-
-test("an exact completed official address outranks a literal-name collision", () => {
-  const candidates = parseAddress("15 Marion St").candidates;
-  const normalizedRows = normalizeRawAuthoritativeRows([
+test("an exact completed official address dominates a literal-name collision", () => {
+  const parsed = parseAddress("15 Marion St");
+  const rawRows = [
     rawRow({ display_address: "15 MARION ST AVE", street_number: "15", street_name: "MARION ST", street_type: "AVE", street_direction: undefined }),
     rawRow({ display_address: "15 MARION ST", street_number: "15", street_name: "MARION", street_type: "ST", street_direction: undefined }),
-  ]);
-  const rows = dedupeAndSortNormalizedRows(normalizedRows, candidates);
-  assert.deepEqual(rows.map((row) => row.displayAddress), ["15 MARION ST", "15 MARION ST AVE"]);
+  ];
+  const results = buildAddressResults(
+    rawRows,
+    parsed.candidates,
+    parsed.normalizedInput,
+  );
+  assert.deepEqual(results.map((row) => row.displayAddress), ["15 MARION ST"]);
 });
 
-test("exact completed civic-suffix address accepts the City's spaced display form", () => {
-  const candidates = parseAddress("1000 A Boston Ave").candidates;
-  const normalizedRows = normalizeRawAuthoritativeRows([
+test("exact completed civic-suffix address accepts compact and spaced input", () => {
+  const rawRows = [
     rawRow({ display_address: "1000 A BOSTON AVE", street_number: "1000", street_number_suffix: "A", street_name: "BOSTON", street_type: "AVE", street_direction: undefined }),
     rawRow({ display_address: "1000 A BOSTON AVE RD", street_number: "1000", street_number_suffix: "A", street_name: "BOSTON AVE", street_type: "RD", street_direction: undefined }),
+  ];
+  for (const input of ["1000A Boston Ave", "1000 A Boston Ave"]) {
+    const parsed = parseAddress(input);
+    const results = buildAddressResults(
+      rawRows,
+      parsed.candidates,
+      parsed.normalizedInput,
+    );
+    assert.deepEqual(results.map((row) => row.displayAddress), ["1000 A BOSTON AVE"]);
+  }
+});
+
+test("exact official-address dominance removes every weaker fallback", () => {
+  const parsed = parseAddress("15 Lake Albrin Bay");
+  const rawRows = [
+    rawRow({ display_address: "15 LAKE PARK DR", street_number: "15", street_name: "LAKE PARK", street_type: "DR", street_direction: undefined }),
+    rawRow({ display_address: "15 LAKE ALBRIN BAY", street_number: "15", street_name: "LAKE ALBRIN", street_type: "BAY", street_direction: undefined }),
+    rawRow({ display_address: "15 LAKE FALL PL", street_number: "15", street_name: "LAKE FALL", street_type: "PL", street_direction: undefined }),
+  ];
+
+  const results = buildAddressResults(
+    rawRows,
+    parsed.candidates,
+    parsed.normalizedInput,
+  );
+  assert.deepEqual(results.map((row) => row.displayAddress), [
+    "15 LAKE ALBRIN BAY",
   ]);
-  const rows = dedupeAndSortNormalizedRows(normalizedRows, candidates);
-  assert.deepEqual(rows.map((row) => row.displayAddress), ["1000 A BOSTON AVE", "1000 A BOSTON AVE RD"]);
+});
+
+test("a complete street name suppresses weaker structural fallbacks", () => {
+  const parsed = parseAddress("15 Lake Albrin");
+  const rawRows = [
+    rawRow({ display_address: "15 LAKE PARK DR", street_number: "15", street_name: "LAKE PARK", street_type: "DR", street_direction: undefined }),
+    rawRow({ display_address: "15 LAKE ALBRIN BAY", street_number: "15", street_name: "LAKE ALBRIN", street_type: "BAY", street_direction: undefined }),
+    rawRow({ display_address: "15 LAKE FALL PL", street_number: "15", street_name: "LAKE FALL", street_type: "PL", street_direction: undefined }),
+  ];
+
+  const results = buildAddressResults(
+    rawRows,
+    parsed.candidates,
+    parsed.normalizedInput,
+  );
+  assert.deepEqual(results.map((row) => row.displayAddress), [
+    "15 LAKE ALBRIN BAY",
+  ]);
+});
+
+test("partial type text promotes the best available fallback tier", () => {
+  const rawRows = [
+    rawRow({ display_address: "72 EPSOM PL", street_number: "72", street_name: "EPSOM", street_type: "PL", street_direction: undefined }),
+  ];
+
+  for (const input of ["72 Epsom P", "72 Epsom Pla", "72 Epsom Plac"]) {
+    const parsed = parseAddress(input);
+    const results = buildAddressResults(
+      rawRows,
+      parsed.candidates,
+      parsed.normalizedInput,
+    );
+    assert.deepEqual(results.map((row) => row.displayAddress), ["72 EPSOM PL"]);
+  }
+});
+
+test("authoritative prefix completions prevent a literal-name collision from hiding a partial type", () => {
+  const parsed = parseAddress("10 River R");
+  const results = buildAddressResults(
+    [
+      rawRow({ display_address: "10 RIVER RD", street_number: "10", street_name: "RIVER", street_type: "RD", street_direction: undefined }),
+      rawRow({ display_address: "10 RIVER RIDGE DR", street_number: "10", street_name: "RIVER RIDGE", street_type: "DR", street_direction: undefined }),
+      rawRow({ display_address: "10 RIVER PARK DR", street_number: "10", street_name: "RIVER PARK", street_type: "DR", street_direction: undefined }),
+    ],
+    parsed.candidates,
+    parsed.normalizedInput,
+  );
+
+  assert.deepEqual(results.map((row) => row.displayAddress), [
+    "10 RIVER RIDGE DR",
+    "10 RIVER RD",
+  ]);
+});
+
+test("authoritative variants preserve literal-name and omitted-type direction readings", () => {
+  const wildwood = parseAddress("50 Wildwood E");
+  const wildwoodResults = buildAddressResults(
+    [
+      rawRow({ display_address: "50 WILDWOOD ST E", street_number: "50", street_name: "WILDWOOD", street_type: "ST", street_direction: "E" }),
+      rawRow({ display_address: "50 WILDWOOD E PK", street_number: "50", street_name: "WILDWOOD E", street_type: "PK", street_direction: undefined }),
+    ],
+    wildwood.candidates,
+    wildwood.normalizedInput,
+  );
+  assert.deepEqual(wildwoodResults.map((row) => row.displayAddress), [
+    "50 WILDWOOD E PK",
+    "50 WILDWOOD ST E",
+  ]);
+});
+
+test("same-tier civic-suffix ambiguity remains available", () => {
+  const suffix = parseAddress("3 A Elkhorn");
+  const suffixResults = buildAddressResults(
+    [
+      rawRow({ display_address: "3 A ELKHORN ST", street_number: "3", street_number_suffix: "A", street_name: "ELKHORN", street_type: "ST", street_direction: undefined }),
+      rawRow({ display_address: "3 A ELKHORN RD", street_number: "3", street_number_suffix: undefined, street_name: "A ELKHORN", street_type: "RD", street_direction: undefined }),
+    ],
+    suffix.candidates,
+    suffix.normalizedInput,
+  );
+  assert.equal(suffixResults.length, 2);
+});
+
+test("identical displayed addresses collapse to one deterministic suggestion", () => {
+  const parsed = parseAddress("1615 Regent Ave W");
+  const rawRows = [
+    ...REGENT_TRUSTEE_CONFLICT_ROWS,
+    rawRow({ display_address: "1615 REGENT ST", street_number: "1615", street_name: "REGENT", street_type: "ST", street_direction: undefined }),
+  ];
+
+  const results = buildAddressResults(
+    rawRows,
+    parsed.candidates,
+    parsed.normalizedInput,
+  );
+  assert.equal(results.length, 1);
+  assert.equal(results[0].displayAddress, "1615 REGENT AVE W");
+  assert.equal(results[0].schoolDivisionWard, "1");
 });
 
 test("numeric trustee ward gets one Ward prefix and named values stay verbatim", () => {
@@ -817,6 +894,31 @@ test("a successful payload with no valid authoritative rows produces an empty re
   assert.equal(controller.state.phase, "empty");
   assert.equal(controller.state.results.length, 0);
   assert.equal(controller.state.popupOpen, false);
+});
+
+test("controller exposes and caches only the strongest structural result tier", async () => {
+  let calls = 0;
+  const payload = [
+    rawRow({ display_address: "15 LAKE PARK DR", street_number: "15", street_name: "LAKE PARK", street_type: "DR", street_direction: undefined }),
+    rawRow({ display_address: "15 LAKE ALBRIN BAY", street_number: "15", street_name: "LAKE ALBRIN", street_type: "BAY", street_direction: undefined }),
+    rawRow({ display_address: "15 LAKE FALL PL", street_number: "15", street_name: "LAKE FALL", street_type: "PL", street_direction: undefined }),
+  ];
+  const { clock, controller } = createController(async () => {
+    calls += 1;
+    return response(200, payload);
+  });
+
+  controller.inputChanged("15 Lake Albrin");
+  clock.tick(300);
+  await flush();
+  assert.equal(controller.state.results.length, 1);
+  assert.equal("primaryResultCount" in controller.state, false);
+  assert.equal(controller.state.results[0].displayAddress, "15 LAKE ALBRIN BAY");
+
+  controller.dismiss();
+  assert.equal(controller.activateInput(), true);
+  assert.equal(controller.state.results.length, 1);
+  assert.equal(calls, 1);
 });
 
 for (const [name, fetchFn, expected] of [
