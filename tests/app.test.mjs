@@ -733,6 +733,14 @@ test("header copy, address description, and help markup match the interface", ()
   assert.doesNotMatch(css.match(/\.lede\s*{[^}]*}/)?.[0] ?? "", /max-width\s*:/);
 });
 
+test("document roots can shrink when a 320 pixel viewport has a scrollbar", () => {
+  const css = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
+  const htmlRule = css.match(/html\s*{[^}]*}/)?.[0] ?? "";
+  const bodyRule = css.match(/body\s*{[^}]*}/)?.[0] ?? "";
+  assert.doesNotMatch(htmlRule, /min-width\s*:/);
+  assert.doesNotMatch(bodyRule, /min-width\s*:/);
+});
+
 test("retry control markup is a hidden native button alongside the single live status", () => {
   const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   assert.match(html, /<button class="retry-button" id="retry-button" type="button" hidden>\s*Retry address search\s*<\/button>/);

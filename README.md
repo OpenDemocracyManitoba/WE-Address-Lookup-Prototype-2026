@@ -21,10 +21,10 @@ node --test
 The deterministic suite does not contact the City service. To repeat the live parser and displayed-result audit against the complete current grouped dataset, run:
 
 ```sh
-node scripts/validate-parser-rework.mjs
+node scripts/audit-live-addresses.mjs
 ```
 
-The audit downloads the City data, compares the working implementation with `address-data.js` from the local `main` Git ref, and reports recall, result counts, ranks, and output fingerprints for official addresses, number-and-name input, partial types and directions, long type aliases, and civic-suffix forms. Use `--baseline <ref>` to compare with another local Git ref. `--experiment-only` skips the baseline comparison, while `--progressive-only` audits every eligible progressive street-name prefix instead of the standard corpora. Because this is a live, exhaustive check, it requires network access and takes substantially longer than `node --test`.
+The audit downloads the complete grouped City dataset and checks the current implementation's recall and displayed results for official addresses, number-and-name input, partial types and directions, long type aliases, and compact, spaced, and split fractional civic-suffix forms. It reports failures, result counts, target ranks, maximum parser candidates, and maximum query length, and exits nonzero if any target is not both recalled and displayed. Run it with `--progressive` to audit every eligible progressive street-name prefix instead of the standard corpora. Because this is a live, exhaustive check, it requires network access and takes substantially longer than `node --test`.
 
 No dependency installation or build step is required.
 

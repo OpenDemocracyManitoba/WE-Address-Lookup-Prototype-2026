@@ -18,13 +18,11 @@
 }
 
 html {
-  min-width: 320px;
   background: var(--canvas);
 }
 
 body {
   margin: 0;
-  min-width: 320px;
   min-height: 100vh;
   color: var(--ink);
   background: linear-gradient(
