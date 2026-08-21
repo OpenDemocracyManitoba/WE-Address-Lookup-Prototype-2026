@@ -126,13 +126,13 @@ export class LookupController {
     const parsed = parseAddress(rawInput);
     if (parsed.normalizedInput !== previousNormalized) this.cache = null;
     const generation = this.generation;
-    if (parsed.eligible) {
+    if (parsed.lookupReady) {
       this.pendingTimer = this.setTimeoutFn(() => {
         this.pendingTimer = null;
         void this.startSearch(
           generation,
           parsed.normalizedInput,
-          parsed.candidates,
+          parsed.addressInterpretations,
         );
       }, this.debounceMs);
     }
@@ -141,14 +141,14 @@ export class LookupController {
       normalizedInput: parsed.normalizedInput,
       ...clearedSuggestions(),
       selected: null,
-      phase: parsed.eligible ? "pending" : "guidance",
+      phase: parsed.lookupReady ? "pending" : "guidance",
     });
   }
 
   async startSearch(
     generation,
     normalizedInput,
-    candidates,
+    addressInterpretations,
     resetSuggestions = false,
   ) {
     if (
@@ -169,7 +169,7 @@ export class LookupController {
     }, this.timeoutMs);
 
     try {
-      const response = await this.fetchFn(buildQuery(candidates), {
+      const response = await this.fetchFn(buildQuery(addressInterpretations), {
         signal: abortController.signal,
       });
       if (!this.isCurrent(generation, normalizedInput, abortController)) return;
@@ -193,7 +193,7 @@ export class LookupController {
       }
       const results = buildAddressResults(
         payload,
-        candidates,
+        addressInterpretations,
         normalizedInput,
       );
       this.clearRequestTimer();
@@ -216,7 +216,7 @@ export class LookupController {
     if (!isRetryablePhase(this.state.phase)) return false;
     const parsed = parseAddress(this.state.rawInput);
     if (
-      !parsed.eligible ||
+      !parsed.lookupReady ||
       parsed.normalizedInput !== this.state.normalizedInput
     )
       return false;
@@ -226,7 +226,7 @@ export class LookupController {
     void this.startSearch(
       this.generation,
       parsed.normalizedInput,
-      parsed.candidates,
+      parsed.addressInterpretations,
       true,
     );
     return true;

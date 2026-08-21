@@ -32,9 +32,9 @@ function normalizeSuffix(value) {
   return SUFFIXES.has(suffix) ? suffix : null;
 }
 
-function generateTailCandidates(streetNumber, suffix, tail) {
+function generateTailInterpretations(streetNumber, suffix, tail) {
   const tokens = tail.split(" ");
-  const candidates = [];
+  const addressInterpretations = [];
   for (
     let dropped = 0;
     dropped <= MAX_TRAILING_TOKEN_DROPS && dropped < tokens.length;
@@ -42,7 +42,7 @@ function generateTailCandidates(streetNumber, suffix, tail) {
   ) {
     const streetName = tokens.slice(0, tokens.length - dropped).join(" ");
     if (alphanumericCount(streetName) >= 3) {
-      candidates.push(Object.freeze({
+      addressInterpretations.push(Object.freeze({
         streetNumber,
         streetNumberSuffix: suffix,
         streetName,
@@ -50,7 +50,7 @@ function generateTailCandidates(streetNumber, suffix, tail) {
       }));
     }
   }
-  return Object.freeze(candidates);
+  return Object.freeze(addressInterpretations);
 }
 
 export function parseAddress(value) {
@@ -73,8 +73,8 @@ export function parseAddress(value) {
       return {
         normalizedInput,
         streetNumber: null,
-        candidates: [],
-        eligible: false,
+        addressInterpretations: [],
+        lookupReady: false,
       };
     streetNumber = Number(plainMatch[1]);
     tail = plainMatch[2] ?? "";
@@ -105,23 +105,25 @@ export function parseAddress(value) {
     return {
       normalizedInput,
       streetNumber: null,
-      candidates: [],
-      eligible: false,
+      addressInterpretations: [],
+      lookupReady: false,
     };
   }
 
-  const candidates = Object.freeze(readings.flatMap((reading) =>
-    generateTailCandidates(
-      streetNumber,
-      reading.suffix,
-      reading.tail,
+  const addressInterpretations = Object.freeze(
+    readings.flatMap((reading) =>
+      generateTailInterpretations(
+        streetNumber,
+        reading.suffix,
+        reading.tail,
+      ),
     ),
-  ));
+  );
   return {
     normalizedInput,
     streetNumber,
-    candidates,
-    eligible: candidates.length > 0,
+    addressInterpretations,
+    lookupReady: addressInterpretations.length > 0,
   };
 }
 
@@ -129,44 +131,52 @@ export function escapeSoqlLiteral(value) {
   return String(value).replace(/'/g, "''");
 }
 
-function candidatePredicate(candidate) {
+function queryAlternativePredicate(queryAlternative) {
   const predicates = [
-    `upper(street_name) like '${escapeSoqlLiteral(candidate.streetName)}%'`,
+    `upper(street_name) like '${escapeSoqlLiteral(queryAlternative.streetName)}%'`,
   ];
-  if (candidate.streetNumberSuffix) {
+  if (queryAlternative.streetNumberSuffix) {
     predicates.push(
-      `upper(street_number_suffix) = '${escapeSoqlLiteral(candidate.streetNumberSuffix)}'`,
+      `upper(street_number_suffix) = '${escapeSoqlLiteral(queryAlternative.streetNumberSuffix)}'`,
     );
   }
   return `(${predicates.join(" AND ")})`;
 }
 
-function queryAlternatives(candidates) {
+function selectQueryAlternatives(addressInterpretations) {
   const shortestBySuffix = new Map();
-  for (const candidate of candidates) {
-    const suffixKey = candidate.streetNumberSuffix ?? "";
+  for (const addressInterpretation of addressInterpretations) {
+    const suffixKey = addressInterpretation.streetNumberSuffix ?? "";
     const current = shortestBySuffix.get(suffixKey);
-    if (!current || candidate.streetName.length < current.streetName.length) {
-      shortestBySuffix.set(suffixKey, candidate);
+    if (
+      !current ||
+      addressInterpretation.streetName.length < current.streetName.length
+    ) {
+      shortestBySuffix.set(suffixKey, addressInterpretation);
     }
   }
   return [...shortestBySuffix.values()];
 }
 
-export function buildQuery(candidates, endpoint = API_ENDPOINT) {
-  if (!Array.isArray(candidates) || candidates.length === 0) {
-    throw new TypeError("At least one parsed candidate is required.");
+export function buildQuery(addressInterpretations, endpoint = API_ENDPOINT) {
+  if (
+    !Array.isArray(addressInterpretations) ||
+    addressInterpretations.length === 0
+  ) {
+    throw new TypeError("At least one address interpretation is required.");
   }
-  const streetNumber = candidates[0].streetNumber;
+  const streetNumber = addressInterpretations[0].streetNumber;
   if (
     !Number.isSafeInteger(streetNumber) ||
     streetNumber < 0 ||
-    candidates.some((item) => item.streetNumber !== streetNumber)
+    addressInterpretations.some((item) => item.streetNumber !== streetNumber)
   ) {
-    throw new TypeError("Candidates must share one numeric civic number.");
+    throw new TypeError(
+      "Address interpretations must share one numeric civic number.",
+    );
   }
-  const alternatives = queryAlternatives(candidates);
-  const where = `street_number = ${streetNumber} AND (${alternatives.map(candidatePredicate).join(" OR ")})`;
+  const queryAlternatives = selectQueryAlternatives(addressInterpretations);
+  const where = `street_number = ${streetNumber} AND (${queryAlternatives.map(queryAlternativePredicate).join(" OR ")})`;
   const params = new URLSearchParams();
   params.set(
     "$select",
@@ -214,28 +224,34 @@ export function normalizeAuthoritativeRow(row) {
   };
 }
 
-function rowMatchesCandidate(row, candidate) {
+function rowMatchesAddressInterpretation(row, addressInterpretation) {
   return (
-    row.streetNumber === candidate.streetNumber &&
+    row.streetNumber === addressInterpretation.streetNumber &&
     String(row.streetName ?? "")
       .toUpperCase()
-      .startsWith(candidate.streetName) &&
-    (!candidate.streetNumberSuffix ||
-      row.streetNumberSuffix?.toUpperCase() === candidate.streetNumberSuffix)
+      .startsWith(addressInterpretation.streetName) &&
+    (!addressInterpretation.streetNumberSuffix ||
+      row.streetNumberSuffix?.toUpperCase() ===
+        addressInterpretation.streetNumberSuffix)
   );
 }
 
-function candidateMatchRank(row, candidates) {
-  const rank = candidates.findIndex((candidate) =>
-    rowMatchesCandidate(row, candidate),
+function addressInterpretationMatchRank(row, addressInterpretations) {
+  const rank = addressInterpretations.findIndex((addressInterpretation) =>
+    rowMatchesAddressInterpretation(row, addressInterpretation),
   );
   return rank === -1 ? Number.MAX_SAFE_INTEGER : rank;
 }
 
-function candidateMatchTier(row, candidates) {
-  const tiers = candidates
-    .filter((candidate) => rowMatchesCandidate(row, candidate))
-    .map((candidate) => candidate.trailingTokenDrops ?? 0);
+function addressInterpretationMatchTier(row, addressInterpretations) {
+  const tiers = addressInterpretations
+    .filter((addressInterpretation) =>
+      rowMatchesAddressInterpretation(row, addressInterpretation),
+    )
+    .map(
+      (addressInterpretation) =>
+        addressInterpretation.trailingTokenDrops ?? 0,
+    );
   return tiers.length ? Math.min(...tiers) : Number.MAX_SAFE_INTEGER;
 }
 
@@ -276,13 +292,15 @@ const NORMALIZED_ROW_COLLATOR = new Intl.Collator("en-CA", {
   sensitivity: "base",
 });
 
-function sortNormalizedRows(rows, candidates) {
+function sortNormalizedRows(rows, addressInterpretations) {
   return [...rows].sort((a, b) => {
     const tierDifference =
-      candidateMatchTier(a, candidates) - candidateMatchTier(b, candidates);
+      addressInterpretationMatchTier(a, addressInterpretations) -
+      addressInterpretationMatchTier(b, addressInterpretations);
     if (tierDifference) return tierDifference;
     const rankDifference =
-      candidateMatchRank(a, candidates) - candidateMatchRank(b, candidates);
+      addressInterpretationMatchRank(a, addressInterpretations) -
+      addressInterpretationMatchRank(b, addressInterpretations);
     if (rankDifference) return rankDifference;
     for (const key of NORMALIZED_ROW_SORT_KEYS) {
       const difference = NORMALIZED_ROW_COLLATOR.compare(
@@ -295,10 +313,14 @@ function sortNormalizedRows(rows, candidates) {
   });
 }
 
-export function buildAddressResults(rawRows, candidates, normalizedInput) {
+export function buildAddressResults(
+  rawRows,
+  addressInterpretations,
+  normalizedInput,
+) {
   const sorted = sortNormalizedRows(
     rawRows.map(normalizeAuthoritativeRow).filter(Boolean),
-    candidates,
+    addressInterpretations,
   );
   const exactInput = comparableAddress(normalizedInput);
   const exact = exactInput
@@ -312,7 +334,10 @@ export function buildAddressResults(rawRows, candidates, normalizedInput) {
       )
     : [];
   const strongestTier = sorted.reduce(
-    (tier, row) => Math.min(tier, candidateMatchTier(row, candidates)),
+    (tier, row) => Math.min(
+      tier,
+      addressInterpretationMatchTier(row, addressInterpretations),
+    ),
     Number.MAX_SAFE_INTEGER,
   );
   const strongest = exact.length
@@ -320,7 +345,9 @@ export function buildAddressResults(rawRows, candidates, normalizedInput) {
     : completions.length
       ? completions
       : sorted.filter(
-          (row) => candidateMatchTier(row, candidates) === strongestTier,
+          (row) =>
+            addressInterpretationMatchTier(row, addressInterpretations) ===
+            strongestTier,
         );
 
   const uniqueAddresses = new Map();

@@ -33,8 +33,10 @@ function startBrowserApp() {
   const list = document.querySelector("#address-suggestions");
   const status = document.querySelector("#address-status");
   const retryButton = document.querySelector("#retry-button");
-  const result = document.querySelector("#election-result");
-  const resultAddress = document.querySelector("#result-address");
+  const addressLookupResult = document.querySelector("#address-lookup-result");
+  const addressLookupResultAddress = document.querySelector(
+    "#address-lookup-result-address",
+  );
   const councilWard = document.querySelector("#council-ward");
   const trusteeWard = document.querySelector("#trustee-ward");
   let lastResults = null;
@@ -88,16 +90,16 @@ function startBrowserApp() {
     if (status.textContent !== nextStatus) status.textContent = nextStatus;
     retryButton.hidden = !isRetryablePhase(state.phase);
 
-    result.hidden = !state.selected;
+    addressLookupResult.hidden = !state.selected;
     if (state.selected) {
-      resultAddress.textContent = state.selected.displayAddress;
+      addressLookupResultAddress.textContent = state.selected.displayAddress;
       councilWard.textContent = formatCouncilWard(state.selected.councilWard);
       trusteeWard.textContent = formatSchoolTrustee(
         state.selected.schoolDivision,
         state.selected.schoolDivisionWard,
       );
     } else {
-      resultAddress.textContent = "";
+      addressLookupResultAddress.textContent = "";
       councilWard.textContent = "";
       trusteeWard.textContent = "";
     }

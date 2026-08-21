@@ -72,12 +72,15 @@ function normalized(value) {
   return String(value ?? "").trim().toUpperCase();
 }
 
-function rowMatchesCandidate(row, candidate) {
+function rowMatchesAddressInterpretation(row, addressInterpretation) {
   return (
-    Number(row.street_number) === candidate.streetNumber &&
-    normalized(row.street_name).startsWith(candidate.streetName) &&
-    (!candidate.streetNumberSuffix ||
-      normalized(row.street_number_suffix) === candidate.streetNumberSuffix)
+    Number(row.street_number) === addressInterpretation.streetNumber &&
+    normalized(row.street_name).startsWith(
+      addressInterpretation.streetName,
+    ) &&
+    (!addressInterpretation.streetNumberSuffix ||
+      normalized(row.street_number_suffix) ===
+        addressInterpretation.streetNumberSuffix)
   );
 }
 
@@ -113,12 +116,12 @@ function audit(rowsByNumber, rows, inputForRow) {
   const displayedResultCounts = [];
   const targetRanks = [];
   const failureCounts = {
-    ineligible: 0,
+    "not lookup ready": 0,
     "not recalled": 0,
     "not displayed": 0,
   };
   const failureExamples = [];
-  let maxCandidates = 0;
+  let maxAddressInterpretations = 0;
   let maxQueryLength = 0;
   let broadest = null;
   let attempted = 0;
@@ -138,20 +141,23 @@ function audit(rowsByNumber, rows, inputForRow) {
     for (const input of inputs) {
       attempted += 1;
       const parsed = addressData.parseAddress(input);
-      maxCandidates = Math.max(maxCandidates, parsed.candidates.length);
-      if (!parsed.eligible) {
-        recordFailure(input, "ineligible", target);
+      maxAddressInterpretations = Math.max(
+        maxAddressInterpretations,
+        parsed.addressInterpretations.length,
+      );
+      if (!parsed.lookupReady) {
+        recordFailure(input, "not lookup ready", target);
         continue;
       }
 
       maxQueryLength = Math.max(
         maxQueryLength,
-        addressData.buildQuery(parsed.candidates).length,
+        addressData.buildQuery(parsed.addressInterpretations).length,
       );
       const cohort = rowsByNumber.get(Number(target.street_number)) ?? [];
       const matches = cohort.filter((row) =>
-        parsed.candidates.some((candidate) =>
-          rowMatchesCandidate(row, candidate),
+        parsed.addressInterpretations.some((addressInterpretation) =>
+          rowMatchesAddressInterpretation(row, addressInterpretation),
         ),
       );
       if (!matches.some((row) => rowKey(row) === rowKey(target))) {
@@ -163,7 +169,7 @@ function audit(rowsByNumber, rows, inputForRow) {
       retrievedResultCounts.push(matches.length);
       const results = addressData.buildAddressResults(
         matches,
-        parsed.candidates,
+        parsed.addressInterpretations,
         parsed.normalizedInput,
       );
       const rank = resultRank(results, target);
@@ -193,7 +199,7 @@ function audit(rowsByNumber, rows, inputForRow) {
     failed: attempted - displayed,
     failureCounts,
     failureExamples,
-    maxCandidates,
+    maxAddressInterpretations,
     maxQueryLength,
     retrievedResultCounts: summarize(retrievedResultCounts),
     displayedResultCounts: summarize(displayedResultCounts),

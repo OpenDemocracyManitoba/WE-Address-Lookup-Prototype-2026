@@ -24,7 +24,7 @@ The deterministic suite does not contact the City service. To repeat the live pa
 node scripts/audit-live-addresses.mjs
 ```
 
-The audit downloads the complete grouped City dataset and checks the current implementation's recall and displayed results for official addresses, number-and-name input, partial types and directions, long type aliases, and compact, spaced, and split fractional civic-suffix forms. It reports failures, result counts, target ranks, maximum parser candidates, and maximum query length, and exits nonzero if any target is not both recalled and displayed. Run it with `--progressive` to audit every eligible progressive street-name prefix instead of the standard corpora. Because this is a live, exhaustive check, it requires network access and takes substantially longer than `node --test`.
+The audit downloads the complete grouped City dataset and checks the current implementation's recall and displayed results for official addresses, number-and-name input, partial types and directions, long type aliases, and compact, spaced, and split fractional civic-suffix forms. It reports failures, result counts, target ranks, maximum Address Interpretations, and maximum query length, and exits nonzero if any target is not both recalled and displayed. Run it with `--progressive` to audit every progressive street-name prefix that is Lookup Ready instead of the standard corpora. Because this is a live, exhaustive check, it requires network access and takes substantially longer than `node --test`.
 
 No dependency installation or build step is required.
 
@@ -42,9 +42,9 @@ Each request selects and groups only these civic and election fields: `street_ad
 
 ### Known Regent trustee-ward conflict
 
-The City dataset returns two authoritative grouped records for `1615 REGENT AVE W`. Both records have the same municipal ward, but their school trustee values are **Ward 1** and **Ward 2**. The address is a shopping-centre property with zero dwelling units, and its underlying units span the two trustee wards. Because school-trustee voters must reside in the ward, no eligible 2026 voter can live at this address and receive the wrong trustee ward from this conflict.
+The City dataset returns two authoritative grouped records for `1615 REGENT AVE W`. Both records have the same municipal ward, but their school trustee values are **Ward 1** and **Ward 2**. The address is a shopping-centre property with zero dwelling units, and its underlying units span the two trustee wards. Because Electors must reside in the school division ward, no 2026 Elector can live at this address and receive the wrong trustee ward from this conflict.
 
-The prototype shows `1615 REGENT AVE W` once. Its general display-address deduplication retains the first tuple in the normal deterministic sort; there is no Regent-specific resolution code. Because the address has no residential units, choosing between its duplicate trustee records is not useful to this residential lookup. A future conflict affecting an eligible residential address would require an explicit data and product decision.
+The prototype shows `1615 REGENT AVE W` once. Its general display-address deduplication retains the first tuple in the normal deterministic sort; there is no Regent-specific resolution code. Because the address has no residential units, choosing between its duplicate trustee records is not useful to this residential lookup. A future conflict affecting a residential address would require an explicit data and product decision.
 
 ## Parsing and query behavior
 
@@ -54,7 +54,7 @@ A query requires a numeric civic number and at least three alphanumeric street-n
 
 Civic suffixes are kept separate from the numeric number. Compact `3A` and spaced `3 A` input can query `street_number = 3` and `street_number_suffix = A`; `1/2` and `1/2A` forms are handled the same way. When a spaced token is also a plausible street-name start, the parser creates a bounded suffix reading and literal-name reading. If no suffix is supplied, the query leaves suffix unrestricted.
 
-The parser does not maintain a street-type alias table or direction vocabulary. Instead, it generates a small ordered candidate set by structure alone. For each civic-number and suffix reading, it uses the complete normalized tail first, then removes at most one and two trailing tokens. It keeps only candidates with at least three alphanumeric name characters and removes duplicates. Combined with the two bounded civic-suffix readings, input produces no more than six candidates. Examples:
+The parser does not maintain a street-type alias table or direction vocabulary. Instead, it generates a small ordered set of Address Interpretations by structure alone. For each civic-number and suffix reading, it uses the complete normalized tail first, then removes at most one and two trailing tokens. It keeps only interpretations with at least three alphanumeric name characters and removes duplicates. Combined with the two bounded civic-suffix readings, input produces no more than six Address Interpretations. Examples:
 
 - `15 MAR` produces `MAR`.
 - `15 MARION` produces `MARION`.
@@ -63,7 +63,7 @@ The parser does not maintain a street-type alias table or direction vocabulary. 
 - `300 ASSINIBOINE PARK` produces `ASSINIBOINE PARK`, then `ASSINIBOINE`.
 - `50 WILDWOOD E` produces `WILDWOOD E`, then `WILDWOOD`.
 
-Each query alternative uses only the exact numeric `street_number`, an optional exact `street_number_suffix`, and a case-insensitive `street_name` prefix. It never constrains `street_type` or `street_direction`. The query builder sends only the shortest required name prefix for each suffix reading, allowing one request to retrieve both literal matches and bounded fallbacks. Candidate order still ranks the most literal and longest interpretation first.
+Each Query Alternative uses only the exact numeric `street_number`, an optional exact `street_number_suffix`, and a case-insensitive `street_name` prefix. It never constrains `street_type` or `street_direction`. The query builder sends only the shortest required name prefix for each suffix reading, allowing one request to retrieve both literal matches and bounded fallbacks. Address Interpretation order still ranks the most literal and longest interpretation first.
 
 Result presentation keeps broad retrieval from the City service without treating every fallback as an equal suggestion. If normalized input exactly matches an authoritative display address, only that address is shown. Otherwise, authoritative input variants beginning with the complete input are treated as the strongest autocomplete tier; these variants are derived from returned fields and permit a civic suffix or street type to be omitted. This keeps partially entered types, directions, and suffix ambiguity visible without maintaining parser vocabulary. When there are no such completions, only results matching the strongest non-empty structural tier are shown: the fewest trailing-token removals that match any returned row. Weaker fallback tiers are discarded rather than grouped in the interface. For example, `15 LAKE ALBRIN` shows the direct `LAKE ALBRIN%` match without the broader `LAKE%` matches, while `72 EPSOM PLA` still promotes `72 EPSOM PL` because its more literal tiers are empty.
 
@@ -77,7 +77,7 @@ The current implementation was audited on August 13, 2026 against 231,369 groupe
 
 ## Autocomplete behavior
 
-Eligible input is debounced for 300 ms. Every edit cancels the debounce, aborts an active Fetch request, clears its timeout, increments the request generation, and removes stale UI. Responses must match both the current generation and normalized input before they can render. Requests time out after 10 seconds, which bounds a slow City service without making normal API latency overly fragile.
+Lookup Ready input is debounced for 300 ms. Every edit cancels the debounce, aborts an active Fetch request, clears its timeout, increments the request generation, and removes stale UI. Responses must match both the current generation and normalized input before they can render. Requests time out after 10 seconds, which bounds a slow City service without making normal API latency overly fragile.
 
 Escape, Tab, and deliberate outside interaction cancel pending work, invalidate completion, close the popup, clear the active option, and reset list scrolling. Completed results for unchanged input may remain in a one-input memory cache and reopen when the input receives focus or is clicked while already focused; reopening does not repeat the City request and reactivates the first option while resetting the list scroll position. Selection clears that cache. Nothing is written to cookies, local storage, session storage, analytics, or telemetry.
 
@@ -89,20 +89,20 @@ The popup is scrollable with contained overscroll, vertical touch panning, and m
 
 Before a release, serve the prototype as described above and record the browser, device or viewport, screen reader and input method used. Run these checks against the live City service; a check passes when its stated outcome occurs.
 
-- [ ] **Keyboard combobox:** Enter an eligible address query with at least two results. The first option is highlighted as soon as the list opens. Enter selects that option; Up and Down move the highlight and wrap at the ends; Escape closes the list without selecting; and Tab closes the list and follows the browser's normal focus order. Refocus or click the unchanged input to confirm cached results reopen with the first option active.
+- [ ] **Keyboard combobox:** Enter Lookup Ready address text with at least two results. The first option is highlighted as soon as the list opens. Enter selects that option; Up and Down move the highlight and wrap at the ends; Escape closes the list without selecting; and Tab closes the list and follows the browser's normal focus order. Refocus or click the unchanged input to confirm cached results reopen with the first option active.
 - [ ] **Screen reader:** With a screen reader running, repeat the keyboard check. The combobox reports that it is expanded, the highlighted option is exposed as the active selected option, and arrowing announces the newly active option. Result-count, error and final election-information status messages are announced once when they change, without duplicate chatter from unchanged state updates.
 - [ ] **IME composition:** Enable an IME that uses a composition candidate window and compose text in the address input. Enter and Escape while composition is active affect only the IME; they do not select an address or dismiss the address list. After composition ends, the same keys resume the documented combobox behavior.
-- [ ] **Focus visibility and Retry:** Use browser developer tools to block the City request, submit an eligible query and wait for **Retry address search**. Keyboard-focus both the input and Retry button. Each control has a clearly visible focus indicator against the white control surface and the page background; activating Retry returns focus to the input.
+- [ ] **Focus visibility and Retry:** Use browser developer tools to block the City request, enter address text that is Lookup Ready, and wait for **Retry address search**. Keyboard-focus both the input and Retry button. Each control has a clearly visible focus indicator against the white control surface and the page background; activating Retry returns focus to the input.
 - [ ] **Zoom and short landscape:** At 200% and 400% browser zoom, and in a phone-sized landscape viewport no taller than 430 CSS pixels, inspect the page before and after selecting a result. The election eyebrow, heading, instructions, search controls, status/result information and privacy notice remain present, readable and operable; nothing overlaps or is clipped, and vertical page scrolling reaches all substantive content.
 - [ ] **Popup during scrolling:** Open a multi-result popup above the input while the on-screen keyboard is visible, then scroll the options so the keyboard closes. The popup remains above the input, its maximum height adjusts to the visual viewport, and scrolling continues normally. Tap an option once and confirm that it is selected and the keyboard closes. Repeat the search, dismiss the popup by tapping elsewhere, then tap the unchanged input while the keyboard opens; cached results reopen on the same side. Rotate the device with the popup open to confirm that the popup closes; tapping the unchanged input reopens cached results with fresh placement.
 - [ ] **Notched mobile landscape:** On a notched device or reliable safe-area simulation in landscape, check both orientations with the popup closed and open. With the standard viewport declaration (and no `viewport-fit=cover`), headings, search controls, options, results and the privacy notice remain outside obstructed areas and usable through normal scrolling.
-- [ ] **Display-address deduplication:** Search for `1615 REGENT AVE W` and confirm that it appears once even though the City service returns two grouped trustee records for that display address. Select it and confirm that the deterministic retained row produces one complete election result.
+- [ ] **Display-address deduplication:** Search for `1615 REGENT AVE W` and confirm that it appears once even though the City service returns two grouped trustee records for that display address. Select it and confirm that the deterministic retained row produces one complete Address Lookup Result.
 
 ## Errors and limitations
 
 The interface distinguishes insufficient input, loading, no results, invalid searches (HTTP 400), a busy service (429), temporary server errors (5xx), timeouts, network/CORS failures, malformed JSON, and unexpected non-array payloads. Superseded or intentionally aborted work is silent.
 
-Transient service, timeout, transport, and unexpected-payload errors display a native **Retry address search** button. Focusing or clicking the input preserves the displayed error without starting another request, including while moving focus between the input and Retry button. Retry immediately reruns the unchanged eligible input through the controller's normal request path, including generation validation, cancellation, timeout, and stale-response protection, then returns focus to the combobox. The control is hidden for HTTP 400, insufficient input, successful results, and all other non-applicable states.
+Transient service, timeout, transport, and unexpected-payload errors display a native **Retry address search** button. Focusing or clicking the input preserves the displayed error without starting another request, including while moving focus between the input and Retry button. Retry immediately reruns the unchanged Lookup Ready input through the controller's normal request path, including generation validation, cancellation, timeout, and stale-response protection, then returns focus to the combobox. The control is hidden for HTTP 400, insufficient input, successful results, and all other non-applicable states.
 
 This is a browser-only prototype and depends on City endpoint availability and its CORS policy. It accepts civic street addresses only, not unit numbers, postal codes, intersections, geolocation, or free-form place names. When City records conflict for the same display address, the interface exposes only the first deterministic tuple; it does not explain the conflict or choose a value using domain-specific rules.
 
@@ -120,7 +120,7 @@ Turn the current manual schema and vocabulary validation into repeatable checks 
 
 Make an explicit choice between direct browser requests, a periodically refreshed static address index, and a caching or proxy service. Compare them on privacy, operational ownership, City-service dependency, CORS exposure, throttling, freshness, latency, and election-day traffic.
 
-Measure representative and worst-case query latency, grouped result counts, and payload sizes. Define synthetic monitoring, alerts, an outage message, and a fallback or recovery policy. Also prove that every eligible grouped query remains below Socrata's documented [default result limit of 1,000](https://dev.socrata.com/docs/paging.html), or implement an explicit limit and paging strategy.
+Measure representative and worst-case query latency, grouped result counts, and payload sizes. Define synthetic monitoring, alerts, an outage message, and a fallback or recovery policy. Also prove that every grouped query produced from Lookup Ready input remains below Socrata's documented [default result limit of 1,000](https://dev.socrata.com/docs/paging.html), or implement an explicit limit and paging strategy.
 
 ### 3. Privacy, threat-model, and deployment-security review
 
@@ -134,7 +134,7 @@ The footer includes the required City data acknowledgement. A broader policy rev
 
 ### 5. Automated real-browser integration and compatibility testing
 
-Add tests that exercise the actual DOM rendering and event wiring in `app.js`, not only the controller and static source text. Cover Chromium, Firefox, and WebKit behavior for typing, debounce, request cancellation, keyboard and pointer selection, retry, focus transitions, popup positioning, viewport changes, and selected-result rendering.
+Add tests that exercise the actual DOM rendering and event wiring in `app.js`, not only the controller and static source text. Cover Chromium, Firefox, and WebKit behavior for typing, debounce, request cancellation, keyboard and pointer selection, retry, focus transitions, popup positioning, viewport changes, and Address Lookup Result rendering.
 
 Keep deterministic mocked browser tests separate from a small live-service smoke test so City-service availability does not make the main suite unreliable.
 

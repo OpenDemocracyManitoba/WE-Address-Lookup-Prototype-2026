@@ -57,7 +57,7 @@ body {
 }
 
 .eyebrow,
-.result-kicker {
+.address-lookup-result-kicker {
   margin: 0 0 0.45rem;
   color: var(--brand-dark);
   font-size: 0.78rem;
@@ -216,7 +216,7 @@ input:focus-visible {
   white-space: nowrap;
 }
 
-.result {
+.address-lookup-result {
   position: relative;
   z-index: 1;
   margin-top: 0.5rem;
@@ -228,14 +228,14 @@ input:focus-visible {
   box-shadow: 0 6px 22px rgb(17 44 57 / 8%);
 }
 
-.result h2 {
+.address-lookup-result h2 {
   margin: 0;
   font-size: clamp(1.35rem, 5vw, 1.8rem);
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
-.result-grid {
+.address-lookup-result-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem;
@@ -244,17 +244,17 @@ input:focus-visible {
   border-top: 1px solid var(--soft-line);
 }
 
-.result-grid div {
+.address-lookup-result-grid div {
   min-width: 0;
 }
 
-.result-grid dt {
+.address-lookup-result-grid dt {
   color: var(--muted);
   font-size: 0.86rem;
   font-weight: 750;
 }
 
-.result-grid dd {
+.address-lookup-result-grid dd {
   margin: 0.3rem 0 0;
   font-size: 1.08rem;
   font-weight: 720;
@@ -317,7 +317,7 @@ input:focus-visible {
     margin-bottom: 1.35rem;
   }
 
-  .result-grid {
+  .address-lookup-result-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }

@@ -22,15 +22,15 @@ import {
 } from "../lookup-controller.js";
 import { calculatePopupGeometry } from "../popup-geometry.js";
 
-function candidate(input, index = 0) {
+function addressInterpretation(input, index = 0) {
   const parsed = parseAddress(input);
-  assert.equal(parsed.eligible, true, `${input} should be eligible`);
-  return parsed.candidates[index];
+  assert.equal(parsed.lookupReady, true, `${input} should be lookup ready`);
+  return parsed.addressInterpretations[index];
 }
 
 function queryParts(input) {
   const parsed = parseAddress(input);
-  const url = new URL(buildQuery(parsed.candidates));
+  const url = new URL(buildQuery(parsed.addressInterpretations));
   return { parsed, url, where: url.searchParams.get("$where") };
 }
 
@@ -222,54 +222,54 @@ test("normalization neutralizes controls and unsupported query punctuation", () 
   assert.equal(normalizeInput("1 POR%\u0000_TA;GE"), "1 POR TA GE");
 });
 
-test("eligibility enforces a number and three alphanumeric street-name characters", () => {
+test("Lookup Ready requires a number and three alphanumeric street-name characters", () => {
   for (const value of ["1", "1 ", "1 P", "1 Po", "1 .-'", "Portage"]) {
-    assert.equal(parseAddress(value).eligible, false, value);
+    assert.equal(parseAddress(value).lookupReady, false, value);
   }
-  assert.equal(parseAddress("1 Por").eligible, true);
-  assert.equal(parseAddress("1 P-O-R").eligible, true);
+  assert.equal(parseAddress("1 Por").lookupReady, true);
+  assert.equal(parseAddress("1 P-O-R").lookupReady, true);
 });
 
-test("eligibility accepts the safe-integer boundary and rejects larger civic numbers", () => {
+test("Lookup Ready accepts the safe-integer boundary and rejects larger civic numbers", () => {
   const largestSafe = parseAddress("9007199254740991 Main");
-  assert.equal(largestSafe.eligible, true);
+  assert.equal(largestSafe.lookupReady, true);
   assert.equal(largestSafe.streetNumber, Number.MAX_SAFE_INTEGER);
 
   for (const input of ["9007199254740992 Main", "99999999999999999999 Main"]) {
     const parsed = parseAddress(input);
-    assert.equal(parsed.eligible, false, input);
+    assert.equal(parsed.lookupReady, false, input);
     assert.equal(parsed.streetNumber, null, input);
-    assert.deepEqual(parsed.candidates, [], input);
+    assert.deepEqual(parsed.addressInterpretations, [], input);
   }
 });
 
-test("ordinary inputs produce progressively shorter literal name candidates", () => {
-  assert.deepEqual(candidate("1 Portage"), {
+test("ordinary inputs produce progressively shorter literal address interpretations", () => {
+  assert.deepEqual(addressInterpretation("1 Portage"), {
     streetNumber: 1, streetNumberSuffix: null, streetName: "PORTAGE",
     trailingTokenDrops: 0,
   });
-  assert.deepEqual(parseAddress("510 Main St").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("510 Main St").addressInterpretations.map((item) => item.streetName), [
     "MAIN ST", "MAIN",
   ]);
-  assert.deepEqual(parseAddress("510 Main Street").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("510 Main Street").addressInterpretations.map((item) => item.streetName), [
     "MAIN STREET", "MAIN",
   ]);
-  assert.deepEqual(parseAddress("1 Portage Avenue").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("1 Portage Avenue").addressInterpretations.map((item) => item.streetName), [
     "PORTAGE AVENUE", "PORTAGE",
   ]);
 });
 
 test("type-like name endings stay literal-first with one bounded fallback", () => {
   const parsed = parseAddress("300 Assiniboine Park");
-  assert.equal(parsed.candidates.length, 2);
-  assert.deepEqual(parsed.candidates.map((item) => item.streetName), [
+  assert.equal(parsed.addressInterpretations.length, 2);
+  assert.deepEqual(parsed.addressInterpretations.map((item) => item.streetName), [
     "ASSINIBOINE PARK", "ASSINIBOINE",
   ]);
-  assert.equal(Object.isFrozen(parsed.candidates), true);
-  assert.equal(parsed.candidates.every(Object.isFrozen), true);
+  assert.equal(Object.isFrozen(parsed.addressInterpretations), true);
+  assert.equal(parsed.addressInterpretations.every(Object.isFrozen), true);
 });
 
-test("PARK and COURT partial, ambiguous, and completed inputs stay eligible", () => {
+test("PARK and COURT partial, ambiguous, and completed inputs stay lookup ready", () => {
   for (const input of [
     "300 Ass",
     "300 Assiniboine Park",
@@ -278,9 +278,9 @@ test("PARK and COURT partial, ambiguous, and completed inputs stay eligible", ()
     "1021 Court",
     "1021 Court Ave",
   ]) {
-    assert.equal(parseAddress(input).eligible, true, input);
+    assert.equal(parseAddress(input).lookupReady, true, input);
   }
-  assert.deepEqual(parseAddress("1021 Court").candidates.map((item) => item.streetName), ["COURT"]);
+  assert.deepEqual(parseAddress("1021 Court").addressInterpretations.map((item) => item.streetName), ["COURT"]);
 
   const parkWhere = queryParts("300 Assiniboine Park").where;
   assert.match(parkWhere, /upper\(street_name\) like 'ASSINIBOINE%'/);
@@ -288,35 +288,35 @@ test("PARK and COURT partial, ambiguous, and completed inputs stay eligible", ()
 });
 
 test("full official addresses drop at most their two trailing structural tokens", () => {
-  assert.deepEqual(parseAddress("1000 Garfield Street N").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("1000 Garfield Street N").addressInterpretations.map((item) => item.streetName), [
     "GARFIELD STREET N", "GARFIELD STREET", "GARFIELD",
   ]);
-  assert.deepEqual(parseAddress("1 Dr. David Friesen Dr").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("1 Dr. David Friesen Dr").addressInterpretations.map((item) => item.streetName), [
     "DR. DAVID FRIESEN DR", "DR. DAVID FRIESEN", "DR. DAVID",
   ]);
-  assert.deepEqual(parseAddress("1 Portage Ave.").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("1 Portage Ave.").addressInterpretations.map((item) => item.streetName), [
     "PORTAGE AVE.", "PORTAGE",
   ]);
 });
 
 test("current ALLEY, BEND, and NW fixtures retain recall without vocabulary", () => {
-  assert.deepEqual(parseAddress("10 ADARA ALLEY").candidates.map((item) => item.streetName), ["ADARA ALLEY", "ADARA"]);
-  assert.deepEqual(parseAddress("100 BRIXHAM BEND").candidates.map((item) => item.streetName), ["BRIXHAM BEND", "BRIXHAM"]);
-  assert.deepEqual(parseAddress("29 SERVICE 3 ST NW").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("10 ADARA ALLEY").addressInterpretations.map((item) => item.streetName), ["ADARA ALLEY", "ADARA"]);
+  assert.deepEqual(parseAddress("100 BRIXHAM BEND").addressInterpretations.map((item) => item.streetName), ["BRIXHAM BEND", "BRIXHAM"]);
+  assert.deepEqual(parseAddress("29 SERVICE 3 ST NW").addressInterpretations.map((item) => item.streetName), [
     "SERVICE 3 ST NW", "SERVICE 3 ST", "SERVICE 3",
   ]);
 });
 
 test("compact civic suffix is separated from numeric street number", () => {
   const parsed = parseAddress("3A ELKHORN ST");
-  assert.equal(parsed.candidates[0].streetNumber, 3);
-  assert.equal(parsed.candidates[0].streetNumberSuffix, "A");
-  assert.deepEqual(parsed.candidates.map((item) => item.streetName), ["ELKHORN ST", "ELKHORN"]);
+  assert.equal(parsed.addressInterpretations[0].streetNumber, 3);
+  assert.equal(parsed.addressInterpretations[0].streetNumberSuffix, "A");
+  assert.deepEqual(parsed.addressInterpretations.map((item) => item.streetName), ["ELKHORN ST", "ELKHORN"]);
 });
 
 test("spaced letter suffix produces bounded suffix and street-name readings", () => {
   const parsed = parseAddress("3 A ELKHORN ST");
-  assert.deepEqual(parsed.candidates.map((item) => [item.streetNumberSuffix, item.streetName]), [
+  assert.deepEqual(parsed.addressInterpretations.map((item) => [item.streetNumberSuffix, item.streetName]), [
     ["A", "ELKHORN ST"],
     ["A", "ELKHORN"],
     [null, "A ELKHORN ST"],
@@ -325,16 +325,16 @@ test("spaced letter suffix produces bounded suffix and street-name readings", ()
 });
 
 test("1/2 and 1/2A suffix forms parse in compact and spaced forms", () => {
-  assert.equal(candidate("371/2 LIPTON ST").streetNumberSuffix, "1/2");
-  assert.equal(candidate("891/2A BRAEMAR AVE").streetNumberSuffix, "1/2A");
-  assert.equal(candidate("891/2A BRAEMAR AVE").streetNumber, 89);
-  assert.deepEqual(parseAddress("37 1/2 LIPTON ST").candidates.map((item) => [item.streetNumberSuffix, item.streetName]), [
+  assert.equal(addressInterpretation("371/2 LIPTON ST").streetNumberSuffix, "1/2");
+  assert.equal(addressInterpretation("891/2A BRAEMAR AVE").streetNumberSuffix, "1/2A");
+  assert.equal(addressInterpretation("891/2A BRAEMAR AVE").streetNumber, 89);
+  assert.deepEqual(parseAddress("37 1/2 LIPTON ST").addressInterpretations.map((item) => [item.streetNumberSuffix, item.streetName]), [
     ["1/2", "LIPTON ST"],
     ["1/2", "LIPTON"],
     [null, "1/2 LIPTON ST"],
     [null, "1/2 LIPTON"],
   ]);
-  assert.deepEqual(parseAddress("89 1/2 A BRAEMAR AVE").candidates.map((item) => [item.streetNumberSuffix, item.streetName]), [
+  assert.deepEqual(parseAddress("89 1/2 A BRAEMAR AVE").addressInterpretations.map((item) => [item.streetNumberSuffix, item.streetName]), [
     ["1/2A", "BRAEMAR AVE"],
     ["1/2A", "BRAEMAR"],
     [null, "1/2 A BRAEMAR AVE"],
@@ -350,43 +350,43 @@ test("omitted suffix adds no suffix restriction", () => {
 
 test("direction-like trailing token yields literal-first structural fallback", () => {
   const parsed = parseAddress("50 Wildwood E");
-  assert.equal(parsed.candidates.length, 2);
-  assert.deepEqual(parsed.candidates.map((item) => item.streetName), ["WILDWOOD E", "WILDWOOD"]);
+  assert.equal(parsed.addressInterpretations.length, 2);
+  assert.deepEqual(parsed.addressInterpretations.map((item) => item.streetName), ["WILDWOOD E", "WILDWOOD"]);
   const garfield = parseAddress("1000 Garfield N");
-  assert.deepEqual(garfield.candidates.map((item) => item.streetName), ["GARFIELD N", "GARFIELD"]);
+  assert.deepEqual(garfield.addressInterpretations.map((item) => item.streetName), ["GARFIELD N", "GARFIELD"]);
 });
 
 test("direction-like name ending remains available when a type follows", () => {
-  assert.deepEqual(parseAddress("50 Wildwood E Park").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("50 Wildwood E Park").addressInterpretations.map((item) => item.streetName), [
     "WILDWOOD E PARK", "WILDWOOD E", "WILDWOOD",
   ]);
 });
 
 test("progressive entry keeps narrowing instead of stopping at three characters", () => {
-  assert.deepEqual(parseAddress("15 Mar").candidates.map((item) => item.streetName), ["MAR"]);
-  assert.deepEqual(parseAddress("15 Mari").candidates.map((item) => item.streetName), ["MARI"]);
-  assert.deepEqual(parseAddress("15 Marion").candidates.map((item) => item.streetName), ["MARION"]);
-  assert.deepEqual(parseAddress("15 Marion S").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("15 Mar").addressInterpretations.map((item) => item.streetName), ["MAR"]);
+  assert.deepEqual(parseAddress("15 Mari").addressInterpretations.map((item) => item.streetName), ["MARI"]);
+  assert.deepEqual(parseAddress("15 Marion").addressInterpretations.map((item) => item.streetName), ["MARION"]);
+  assert.deepEqual(parseAddress("15 Marion S").addressInterpretations.map((item) => item.streetName), [
     "MARION S", "MARION",
   ]);
-  assert.deepEqual(parseAddress("15 Marion St N").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("15 Marion St N").addressInterpretations.map((item) => item.streetName), [
     "MARION ST N", "MARION ST", "MARION",
   ]);
 });
 
 test("multi-word names retain literal prefixes before bounded structural fallbacks", () => {
-  assert.deepEqual(parseAddress("1 Dr. David-Friesen Dr").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("1 Dr. David-Friesen Dr").addressInterpretations.map((item) => item.streetName), [
     "DR. DAVID-FRIESEN DR", "DR. DAVID-FRIESEN",
   ]);
-  assert.deepEqual(parseAddress("20 Rue des Meurons St").candidates.map((item) => item.streetName), [
+  assert.deepEqual(parseAddress("20 Rue des Meurons St").addressInterpretations.map((item) => item.streetName), [
     "RUE DES MEURONS ST", "RUE DES MEURONS", "RUE DES",
   ]);
 });
 
-test("candidate generation is bounded at six across ambiguous suffix readings", () => {
+test("address interpretation generation is bounded at six across ambiguous suffix readings", () => {
   const parsed = parseAddress("3 A Alpha Beta St N");
-  assert.equal(parsed.candidates.length, 6);
-  assert.deepEqual(parsed.candidates.map((item) => [item.streetNumberSuffix, item.streetName]), [
+  assert.equal(parsed.addressInterpretations.length, 6);
+  assert.deepEqual(parsed.addressInterpretations.map((item) => [item.streetNumberSuffix, item.streetName]), [
     ["A", "ALPHA BETA ST N"],
     ["A", "ALPHA BETA ST"],
     ["A", "ALPHA BETA"],
@@ -435,26 +435,26 @@ test("query includes select, where, group, order and excludes forbidden fields",
   assert.equal(url.searchParams.has("$limit"), false);
 });
 
-test("rank candidates stay ordered while redundant query predicates are removed", () => {
+test("ranked address interpretations stay ordered while redundant query predicates are removed", () => {
   const { parsed, where } = queryParts("50 Wildwood E");
-  assert.equal(parsed.candidates.length, 2);
+  assert.equal(parsed.addressInterpretations.length, 2);
   assert.equal((where.match(/ OR /g) || []).length, 0);
   assert.doesNotMatch(where, /WILDWOOD E%/);
   assert.match(where, /WILDWOOD%/);
 
   const duplicateUrl = new URL(buildQuery([
-    parsed.candidates[0],
-    parsed.candidates[1],
-    parsed.candidates[0],
+    parsed.addressInterpretations[0],
+    parsed.addressInterpretations[1],
+    parsed.addressInterpretations[0],
   ]));
   const duplicateWhere = duplicateUrl.searchParams.get("$where");
   assert.equal((duplicateWhere.match(/ OR /g) || []).length, 0);
   assert.match(duplicateWhere, /WILDWOOD%/);
 });
 
-test("six rank candidates collapse to at most two suffix-aware query alternatives", () => {
+test("six ranked address interpretations collapse to at most two suffix-aware query alternatives", () => {
   const { parsed, where } = queryParts("3 A Alpha Beta St N");
-  assert.equal(parsed.candidates.length, 6);
+  assert.equal(parsed.addressInterpretations.length, 6);
   assert.equal((where.match(/ OR /g) || []).length, 1);
   assert.match(where, /upper\(street_name\) like 'ALPHA BETA%'.*street_number_suffix/);
   assert.match(where, /upper\(street_name\) like 'A ALPHA BETA%'/);
@@ -550,7 +550,7 @@ test("an exact completed official address dominates a literal-name collision", (
   ];
   const results = buildAddressResults(
     rawRows,
-    parsed.candidates,
+    parsed.addressInterpretations,
     parsed.normalizedInput,
   );
   assert.deepEqual(results.map((row) => row.displayAddress), ["15 MARION ST"]);
@@ -565,7 +565,7 @@ test("exact completed civic-suffix address accepts compact and spaced input", ()
     const parsed = parseAddress(input);
     const results = buildAddressResults(
       rawRows,
-      parsed.candidates,
+      parsed.addressInterpretations,
       parsed.normalizedInput,
     );
     assert.deepEqual(results.map((row) => row.displayAddress), ["1000 A BOSTON AVE"]);
@@ -582,7 +582,7 @@ test("exact official-address dominance removes every weaker fallback", () => {
 
   const results = buildAddressResults(
     rawRows,
-    parsed.candidates,
+    parsed.addressInterpretations,
     parsed.normalizedInput,
   );
   assert.deepEqual(results.map((row) => row.displayAddress), [
@@ -600,7 +600,7 @@ test("a complete street name suppresses weaker structural fallbacks", () => {
 
   const results = buildAddressResults(
     rawRows,
-    parsed.candidates,
+    parsed.addressInterpretations,
     parsed.normalizedInput,
   );
   assert.deepEqual(results.map((row) => row.displayAddress), [
@@ -617,7 +617,7 @@ test("partial type text promotes the best available fallback tier", () => {
     const parsed = parseAddress(input);
     const results = buildAddressResults(
       rawRows,
-      parsed.candidates,
+      parsed.addressInterpretations,
       parsed.normalizedInput,
     );
     assert.deepEqual(results.map((row) => row.displayAddress), ["72 EPSOM PL"]);
@@ -632,7 +632,7 @@ test("authoritative prefix completions prevent a literal-name collision from hid
       rawRow({ display_address: "10 RIVER RIDGE DR", street_number: "10", street_name: "RIVER RIDGE", street_type: "DR", street_direction: undefined }),
       rawRow({ display_address: "10 RIVER PARK DR", street_number: "10", street_name: "RIVER PARK", street_type: "DR", street_direction: undefined }),
     ],
-    parsed.candidates,
+    parsed.addressInterpretations,
     parsed.normalizedInput,
   );
 
@@ -649,7 +649,7 @@ test("authoritative variants preserve literal-name and omitted-type direction re
       rawRow({ display_address: "50 WILDWOOD ST E", street_number: "50", street_name: "WILDWOOD", street_type: "ST", street_direction: "E" }),
       rawRow({ display_address: "50 WILDWOOD E PK", street_number: "50", street_name: "WILDWOOD E", street_type: "PK", street_direction: undefined }),
     ],
-    wildwood.candidates,
+    wildwood.addressInterpretations,
     wildwood.normalizedInput,
   );
   assert.deepEqual(wildwoodResults.map((row) => row.displayAddress), [
@@ -665,7 +665,7 @@ test("same-tier civic-suffix ambiguity remains available", () => {
       rawRow({ display_address: "3 A ELKHORN ST", street_number: "3", street_number_suffix: "A", street_name: "ELKHORN", street_type: "ST", street_direction: undefined }),
       rawRow({ display_address: "3 A ELKHORN RD", street_number: "3", street_number_suffix: undefined, street_name: "A ELKHORN", street_type: "RD", street_direction: undefined }),
     ],
-    suffix.candidates,
+    suffix.addressInterpretations,
     suffix.normalizedInput,
   );
   assert.equal(suffixResults.length, 2);
@@ -680,7 +680,7 @@ test("identical displayed addresses collapse to one deterministic suggestion", (
 
   const results = buildAddressResults(
     rawRows,
-    parsed.candidates,
+    parsed.addressInterpretations,
     parsed.normalizedInput,
   );
   assert.equal(results.length, 1);
@@ -702,7 +702,7 @@ test("missing election values are visibly represented", () => {
   assert.equal(normalizeAuthoritativeRow(rawRow({ ward_as_of_september_17: null })).councilWard, null);
 });
 
-test("selected-result status announces the official address and visible election values", () => {
+test("Address Lookup Result status announces the official address and visible election values", () => {
   const selected = normalizeAuthoritativeRow(rawRow());
   assert.equal(
     statusMessage({ phase: "selected", selected }),
@@ -710,7 +710,7 @@ test("selected-result status announces the official address and visible election
   );
 });
 
-test("selected-result status represents missing values like the visible result", () => {
+test("Address Lookup Result status represents missing values like the visible result", () => {
   const selected = normalizeAuthoritativeRow(rawRow({
     ward_as_of_september_17: null,
     school_division: null,
@@ -1006,7 +1006,7 @@ test("activation preserves non-retryable HTTP 400 without another request", asyn
   assert.equal(calls, 2);
 });
 
-test("retry refuses non-retryable or no-longer-eligible state", async () => {
+test("retry refuses non-retryable or no-longer-lookup-ready state", async () => {
   const { clock, controller } = createController(async () => response(400, []));
   controller.inputChanged("1 Por");
   clock.tick(300);

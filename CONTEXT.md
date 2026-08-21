@@ -150,6 +150,18 @@ _Avoid_: Ballot, residence
 The use of a Civic Address to identify its Electoral Assignment and associated Contests. It does not establish a visitor's identity, legal eligibility, voter registration, or guaranteed ballot.
 _Avoid_: Ballot lookup, eligibility check
 
+**Address Interpretation**:
+One possible structural reading of address text entered for an Address Lookup.
+_Avoid_: Candidate, parser candidate
+
+**Query Alternative**:
+A City address-service query alternative derived from one or more Address Interpretations.
+_Avoid_: Candidate, Address Interpretation
+
+**Lookup Ready**:
+The state in which entered address text is sufficiently complete to perform an Address Lookup. It does not describe a Visitor's eligibility or the status of an address.
+_Avoid_: Eligible, eligibility
+
 **Address Lookup Result**:
 The selected Civic Address, its Electoral Assignment, and the Applicable Contests returned by an Address Lookup.
 _Avoid_: Election result, ballot
