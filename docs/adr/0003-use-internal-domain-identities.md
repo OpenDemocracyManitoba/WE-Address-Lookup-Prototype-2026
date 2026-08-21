@@ -1,0 +1,3 @@
+# Use internal domain identities
+
+Winnipeg Election assigns its own identities to Persons, Candidacies, Contests, and Electoral Areas rather than using identifiers or labels supplied by the City or another authority as domain identities. A source identifier identifies only its imported record and is retained as provenance, because different authorities use unrelated identifier schemes and a source row is not equivalent to a domain entity. Each electoral entity has a Canonical Name, while inconsistent source spellings and labels are mapped explicitly; matching or merging entities never occurs solely because identifiers or names happen to match.

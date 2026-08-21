@@ -1,0 +1,3 @@
+# Separate import from publication
+
+Authoritative source data is evidence but can contain test records, destructive mutations, unknown labels, and incomplete coverage, so an import must not directly replace voter-facing data. Each Import Run preserves a Source Snapshot, normalizes records into Winnipeg Election entities, and validates the resulting coverage and statuses before publication; routine valid changes may publish automatically, while removals, unknown values, suspicious coverage reductions, and source conflicts retain the last-known-good publication and enter Needs Review. Candidate Publication Mode remains an explicit operator decision rather than an automatic consequence of an import or deadline.
