@@ -1,0 +1,9 @@
+AGENTS.md
+CONTEXT.md
+README.md
+.agents/
+.codex/
+data/
+docs/
+scripts/
+tests/

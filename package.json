@@ -3,6 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
     "test": "node --test"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.6"
   }
 }

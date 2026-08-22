@@ -1,21 +1,28 @@
 # Winnipeg election ward address lookup
 
-A small, static prototype that maps an official Winnipeg civic street address to its City Council ward, school division, and school trustee ward. It uses only HTML, CSS, JavaScript, browser APIs, and deterministic Node tests.
+A small, static Eleventy site that maps an official Winnipeg civic street address to its City Council ward, school division, and school trustee ward. The Address Lookup uses browser JavaScript and queries the City address service directly.
 
 ## Run the prototype
 
-Serve the repository with any basic static HTTP server, then open `index.html` through that server. For example, if Python is available:
+Install dependencies and start Eleventy's local development server:
 
 ```sh
-python -m http.server 8000
+npm install
+npm start
 ```
 
-Then visit `http://localhost:8000`. Opening the file directly may be blocked by browser module or cross-origin rules.
+Eleventy prints the local preview URL when the server starts. Opening a source file directly may be blocked by browser module or cross-origin rules.
 
-Run all deterministic tests with:
+Create a production build in `_site` with:
 
 ```sh
-node --test
+npm run build
+```
+
+Run all deterministic tests, including the production-build contract, with:
+
+```sh
+npm test
 ```
 
 The deterministic suite does not contact the City service. To repeat the live parser and displayed-result audit against the complete current grouped dataset, run:
@@ -25,8 +32,6 @@ node scripts/audit-live-addresses.mjs
 ```
 
 The audit downloads the complete grouped City dataset and checks the current implementation's recall and displayed results for official addresses, number-and-name input, partial types and directions, long type aliases, and compact, spaced, and split fractional civic-suffix forms. It reports failures, result counts, target ranks, maximum Address Interpretations, and maximum query length, and exits nonzero if any target is not both recalled and displayed. Run it with `--progressive` to audit every progressive street-name prefix that is Lookup Ready instead of the standard corpora. Because this is a live, exhaustive check, it requires network access and takes substantially longer than `node --test`.
-
-No dependency installation or build step is required.
 
 ## City data and field choices
 

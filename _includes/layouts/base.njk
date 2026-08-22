@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{ description }}" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-name" href="/">Winnipeg Election 2026</a>
+      <nav class="site-navigation" aria-label="Main navigation">
+        <a href="/">Address Lookup</a>
+        <a href="/learn/">Learn</a>
+        <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
+      </nav>
+    </header>
+    <main class="page-shell">
+      {{ content | safe }}
+    </main>
+    {% if lookupPage %}<script type="module" src="/assets/app.js"></script>{% endif %}
+  </body>
+</html>
