@@ -28,7 +28,7 @@ function contestTemplates() {
   );
 }
 
-test("rendering selects three ordered Contest templates and replaces the prior result", () => {
+function createRenderHarness() {
   const container = {
     children: [],
     replaceChildren(...children) {
@@ -47,6 +47,18 @@ test("rendering selects three ordered Contest templates and replaces the prior r
         randomizations += 1;
       },
     });
+  return {
+    container,
+    render,
+    get randomizations() {
+      return randomizations;
+    },
+  };
+}
+
+test("rendering selects three ordered Contest templates and replaces the prior result", () => {
+  const harness = createRenderHarness();
+  const { container, render } = harness;
 
   render({
     councilWard: "Fort Rouge - East Fort Garry",
@@ -109,29 +121,15 @@ test("rendering selects three ordered Contest templates and replaces the prior r
     ),
     false,
   );
-  assert.equal(randomizations, 2);
+  assert.equal(harness.randomizations, 2);
 
   render(null);
   assert.deepEqual(container.children, []);
-  assert.equal(randomizations, 2);
+  assert.equal(harness.randomizations, 2);
 });
 
 test("rendering preserves resolved Contests around unsupported or unfamiliar assignments", () => {
-  const container = {
-    children: [],
-    replaceChildren(...children) {
-      this.children = children;
-    },
-  };
-  const render = (address) =>
-    renderApplicableContests({
-      address,
-      container,
-      contests,
-      templates: contestTemplates(),
-      unresolvedContestNode: ({ office, message }) => ({ office, message }),
-      randomize: () => {},
-    });
+  const { container, render } = createRenderHarness();
 
   render({
     councilWard: "St. Norbert - Seine River",

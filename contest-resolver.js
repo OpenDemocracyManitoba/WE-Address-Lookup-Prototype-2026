@@ -26,7 +26,7 @@ const unresolvedMessages = Object.freeze({
       "School Trustee Contest information is unavailable because the selected address's School Division Ward could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected.",
 });
 
-function resolvedSlot(office, contest) {
+function createApplicableContestResolution(office, contest) {
   return contest
     ? { office, status: RESOLUTION_STATUS.RESOLVED, contest }
     : {
@@ -63,5 +63,7 @@ export function resolveApplicableContests(address, contests) {
     [OFFICES.SCHOOL_TRUSTEE]: schoolTrustee,
   };
 
-  return OFFICE_ORDER.map((office) => resolvedSlot(office, matches[office]));
+  return OFFICE_ORDER.map((office) =>
+    createApplicableContestResolution(office, matches[office])
+  );
 }
