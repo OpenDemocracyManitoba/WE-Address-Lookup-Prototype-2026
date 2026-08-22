@@ -68,16 +68,15 @@ contestPage: true
               {% endif %}
 
               {% set campaignUrl = candidate.campaignWebsite | externalUrl %}
-              {% if campaignUrl or candidate.email or candidate.phone or candidate.socialLinks %}
+              {% if campaignUrl or candidate.email or candidate.phone or candidate.presentation.socialLinks.length %}
                 <div class="candidate-contact">
                   <h3>Campaign and contact information</h3>
                   <ul>
                     {% if campaignUrl %}<li><a href="{{ campaignUrl }}">Campaign website</a></li>{% endif %}
                     {% if candidate.email %}<li><a href="mailto:{{ candidate.email }}">{{ candidate.email }}</a></li>{% endif %}
                     {% if candidate.phone %}<li><a href="tel:{{ candidate.phone | phoneHref }}">{{ candidate.phone }}</a></li>{% endif %}
-                    {% for social in candidate.socialLinks %}
-                      {% set socialUrl = social.url | externalUrl %}
-                      {% if socialUrl %}<li><a href="{{ socialUrl }}">{{ social.platform | socialLabel }}</a></li>{% endif %}
+                    {% for social in candidate.presentation.socialLinks %}
+                      <li><a href="{{ social.publicUrl }}">{{ social.platform | socialLabel }}</a></li>
                     {% endfor %}
                   </ul>
                 </div>

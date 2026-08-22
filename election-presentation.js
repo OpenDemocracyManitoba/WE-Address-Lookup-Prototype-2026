@@ -22,11 +22,18 @@ function familyNameSortValue(sourcePublishedName) {
 }
 
 function presentCandidate(candidate) {
+  const socialLinks = (candidate.socialLinks ?? [])
+    .map((socialLink) => ({
+      ...socialLink,
+      publicUrl: externalUrl(socialLink.url),
+    }))
+    .filter((socialLink) => socialLink.publicUrl);
   return {
     ...candidate,
     presentation: {
       phaseLabel: phaseLabels[candidate.phase],
       roleLabel: roleLabels[candidate.status.value],
+      socialLinks,
     },
   };
 }
