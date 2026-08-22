@@ -12,6 +12,7 @@
       <a class="site-name" href="/">Winnipeg Election 2026</a>
       <nav class="site-navigation" aria-label="Main navigation">
         <a href="/">Address Lookup</a>
+        <a href="/contests/">Contests</a>
         <a href="/learn/">Learn</a>
         <a href="/about/">About</a>
         <a href="/faq/">FAQ</a>
@@ -21,5 +22,6 @@
       {{ content | safe }}
     </main>
     {% if lookupPage %}<script type="module" src="/assets/app.js"></script>{% endif %}
+    {% if contestPage %}<script type="module" src="/assets/candidate-order.js"></script>{% endif %}
   </body>
 </html>

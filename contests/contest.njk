@@ -1,0 +1,100 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: election.contests
+  size: 1
+  alias: contest
+permalink: "contests/{{ contest.id }}/index.html"
+eleventyComputed:
+  title: "{{ contest.office }} — {{ contest.electoralArea.canonicalName }} | Winnipeg Election 2026"
+  description: "Candidate information for the {{ contest.office }} Contest in {{ contest.electoralArea.canonicalName }}."
+contestPage: true
+---
+<article class="contest-page">
+  <header class="intro">
+    <p class="eyebrow">{{ contest.office }} Contest</p>
+    <h1>{{ contest.electoralArea.canonicalName }}</h1>
+  </header>
+
+  <dl class="contest-metadata">
+    <div><dt>Office</dt><dd>{{ contest.office }}</dd></div>
+    <div><dt>Electoral Area</dt><dd>{{ contest.electoralArea.canonicalName }}</dd></div>
+    <div><dt>Number to Elect</dt><dd>{{ contest.numberToElect }}</dd></div>
+    <div><dt>Candidate List Availability</dt><dd>{{ contest.candidateList.availability }}</dd></div>
+  </dl>
+
+  {% if contest.candidateList.availability == "Unavailable" %}
+    <section class="candidate-list-notice" aria-labelledby="candidate-information-heading">
+      <h2 id="candidate-information-heading">Candidate information unavailable</h2>
+      <p>This resource does not currently support Candidate data for this Contest. This does not mean that no Candidates exist.</p>
+    </section>
+  {% elif contest.candidates.length == 0 %}
+    <section class="candidate-list-notice" aria-labelledby="candidate-information-heading">
+      <h2 id="candidate-information-heading">No published Candidate Records</h2>
+      <p>The reviewed Candidate list is published, but it contained no Candidate Records when observed.</p>
+    </section>
+  {% else %}
+    <section aria-labelledby="candidate-information-heading">
+      <h2 id="candidate-information-heading" class="candidate-list-heading">Candidate information</h2>
+      <p id="candidate-order-explanation" class="ordering-explanation" data-order-explanation>Candidates are shown alphabetically by family name.</p>
+      <ul class="candidate-list" data-candidate-list aria-describedby="candidate-order-explanation">
+        {% for candidate in contest.candidates %}
+          <li class="candidate-list-item" data-candidate-record>
+            <article class="candidate-record">
+              <p class="candidate-role">{% if candidate.phase == "nomination" %}Candidate{% else %}Prospective Candidate{% endif %}</p>
+              <h2>{{ candidate.sourcePublishedName }}</h2>
+              <dl class="candidate-metadata">
+                <div><dt>Election Phase</dt><dd>{% if candidate.phase == "nomination" %}Nomination{% else %}Registration{% endif %}</dd></div>
+                <div><dt>Candidate Status</dt><dd>{{ candidate.status.value }}</dd></div>
+                {% if candidate.registrationDate %}<div><dt>Registration Date</dt><dd>{{ candidate.registrationDate | displayDate }}</dd></div>{% endif %}
+              </dl>
+
+              {% set imageUrl = candidate.imageUrl | externalUrl %}
+              {% if imageUrl %}<img class="candidate-image" src="{{ imageUrl }}" alt="{{ candidate.sourcePublishedName }}" />{% endif %}
+
+              {% if candidate.biography or candidate.biographyFrench %}
+                <section class="candidate-biography">
+                  <h3>Candidate-provided information</h3>
+                  {% if candidate.biography %}<p>{{ candidate.biography }}</p>{% endif %}
+                  {% if candidate.biographyFrench %}<p lang="fr">{{ candidate.biographyFrench }}</p>{% endif %}
+                </section>
+              {% endif %}
+
+              {% set campaignUrl = candidate.campaignWebsite | externalUrl %}
+              {% if campaignUrl or candidate.email or candidate.phone or candidate.socialLinks %}
+                <div class="candidate-contact">
+                  <h3>Campaign and contact information</h3>
+                  <ul>
+                    {% if campaignUrl %}<li><a href="{{ campaignUrl }}">Campaign website</a></li>{% endif %}
+                    {% if candidate.email %}<li><a href="mailto:{{ candidate.email }}">{{ candidate.email }}</a></li>{% endif %}
+                    {% if candidate.phone %}<li><a href="tel:{{ candidate.phone | phoneHref }}">{{ candidate.phone }}</a></li>{% endif %}
+                    {% for social in candidate.socialLinks %}
+                      {% set socialUrl = social.url | externalUrl %}
+                      {% if socialUrl %}<li><a href="{{ socialUrl }}">{{ social.platform | socialLabel }}</a></li>{% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+
+              {% if candidate.financialDisclosure or candidate.statementOfDisclosure %}
+                <div class="candidate-disclosures">
+                  <h3>Disclosure documents</h3>
+                  <ul>
+                    {% if candidate.financialDisclosure %}
+                      {% set disclosureUrl = candidate.financialDisclosure.url | externalUrl %}
+                      {% if disclosureUrl %}<li><a href="{{ disclosureUrl }}">{{ candidate.financialDisclosure.fileName or "Financial disclosure" }}</a></li>{% endif %}
+                    {% endif %}
+                    {% if candidate.statementOfDisclosure %}
+                      {% set statementUrl = candidate.statementOfDisclosure.url | externalUrl %}
+                      {% if statementUrl %}<li><a href="{{ statementUrl }}">{{ candidate.statementOfDisclosure.fileName or "Statement of disclosure" }}</a></li>{% endif %}
+                    {% endif %}
+                  </ul>
+                </div>
+              {% endif %}
+            </article>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+</article>

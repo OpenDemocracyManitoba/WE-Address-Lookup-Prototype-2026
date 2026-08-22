@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+title: Contest Directory | Winnipeg Election 2026
+description: Browse every Contest in the 2026 Municipal Council and School Boards Election.
+---
+<header class="intro">
+  <p class="eyebrow">2026 Winnipeg Election</p>
+  <h1>Contest Directory</h1>
+  <p class="lede">Browse the Candidates and Prospective Candidates for every 2026 Contest.</p>
+</header>
+
+<div class="contest-directory">
+{% for office in ["Mayor", "Councillor", "School Trustee"] %}
+  <section class="contest-directory-group" aria-labelledby="{{ office | slugify }}-contests">
+    <h2 id="{{ office | slugify }}-contests">{{ office }}</h2>
+    <ul class="contest-directory-list">
+      {% for contest in election.contests %}
+        {% if contest.office == office %}
+          <li>
+            <a href="/contests/{{ contest.id }}/">{{ contest.electoralArea.canonicalName }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+{% endfor %}
+</div>
