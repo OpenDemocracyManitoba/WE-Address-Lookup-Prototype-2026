@@ -1,0 +1,36 @@
+{
+  "sourceId": "city-address-dataset",
+  "observedAt": "2026-08-22",
+  "retrievalUrl": "https://data.winnipeg.ca/resource/cam2-ii3u.json",
+  "retrievalMethod": "Grouped ward_as_of_september_17, school_division, and school_division_ward; 65 combinations were observed.",
+  "observedLabels": {
+    "councilWards": [
+      "Charleswood - Tuxedo", "Daniel McIntyre", "Elmwood - East Kildonan",
+      "Fort Rouge - East Fort Garry", "Mynarski", "North Kildonan", "Old Kildonan",
+      "Point Douglas", "River Heights - Fort Garry", "St. Boniface", "St. James",
+      "St. Norbert - Seine River", "St. Vital", "Transcona", "Waverley West"
+    ],
+    "schoolDivisionWards": [
+      ["Louis Riel", "1"], ["Louis Riel", "2"], ["Louis Riel", "3"], ["Louis Riel", "4"],
+      ["Pembina Trails", "1"], ["Pembina Trails", "2"], ["Pembina Trails", "3"],
+      ["River East - Transcona", "1"], ["River East - Transcona", "2"],
+      ["River East - Transcona", "3"], ["River East - Transcona", "4"],
+      ["St James-Assiniboia", "East Ward"], ["St James-Assiniboia", "West Ward"],
+      ["St James-Assiniboia", "Centre Ward"], ["Seven Oaks", "2"], ["Seven Oaks", "3"],
+      ["Winnipeg", "1"], ["Winnipeg", "2"], ["Winnipeg", "3"], ["Winnipeg", "4"],
+      ["Winnipeg", "5"], ["Winnipeg", "6"], ["Winnipeg", "7"], ["Winnipeg", "8"], ["Winnipeg", "9"],
+      ["Seine River", "1"], ["Interlake", "Rosser"]
+    ]
+  },
+  "unresolvedFindings": [
+    { "kind": "missingSchoolAssignment", "addressCount": 200, "meaning": "Rows without both school fields cannot establish a School Trustee Contest." },
+    { "kind": "missingAllElectoralAssignments", "addressCount": 10, "meaning": "Rows without Council or school labels cannot establish applicable Contests." }
+  ],
+  "rawRows": [
+    { "street_address": "1001 DUCHARME AVE", "street_number": "1001", "street_name": "DUCHARME", "street_type": "AVE", "school_division": "Seine River", "school_division_ward": "1", "ward_as_of_september_17": "St. Norbert - Seine River" },
+    { "street_address": "3360 STURGEON RD", "street_number": "3360", "street_name": "STURGEON", "street_type": "RD", "school_division": "Interlake", "school_division_ward": "Rosser", "ward_as_of_september_17": "St. James" },
+    { "street_address": "1005 CAVALIER DR", "street_number": "1005", "street_name": "CAVALIER", "street_type": "DR", "school_division": "St James-Assiniboia", "school_division_ward": "Centre Ward", "ward_as_of_september_17": "St. James" },
+    { "street_address": "1000 MAIN ST", "street_number": "1000", "street_name": "MAIN", "street_type": "ST", "school_division": "Winnipeg", "school_division_ward": "5", "ward_as_of_september_17": "Mynarski" },
+    { "street_address": "100 OMANDS CREEK BLVD", "street_number": "100", "street_name": "OMANDS CREEK", "street_type": "BLVD", "school_division": null, "school_division_ward": null, "ward_as_of_september_17": "Point Douglas" }
+  ]
+}

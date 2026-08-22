@@ -22,29 +22,21 @@ _Avoid_: Office
 The number of people elected in a Contest.
 _Avoid_: Number of candidates, number of offices
 
-**Candidacy**:
-A Person's participation in one Contest.
-_Avoid_: Person, contest
-
-**Person**:
-An individual who may have a Candidacy in a Contest.
-_Avoid_: Candidate when referring to the individual independently of a contest
+**Candidate Record**:
+A source-backed record about one individual in one Contest, including the source-published name, phase or status, provenance, and available voter-facing information.
+_Avoid_: Person, Candidacy, identity record
 
 **Prospective Candidate**:
-A Person who has registered to seek an Office but whose nomination papers have not been accepted.
+A person who has registered to seek an Office but whose nomination papers have not been accepted.
 _Avoid_: Candidate, registered candidate
 
 **Candidate**:
-A Person whose nomination papers for a Contest have been accepted by the Senior Election Official.
+A person whose nomination papers for a Contest have been accepted by the Senior Election Official.
 _Avoid_: Prospective candidate, registrant
 
-**Candidacy Status**:
-Winnipeg Election's normalized state of a Candidacy: Registered, Registration Withdrawn, Nominated, Nomination Withdrawn, Not Nominated, or Needs Review. The raw source status remains separate and does not determine this state without normalization.
+**Candidate Status**:
+The phase or status attached to a Candidate Record, such as Registered, Registration Withdrawn, Nominated, Nomination Withdrawn, Not Nominated, or Needs Review. The raw source value remains separate and does not determine this state without normalization.
 _Avoid_: Candidate type, active flag
-
-**Contest Status**:
-The official state of a Contest after nominations: Awaiting Official Candidate List, Election Required, Acclaimed, or Needs Review.
-_Avoid_: Candidacy status, candidate status
 
 **Election Result**:
 The official declared outcome of a Contest after voting or acclamation.
@@ -82,13 +74,13 @@ _Avoid_: Councillor, school division
 The time-stamped set of Candidates currently recognized by official sources for the Election's Contests. It excludes Prospective Candidates and people whose Candidacies are no longer active, but is not considered immutable.
 _Avoid_: Final candidate list
 
-**Candidate Publication Mode**:
-The visibility policy controlling which Candidacies are public: Registration mode shows published Prospective Candidates and their statuses, while Nominated mode shows only active Candidates. Nominated mode begins only after the post-withdrawal official list has been verified.
-_Avoid_: Nomination-complete flag, automatic deadline switch
+**Election Phase**:
+The explicit presentation phase for Candidate Records: Registration shows Prospective Candidates and their current statuses, while Nominated shows only accepted Candidates.
+_Avoid_: Publication state, approval stage, automatic deadline switch
 
 **Official Candidate Record**:
-Information an Authoritative Source publishes to identify a Person's Candidacy, Contest, and Candidacy Status.
-_Avoid_: Candidate-provided information, person
+Information an Authoritative Source publishes to identify a Candidate Record's Contest and Candidate Status.
+_Avoid_: Candidate-provided information, domain identity
 
 **Candidate-Provided Information**:
 Contact or campaign information a Person supplies through an Authoritative Source, such as a phone number, email address, website, social account, official agent, or auditor. Publication by an authority does not mean that authority independently verified the information.
@@ -171,7 +163,7 @@ A Contest selected by an Electoral Assignment: the citywide Mayoral Contest, the
 _Avoid_: Ballot contest, the visitor's contest
 
 **Contest Directory**:
-The address-independent way for Visitors to browse every Contest by Office and Electoral Area. It exposes the same Contests and Candidacies used by Address Lookup rather than maintaining a separate candidate list.
+The address-independent way for Visitors to browse every Contest by Office and Electoral Area. It exposes the same Contests and Candidate Records used by Address Lookup rather than maintaining a separate candidate list.
 _Avoid_: Candidate database, alternate candidate list
 
 ### People

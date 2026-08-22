@@ -1,0 +1,78 @@
+{
+  "sourceId": "city-candidate-dataset",
+  "observedAt": "2026-08-22",
+  "retrievalUrl": "https://data.winnipeg.ca/resource/9gi9-dauz.json?$limit=18000&$where=election_date%20%3E=%20%272026-01-01T00:00:00.000%27%20AND%20election_date%20%3C%20%272027-01-01T00:00:00.000%27%20AND%20(nomination_order%20IS%20NULL%20OR%20nomination_order%20%3E=%200)",
+  "retrievalMethod": "The same 2026 filter and visibility condition embedded in the official City registered-candidates page; 133 rows were observed.",
+  "observedStatuses": ["Registered"],
+  "observedWithdrawalConvention": "Some withdrawn registrations retain candidate_status=Registered and append - WITHDRAWN to name.",
+  "observedLabels": {
+    "councilWards": [
+      "Charleswood-Tuxedo-Westwood", "Daniel McIntyre", "Elmwood-East Kildonan",
+      "Fort Rouge-East Fort Garry", "Mynarski", "North Kildonan", "Old Kildonan",
+      "Point Douglas", "River Heights-Fort Garry", "St. Boniface", "St. James",
+      "St. Norbert-Seine River", "St. Vital", "Transcona", "Waverley West"
+    ],
+    "schoolDivisionWards": [
+      ["Louis Riel School Division", "Ward 1"],
+      ["Louis Riel School Division", "Ward 2"],
+      ["Louis Riel School Division", "Ward 3"],
+      ["Louis Riel School Division", "Ward 4"],
+      ["Pembina Trails School Division", "Ward 1"],
+      ["Pembina Trails School Division", "Ward 2"],
+      ["Pembina Trails School Division", "Ward 3"],
+      ["River East Transcona School Division", "Ward 1"],
+      ["River East Transcona School Division", "Ward 2"],
+      ["River East Transcona School Division", "Ward 3"],
+      ["River East Transcona School Division", "Ward 4"],
+      ["St. James – Assiniboia School Division", "East"],
+      ["St. James – Assiniboia School Division", "West"],
+      ["St. James – Assiniboia School Division", "Centre"],
+      ["Seven Oaks School Division", "Ward 2"],
+      ["Seven Oaks School Division", "Ward 3"],
+      ["Winnipeg School Division", "Ward 1"],
+      ["Winnipeg School Division", "Ward 3"],
+      ["Winnipeg School Division", "Ward 4"],
+      ["Winnipeg School Division", "Ward 5"],
+      ["Winnipeg School Division", "Ward 6"],
+      ["Winnipeg School Division", "Ward 7"],
+      ["Winnipeg School Division", "Ward 8"],
+      ["Winnipeg School Division", "Ward 9"]
+    ]
+  },
+  "rawRows": [
+    {
+      "id": "2026-28", "election_date": "2026-10-28T00:00:00", "registration_date": "2026-05-01T00:00:00",
+      "name": "Scott Gillingham", "type": "Mayor", "candidate_status": "Registered",
+      "phone": "204-500-0950", "email": "info@scottgillingham.com", "website": "www.scottgillingham.com",
+      "official_agent": "Scott Kitching", "auditor": "Michael Angers, Baker Tilly", "election_type": "General"
+    },
+    {
+      "id": "2026-39", "election_date": "2026-10-28T00:00:00", "registration_date": "2026-06-30T00:00:00",
+      "name": "Matt Allard", "type": "Councillor", "candidate_status": "Registered", "ward": "St. Boniface",
+      "phone": "204-396-4636", "email": "info@mattallard.ca", "website": "www.mattallard.ca",
+      "official_agent": "Dwight Zacharias", "auditor": "Joelle Regnier, Talbot and Associates",
+      "facebook": "https://www.facebook.com/stbmattallard/", "twitter": "https://x.com/mathieuallard",
+      "linkedin": "https://www.linkedin.com/in/yourneighbouryourcouncillor/", "instagram": "https://www.instagram.com/mathieufredericallard/",
+      "election_type": "General"
+    },
+    {
+      "id": "2026-43", "election_date": "2026-10-28T00:00:00", "registration_date": "2026-06-30T00:00:00",
+      "name": "Sherri Rollins  - WITHDRAWN", "type": "Councillor", "candidate_status": "Registered",
+      "ward": "Fort Rouge-East Fort Garry", "official_agent": "Darcy Rollins", "auditor": "Philip Bobby, Fort Group",
+      "election_type": "General"
+    },
+    {
+      "id": "2026-47", "election_date": "2026-10-28T00:00:00", "registration_date": "2026-06-30T00:00:00",
+      "name": "Brian Mayes", "type": "School Trustee", "candidate_status": "Registered",
+      "school_division": "Louis Riel School Division", "school_division_ward": "Ward 2",
+      "phone": "204-255-4909", "email": "brianmayes4trustee@gmail.com", "website": "www.brianmayes4trustee.com",
+      "election_type": "General"
+    },
+    {
+      "id": "2026-66", "election_date": "2026-10-28T00:00:00", "registration_date": "2026-07-02T00:00:00",
+      "name": "Sandy Lethbridge", "type": "School Trustee", "candidate_status": "Registered",
+      "school_division": "St. James – Assiniboia School Division", "school_division_ward": "West",
+      "phone": "204-951-9686", "email": "sandylethbridgewestward@shaw.ca", "election_type": "General"
+    }
+  ]
+}
