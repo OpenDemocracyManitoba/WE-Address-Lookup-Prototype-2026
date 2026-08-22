@@ -35,6 +35,8 @@ npm run import:candidates
 
 The command fetches the supported City Candidate dataset, preserves the exact response under `data/election-2026/source-snapshots/`, resolves reviewed source labels to canonical Contests, and shows an added/changed/removed summary. It replaces `data/election-2026/candidates.json` only after the Operator confirms. Unfamiliar labels require a canonical Contest ID; accepted decisions are retained in `data/election-2026/source-mapping-decisions.json` and reused on later imports.
 
+The importer deliberately does not stage or commit files in a working tree that may contain other work. After confirming an import, review and commit the new Source Snapshot, `candidates.json`, and any changed Source Mapping Decisions together so Netlify builds from the same inspectable evidence the Operator approved.
+
 After an import, list every supported imported Contest and its Candidate names with:
 
 ```sh

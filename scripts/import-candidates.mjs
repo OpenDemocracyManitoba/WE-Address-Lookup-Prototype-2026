@@ -55,6 +55,15 @@ function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
 }
 
+function readJsonOrDefault(path, fallback) {
+  try {
+    return readJson(path);
+  } catch (error) {
+    if (error.code === "ENOENT") return fallback;
+    throw error;
+  }
+}
+
 function writeJsonAtomically(path, value) {
   mkdirSync(dirname(path), { recursive: true });
   const temporaryPath = `${path}.${process.pid}.tmp`;
@@ -71,13 +80,20 @@ function sourceLabelFor(row) {
     return { contestId: "mayor-winnipeg" };
   }
   if (row.type === "Councillor") {
-    return { kind: "councilWard", label: nonEmpty(row.ward) };
+    const label = nonEmpty(row.ward);
+    if (!label) throw new Error(`Councillor ${JSON.stringify(row.name)} has no Council Ward Source Label.`);
+    return { kind: "councilWard", label };
   }
   if (row.type === "School Trustee") {
+    const schoolDivision = nonEmpty(row.school_division);
+    const ward = nonEmpty(row.school_division_ward);
+    if (!schoolDivision || !ward) {
+      throw new Error(`School Trustee ${JSON.stringify(row.name)} has an incomplete School Division Ward Source Label.`);
+    }
     return {
       kind: "schoolDivisionWard",
-      schoolDivision: nonEmpty(row.school_division),
-      ward: nonEmpty(row.school_division_ward),
+      schoolDivision,
+      ward,
     };
   }
   throw new Error(`Unsupported Candidate type ${JSON.stringify(row.type)} for ${JSON.stringify(row.name)}.`);
@@ -109,7 +125,10 @@ function candidateStatus(row) {
     ["Nomination Withdrawn", "Nomination Withdrawn"],
     ["Not Nominated", "Not Nominated"],
   ]);
-  const value = known.get(sourceValue) ?? "Needs Review";
+  if (!known.has(sourceValue)) {
+    throw new Error(`Candidate ${JSON.stringify(row.name)} has unrecognized source status ${JSON.stringify(sourceValue)}.`);
+  }
+  const value = known.get(sourceValue);
   const phase = ["Nominated", "Nomination Withdrawn", "Not Nominated"].includes(value)
     ? "nomination"
     : "registration";
@@ -207,6 +226,15 @@ function contestDisplayName(contest) {
   return `${contest.office} — ${contest.electoralArea.canonicalName}`;
 }
 
+function assertContestMatchesRecord(contest, row, sourceLabel) {
+  if (contest.office !== row.type) {
+    throw new Error(`${contestDisplayName(contest)} does not elect a ${row.type}.`);
+  }
+  if (sourceLabel.kind && contest.electoralArea.kind !== sourceLabel.kind) {
+    throw new Error(`${contestDisplayName(contest)} does not match ${describeSourceLabel(sourceLabel)}.`);
+  }
+}
+
 function listCandidates(dataDirectory) {
   const contests = readJson(join(dataDirectory, "contests.json")).contests
     .filter((contest) => contest.candidateList.support === "supported");
@@ -252,17 +280,13 @@ async function main() {
   const decisionsFile = join(options.dataDirectory, "source-mapping-decisions.json");
   const candidatesFile = join(options.dataDirectory, "candidates.json");
   const contests = readJson(contestsFile).contests;
+  const contestsById = new Map(contests.map((contest) => [contest.id, contest]));
   const supportedContestIds = new Set(
     contests.filter((contest) => contest.candidateList.support === "supported").map((contest) => contest.id),
   );
   const reviewedMappings = readJson(mappingsFile).labels
     .filter((mapping) => mapping.source === SOURCE_ID);
-  const decisionsDocument = (() => {
-    try { return readJson(decisionsFile); } catch (error) {
-      if (error.code === "ENOENT") return { decisions: [] };
-      throw error;
-    }
-  })();
+  const decisionsDocument = readJsonOrDefault(decisionsFile, { decisions: [] });
   const { sourceText, retrievalUrl } = await readSource(options);
   const rows = JSON.parse(sourceText);
   if (!Array.isArray(rows)) throw new Error("The City Candidate source response is not a JSON array.");
@@ -289,19 +313,22 @@ async function main() {
       if (!contestId) {
         const reviewed = reviewedMappings.filter((mapping) => sameSourceLabel(mapping, sourceLabel));
         const saved = decisionsDocument.decisions.filter((mapping) => sameSourceLabel(mapping, sourceLabel));
-        const matches = [...reviewed, ...saved];
-        const contestIds = new Set(matches.map((mapping) => mapping.contestId));
-        if (contestIds.size > 1) {
-          throw new Error(`Ambiguous saved mappings for ${describeSourceLabel(sourceLabel)}.`);
-        }
-        contestId = matches[0]?.contestId;
-        if (!contestId) {
-          console.log(`Unfamiliar source label: ${describeSourceLabel(sourceLabel)}`);
+        const savedContestIds = new Set(saved.map((mapping) => mapping.contestId));
+        const reviewedContestIds = new Set(reviewed.map((mapping) => mapping.contestId));
+        const isAmbiguous = savedContestIds.size > 1
+          || (savedContestIds.size === 0 && reviewedContestIds.size > 1);
+        if (savedContestIds.size === 1) contestId = saved[0].contestId;
+        else if (reviewedContestIds.size === 1) contestId = reviewed[0].contestId;
+        if (!contestId || isAmbiguous) {
+          console.log(`${isAmbiguous ? "Ambiguous" : "Unfamiliar"} source label: ${describeSourceLabel(sourceLabel)}`);
           const entered = await ask("Canonical Contest ID (blank to cancel): ", answers);
           if (!supportedContestIds.has(entered)) {
             throw new Error(`Unresolved Contest for ${describeSourceLabel(sourceLabel)}.`);
           }
+          assertContestMatchesRecord(contestsById.get(entered), row, sourceLabel);
           contestId = entered;
+          decisionsDocument.decisions = decisionsDocument.decisions
+            .filter((mapping) => !sameSourceLabel(mapping, sourceLabel));
           decisionsDocument.decisions.push({
             source: SOURCE_ID,
             ...sourceLabel,
@@ -314,6 +341,7 @@ async function main() {
       if (!supportedContestIds.has(contestId)) {
         throw new Error(`Candidate ${JSON.stringify(row.name)} resolved to unsupported or unknown Contest ${JSON.stringify(contestId)}.`);
       }
+      assertContestMatchesRecord(contestsById.get(contestId), row, sourceLabel);
       normalized.push(normalizeRow(row, contestId, options.observedAt));
     }
     const candidates = assertNoConflictingDuplicates(normalized)
@@ -321,12 +349,7 @@ async function main() {
         const contestOrder = left.contestId.localeCompare(right.contestId, "en-CA");
         return contestOrder || left.sourcePublishedName.localeCompare(right.sourcePublishedName, "en-CA");
       });
-    const previousDocument = (() => {
-      try { return readJson(candidatesFile); } catch (error) {
-        if (error.code === "ENOENT") return { candidates: [] };
-        throw error;
-      }
-    })();
+    const previousDocument = readJsonOrDefault(candidatesFile, { candidates: [] });
     const summary = summarizeChanges(previousDocument.candidates, candidates);
     console.log(`Added ${summary.added}, changed ${summary.changed}, removed ${summary.removed}`);
     const confirmed = /^(y|yes)$/i.test(await ask("Replace normalized Candidate data? [y/N] ", answers));
@@ -344,6 +367,7 @@ async function main() {
       candidates,
     });
     console.log("Candidate data replaced.");
+    console.log("Review and commit the Source Snapshot, normalized Candidate data, and any mapping decisions.");
   } finally {
     input.close();
   }

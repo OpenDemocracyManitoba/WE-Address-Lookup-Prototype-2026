@@ -31,6 +31,20 @@ function makeDataDirectory() {
   return dataDirectory;
 }
 
+function existingCandidateDocument() {
+  return { candidates: [{
+    contestId: "mayor-winnipeg",
+    source: {
+      sourceId: "city-candidate-dataset",
+      observedAt: "2026-08-20T00:00:00.000Z",
+      recordId: "old",
+    },
+    sourcePublishedName: "Existing Candidate",
+    phase: "registration",
+    status: { sourceValue: "Registered", value: "Registered" },
+  }] };
+}
+
 function runImporter(
   dataDirectory,
   sourceFile,
@@ -60,38 +74,17 @@ function runImporter(
 test("confirmed import preserves evidence and proposes normalized Contest-scoped Candidates", () => {
   const dataDirectory = makeDataDirectory();
   const sourceFile = join(dataDirectory, "source.json");
+  const reviewedRows = readJson(
+    fileURLToPath(new URL("fixtures/election-2026/city-candidates.json", import.meta.url)),
+  ).rawRows;
   const sourceText = `${JSON.stringify([
     {
-      id: "2026-28",
-      election_date: "2026-10-28T00:00:00",
-      registration_date: "2026-05-01T00:00:00",
-      name: "Scott Gillingham",
-      type: "Mayor",
-      candidate_status: "Registered",
-      email: "info@scottgillingham.com",
+      ...reviewedRows.find((row) => row.id === "2026-28"),
       financial_disclosure_file_name: "financial.pdf",
       financial_disclosure_link: "https://example.test/financial.pdf",
-      official_agent: "Excluded Agent",
     },
-    {
-      id: "2026-39",
-      election_date: "2026-10-28T00:00:00",
-      registration_date: "2026-06-30T00:00:00",
-      name: "Matt Allard",
-      type: "Councillor",
-      candidate_status: "Registered",
-      ward: "St. Boniface",
-    },
-    {
-      id: "2026-47",
-      election_date: "2026-10-28T00:00:00",
-      registration_date: "2026-06-30T00:00:00",
-      name: "Brian Mayes",
-      type: "School Trustee",
-      candidate_status: "Registered",
-      school_division: "Louis Riel School Division",
-      school_division_ward: "Ward 2",
-    },
+    reviewedRows.find((row) => row.id === "2026-39"),
+    reviewedRows.find((row) => row.id === "2026-47"),
     {
       id: "2026-99",
       election_date: "2026-10-28T00:00:00",
@@ -122,6 +115,7 @@ test("confirmed import preserves evidence and proposes normalized Contest-scoped
 
   assert.match(output, /Added 4, changed 0, removed 0/);
   assert.match(output, /Candidate data replaced\./);
+  assert.match(output, /Review and commit the Source Snapshot, normalized Candidate data, and any mapping decisions\./);
 
   const snapshotDirectory = join(dataDirectory, "source-snapshots", "city-candidate-dataset");
   const snapshotFiles = readdirSync(snapshotDirectory);
@@ -175,13 +169,7 @@ test("failed validation and declined confirmation leave normalized Candidate dat
     const dataDirectory = makeDataDirectory();
     const sourceFile = join(dataDirectory, "source.json");
     const candidatesFile = join(dataDirectory, "candidates.json");
-    const previousBytes = `${JSON.stringify({ candidates: [{
-      contestId: "mayor-winnipeg",
-      source: { sourceId: "city-candidate-dataset", observedAt: "2026-08-20T00:00:00.000Z", recordId: "old" },
-      sourcePublishedName: "Existing Candidate",
-      phase: "registration",
-      status: { sourceValue: "Registered", value: "Registered" },
-    }] }, null, 2)}\n`;
+    const previousBytes = `${JSON.stringify(existingCandidateDocument(), null, 2)}\n`;
     writeFileSync(candidatesFile, previousBytes);
     writeFileSync(sourceFile, `${JSON.stringify([{
       id: "2026-100",
@@ -211,23 +199,66 @@ test("failed validation and declined confirmation leave normalized Candidate dat
     const dataDirectory = makeDataDirectory();
     const sourceFile = join(dataDirectory, "source.json");
     const candidatesFile = join(dataDirectory, "candidates.json");
-    const previousBytes = `${JSON.stringify({ candidates: [{
-      contestId: "mayor-winnipeg",
-      source: { sourceId: "city-candidate-dataset", observedAt: "2026-08-20T00:00:00.000Z", recordId: "old" },
-      sourcePublishedName: "Existing Candidate",
-      phase: "registration",
-      status: { sourceValue: "Registered", value: "Registered" },
-    }] }, null, 2)}\n`;
+    const previousBytes = `${JSON.stringify(existingCandidateDocument(), null, 2)}\n`;
     writeFileSync(candidatesFile, previousBytes);
     writeFileSync(sourceFile, `${JSON.stringify([{
       id: "2026-invalid",
-      name: "Missing Status",
+      name: "Unknown Status",
       type: "Councillor",
+      candidate_status: "Future Official Status",
       ward: "St. Boniface",
     }], null, 2)}\n`);
 
-    assert.throws(() => runImporter(dataDirectory, sourceFile), /has no source status/);
+    assert.throws(() => runImporter(dataDirectory, sourceFile), /unrecognized source status/);
     assert.equal(readFileSync(candidatesFile, "utf8"), previousBytes);
+  });
+
+  await t.test("an unfamiliar label cannot be assigned to a Contest for another Office", () => {
+    const dataDirectory = makeDataDirectory();
+    const sourceFile = join(dataDirectory, "source.json");
+    writeFileSync(sourceFile, `${JSON.stringify([{
+      id: "2026-wrong-office",
+      name: "Wrong Office Decision",
+      type: "Councillor",
+      candidate_status: "Registered",
+      ward: "Unfamiliar Ward",
+    }], null, 2)}\n`);
+
+    assert.throws(
+      () => runImporter(dataDirectory, sourceFile, "mayor-winnipeg\n"),
+      /does not elect a Councillor/,
+    );
+    assert.ok(!readdirSync(dataDirectory).includes("candidates.json"));
+  });
+
+  await t.test("a genuine mapping ambiguity is explicitly resolved and remembered", () => {
+    const dataDirectory = makeDataDirectory();
+    const sourceFile = join(dataDirectory, "source.json");
+    writeFileSync(sourceFile, `${JSON.stringify([{
+      id: "2026-ambiguous",
+      name: "Resolved Candidate",
+      type: "Councillor",
+      candidate_status: "Registered",
+      ward: "Ambiguous Ward",
+    }], null, 2)}\n`);
+    writeFileSync(join(dataDirectory, "source-mapping-decisions.json"), `${JSON.stringify({
+      decisions: [
+        { source: "city-candidate-dataset", kind: "councilWard", label: "Ambiguous Ward", contestId: "council-st-boniface" },
+        { source: "city-candidate-dataset", kind: "councilWard", label: "Ambiguous Ward", contestId: "council-st-vital" },
+      ],
+    }, null, 2)}\n`);
+
+    const output = runImporter(dataDirectory, sourceFile, "council-st-vital\nyes\n");
+
+    assert.match(output, /Ambiguous source label/);
+    assert.equal(readJson(join(dataDirectory, "candidates.json")).candidates[0].contestId, "council-st-vital");
+    assert.deepEqual(readJson(join(dataDirectory, "source-mapping-decisions.json")).decisions, [{
+      source: "city-candidate-dataset",
+      kind: "councilWard",
+      label: "Ambiguous Ward",
+      contestId: "council-st-vital",
+      decidedAt: "2026-08-22T15:30:00.000Z",
+    }]);
   });
 
   await t.test("a timestamp collision cannot mutate an existing Source Snapshot", () => {
