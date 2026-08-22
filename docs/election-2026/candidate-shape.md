@@ -8,7 +8,6 @@ A Candidate Record belongs directly to one Contest. It does not introduce a Pers
 | --- | --- |
 | `contestId` | The one canonical Contest selected through a reviewed Source Label mapping. |
 | `source.sourceId` | The Authoritative Source that published the record. |
-| `source.recordId` | The source identifier, retained only as provenance. |
 | `source.observedAt` | When the source evidence was observed. |
 | `sourcePublishedName` | The name exactly as published, including spacing, accents, and any raw withdrawal marker. |
 | `phase` | `registration` or `nomination`, so the site can say Prospective Candidate or Candidate accurately. |
@@ -22,6 +21,7 @@ The required fields are the minimum needed to assign the record correctly, descr
 | Group | Proposed field | City raw field(s) |
 | --- | --- | --- |
 | Registration evidence | `registrationDate` | `registration_date` |
+| Source provenance | `source.recordId` | `id`, when the source publishes one |
 | Biography | `biography`, `biographyFrench` | `biography`, `biography_francais` |
 | Image | `imageUrl` | `image` |
 | Campaign | `campaignWebsite` | `website` |

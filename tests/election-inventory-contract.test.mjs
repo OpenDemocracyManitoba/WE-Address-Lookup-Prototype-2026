@@ -12,6 +12,19 @@ function labelKey(label) {
     : `${label.source}\u0000${label.kind}\u0000${label.label}`;
 }
 
+function councilLabels(source, labels) {
+  return labels.map((label) => ({ source, kind: "councilWard", label }));
+}
+
+function schoolLabels(source, labels) {
+  return labels.map(([schoolDivision, ward]) => ({
+    source,
+    kind: "schoolDivisionWard",
+    schoolDivision,
+    ward,
+  }));
+}
+
 test("the 2026 Election inventory completely and unambiguously covers the committed source evidence", () => {
   const inventory = readJson("../data/election-2026/contests.json");
   const mappings = readJson("../data/election-2026/source-label-mappings.json");
@@ -29,8 +42,8 @@ test("the 2026 Election inventory completely and unambiguously covers the commit
     assert.ok(contest.provenance?.length, `${contest.id} has provenance`);
     assert.ok(Array.isArray(contest.aliases) && contest.aliases.length, `${contest.id} has source-label aliases`);
     assert.ok(["supported", "unsupported"].includes(contest.candidateList.support), `${contest.id} declares Candidate support`);
-    assert.ok(["published", "unavailable"].includes(contest.candidateList.availability), `${contest.id} declares Candidate-list availability`);
-    if (contest.candidateList.availability === "unavailable") {
+    assert.ok(["Published", "Unavailable"].includes(contest.candidateList.availability), `${contest.id} declares Candidate-list availability`);
+    if (contest.candidateList.availability === "Unavailable") {
       assert.equal(contest.candidateList.verifiedCandidateCount, null, `${contest.id} must not represent unavailable coverage as zero Candidates`);
     }
   }
@@ -43,34 +56,19 @@ test("the 2026 Election inventory completely and unambiguously covers the commit
 
   const mappingCounts = new Map();
   for (const mapping of mappings.labels) {
-    assert.ok(contests.has(mapping.contestId), `${labelKey(mapping)} maps to an existing Contest`);
+    const contest = contests.get(mapping.contestId);
+    assert.ok(contest, `${labelKey(mapping)} maps to an existing Contest`);
+    assert.ok(["supported", "unsupported"].includes(mapping.support), `${labelKey(mapping)} declares support status`);
+    assert.equal(mapping.support, contest.candidateList.support, `${labelKey(mapping)} support agrees with its Contest`);
     const key = labelKey(mapping);
     mappingCounts.set(key, (mappingCounts.get(key) ?? 0) + 1);
   }
 
   const observedLabels = [
-    ...candidateEvidence.observedLabels.councilWards.map((label) => ({
-      source: candidateEvidence.sourceId,
-      kind: "councilWard",
-      label,
-    })),
-    ...candidateEvidence.observedLabels.schoolDivisionWards.map(([schoolDivision, ward]) => ({
-      source: candidateEvidence.sourceId,
-      kind: "schoolDivisionWard",
-      schoolDivision,
-      ward,
-    })),
-    ...addressEvidence.observedLabels.councilWards.map((label) => ({
-      source: addressEvidence.sourceId,
-      kind: "councilWard",
-      label,
-    })),
-    ...addressEvidence.observedLabels.schoolDivisionWards.map(([schoolDivision, ward]) => ({
-      source: addressEvidence.sourceId,
-      kind: "schoolDivisionWard",
-      schoolDivision,
-      ward,
-    })),
+    ...councilLabels(candidateEvidence.sourceId, candidateEvidence.observedLabels.councilWards),
+    ...schoolLabels(candidateEvidence.sourceId, candidateEvidence.observedLabels.schoolDivisionWards),
+    ...councilLabels(addressEvidence.sourceId, addressEvidence.observedLabels.councilWards),
+    ...schoolLabels(addressEvidence.sourceId, addressEvidence.observedLabels.schoolDivisionWards),
   ];
   for (const label of observedLabels) {
     assert.equal(mappingCounts.get(labelKey(label)), 1, `${labelKey(label)} maps to exactly one canonical Contest`);
@@ -98,6 +96,15 @@ test("the 2026 Election inventory completely and unambiguously covers the commit
   assert.ok(candidateEvidence.rawRows.some((row) => row.name.includes("WITHDRAWN")));
   assert.ok(candidateEvidence.rawRows.some((row) => row.facebook || row.twitter || row.linkedin || row.instagram));
   assert.ok(candidateEvidence.rawRows.some((row) => !row.phone && !row.email && !row.website));
+  for (const evidence of [candidateEvidence, candidateEvidence.publicationPage, addressEvidence]) {
+    assert.match(evidence.observedAt, /^2026-\d{2}-\d{2}$/u, `${evidence.sourceId} records when it was observed`);
+    assert.match(evidence.retrievalUrl, /^https:\/\//u, `${evidence.sourceId} records where it was retrieved`);
+    assert.ok(evidence.retrievalMethod, `${evidence.sourceId} records how it was retrieved`);
+    assert.ok(evidence.format, `${evidence.sourceId} records its raw format`);
+  }
+  const publicationScript = candidateEvidence.publicationPage.rawScriptFragments.join("\n");
+  assert.match(publicationScript, /9gi9-dauz\.json/u);
+  assert.match(publicationScript, /candidate_status === 'Nominated'/u);
   for (const row of candidateEvidence.rawRows) {
     for (const field of ["id", "election_date", "registration_date", "name", "type", "candidate_status"]) {
       assert.ok(row[field], `Candidate fixture ${row.id} retains raw ${field}`);

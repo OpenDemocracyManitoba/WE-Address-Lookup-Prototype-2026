@@ -3,6 +3,7 @@
   "observedAt": "2026-08-22",
   "retrievalUrl": "https://data.winnipeg.ca/resource/cam2-ii3u.json",
   "retrievalMethod": "Grouped ward_as_of_september_17, school_division, and school_division_ward; 65 combinations were observed.",
+  "format": "JSON",
   "observedLabels": {
     "councilWards": [
       "Charleswood - Tuxedo", "Daniel McIntyre", "Elmwood - East Kildonan",

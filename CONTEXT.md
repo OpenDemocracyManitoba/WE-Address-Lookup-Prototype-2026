@@ -71,7 +71,7 @@ _Avoid_: Councillor, school division
 ### Candidate Data
 
 **Current Official Candidate List**:
-The time-stamped set of Candidates currently recognized by official sources for the Election's Contests. It excludes Prospective Candidates and people whose Candidacies are no longer active, but is not considered immutable.
+The time-stamped set of Candidates currently recognized by official sources for the Election's Contests. It excludes Prospective Candidates and Candidate Records that are no longer active, but is not considered immutable.
 _Avoid_: Final candidate list
 
 **Election Phase**:
@@ -83,11 +83,11 @@ Information an Authoritative Source publishes to identify a Candidate Record's C
 _Avoid_: Candidate-provided information, domain identity
 
 **Candidate-Provided Information**:
-Contact or campaign information a Person supplies through an Authoritative Source, such as a phone number, email address, website, social account, official agent, or auditor. Publication by an authority does not mean that authority independently verified the information.
+Contact or campaign information an individual supplies through an Authoritative Source, such as a phone number, email address, website, social account, official agent, or auditor. Publication by an authority does not mean that authority independently verified the information.
 _Avoid_: Official candidate record, verified candidate information
 
 **Candidate List Availability**:
-The verification state of candidate information for a Contest: Not Published, Published, or Needs Review. A Published list may contain zero Candidates; missing source data never means that no Candidates exist.
+The verification state of candidate information for a Contest: Not Published, Published, Unavailable, or Needs Review. A Published list may contain zero Candidates; Unavailable means the resource does not support that Contest and never means that no Candidates exist.
 _Avoid_: Candidate count, source availability
 
 **Source Snapshot**:
