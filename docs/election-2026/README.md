@@ -11,6 +11,9 @@ This directory records the reviewed design evidence for Issue #5. It is delibera
 - [`tests/fixtures/election-2026/city-candidates.json`](../../tests/fixtures/election-2026/city-candidates.json): representative unmodified City Candidate rows plus the complete observed Candidate-label inventory.
 - [`tests/fixtures/election-2026/city-addresses.json`](../../tests/fixtures/election-2026/city-addresses.json): representative unmodified City address rows plus the complete observed Electoral Assignment label inventory.
 - [`tests/election-inventory-contract.test.mjs`](../../tests/election-inventory-contract.test.mjs): the deterministic acceptance check over those complete artifacts.
+- [`data/election-2026/source-mapping-decisions.json`](../../data/election-2026/source-mapping-decisions.json): Operator-approved mappings for unfamiliar Candidate Source Labels, initially empty and extended by the import command.
+
+The Candidate workflow is run with `npm run import:candidates`. Its exact Source Snapshots are stored under `data/election-2026/source-snapshots/`, and confirmed normalized public records are stored in `data/election-2026/candidates.json`. Run `npm run list:candidates` to inspect every supported imported Contest with Candidate names only.
 
 ## Reviewed findings
 

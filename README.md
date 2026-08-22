@@ -25,6 +25,24 @@ Run all deterministic tests, including the production-build contract, with:
 npm test
 ```
 
+## Import Candidate data
+
+Run the local, interactive Candidate import from the repository root:
+
+```sh
+npm run import:candidates
+```
+
+The command fetches the supported City Candidate dataset, preserves the exact response under `data/election-2026/source-snapshots/`, resolves reviewed source labels to canonical Contests, and shows an added/changed/removed summary. It replaces `data/election-2026/candidates.json` only after the Operator confirms. Unfamiliar labels require a canonical Contest ID; accepted decisions are retained in `data/election-2026/source-mapping-decisions.json` and reused on later imports.
+
+After an import, list every supported imported Contest and its Candidate names with:
+
+```sh
+npm run list:candidates
+```
+
+This read-only listing intentionally shows Candidate names only. Contests with a verified empty imported list are shown with `(no imported candidates)`; unsupported Seine River and Interlake Candidate sources are not imported or listed by this command.
+
 The deterministic suite does not contact the City service. To repeat the live parser and displayed-result audit against the complete current grouped dataset, run:
 
 ```sh

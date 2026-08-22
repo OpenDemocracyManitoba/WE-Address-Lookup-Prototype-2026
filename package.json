@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "eleventy",
+    "import:candidates": "node scripts/import-candidates.mjs",
+    "list:candidates": "node scripts/import-candidates.mjs --list",
     "start": "eleventy --serve",
     "test": "node --test"
   },
