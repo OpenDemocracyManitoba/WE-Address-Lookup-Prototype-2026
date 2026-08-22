@@ -102,4 +102,6 @@ test("Contest browsing distinguishes published, empty, withdrawn, and unavailabl
   const withdrawn = readBuiltPage("contests/council-fort-rouge-east-fort-garry/index.html");
   assert.match(withdrawn, />Sherri Rollins  - WITHDRAWN<\/h2>/);
   assert.match(withdrawn, /<dt>Candidate Status<\/dt><dd>Registration Withdrawn<\/dd>/);
+  assert.match(withdrawn, /<p class="candidate-role">Registration withdrawn<\/p>/);
+  assert.doesNotMatch(withdrawn, /<p class="candidate-role">Prospective Candidate<\/p>\s*<h2>Sherri Rollins/);
 });
