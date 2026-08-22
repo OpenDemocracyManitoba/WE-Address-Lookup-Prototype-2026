@@ -1,0 +1,34 @@
+{% macro homeContest(contest) %}
+<article class="applicable-contest">
+  <p class="candidate-role">{{ contest.office }} Contest</p>
+  <h3><a href="/contests/{{ contest.id }}/">{{ contest.electoralArea.canonicalName }}</a></h3>
+  <dl class="applicable-contest-metadata">
+    <div><dt>Number to Elect</dt><dd>{{ contest.numberToElect }}</dd></div>
+    <div><dt>Candidate List Availability</dt><dd>{{ contest.candidateList.availability }}</dd></div>
+  </dl>
+
+  {% if contest.candidateList.availability == "Unavailable" %}
+    <section class="candidate-list-notice">
+      <h4>Candidate information unavailable</h4>
+      <p>This resource does not currently support Candidate data for this Contest. This does not mean that no Candidates exist.</p>
+    </section>
+  {% elif contest.candidates.length == 0 %}
+    <section class="candidate-list-notice">
+      <h4>No published Candidate Records</h4>
+      <p>The reviewed Candidate list is published, but it contained no Candidate Records when observed.</p>
+    </section>
+  {% else %}
+    <section>
+      <h4>Candidate information</h4>
+      <ul class="applicable-candidate-list">
+        {% for candidate in contest.candidates %}
+          <li>
+            <span>{{ candidate.presentation.roleLabel }} · {{ candidate.presentation.phaseLabel }}: {{ candidate.status.value }}</span>
+            <strong>{{ candidate.sourcePublishedName }}</strong>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+</article>
+{% endmacro %}

@@ -8,6 +8,21 @@ import {
   statusMessage,
 } from "./lookup-controller.js";
 import { calculatePopupGeometry } from "./popup-geometry.js";
+import { resolveApplicableContests } from "./contest-resolver.js";
+
+function unresolvedContest(slot) {
+  const article = document.createElement("article");
+  article.className = "applicable-contest unavailable-contest-resolution";
+  const label = document.createElement("p");
+  label.className = "candidate-role";
+  label.textContent = `${slot.office} Contest`;
+  const heading = document.createElement("h3");
+  heading.textContent = "Contest information unavailable";
+  const message = document.createElement("p");
+  message.textContent = slot.message;
+  article.append(label, heading, message);
+  return article;
+}
 
 function positionPopup(input, wrap, list) {
   if (list.hidden) return;
@@ -39,6 +54,14 @@ function startBrowserApp() {
   );
   const councilWard = document.querySelector("#council-ward");
   const trusteeWard = document.querySelector("#trustee-ward");
+  const applicableContests = document.querySelector("#applicable-contests");
+  const contestResolutionData = JSON.parse(
+    document.querySelector("#contest-resolution-data").textContent,
+  );
+  const contestTemplates = new Map(
+    [...document.querySelectorAll("[data-contest-template]")]
+      .map((template) => [template.dataset.contestTemplate, template]),
+  );
   let lastResults = null;
   let lastPopupOpen = false;
 
@@ -91,6 +114,7 @@ function startBrowserApp() {
     retryButton.hidden = !isRetryablePhase(state.phase);
 
     addressLookupResult.hidden = !state.selected;
+    applicableContests.replaceChildren();
     if (state.selected) {
       addressLookupResultAddress.textContent = state.selected.displayAddress;
       councilWard.textContent = formatCouncilWard(state.selected.councilWard);
@@ -98,6 +122,17 @@ function startBrowserApp() {
         state.selected.schoolDivision,
         state.selected.schoolDivisionWard,
       );
+      for (const slot of resolveApplicableContests(
+        state.selected,
+        contestResolutionData,
+      )) {
+        const template = slot.contest
+          ? contestTemplates.get(slot.contest.id)
+          : null;
+        applicableContests.append(
+          template ? template.content.cloneNode(true) : unresolvedContest(slot),
+        );
+      }
     } else {
       addressLookupResultAddress.textContent = "";
       councilWard.textContent = "";

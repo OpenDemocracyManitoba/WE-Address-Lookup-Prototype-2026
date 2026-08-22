@@ -34,6 +34,54 @@ test("production build publishes the shared site shell and Address Lookup assets
   assert.match(readFileSync(new URL("../_site/assets/app.js", import.meta.url), "utf8"), /LookupController/);
 });
 
+test("the home page publishes ordered Contest templates from the shared Candidate presentation", () => {
+  const home = readBuiltPage("index.html");
+  const mayor = home.indexOf('data-contest-template="mayor-winnipeg"');
+  const councillor = home.indexOf(
+    'data-contest-template="council-fort-rouge-east-fort-garry"',
+  );
+  const schoolTrustee = home.indexOf(
+    'data-contest-template="school-winnipeg-ward-5"',
+  );
+
+  assert.match(home, /id="applicable-contests"/);
+  assert.match(home, /id="contest-resolution-data" type="application\/json"/);
+  assert.ok(mayor >= 0);
+  assert.ok(mayor < councillor);
+  assert.ok(councillor < schoolTrustee);
+  assert.match(home, /href="\/contests\/mayor-winnipeg\/"/);
+  assert.match(home, />Scott Gillingham<\/strong>/);
+  assert.match(home, /Prospective Candidate · Registration: Registered/);
+  assert.match(home, /href="\/contests\/council-fort-rouge-east-fort-garry\/"/);
+  assert.match(home, />Jeff Palmer<\/strong>/);
+  assert.match(home, /href="\/contests\/school-winnipeg-ward-5\/"/);
+  assert.match(home, />Tim Bigelow<\/strong>/);
+
+  const unsupportedTemplate = home.slice(
+    home.indexOf('data-contest-template="school-seine-river-ward-1"'),
+    home.indexOf(
+      "</template>",
+      home.indexOf('data-contest-template="school-seine-river-ward-1"'),
+    ),
+  );
+  assert.match(unsupportedTemplate, /Candidate information unavailable/);
+  assert.match(unsupportedTemplate, /does not mean that no Candidates exist/);
+  assert.doesNotMatch(unsupportedTemplate, /No published Candidate Records/);
+
+  const builtApp = readFileSync(
+    new URL("../_site/assets/app.js", import.meta.url),
+    "utf8",
+  );
+  assert.match(builtApp, /resolveApplicableContests/);
+  assert.match(
+    readFileSync(
+      new URL("../_site/assets/contest-resolver.js", import.meta.url),
+      "utf8",
+    ),
+    /export function resolveApplicableContests/,
+  );
+});
+
 test("production build publishes the Contest Directory in Office order", () => {
   const directory = readBuiltPage("contests/index.html");
   const inventory = JSON.parse(
