@@ -83,7 +83,7 @@ test("production build publishes accessible Contest pages with alphabetical Cand
   assert.match(page, /<script type="module" src="\/assets\/candidate-order\.js"><\/script>/);
 });
 
-test("Contest browsing distinguishes published, empty, withdrawn, and unavailable Candidate information", () => {
+test("Contest browsing distinguishes published, empty, and unavailable Candidate information", () => {
   const directory = readBuiltPage("contests/index.html");
   assert.match(directory, /<nav class="site-navigation" aria-label="Main navigation">[\s\S]*href="\/contests\/"/);
 
@@ -100,8 +100,7 @@ test("Contest browsing distinguishes published, empty, withdrawn, and unavailabl
   }
 
   const withdrawn = readBuiltPage("contests/council-fort-rouge-east-fort-garry/index.html");
-  assert.match(withdrawn, />Sherri Rollins  - WITHDRAWN<\/h2>/);
-  assert.match(withdrawn, /<dt>Candidate Status<\/dt><dd>Registration Withdrawn<\/dd>/);
-  assert.match(withdrawn, /<p class="candidate-role">Registration withdrawn<\/p>/);
-  assert.doesNotMatch(withdrawn, /<p class="candidate-role">Prospective Candidate<\/p>\s*<h2>Sherri Rollins/);
+  assert.match(withdrawn, />Jeff Palmer<\/h2>/);
+  assert.doesNotMatch(withdrawn, /Sherri Rollins  - WITHDRAWN/);
+  assert.doesNotMatch(withdrawn, /Registration Withdrawn/);
 });

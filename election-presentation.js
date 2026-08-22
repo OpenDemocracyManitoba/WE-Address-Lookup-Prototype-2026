@@ -9,12 +9,12 @@ const phaseLabels = {
 
 const roleLabels = {
   Nominated: "Candidate",
-  "Nomination Withdrawn": "Nomination withdrawn",
   "Not Nominated": "Not nominated",
   Registered: "Prospective Candidate",
-  "Registration Withdrawn": "Registration withdrawn",
   "Needs Review": "Candidate Record needs review",
 };
+
+const withdrawnStatuses = new Set(["Nomination Withdrawn", "Registration Withdrawn"]);
 
 function familyNameSortValue(sourcePublishedName) {
   const publishedName = sourcePublishedName.replace(/\s+-\s+WITHDRAWN\s*$/iu, "").trim();
@@ -38,17 +38,15 @@ function presentCandidate(candidate) {
   };
 }
 
-export function loadElectionPresentation() {
-  const election = JSON.parse(readFileSync("data/election-2026/contests.json", "utf8"));
-  const candidateDocument = JSON.parse(
-    readFileSync("data/election-2026/candidates.json", "utf8"),
-  );
+export function presentElection(election, candidateDocument) {
   return {
     ...election,
     contests: election.contests.map((contest) => ({
       ...contest,
       candidates: candidateDocument.candidates
-        .filter((candidate) => candidate.contestId === contest.id)
+        .filter((candidate) =>
+          candidate.contestId === contest.id && !withdrawnStatuses.has(candidate.status.value)
+        )
         .map(presentCandidate)
         .sort((left, right) =>
           collator.compare(
@@ -58,6 +56,14 @@ export function loadElectionPresentation() {
         ),
     })),
   };
+}
+
+export function loadElectionPresentation() {
+  const election = JSON.parse(readFileSync("data/election-2026/contests.json", "utf8"));
+  const candidateDocument = JSON.parse(
+    readFileSync("data/election-2026/candidates.json", "utf8"),
+  );
+  return presentElection(election, candidateDocument);
 }
 
 export function externalUrl(value) {
