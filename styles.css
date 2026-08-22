@@ -460,8 +460,7 @@ input:focus-visible {
   margin: 1rem 0;
 }
 
-.applicable-contest-metadata dt,
-.applicable-candidate-list span {
+.applicable-contest-metadata dt {
   color: var(--muted);
   font-size: 0.78rem;
   font-weight: 700;
@@ -470,21 +469,6 @@ input:focus-visible {
 .applicable-contest-metadata dd {
   margin: 0.2rem 0 0;
   font-weight: 700;
-}
-
-.applicable-candidate-list {
-  display: grid;
-  gap: 0.5rem;
-  margin: 0.75rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.applicable-candidate-list li {
-  display: flex;
-  flex-direction: column;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--soft-line);
 }
 
 .unavailable-contest-resolution {

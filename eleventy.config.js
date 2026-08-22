@@ -32,6 +32,7 @@ export default function (eleventyConfig) {
     "popup-geometry.js": "assets/popup-geometry.js",
     "candidate-order.js": "assets/candidate-order.js",
     "contest-resolver.js": "assets/contest-resolver.js",
+    "contest-result-renderer.js": "assets/contest-result-renderer.js",
     "styles.css": "assets/styles.css",
   });
 

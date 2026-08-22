@@ -1,0 +1,81 @@
+{% macro disclosureListItem(disclosure, url, fallbackLabel) %}
+  {% if url %}
+    <li><a href="{{ url }}">{{ disclosure.fileName or fallbackLabel }}</a></li>
+  {% elif disclosure.fileName %}
+    <li>{{ disclosure.fileName }}</li>
+  {% endif %}
+{% endmacro %}
+
+{% macro candidateInformation(contest, headingTag="h2", nameTag="h2", subheadingTag="h3", idPrefix="") %}
+  {% set headingId = idPrefix ~ "candidate-information-heading" %}
+  {% if contest.candidateList.availability == "Unavailable" %}
+    <section class="candidate-list-notice" aria-labelledby="{{ headingId }}">
+      <{{ headingTag }} id="{{ headingId }}">Candidate information unavailable</{{ headingTag }}>
+      <p>This resource does not currently support Candidate data for this Contest. This does not mean that no Candidates exist.</p>
+    </section>
+  {% elif contest.candidates.length == 0 %}
+    <section class="candidate-list-notice" aria-labelledby="{{ headingId }}">
+      <{{ headingTag }} id="{{ headingId }}">No published Candidate Records</{{ headingTag }}>
+      <p>The reviewed Candidate list is published, but it contained no Candidate Records when observed.</p>
+    </section>
+  {% else %}
+    {% set explanationId = idPrefix ~ "candidate-order-explanation" %}
+    <section aria-labelledby="{{ headingId }}">
+      <{{ headingTag }} id="{{ headingId }}" class="candidate-list-heading">Candidate information</{{ headingTag }}>
+      <p id="{{ explanationId }}" class="ordering-explanation" data-order-explanation>Candidates are shown alphabetically by family name.</p>
+      <ul class="candidate-list" data-candidate-list aria-describedby="{{ explanationId }}">
+        {% for candidate in contest.candidates %}
+          <li class="candidate-list-item" data-candidate-record>
+            <article class="candidate-record">
+              <p class="candidate-role">{{ candidate.presentation.roleLabel }}</p>
+              <{{ nameTag }}>{{ candidate.sourcePublishedName }}</{{ nameTag }}>
+              <dl class="candidate-metadata">
+                <div><dt>Election Phase</dt><dd>{{ candidate.presentation.phaseLabel }}</dd></div>
+                <div><dt>Candidate Status</dt><dd>{{ candidate.status.value }}</dd></div>
+                {% if candidate.registrationDate %}<div><dt>Registration Date</dt><dd>{{ candidate.registrationDate | displayDate }}</dd></div>{% endif %}
+              </dl>
+
+              {% set imageUrl = candidate.imageUrl | externalUrl %}
+              {% if imageUrl %}<img class="candidate-image" src="{{ imageUrl }}" alt="{{ candidate.sourcePublishedName }}" />{% endif %}
+
+              {% if candidate.biography or candidate.biographyFrench %}
+                <section class="candidate-biography">
+                  <{{ subheadingTag }}>Candidate-provided information</{{ subheadingTag }}>
+                  {% if candidate.biography %}<p>{{ candidate.biography }}</p>{% endif %}
+                  {% if candidate.biographyFrench %}<p lang="fr">{{ candidate.biographyFrench }}</p>{% endif %}
+                </section>
+              {% endif %}
+
+              {% set campaignUrl = candidate.campaignWebsite | externalUrl %}
+              {% if campaignUrl or candidate.email or candidate.phone or candidate.presentation.socialLinks.length %}
+                <div class="candidate-contact">
+                  <{{ subheadingTag }}>Campaign and contact information</{{ subheadingTag }}>
+                  <ul>
+                    {% if campaignUrl %}<li><a href="{{ campaignUrl }}">Campaign website</a></li>{% endif %}
+                    {% if candidate.email %}<li><a href="mailto:{{ candidate.email }}">{{ candidate.email }}</a></li>{% endif %}
+                    {% if candidate.phone %}<li><a href="tel:{{ candidate.phone | phoneHref }}">{{ candidate.phone }}</a></li>{% endif %}
+                    {% for social in candidate.presentation.socialLinks %}
+                      <li><a href="{{ social.publicUrl }}">{{ social.platform | socialLabel }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+
+              {% set financialDisclosureUrl = candidate.financialDisclosure.url | externalUrl %}
+              {% set statementOfDisclosureUrl = candidate.statementOfDisclosure.url | externalUrl %}
+              {% if financialDisclosureUrl or candidate.financialDisclosure.fileName or statementOfDisclosureUrl or candidate.statementOfDisclosure.fileName %}
+                <div class="candidate-disclosures">
+                  <{{ subheadingTag }}>Disclosure documents</{{ subheadingTag }}>
+                  <ul>
+                    {{ disclosureListItem(candidate.financialDisclosure, financialDisclosureUrl, "Financial disclosure") }}
+                    {{ disclosureListItem(candidate.statementOfDisclosure, statementOfDisclosureUrl, "Statement of disclosure") }}
+                  </ul>
+                </div>
+              {% endif %}
+            </article>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+{% endmacro %}

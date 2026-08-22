@@ -50,12 +50,22 @@ test("the home page publishes ordered Contest templates from the shared Candidat
   assert.ok(mayor < councillor);
   assert.ok(councillor < schoolTrustee);
   assert.match(home, /href="\/contests\/mayor-winnipeg\/"/);
-  assert.match(home, />Scott Gillingham<\/strong>/);
-  assert.match(home, /Prospective Candidate · Registration: Registered/);
+  assert.match(home, />Scott Gillingham<\/h4>/);
+  assert.match(home, /<p class="candidate-role">Prospective Candidate<\/p>/);
+  assert.match(home, /<dt>Election Phase<\/dt><dd>Registration<\/dd>/);
+  assert.match(home, /<dt>Candidate Status<\/dt><dd>Registered<\/dd>/);
+  assert.match(
+    home,
+    /id="mayor-winnipeg-candidate-order-explanation"[^>]*>Candidates are shown alphabetically by family name\.<\/p>/,
+  );
+  assert.match(
+    home,
+    /data-candidate-list aria-describedby="mayor-winnipeg-candidate-order-explanation"/,
+  );
   assert.match(home, /href="\/contests\/council-fort-rouge-east-fort-garry\/"/);
-  assert.match(home, />Jeff Palmer<\/strong>/);
+  assert.match(home, />Jeff Palmer<\/h4>/);
   assert.match(home, /href="\/contests\/school-winnipeg-ward-5\/"/);
-  assert.match(home, />Tim Bigelow<\/strong>/);
+  assert.match(home, />Tim Bigelow<\/h4>/);
 
   const unsupportedTemplate = home.slice(
     home.indexOf('data-contest-template="school-seine-river-ward-1"'),
@@ -72,7 +82,15 @@ test("the home page publishes ordered Contest templates from the shared Candidat
     new URL("../_site/assets/app.js", import.meta.url),
     "utf8",
   );
-  assert.match(builtApp, /resolveApplicableContests/);
+  assert.match(builtApp, /renderApplicableContests/);
+  assert.match(builtApp, /randomizeCandidateLists/);
+  assert.match(
+    readFileSync(
+      new URL("../_site/assets/contest-result-renderer.js", import.meta.url),
+      "utf8",
+    ),
+    /resolveApplicableContests/,
+  );
   assert.match(
     readFileSync(
       new URL("../_site/assets/contest-resolver.js", import.meta.url),

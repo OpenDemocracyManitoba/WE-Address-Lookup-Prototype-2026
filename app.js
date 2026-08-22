@@ -8,18 +8,19 @@ import {
   statusMessage,
 } from "./lookup-controller.js";
 import { calculatePopupGeometry } from "./popup-geometry.js";
-import { resolveApplicableContests } from "./contest-resolver.js";
+import { randomizeCandidateLists } from "./candidate-order.js";
+import { renderApplicableContests } from "./contest-result-renderer.js";
 
-function unresolvedContest(slot) {
+function unresolvedContest(applicableContestResolution) {
   const article = document.createElement("article");
   article.className = "applicable-contest unavailable-contest-resolution";
   const label = document.createElement("p");
   label.className = "candidate-role";
-  label.textContent = `${slot.office} Contest`;
+  label.textContent = `${applicableContestResolution.office} Contest`;
   const heading = document.createElement("h3");
   heading.textContent = "Contest information unavailable";
   const message = document.createElement("p");
-  message.textContent = slot.message;
+  message.textContent = applicableContestResolution.message;
   article.append(label, heading, message);
   return article;
 }
@@ -114,7 +115,14 @@ function startBrowserApp() {
     retryButton.hidden = !isRetryablePhase(state.phase);
 
     addressLookupResult.hidden = !state.selected;
-    applicableContests.replaceChildren();
+    renderApplicableContests({
+      address: state.selected,
+      container: applicableContests,
+      contests: contestResolutionData,
+      templates: contestTemplates,
+      unresolvedContestNode: unresolvedContest,
+      randomize: () => randomizeCandidateLists(document),
+    });
     if (state.selected) {
       addressLookupResultAddress.textContent = state.selected.displayAddress;
       councilWard.textContent = formatCouncilWard(state.selected.councilWard);
@@ -122,17 +130,6 @@ function startBrowserApp() {
         state.selected.schoolDivision,
         state.selected.schoolDivisionWard,
       );
-      for (const slot of resolveApplicableContests(
-        state.selected,
-        contestResolutionData,
-      )) {
-        const template = slot.contest
-          ? contestTemplates.get(slot.contest.id)
-          : null;
-        applicableContests.append(
-          template ? template.content.cloneNode(true) : unresolvedContest(slot),
-        );
-      }
     } else {
       addressLookupResultAddress.textContent = "";
       councilWard.textContent = "";
