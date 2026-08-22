@@ -1,0 +1,2642 @@
+{
+  "election": "2026 Municipal Council and School Boards Election",
+  "importedAt": "2026-08-22T15:18:57.429Z",
+  "sourceSnapshots": [
+    {
+      "sourceId": "city-candidate-dataset",
+      "observedAt": "2026-08-22T15:18:57.429Z",
+      "retrievalUrl": "https://data.winnipeg.ca/resource/9gi9-dauz.json?$limit=18000&$where=election_date%20%3E=%20%272026-01-01T00:00:00.000%27%20AND%20election_date%20%3C%20%272027-01-01T00:00:00.000%27%20AND%20(nomination_order%20IS%20NULL%20OR%20nomination_order%20%3E=%200)",
+      "path": "source-snapshots/city-candidate-dataset/2026-08-22T15-18-57-429Z.json"
+    }
+  ],
+  "candidates": [
+    {
+      "contestId": "council-charleswood-tuxedo-westwood",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-52"
+      },
+      "sourcePublishedName": "Evan Duncan",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.voteevanduncan.ca",
+      "email": "voteevanduncan@gmail.com"
+    },
+    {
+      "contestId": "council-daniel-mcintyre",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-37"
+      },
+      "sourcePublishedName": "Cindy Gilroy",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "https://votecindygilroy.ca/",
+      "email": "votecindygilroy@gmail.com",
+      "phone": "204-898-5999"
+    },
+    {
+      "contestId": "council-elmwood-east-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-55"
+      },
+      "sourcePublishedName": "Abel Gutierrez",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.voteabel.com",
+      "email": "abelj18@hotmail.com",
+      "phone": "204-960-4744"
+    },
+    {
+      "contestId": "council-elmwood-east-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-132"
+      },
+      "sourcePublishedName": "Adam Dudek",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-21T00:00:00.000",
+      "campaignWebsite": "www.adamdudek.ca",
+      "email": "dudekwpg@gmail.com"
+    },
+    {
+      "contestId": "council-elmwood-east-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-100"
+      },
+      "sourcePublishedName": "Christian Sweryda",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-07T00:00:00.000",
+      "campaignWebsite": "www.chrisforelmwoodek.ca",
+      "email": "umsweryd@myumanitoba.ca",
+      "phone": "204-801-9239"
+    },
+    {
+      "contestId": "council-elmwood-east-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-80"
+      },
+      "sourcePublishedName": "Emma Durand-Wood",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "www.teamemma.ca",
+      "email": "hello@teamemma.ca",
+      "phone": "204-202-3173"
+    },
+    {
+      "contestId": "council-elmwood-east-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-131"
+      },
+      "sourcePublishedName": "Jessica Wiebe",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-21T00:00:00.000",
+      "campaignWebsite": "https://jessicawiebeforek.com",
+      "email": "jessicawiebeforeastkildonan@outlook.com",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/jessica.dawn.jfire"
+        }
+      ]
+    },
+    {
+      "contestId": "council-fort-rouge-east-fort-garry",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-59"
+      },
+      "sourcePublishedName": "Jeff Palmer",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.votejeffpalmer.ca",
+      "email": "jeff@votejeffpalmer.ca",
+      "phone": "204-806-8135",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/JeffPalmerWinnipeg/"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/jeff4fortrougeeastfortgarry/%20"
+        }
+      ]
+    },
+    {
+      "contestId": "council-fort-rouge-east-fort-garry",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-112"
+      },
+      "sourcePublishedName": "Kevin Stuart",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-13T00:00:00.000",
+      "campaignWebsite": "www.teamkevinstuart.com",
+      "email": "info@teamkevinstuart.com",
+      "phone": "431-337-3039",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "www.facebook.com/teamkevinstuart"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/teamkevinstuart"
+        }
+      ]
+    },
+    {
+      "contestId": "council-fort-rouge-east-fort-garry",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-43"
+      },
+      "sourcePublishedName": "Sherri Rollins  - WITHDRAWN",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registration Withdrawn"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000"
+    },
+    {
+      "contestId": "council-mynarski",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-85"
+      },
+      "sourcePublishedName": "Ayaz Noor Mohammed",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-03T00:00:00.000",
+      "campaignWebsite": "https://ayazformynarski.ca",
+      "email": "ayazformynarski@gmail.com",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/AyazForMynarski"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/ayazformynarski"
+        }
+      ]
+    },
+    {
+      "contestId": "council-mynarski",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-56"
+      },
+      "sourcePublishedName": "Harold Brazil",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.haroldbrazilformynarski.ca",
+      "email": "haroldbrazilformynarski@gmail.com",
+      "phone": "204-995-5533"
+    },
+    {
+      "contestId": "council-mynarski",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-159"
+      },
+      "sourcePublishedName": "Laurie  Kozak",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-21T00:00:00.000",
+      "campaignWebsite": "www.lauriekozak.com",
+      "email": "laurie@lauriekozak.com",
+      "phone": "431-866-5820"
+    },
+    {
+      "contestId": "council-mynarski",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-83"
+      },
+      "sourcePublishedName": "Natalie  Smith",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-03T00:00:00.000",
+      "campaignWebsite": "natalieformynarski.com",
+      "email": "natalie4mynarski@gmail.com",
+      "phone": "204-509-4584",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/nat4mynarski/"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/nat4mynarski/"
+        }
+      ]
+    },
+    {
+      "contestId": "council-mynarski",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-116"
+      },
+      "sourcePublishedName": "Ross Eadie",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-14T00:00:00.000",
+      "campaignWebsite": "www.rosseadie.ca",
+      "email": "ross@rosseadie.ca",
+      "phone": "204-471-4803"
+    },
+    {
+      "contestId": "council-north-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-49"
+      },
+      "sourcePublishedName": "Jeff Browaty",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "https://www.jeffbrowaty.com/",
+      "email": "info@jeffbrowaty.com",
+      "phone": "204-663-4157"
+    },
+    {
+      "contestId": "council-north-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-136"
+      },
+      "sourcePublishedName": "Orvie Dingwall",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-23T00:00:00.000",
+      "campaignWebsite": "www.orvie.ca",
+      "email": "campaign@orvie.ca",
+      "phone": "204-202-3274",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "www.facebook.com/orvie4nk"
+        },
+        {
+          "platform": "instagram",
+          "url": "www.instagram.com/orvie4nk"
+        }
+      ]
+    },
+    {
+      "contestId": "council-north-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-38"
+      },
+      "sourcePublishedName": "Tyler Andersen",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.Tyler4NK.com",
+      "email": "Tyler4NK@gmail.com",
+      "phone": "431-999-8965",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/profile.php?id=61591590775886"
+        }
+      ]
+    },
+    {
+      "contestId": "council-old-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-36"
+      },
+      "sourcePublishedName": "Devi Sharma",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000"
+    },
+    {
+      "contestId": "council-old-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-72"
+      },
+      "sourcePublishedName": "Greg McFarlane",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "www.greg-mcfarlane.ca",
+      "email": "vote4greg2026@gmail.com",
+      "phone": "204-479-4941",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/share/1H98HdakkZ/?mibextid=wwXIfr"
+        }
+      ]
+    },
+    {
+      "contestId": "council-old-kildonan",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-77"
+      },
+      "sourcePublishedName": "Love Randhawa",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "email": "loverandhawa33@yahoo.com",
+      "phone": "204-960-8592",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/share/19NQ2Yc3zf/"
+        },
+        {
+          "platform": "twitter",
+          "url": "https://x.com/LoveRandhawawpg"
+        }
+      ]
+    },
+    {
+      "contestId": "council-point-douglas",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-142"
+      },
+      "sourcePublishedName": "Mark Requinta",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-30T00:00:00.000",
+      "campaignWebsite": "www.requinta.ca",
+      "email": "markrequintaforpointdouglas@gmail.com",
+      "phone": "204-979-5007"
+    },
+    {
+      "contestId": "council-point-douglas",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-71"
+      },
+      "sourcePublishedName": "Vivian Santos",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "www.vivian4pointdouglas.ca",
+      "email": "info@vivian4pointdouglas.ca",
+      "phone": "204-510-1608"
+    },
+    {
+      "contestId": "council-river-heights-fort-garry",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-48"
+      },
+      "sourcePublishedName": "Georgina Sabesky",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.sabesky.ca",
+      "email": "info@sabesky.ca",
+      "phone": "204-272-9180"
+    },
+    {
+      "contestId": "council-river-heights-fort-garry",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-103"
+      },
+      "sourcePublishedName": "Jorge Requena Ramos",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-08T00:00:00.000",
+      "email": "togetherriverheights@gmail.com",
+      "phone": "204-998-9780"
+    },
+    {
+      "contestId": "council-river-heights-fort-garry",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-117"
+      },
+      "sourcePublishedName": "Randy McDonald",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-14T00:00:00.000",
+      "campaignWebsite": "https://v4rm2026.blogspot.com/",
+      "email": "vote.4.randy.mcd@gmail.com",
+      "phone": "204-232-8899"
+    },
+    {
+      "contestId": "council-river-heights-fort-garry",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-60"
+      },
+      "sourcePublishedName": "Sara MacArthur",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "https://saramacarthur.com/",
+      "email": "sara@saramacarthur.com",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/people/Sara-MacArthur-for-River-Heights-Fort-Garry/61590536617639/"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/saramacarthur/"
+        }
+      ]
+    },
+    {
+      "contestId": "council-river-heights-fort-garry",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-91"
+      },
+      "sourcePublishedName": "Ty Mitchell - WITHDRAWN",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registration Withdrawn"
+      },
+      "registrationDate": "2026-07-06T00:00:00.000"
+    },
+    {
+      "contestId": "council-st-boniface",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-39"
+      },
+      "sourcePublishedName": "Matt Allard",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.mattallard.ca",
+      "email": "info@mattallard.ca",
+      "phone": "204-396-4636",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/stbmattallard/"
+        },
+        {
+          "platform": "twitter",
+          "url": "https://x.com/mathieuallard"
+        },
+        {
+          "platform": "linkedin",
+          "url": "https://www.linkedin.com/in/yourneighbouryourcouncillor/"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/mathieufredericallard/"
+        }
+      ]
+    },
+    {
+      "contestId": "council-st-boniface",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-45"
+      },
+      "sourcePublishedName": "Nicholas Douklias",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.nicholasdouklias.ca",
+      "email": "vote@nicholasdouklias.ca",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/doukliassaintboniface"
+        },
+        {
+          "platform": "twitter",
+          "url": "https://x.com/NikkoDouklias"
+        },
+        {
+          "platform": "linkedin",
+          "url": "https://www.linkedin.com/in/nicholasdouklias/"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/nicholasdouklias"
+        }
+      ]
+    },
+    {
+      "contestId": "council-st-boniface",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-102"
+      },
+      "sourcePublishedName": "Robyn Vilde",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-08T00:00:00.000",
+      "campaignWebsite": "https://www.robynvildecampaign.com/",
+      "email": "robynvilde4stboniface@gmail.com",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/profile.php?id=61592345781115"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/robynev_94/"
+        }
+      ]
+    },
+    {
+      "contestId": "council-st-boniface",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-89"
+      },
+      "sourcePublishedName": "Sylvie Schmitt",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-03T00:00:00.000",
+      "campaignWebsite": "https://sylvie4citycouncil.neocities.org/sylvie-schmitt-campaign",
+      "email": "sylvie4citycouncil@gmail.com"
+    },
+    {
+      "contestId": "council-st-james",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-42"
+      },
+      "sourcePublishedName": "Kelly Ryback",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.ryback.ca",
+      "email": "kelly@ryback.ca",
+      "phone": "431-441-2555",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/groups/288816829999267"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/Ryback4StJames/"
+        }
+      ]
+    },
+    {
+      "contestId": "council-st-james",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-40"
+      },
+      "sourcePublishedName": "Shawn Dobson",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "email": "Stdobson01@gmail.com"
+    },
+    {
+      "contestId": "council-st-james",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-62"
+      },
+      "sourcePublishedName": "Tyler Crichton",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.TylerForStJames.ca",
+      "email": "hello@tylerforstjames.ca",
+      "phone": "431-877-8276"
+    },
+    {
+      "contestId": "council-st-norbert-seine-river",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-123"
+      },
+      "sourcePublishedName": "Anita Roy",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-20T00:00:00.000",
+      "campaignWebsite": "www.anitaroy.ca",
+      "email": "anitaforcommunity@gmail.com",
+      "phone": "204930-0653",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/share/1C4V3vaqj1/?mibextid=wwXIfr"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/anitaforcommunity/"
+        }
+      ]
+    },
+    {
+      "contestId": "council-st-norbert-seine-river",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-107"
+      },
+      "sourcePublishedName": "Govind Thawani",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-10T00:00:00.000",
+      "email": "govindthawani@hotmail.com",
+      "phone": "204-952-1505"
+    },
+    {
+      "contestId": "council-st-norbert-seine-river",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-121"
+      },
+      "sourcePublishedName": "Louise May",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-17T00:00:00.000",
+      "campaignWebsite": "www.louisemay.ca",
+      "email": "louisemay@louisemay.ca",
+      "phone": "204-202-4844",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/groups/120287021349531"
+        },
+        {
+          "platform": "linkedin",
+          "url": "https://www.linkedin.com/in/louise-may-86667829/"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://instagram.com/louisemay_wpgcitycouncil"
+        }
+      ]
+    },
+    {
+      "contestId": "council-st-norbert-seine-river",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-122"
+      },
+      "sourcePublishedName": "Ray DuBois",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-17T00:00:00.000",
+      "campaignWebsite": "www.raydubois.com",
+      "email": "info@raydubois.com",
+      "phone": "204-333-4452"
+    },
+    {
+      "contestId": "council-st-vital",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-46"
+      },
+      "sourcePublishedName": "Chris Sigurdson",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "https://sigurdson4sv.ca/",
+      "email": "sigurd01@shaw.ca",
+      "phone": "204-470-8713"
+    },
+    {
+      "contestId": "council-st-vital",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-156"
+      },
+      "sourcePublishedName": "Doug Reimer",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-13T00:00:00.000",
+      "campaignWebsite": "https://dougreimer.ca/",
+      "email": "ReimerD.68@gmail.com",
+      "phone": "431-481-1928"
+    },
+    {
+      "contestId": "council-st-vital",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-140"
+      },
+      "sourcePublishedName": "Season Kirkwood",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-28T00:00:00.000",
+      "campaignWebsite": "www.seasonkirkwood.ca",
+      "email": "voteseasonkirkwood@gmail.com",
+      "phone": "431-866-3847"
+    },
+    {
+      "contestId": "council-transcona",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-41"
+      },
+      "sourcePublishedName": "Chris Giesbrecht",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.transconaproud.ca",
+      "email": "chris@transconaproud.ca",
+      "phone": "431-533-2325"
+    },
+    {
+      "contestId": "council-transcona",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-98"
+      },
+      "sourcePublishedName": "Lora Meseman",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-07T00:00:00.000",
+      "campaignWebsite": "www.lora4transcona.ca",
+      "email": "team@lora4transcona.ca",
+      "phone": "431-791-5672"
+    },
+    {
+      "contestId": "council-transcona",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-58"
+      },
+      "sourcePublishedName": "Nathine Dagdick",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "https://www.nathinedagdickfortranscona.ca/",
+      "email": "nathinedagdick@yahoo.com"
+    },
+    {
+      "contestId": "council-transcona",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-54"
+      },
+      "sourcePublishedName": "Shawn Nason",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.nason2026.ca",
+      "email": "vote@nason2026.ca",
+      "phone": "204-894-8121"
+    },
+    {
+      "contestId": "council-waverley-west",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-118"
+      },
+      "sourcePublishedName": "Antar Banik",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-15T00:00:00.000",
+      "campaignWebsite": "www.antarforcouncil.com",
+      "email": "contact@antarforcouncil.com",
+      "phone": "431-342-1670"
+    },
+    {
+      "contestId": "council-waverley-west",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-87"
+      },
+      "sourcePublishedName": "Jasmine Brar",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-03T00:00:00.000",
+      "campaignWebsite": "www.jasminebrar.ca",
+      "email": "electjasminebrar@gmail.com",
+      "phone": "431-293-2913",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/Jasminebrar.wpg/"
+        },
+        {
+          "platform": "twitter",
+          "url": "https://x.com/Jasminebrar12"
+        },
+        {
+          "platform": "linkedin",
+          "url": "https://ca.linkedin.com/in/jasmine-brar-7b0741114"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/jasminebrar12/"
+        }
+      ]
+    },
+    {
+      "contestId": "council-waverley-west",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-44"
+      },
+      "sourcePublishedName": "Nafiya  Naso",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.votenaso.ca",
+      "email": "nafiya@votenaso.ca",
+      "phone": "204-955-3938",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/nafiya.naso/"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/nafiyanaso/"
+        }
+      ]
+    },
+    {
+      "contestId": "council-waverley-west",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-75"
+      },
+      "sourcePublishedName": "Uche Nwankwo",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "https://uchenwankwo.ca/",
+      "email": "info@uchenwankwo.ca",
+      "phone": "204-451-9600",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/UcheNwankwoWaverley/"
+        },
+        {
+          "platform": "twitter",
+          "url": "https://x.com/Uche_mn"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/uchenwankwo.focus/"
+        }
+      ]
+    },
+    {
+      "contestId": "council-waverley-west",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-84"
+      },
+      "sourcePublishedName": "Yuanchao Li",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-03T00:00:00.000",
+      "email": "yuanchaoli@longhan.ca",
+      "phone": "431-336-5285",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/yuanchao.li.wpg"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/yuanchao_li_wpg"
+        }
+      ]
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-148"
+      },
+      "sourcePublishedName": "Brad Gross",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-07T00:00:00.000",
+      "email": "509sold@gmail.com",
+      "phone": "204-509-7653"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-27"
+      },
+      "sourcePublishedName": "Christopher Clacio",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-05-01T00:00:00.000",
+      "email": "chrisclacio4mayor@proton.me",
+      "phone": "204-333-1658"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-32"
+      },
+      "sourcePublishedName": "Don Woodstock",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-05-20T00:00:00.000",
+      "campaignWebsite": "donwoodstock.com",
+      "email": "donwoodstockcampaign@gmail.com",
+      "phone": "204-880-1564"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-34"
+      },
+      "sourcePublishedName": "Johnny Calderón",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-16T00:00:00.000",
+      "email": "jc@jcforwinnipeg.com"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-33"
+      },
+      "sourcePublishedName": "Joshua Pagdato",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-05-22T00:00:00.000",
+      "email": "projectptkc@gmail.com",
+      "phone": "431-998-6532"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-31"
+      },
+      "sourcePublishedName": "Mazher Alam",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-05-20T00:00:00.000",
+      "email": "mazher313@gmail.com"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-29"
+      },
+      "sourcePublishedName": "Michael Vogiatzakis",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-05-07T00:00:00.000",
+      "campaignWebsite": "Mikeformayor2026.com",
+      "email": "Mikeformayor2026@gmail.com"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-35"
+      },
+      "sourcePublishedName": "Noah Redden",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-26T00:00:00.000",
+      "campaignWebsite": "https://linktr.ee/noahreddenforwinnipeg",
+      "email": "noahreddenforwinnipeg@gmail.com"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-28"
+      },
+      "sourcePublishedName": "Scott Gillingham",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-05-01T00:00:00.000",
+      "campaignWebsite": "www.scottgillingham.com",
+      "email": "info@scottgillingham.com",
+      "phone": "204-500-0950"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-30"
+      },
+      "sourcePublishedName": "Umar Hayat",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-05-13T00:00:00.000",
+      "campaignWebsite": "hayatformayor.com",
+      "email": "hayattumar@hotmail.com",
+      "phone": "204-955-2989"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-144"
+      },
+      "sourcePublishedName": "Zachary Uminski",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-31T00:00:00.000",
+      "campaignWebsite": "voteforzac.ca",
+      "email": "info@voteforzac.ca",
+      "phone": "431-777-6956",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/people/Zac-Uminski/61592747297355/?mibextid=wwXIfr&rdid=Tg8Emii3RWWypGXV&share_url=https%3A%2F%2F"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/miikana_mayor2026?igsi=eXM5MmF3MnhjcjR5&utm_source=qr"
+        }
+      ]
+    },
+    {
+      "contestId": "school-louis-riel-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-135"
+      },
+      "sourcePublishedName": "Anna Weier",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-23T00:00:00.000",
+      "email": "weier.anna@gmail.com",
+      "phone": "204-297-0100"
+    },
+    {
+      "contestId": "school-louis-riel-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-93"
+      },
+      "sourcePublishedName": "Ian Walker",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-06T00:00:00.000",
+      "email": "ian@ianwalker.ca",
+      "phone": "204-781-0438"
+    },
+    {
+      "contestId": "school-louis-riel-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-81"
+      },
+      "sourcePublishedName": "Moe Koroma",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "email": "makoroma@gmail.com",
+      "phone": "204-557-8384"
+    },
+    {
+      "contestId": "school-louis-riel-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-47"
+      },
+      "sourcePublishedName": "Brian Mayes",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.brianmayes4trustee.com",
+      "email": "brianmayes4trustee@gmail.com",
+      "phone": "204-255-4909"
+    },
+    {
+      "contestId": "school-louis-riel-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-106"
+      },
+      "sourcePublishedName": "Irene Nordheim",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-09T00:00:00.000",
+      "email": "nordheimirene@gmail.com",
+      "phone": "204-290-3739"
+    },
+    {
+      "contestId": "school-louis-riel-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-96"
+      },
+      "sourcePublishedName": "Lauren Lambert",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-07T00:00:00.000",
+      "email": "LaurenLambertlrsd@gmail.com",
+      "phone": "204-807-0554"
+    },
+    {
+      "contestId": "school-louis-riel-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-82"
+      },
+      "sourcePublishedName": "Peter Bjornson",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-03T00:00:00.000",
+      "campaignWebsite": "www.peterbjornson.ca",
+      "email": "peter.bjornson@outlook.com",
+      "phone": "204-232-1326",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/p/Peter-Bjornson-for-LRSD-Ward-3-61580203888345/"
+        }
+      ]
+    },
+    {
+      "contestId": "school-louis-riel-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-90"
+      },
+      "sourcePublishedName": "Ryan Palmquist",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-03T00:00:00.000",
+      "email": "ryan.m.palmquist@gmail.com",
+      "phone": "204-290-9976",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/RyanPalmquistStVital/"
+        }
+      ]
+    },
+    {
+      "contestId": "school-louis-riel-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-79"
+      },
+      "sourcePublishedName": "Sandy Nemeth",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "https://sandynemeth.blogspot.com/",
+      "email": "sandynemeth3@gmail.com",
+      "phone": "204-230-6475",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "www.facebook.com/sandy.nemeth.1"
+        },
+        {
+          "platform": "instagram",
+          "url": "www.instagram.com/sandynemethlrsd/"
+        }
+      ]
+    },
+    {
+      "contestId": "school-louis-riel-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-69"
+      },
+      "sourcePublishedName": "Chipalo Simunyola",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "email": "csimunyola@gmail.com",
+      "phone": "204-688-7479"
+    },
+    {
+      "contestId": "school-louis-riel-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-138"
+      },
+      "sourcePublishedName": "Jocelyn  Greenwood",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-27T00:00:00.000",
+      "email": "jgreenw369@gmail.com"
+    },
+    {
+      "contestId": "school-louis-riel-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-74"
+      },
+      "sourcePublishedName": "John Baert",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "https://www.johnbaert4ward4.ca/",
+      "email": "johnbaert204@gmail.com",
+      "phone": "204-453-4466"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-73"
+      },
+      "sourcePublishedName": "Craig Stahlke",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "www.stahlkefortrustee.com",
+      "email": "cnstahlke@shaw.ca",
+      "phone": "204-781-5622"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-109"
+      },
+      "sourcePublishedName": "Linda Karn",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-13T00:00:00.000",
+      "campaignWebsite": "https://lindakarn5.wixsite.com/trustee",
+      "email": "linda.karn@protonmail.com",
+      "phone": "204-888-5974"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-97"
+      },
+      "sourcePublishedName": "Samantha Pope",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-07T00:00:00.000",
+      "campaignWebsite": "samantha4ward1.ca",
+      "email": "samantha4ward1@gmail.com",
+      "phone": "204-997-9317",
+      "socialLinks": [
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/samantha4ward1/"
+        }
+      ]
+    },
+    {
+      "contestId": "school-pembina-trails-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-78"
+      },
+      "sourcePublishedName": "Brook Jones",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "https://electbrookjones.ca/",
+      "email": "brook@brookjones.ca",
+      "phone": "204-291-4120",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/people/Elect-Brook-Jones/61581462950686/"
+        },
+        {
+          "platform": "linkedin",
+          "url": "https://ca.linkedin.com/in/brook-jones-435a521b8"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/electbrookjones/"
+        }
+      ]
+    },
+    {
+      "contestId": "school-pembina-trails-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-61"
+      },
+      "sourcePublishedName": "Christine Jolly",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "email": "jollychristine57@gmail.com",
+      "phone": "431-305-5193"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-63"
+      },
+      "sourcePublishedName": "Lauralee Gooding",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "www.lauraleegooding.ca",
+      "email": "goodinglauralee@gmail.com",
+      "phone": "431-371-1900"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-104"
+      },
+      "sourcePublishedName": "Alicia Becker",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-08T00:00:00.000",
+      "email": "aliciamack999@gmail.com",
+      "phone": "204-261-7602"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-125"
+      },
+      "sourcePublishedName": "Asim Nawaz",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-20T00:00:00.000",
+      "email": "asimncc7@gmail.com",
+      "phone": "204-333-8600"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-120"
+      },
+      "sourcePublishedName": "Carrissa Reyes",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-17T00:00:00.000",
+      "email": "vote4carrissa@gmail.com",
+      "phone": "204-228-6999",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/share/19F1J9YgVW/?mibextid=wwXIfr"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/carrissareyes4schooltrustee?igsh=anh1MHpybzRpZW56&utm_source=qr"
+        }
+      ]
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-57"
+      },
+      "sourcePublishedName": "Cindy Nachtigall",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "phone": "204-269-3181"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-153"
+      },
+      "sourcePublishedName": "Heethy Maan",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-11T00:00:00.000",
+      "email": "heethymaan@gmail.com",
+      "phone": "204-997-4119",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/share/192HJNLjbF/?mibextid=wwXIfr"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/heethymaan?igsh=MTUwMHNyZjNydmloOA%3D%3D&utm_source=qr"
+        }
+      ]
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-76"
+      },
+      "sourcePublishedName": "Noman Zaheer",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "www.votezaheer.ca",
+      "email": "info@votezaheer.ca",
+      "phone": "204-899-7997",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/votezaheer"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/votezaheer"
+        }
+      ]
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-110"
+      },
+      "sourcePublishedName": "Patricia Eyamba",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-13T00:00:00.000",
+      "email": "eyambapatricia@gmail.com",
+      "phone": "204-914-0614"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-126"
+      },
+      "sourcePublishedName": "Tasneem  Vali",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-21T00:00:00.000",
+      "email": "tvali@hotmail.com",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/people/Tasneem-Vali-for-School-Trustee-Pembina-Trails-Ward-3/61592463298179/"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/valiforschooltrustee/"
+        }
+      ]
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-127"
+      },
+      "sourcePublishedName": "Tony Guan",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-21T00:00:00.000",
+      "email": "tonyjguan@gmail.com",
+      "phone": "204-230-0659"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-95"
+      },
+      "sourcePublishedName": "Towela Mkanda",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-06T00:00:00.000",
+      "email": "info.whoa.yoga@gmail.com",
+      "phone": "204-296-2211"
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-149"
+      },
+      "sourcePublishedName": "Veerpal Sandhu",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-07T00:00:00.000",
+      "email": "india1953@live.com",
+      "phone": "204-995-1035"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-157"
+      },
+      "sourcePublishedName": "Colleen Carswell",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-17T00:00:00.000",
+      "email": "colleencarswell@gmail.com",
+      "phone": "204-222-1486"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-92"
+      },
+      "sourcePublishedName": "Jerry Sodomlak",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-06T00:00:00.000",
+      "campaignWebsite": "jerrysodomlak4schooltrustee.ca",
+      "email": "jsodomlak@gmail.com",
+      "phone": "204-999-1409"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-68"
+      },
+      "sourcePublishedName": "Ryan Frick",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "www.ryanfrick.ca",
+      "email": "frick4trustee@gmail.com"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-143"
+      },
+      "sourcePublishedName": "Glenn Buffie",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-31T00:00:00.000",
+      "email": "glennbuffie4retsd@gmail.com",
+      "phone": "204-228-4666"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-137"
+      },
+      "sourcePublishedName": "Idunnu Tokurah",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-24T00:00:00.000",
+      "campaignWebsite": "https://vote4idunnu.ca/",
+      "email": "vote4idunnu@gmail.com",
+      "phone": "204-296-6474"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-150"
+      },
+      "sourcePublishedName": "Sheri Hanson",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-07T00:00:00.000",
+      "email": "sd.hanson@icloud.com",
+      "phone": "431-278-0738"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-88"
+      },
+      "sourcePublishedName": "Garry Kowalski",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-03T00:00:00.000",
+      "email": "garykowalski@hotmail.com"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-134"
+      },
+      "sourcePublishedName": "Lorlie Froese",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-22T00:00:00.000",
+      "email": "lorliefroese@gmail.com",
+      "phone": "204-997-0030"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-86"
+      },
+      "sourcePublishedName": "Brenda Bage",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-03T00:00:00.000"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-65"
+      },
+      "sourcePublishedName": "Joe Hilmerich",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "email": "joachimfortrustee@gmail.com"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-113"
+      },
+      "sourcePublishedName": "Pamela Jansen",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-13T00:00:00.000",
+      "email": "2peacefulwarriors@gmail.com",
+      "phone": "204-806-3674"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-147"
+      },
+      "sourcePublishedName": "Susan Olynik",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-05T00:00:00.000",
+      "email": "susan168823@gmail.com",
+      "phone": "204-661-6440"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-133"
+      },
+      "sourcePublishedName": "Derek Dabee",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-22T00:00:00.000",
+      "email": "ddabee@mymts.net",
+      "phone": "204-996-4055"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-101"
+      },
+      "sourcePublishedName": "Dirk Leavesley",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-07T00:00:00.000",
+      "email": "dirkleavesley41@gmail.com",
+      "phone": "204-955-0547"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-129"
+      },
+      "sourcePublishedName": "Ernesto Ofiaza",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-21T00:00:00.000",
+      "email": "enofiaza63@yahoo.ca",
+      "phone": "204-470-1002"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-128"
+      },
+      "sourcePublishedName": "Jagjit Khattra",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-21T00:00:00.000",
+      "email": "jagjitkhattra83@gmail.com",
+      "phone": "204-509-9006"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-115"
+      },
+      "sourcePublishedName": "Leila Castro",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-14T00:00:00.000",
+      "email": "Leilacastro.ca@gmail.com",
+      "phone": "204-807-4109"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-130"
+      },
+      "sourcePublishedName": "Manpreet Toor",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-21T00:00:00.000",
+      "email": "manpreettoor457@gmail.com",
+      "phone": "204-894-7547"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-108"
+      },
+      "sourcePublishedName": "Maria Santos",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-13T00:00:00.000",
+      "email": "08msantos@gmail.com"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-155"
+      },
+      "sourcePublishedName": "Robert Bilsland",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-12T00:00:00.000",
+      "email": "robbilsland@hotmail.com",
+      "phone": "204-226-9422"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-146"
+      },
+      "sourcePublishedName": "Sandeep Bhatti",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-04T00:00:00.000",
+      "email": "sandeepbhattilife@gmail.com",
+      "phone": "204-914-3232"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-70"
+      },
+      "sourcePublishedName": "Edward Ploszay",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "email": "mploszay@yahoo.com",
+      "phone": "204-339-1260"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-50"
+      },
+      "sourcePublishedName": "Evan Krosney",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "email": "evankrosney@gmail.com",
+      "phone": "204-250-4387"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-67"
+      },
+      "sourcePublishedName": "Lisa Brooks",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "phone": "204-795-6240"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-53"
+      },
+      "sourcePublishedName": "Mary Jane Napolitano",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "email": "maryjane.napolitano@gmail.com",
+      "phone": "204-999-5094"
+    },
+    {
+      "contestId": "school-seven-oaks-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-64"
+      },
+      "sourcePublishedName": "Richard Sawka",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "email": "richard.sawka2026@gmail.com",
+      "phone": "204-806-0075"
+    },
+    {
+      "contestId": "school-st-james-assiniboia-centre",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-114"
+      },
+      "sourcePublishedName": "Craig Johnson",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-14T00:00:00.000",
+      "email": "craig.johnson@mts.net",
+      "phone": "204-880-6878"
+    },
+    {
+      "contestId": "school-st-james-assiniboia-centre",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-158"
+      },
+      "sourcePublishedName": "Craig McGregor",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-18T00:00:00.000",
+      "email": "craigmcgregor294@gmail.com",
+      "phone": "204-294-8729"
+    },
+    {
+      "contestId": "school-st-james-assiniboia-east",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-145"
+      },
+      "sourcePublishedName": "Holly Hunter",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-04T00:00:00.000",
+      "email": "hollyhunter@shaw.ca",
+      "phone": "204-232-8202"
+    },
+    {
+      "contestId": "school-st-james-assiniboia-east",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-124"
+      },
+      "sourcePublishedName": "Tara Smith",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-20T00:00:00.000",
+      "email": "tara.smith4000@gmail.com",
+      "phone": "204-996-3516"
+    },
+    {
+      "contestId": "school-st-james-assiniboia-east",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-152"
+      },
+      "sourcePublishedName": "Vicki Rempel",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-10T00:00:00.000",
+      "email": "vickster304@gmail.com",
+      "phone": "204-997-7037"
+    },
+    {
+      "contestId": "school-st-james-assiniboia-west",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-111"
+      },
+      "sourcePublishedName": "Cheryl Smukowich",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-13T00:00:00.000",
+      "email": "cheryl.smukowich@gmail.com",
+      "phone": "204-899-5819"
+    },
+    {
+      "contestId": "school-st-james-assiniboia-west",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-141"
+      },
+      "sourcePublishedName": "Fiona  Shiells",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-29T00:00:00.000",
+      "campaignWebsite": "www.fionashiells.com",
+      "email": "fshiells@gmail.com",
+      "phone": "204-590-8352"
+    },
+    {
+      "contestId": "school-st-james-assiniboia-west",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-66"
+      },
+      "sourcePublishedName": "Sandy Lethbridge",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-02T00:00:00.000",
+      "email": "sandylethbridgewestward@shaw.ca",
+      "phone": "204-951-9686"
+    },
+    {
+      "contestId": "school-winnipeg-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-119"
+      },
+      "sourcePublishedName": "Chris Wilson",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-16T00:00:00.000",
+      "email": "cjpw@shaw.ca",
+      "phone": "204-583-4608"
+    },
+    {
+      "contestId": "school-winnipeg-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-94"
+      },
+      "sourcePublishedName": "Kathy Heppner",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-06T00:00:00.000",
+      "campaignWebsite": "www.kathyheppner.ca",
+      "email": "kathy@kathyheppner.ca",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/kathyheppnerwsdtrustee/"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/kathyheppnerwsdtrustee/"
+        }
+      ]
+    },
+    {
+      "contestId": "school-winnipeg-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-99"
+      },
+      "sourcePublishedName": "Lionel Lien",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-07T00:00:00.000",
+      "email": "lionell_99@yahoo.com",
+      "phone": "204-227-9064"
+    },
+    {
+      "contestId": "school-winnipeg-ward-5",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-151"
+      },
+      "sourcePublishedName": "Tim Bigelow",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-07T00:00:00.000",
+      "email": "standupguytim@gmail.com",
+      "phone": "204-333-0177"
+    },
+    {
+      "contestId": "school-winnipeg-ward-6",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-105"
+      },
+      "sourcePublishedName": "Dante Aviso",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-09T00:00:00.000",
+      "campaignWebsite": "danteaviso.ca",
+      "email": "dantewsd1@gmail.com",
+      "phone": "204-698-3198"
+    },
+    {
+      "contestId": "school-winnipeg-ward-7",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-139"
+      },
+      "sourcePublishedName": "Tamara Kuly",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-07-27T00:00:00.000",
+      "campaignWebsite": "votetamarakuly.com",
+      "email": "votetamarakuly@gmail.ca",
+      "phone": "204-287-8820"
+    },
+    {
+      "contestId": "school-winnipeg-ward-8",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-154"
+      },
+      "sourcePublishedName": "Prabhnoor Singh",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-12T00:00:00.000",
+      "email": "Prabhnoor.Singh.mb@gmail.com"
+    },
+    {
+      "contestId": "school-winnipeg-ward-9",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-08-22T15:18:57.429Z",
+        "recordId": "2026-51"
+      },
+      "sourcePublishedName": "Ann Evangelista",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "campaignWebsite": "www.annevangelista.ca",
+      "email": "annevangelista.ca@gmail.com",
+      "phone": "204-915-5940",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/annyourschooltrustee"
+        },
+        {
+          "platform": "linkedin",
+          "url": "https://ca.linkedin.com/in/annyourschooltrustee"
+        }
+      ]
+    }
+  ]
+}
