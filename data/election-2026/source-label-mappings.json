@@ -6,210 +6,210 @@
       "kind": "councilWard",
       "label": "Charleswood-Tuxedo-Westwood",
       "contestId": "council-charleswood-tuxedo-westwood",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "Daniel McIntyre",
       "contestId": "council-daniel-mcintyre",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "Elmwood-East Kildonan",
       "contestId": "council-elmwood-east-kildonan",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "Fort Rouge-East Fort Garry",
       "contestId": "council-fort-rouge-east-fort-garry",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "Mynarski",
       "contestId": "council-mynarski",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "North Kildonan",
       "contestId": "council-north-kildonan",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "Old Kildonan",
       "contestId": "council-old-kildonan",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "Point Douglas",
       "contestId": "council-point-douglas",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "River Heights-Fort Garry",
       "contestId": "council-river-heights-fort-garry",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "St. Boniface",
       "contestId": "council-st-boniface",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "St. James",
       "contestId": "council-st-james",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "St. Norbert-Seine River",
       "contestId": "council-st-norbert-seine-river",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "St. Vital",
       "contestId": "council-st-vital",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "Transcona",
       "contestId": "council-transcona",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
       "kind": "councilWard",
       "label": "Waverley West",
       "contestId": "council-waverley-west",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "Charleswood - Tuxedo",
       "contestId": "council-charleswood-tuxedo-westwood",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "Daniel McIntyre",
       "contestId": "council-daniel-mcintyre",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "Elmwood - East Kildonan",
       "contestId": "council-elmwood-east-kildonan",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "Fort Rouge - East Fort Garry",
       "contestId": "council-fort-rouge-east-fort-garry",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "Mynarski",
       "contestId": "council-mynarski",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "North Kildonan",
       "contestId": "council-north-kildonan",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "Old Kildonan",
       "contestId": "council-old-kildonan",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "Point Douglas",
       "contestId": "council-point-douglas",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "River Heights - Fort Garry",
       "contestId": "council-river-heights-fort-garry",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "St. Boniface",
       "contestId": "council-st-boniface",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "St. James",
       "contestId": "council-st-james",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "St. Norbert - Seine River",
       "contestId": "council-st-norbert-seine-river",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "St. Vital",
       "contestId": "council-st-vital",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "Transcona",
       "contestId": "council-transcona",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
       "kind": "councilWard",
       "label": "Waverley West",
       "contestId": "council-waverley-west",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -217,7 +217,7 @@
       "schoolDivision": "Louis Riel School Division",
       "ward": "Ward 1",
       "contestId": "school-louis-riel-ward-1",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -225,7 +225,7 @@
       "schoolDivision": "Louis Riel School Division",
       "ward": "Ward 2",
       "contestId": "school-louis-riel-ward-2",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -233,7 +233,7 @@
       "schoolDivision": "Louis Riel School Division",
       "ward": "Ward 3",
       "contestId": "school-louis-riel-ward-3",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -241,7 +241,7 @@
       "schoolDivision": "Louis Riel School Division",
       "ward": "Ward 4",
       "contestId": "school-louis-riel-ward-4",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -249,7 +249,7 @@
       "schoolDivision": "Pembina Trails School Division",
       "ward": "Ward 1",
       "contestId": "school-pembina-trails-ward-1",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -257,7 +257,7 @@
       "schoolDivision": "Pembina Trails School Division",
       "ward": "Ward 2",
       "contestId": "school-pembina-trails-ward-2",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -265,7 +265,7 @@
       "schoolDivision": "Pembina Trails School Division",
       "ward": "Ward 3",
       "contestId": "school-pembina-trails-ward-3",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -273,7 +273,7 @@
       "schoolDivision": "River East Transcona School Division",
       "ward": "Ward 1",
       "contestId": "school-river-east-transcona-ward-1",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -281,7 +281,7 @@
       "schoolDivision": "River East Transcona School Division",
       "ward": "Ward 2",
       "contestId": "school-river-east-transcona-ward-2",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -289,7 +289,7 @@
       "schoolDivision": "River East Transcona School Division",
       "ward": "Ward 3",
       "contestId": "school-river-east-transcona-ward-3",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -297,7 +297,7 @@
       "schoolDivision": "River East Transcona School Division",
       "ward": "Ward 4",
       "contestId": "school-river-east-transcona-ward-4",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -305,7 +305,7 @@
       "schoolDivision": "St. James – Assiniboia School Division",
       "ward": "East",
       "contestId": "school-st-james-assiniboia-east",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -313,7 +313,7 @@
       "schoolDivision": "St. James – Assiniboia School Division",
       "ward": "West",
       "contestId": "school-st-james-assiniboia-west",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -321,7 +321,7 @@
       "schoolDivision": "St. James – Assiniboia School Division",
       "ward": "Centre",
       "contestId": "school-st-james-assiniboia-centre",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -329,7 +329,7 @@
       "schoolDivision": "Seven Oaks School Division",
       "ward": "Ward 2",
       "contestId": "school-seven-oaks-ward-2",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -337,7 +337,7 @@
       "schoolDivision": "Seven Oaks School Division",
       "ward": "Ward 3",
       "contestId": "school-seven-oaks-ward-3",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -345,7 +345,7 @@
       "schoolDivision": "Winnipeg School Division",
       "ward": "Ward 1",
       "contestId": "school-winnipeg-ward-1",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -353,7 +353,7 @@
       "schoolDivision": "Winnipeg School Division",
       "ward": "Ward 3",
       "contestId": "school-winnipeg-ward-3",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -361,7 +361,7 @@
       "schoolDivision": "Winnipeg School Division",
       "ward": "Ward 4",
       "contestId": "school-winnipeg-ward-4",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -369,7 +369,7 @@
       "schoolDivision": "Winnipeg School Division",
       "ward": "Ward 5",
       "contestId": "school-winnipeg-ward-5",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -377,7 +377,7 @@
       "schoolDivision": "Winnipeg School Division",
       "ward": "Ward 6",
       "contestId": "school-winnipeg-ward-6",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -385,7 +385,7 @@
       "schoolDivision": "Winnipeg School Division",
       "ward": "Ward 7",
       "contestId": "school-winnipeg-ward-7",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -393,7 +393,7 @@
       "schoolDivision": "Winnipeg School Division",
       "ward": "Ward 8",
       "contestId": "school-winnipeg-ward-8",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-candidate-dataset",
@@ -401,7 +401,7 @@
       "schoolDivision": "Winnipeg School Division",
       "ward": "Ward 9",
       "contestId": "school-winnipeg-ward-9",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -409,7 +409,7 @@
       "schoolDivision": "Louis Riel",
       "ward": "1",
       "contestId": "school-louis-riel-ward-1",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -417,7 +417,7 @@
       "schoolDivision": "Louis Riel",
       "ward": "2",
       "contestId": "school-louis-riel-ward-2",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -425,7 +425,7 @@
       "schoolDivision": "Louis Riel",
       "ward": "3",
       "contestId": "school-louis-riel-ward-3",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -433,7 +433,7 @@
       "schoolDivision": "Louis Riel",
       "ward": "4",
       "contestId": "school-louis-riel-ward-4",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -441,7 +441,7 @@
       "schoolDivision": "Pembina Trails",
       "ward": "1",
       "contestId": "school-pembina-trails-ward-1",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -449,7 +449,7 @@
       "schoolDivision": "Pembina Trails",
       "ward": "2",
       "contestId": "school-pembina-trails-ward-2",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -457,7 +457,7 @@
       "schoolDivision": "Pembina Trails",
       "ward": "3",
       "contestId": "school-pembina-trails-ward-3",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -465,7 +465,7 @@
       "schoolDivision": "River East - Transcona",
       "ward": "1",
       "contestId": "school-river-east-transcona-ward-1",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -473,7 +473,7 @@
       "schoolDivision": "River East - Transcona",
       "ward": "2",
       "contestId": "school-river-east-transcona-ward-2",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -481,7 +481,7 @@
       "schoolDivision": "River East - Transcona",
       "ward": "3",
       "contestId": "school-river-east-transcona-ward-3",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -489,7 +489,7 @@
       "schoolDivision": "River East - Transcona",
       "ward": "4",
       "contestId": "school-river-east-transcona-ward-4",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -497,7 +497,7 @@
       "schoolDivision": "St James-Assiniboia",
       "ward": "East Ward",
       "contestId": "school-st-james-assiniboia-east",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -505,7 +505,7 @@
       "schoolDivision": "St James-Assiniboia",
       "ward": "West Ward",
       "contestId": "school-st-james-assiniboia-west",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -513,7 +513,7 @@
       "schoolDivision": "St James-Assiniboia",
       "ward": "Centre Ward",
       "contestId": "school-st-james-assiniboia-centre",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -521,7 +521,7 @@
       "schoolDivision": "Seven Oaks",
       "ward": "2",
       "contestId": "school-seven-oaks-ward-2",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -529,7 +529,7 @@
       "schoolDivision": "Seven Oaks",
       "ward": "3",
       "contestId": "school-seven-oaks-ward-3",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -537,7 +537,7 @@
       "schoolDivision": "Winnipeg",
       "ward": "1",
       "contestId": "school-winnipeg-ward-1",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -545,7 +545,7 @@
       "schoolDivision": "Winnipeg",
       "ward": "2",
       "contestId": "school-winnipeg-ward-2",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -553,7 +553,7 @@
       "schoolDivision": "Winnipeg",
       "ward": "3",
       "contestId": "school-winnipeg-ward-3",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -561,7 +561,7 @@
       "schoolDivision": "Winnipeg",
       "ward": "4",
       "contestId": "school-winnipeg-ward-4",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -569,7 +569,7 @@
       "schoolDivision": "Winnipeg",
       "ward": "5",
       "contestId": "school-winnipeg-ward-5",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -577,7 +577,7 @@
       "schoolDivision": "Winnipeg",
       "ward": "6",
       "contestId": "school-winnipeg-ward-6",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -585,7 +585,7 @@
       "schoolDivision": "Winnipeg",
       "ward": "7",
       "contestId": "school-winnipeg-ward-7",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -593,7 +593,7 @@
       "schoolDivision": "Winnipeg",
       "ward": "8",
       "contestId": "school-winnipeg-ward-8",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -601,7 +601,7 @@
       "schoolDivision": "Winnipeg",
       "ward": "9",
       "contestId": "school-winnipeg-ward-9",
-      "support": "supported"
+      "candidateListSupport": "supported"
     },
     {
       "source": "city-address-dataset",
@@ -609,7 +609,7 @@
       "schoolDivision": "Seine River",
       "ward": "1",
       "contestId": "school-seine-river-ward-1",
-      "support": "unsupported"
+      "candidateListSupport": "unsupported"
     },
     {
       "source": "city-address-dataset",
@@ -617,8 +617,8 @@
       "schoolDivision": "Interlake",
       "ward": "Rosser",
       "contestId": "school-interlake-ward-1",
-      "support": "unsupported",
-      "note": "The address label Rosser lies in Interlake School Division Ward 1."
+      "note": "The address label Rosser lies in Interlake School Division Ward 1.",
+      "candidateListSupport": "unsupported"
     }
   ]
 }

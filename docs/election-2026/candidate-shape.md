@@ -16,12 +16,15 @@ A Candidate Record belongs directly to one Contest. It does not introduce a Pers
 
 The required fields are the minimum needed to assign the record correctly, describe its phase honestly, and trace it back to evidence. A missing required field prevents normalization of that record.
 
+## Optional provenance
+
+`source.recordId` retains `id` when the source publishes one. It is not a domain identity or display value, and a source without record identifiers can still normalize a Candidate Record.
+
 ## Optional voter-facing fields
 
 | Group | Proposed field | City raw field(s) |
 | --- | --- | --- |
 | Registration evidence | `registrationDate` | `registration_date` |
-| Source provenance | `source.recordId` | `id`, when the source publishes one |
 | Biography | `biography`, `biographyFrench` | `biography`, `biography_francais` |
 | Image | `imageUrl` | `image` |
 | Campaign | `campaignWebsite` | `website` |

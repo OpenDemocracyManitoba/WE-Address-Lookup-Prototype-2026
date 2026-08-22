@@ -45,8 +45,11 @@ test("the 2026 Election inventory completely and unambiguously covers the commit
     assert.ok(["Published", "Unavailable"].includes(contest.candidateList.availability), `${contest.id} declares Candidate-list availability`);
     if (contest.candidateList.availability === "Unavailable") {
       assert.equal(contest.candidateList.verifiedCandidateCount, null, `${contest.id} must not represent unavailable coverage as zero Candidates`);
+    } else {
+      assert.ok(Number.isInteger(contest.candidateList.verifiedCandidateCount) && contest.candidateList.verifiedCandidateCount >= 0, `${contest.id} has a verified Published Candidate count`);
     }
   }
+  assert.equal(contests.get("school-winnipeg-ward-2").candidateList.verifiedCandidateCount, 0, "Published zero Candidates remains distinct from Unavailable coverage");
 
   const unsupported = inventory.contests
     .filter((contest) => contest.candidateList.support === "unsupported")
@@ -58,8 +61,8 @@ test("the 2026 Election inventory completely and unambiguously covers the commit
   for (const mapping of mappings.labels) {
     const contest = contests.get(mapping.contestId);
     assert.ok(contest, `${labelKey(mapping)} maps to an existing Contest`);
-    assert.ok(["supported", "unsupported"].includes(mapping.support), `${labelKey(mapping)} declares support status`);
-    assert.equal(mapping.support, contest.candidateList.support, `${labelKey(mapping)} support agrees with its Contest`);
+    assert.ok(["supported", "unsupported"].includes(mapping.candidateListSupport), `${labelKey(mapping)} declares Candidate-list support status`);
+    assert.equal(mapping.candidateListSupport, contest.candidateList.support, `${labelKey(mapping)} Candidate-list support agrees with its Contest`);
     const key = labelKey(mapping);
     mappingCounts.set(key, (mappingCounts.get(key) ?? 0) + 1);
   }
