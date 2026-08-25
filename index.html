@@ -4,7 +4,7 @@ title: Find your Winnipeg election wards
 description: Find City Council and school trustee wards for an official Winnipeg civic address.
 lookupPage: true
 ---
-{% from "macros/home-contest.njk" import homeContest %}
+{% from "macros/home-contest.njk" import homeContest, unresolvedHomeContest %}
       <section class="lookup" aria-labelledby="page-title">
         <header class="intro">
           <p class="eyebrow">2026 Winnipeg Election</p>
@@ -78,6 +78,9 @@ lookupPage: true
         <div hidden>
           {% for contest in election.contests %}
             <template data-contest-template="{{ contest.id }}">{{ homeContest(contest) }}</template>
+          {% endfor %}
+          {% for office in ["Mayor", "Councillor", "School Trustee"] %}
+            <template data-contest-template="{{ office }}">{{ unresolvedHomeContest(office) }}</template>
           {% endfor %}
         </div>
         <script id="contest-resolution-data" type="application/json">{{ election.contests | contestResolutionData | jsonForHtml | safe }}</script>

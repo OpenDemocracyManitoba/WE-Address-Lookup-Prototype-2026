@@ -1,6 +1,6 @@
-{% macro disclosureListItem(disclosure, url, fallbackLabel) %}
-  {% if url %}
-    <li><a href="{{ url }}">{{ disclosure.fileName or fallbackLabel }}</a></li>
+{% macro disclosureListItem(disclosure, fallbackLabel) %}
+  {% if disclosure.publicUrl %}
+    <li><a href="{{ disclosure.publicUrl }}">{{ disclosure.fileName or fallbackLabel }}</a></li>
   {% elif disclosure.fileName %}
     <li>{{ disclosure.fileName }}</li>
   {% endif %}
@@ -32,11 +32,10 @@
               <dl class="candidate-metadata">
                 <div><dt>Election Phase</dt><dd>{{ candidate.presentation.phaseLabel }}</dd></div>
                 <div><dt>Candidate Status</dt><dd>{{ candidate.status.value }}</dd></div>
-                {% if candidate.registrationDate %}<div><dt>Registration Date</dt><dd>{{ candidate.registrationDate | displayDate }}</dd></div>{% endif %}
+                {% if candidate.presentation.registrationDate %}<div><dt>Registration Date</dt><dd>{{ candidate.presentation.registrationDate }}</dd></div>{% endif %}
               </dl>
 
-              {% set imageUrl = candidate.imageUrl | externalUrl %}
-              {% if imageUrl %}<img class="candidate-image" src="{{ imageUrl }}" alt="{{ candidate.sourcePublishedName }}" />{% endif %}
+              {% if candidate.presentation.imageUrl %}<img class="candidate-image" src="{{ candidate.presentation.imageUrl }}" alt="{{ candidate.sourcePublishedName }}" />{% endif %}
 
               {% if candidate.biography or candidate.biographyFrench %}
                 <section class="candidate-biography">
@@ -46,29 +45,26 @@
                 </section>
               {% endif %}
 
-              {% set campaignUrl = candidate.campaignWebsite | externalUrl %}
-              {% if campaignUrl or candidate.email or candidate.phone or candidate.presentation.socialLinks.length %}
+              {% if candidate.presentation.campaignUrl or candidate.email or candidate.phone or candidate.presentation.socialLinks.length %}
                 <div class="candidate-contact">
                   <{{ subheadingTag }}>Campaign and contact information</{{ subheadingTag }}>
                   <ul>
-                    {% if campaignUrl %}<li><a href="{{ campaignUrl }}">Campaign website</a></li>{% endif %}
+                    {% if candidate.presentation.campaignUrl %}<li><a href="{{ candidate.presentation.campaignUrl }}">Campaign website</a></li>{% endif %}
                     {% if candidate.email %}<li><a href="mailto:{{ candidate.email }}">{{ candidate.email }}</a></li>{% endif %}
-                    {% if candidate.phone %}<li><a href="tel:{{ candidate.phone | phoneHref }}">{{ candidate.phone }}</a></li>{% endif %}
+                    {% if candidate.phone %}<li><a href="tel:{{ candidate.presentation.phoneHref }}">{{ candidate.phone }}</a></li>{% endif %}
                     {% for social in candidate.presentation.socialLinks %}
-                      <li><a href="{{ social.publicUrl }}">{{ social.platform | socialLabel }}</a></li>
+                      <li><a href="{{ social.publicUrl }}">{{ social.label }}</a></li>
                     {% endfor %}
                   </ul>
                 </div>
               {% endif %}
 
-              {% set financialDisclosureUrl = candidate.financialDisclosure.url | externalUrl %}
-              {% set statementOfDisclosureUrl = candidate.statementOfDisclosure.url | externalUrl %}
-              {% if financialDisclosureUrl or candidate.financialDisclosure.fileName or statementOfDisclosureUrl or candidate.statementOfDisclosure.fileName %}
+              {% if candidate.presentation.financialDisclosure.publicUrl or candidate.presentation.financialDisclosure.fileName or candidate.presentation.statementOfDisclosure.publicUrl or candidate.presentation.statementOfDisclosure.fileName %}
                 <div class="candidate-disclosures">
                   <{{ subheadingTag }}>Disclosure documents</{{ subheadingTag }}>
                   <ul>
-                    {{ disclosureListItem(candidate.financialDisclosure, financialDisclosureUrl, "Financial disclosure") }}
-                    {{ disclosureListItem(candidate.statementOfDisclosure, statementOfDisclosureUrl, "Statement of disclosure") }}
+                    {{ disclosureListItem(candidate.presentation.financialDisclosure, "Financial disclosure") }}
+                    {{ disclosureListItem(candidate.presentation.statementOfDisclosure, "Statement of disclosure") }}
                   </ul>
                 </div>
               {% endif %}

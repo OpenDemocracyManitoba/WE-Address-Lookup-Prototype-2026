@@ -17,15 +17,6 @@ function hasAlias(contest, sourceLabel) {
   return Boolean(sourceLabel) && contest.aliases.includes(sourceLabel);
 }
 
-const unresolvedMessages = Object.freeze({
-  [OFFICES.MAYOR]:
-    "Mayoral Contest information is unavailable because it could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected.",
-  [OFFICES.COUNCILLOR]:
-    "Council Contest information is unavailable because the selected address's Council Ward could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected.",
-  [OFFICES.SCHOOL_TRUSTEE]:
-      "School Trustee Contest information is unavailable because the selected address's School Division Ward could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected.",
-});
-
 function createApplicableContestResolution(office, contest) {
   return contest
     ? { office, status: RESOLUTION_STATUS.RESOLVED, contest }
@@ -33,7 +24,6 @@ function createApplicableContestResolution(office, contest) {
         office,
         status: RESOLUTION_STATUS.UNRESOLVED,
         contest: null,
-        message: unresolvedMessages[office],
       };
 }
 

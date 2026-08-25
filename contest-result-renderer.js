@@ -5,8 +5,6 @@ export function renderApplicableContests({
   container,
   contests,
   templates,
-  unresolvedContestNode,
-  randomize,
 }) {
   if (!address) {
     container.replaceChildren();
@@ -15,18 +13,10 @@ export function renderApplicableContests({
 
   const nodes = resolveApplicableContests(address, contests).map(
     (applicableContestResolution) => {
-      const template = applicableContestResolution.contest
-        ? templates.get(applicableContestResolution.contest.id)
-        : null;
-      if (template) return template.content.cloneNode(true);
-      return unresolvedContestNode({
-        ...applicableContestResolution,
-        message:
-          applicableContestResolution.message ??
-          "Contest information could not be loaded. No different Contest was selected.",
-      });
+      const templateKey = applicableContestResolution.contest?.id ??
+        applicableContestResolution.office;
+      return templates.get(templateKey).content.cloneNode(true);
     },
   );
   container.replaceChildren(...nodes);
-  randomize();
 }

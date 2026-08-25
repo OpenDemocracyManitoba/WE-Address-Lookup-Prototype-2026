@@ -7,8 +7,8 @@ import { renderApplicableContests } from "../contest-result-renderer.js";
 const { contests } = loadElectionPresentation();
 
 function contestTemplates() {
-  return new Map(
-    contests.map((contest) => [
+  return new Map([
+    ...contests.map((contest) => [
       contest.id,
       {
         content: {
@@ -25,7 +25,17 @@ function contestTemplates() {
         },
       },
     ]),
-  );
+    ...["Mayor", "Councillor", "School Trustee"].map((office) => [
+      office,
+      {
+        content: {
+          cloneNode() {
+            return { office, unresolved: true };
+          },
+        },
+      },
+    ]),
+  ]);
 }
 
 function createRenderHarness() {
@@ -35,24 +45,16 @@ function createRenderHarness() {
       this.children = children;
     },
   };
-  let randomizations = 0;
   const render = (address) =>
     renderApplicableContests({
       address,
       container,
       contests,
       templates: contestTemplates(),
-      unresolvedContestNode: ({ office, message }) => ({ office, message }),
-      randomize: () => {
-        randomizations += 1;
-      },
     });
   return {
     container,
     render,
-    get randomizations() {
-      return randomizations;
-    },
   };
 }
 
@@ -121,11 +123,8 @@ test("rendering selects three ordered Contest templates and replaces the prior r
     ),
     false,
   );
-  assert.equal(harness.randomizations, 2);
-
   render(null);
   assert.deepEqual(container.children, []);
-  assert.equal(harness.randomizations, 2);
 });
 
 test("rendering preserves resolved Contests around unsupported or unfamiliar assignments", () => {
@@ -156,13 +155,20 @@ test("rendering preserves resolved Contests around unsupported or unfamiliar ass
     schoolDivisionWard: "99",
   });
   assert.equal(container.children[0].contestId, "mayor-winnipeg");
-  assert.deepEqual(
-    container.children.slice(1).map(({ office }) => office),
-    ["Councillor", "School Trustee"],
-  );
-  for (const unresolved of container.children.slice(1)) {
-    assert.match(unresolved.message, /could not be matched/);
-    assert.match(unresolved.message, /No different Contest was selected/);
-    assert.equal("contestId" in unresolved, false);
-  }
+  assert.deepEqual(container.children.slice(1), [
+    { office: "Councillor", unresolved: true },
+    { office: "School Trustee", unresolved: true },
+  ]);
+});
+
+test("rendering selects unresolved templates for incomplete assignments", () => {
+  const { container, render } = createRenderHarness();
+
+  render({});
+
+  assert.equal(container.children[0].contestId, "mayor-winnipeg");
+  assert.deepEqual(container.children.slice(1), [
+    { office: "Councillor", unresolved: true },
+    { office: "School Trustee", unresolved: true },
+  ]);
 });

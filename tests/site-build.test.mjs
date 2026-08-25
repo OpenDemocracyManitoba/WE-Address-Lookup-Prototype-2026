@@ -67,6 +67,27 @@ test("the home page publishes ordered Contest templates from the shared Candidat
   assert.match(home, /href="\/contests\/school-winnipeg-ward-5\/"/);
   assert.match(home, />Tim Bigelow<\/h4>/);
 
+  const unresolvedTemplates = {
+    Mayor:
+      "Mayoral Contest information is unavailable because it could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected.",
+    Councillor:
+      "Council Contest information is unavailable because the selected address's Council Ward could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected.",
+    "School Trustee":
+      "School Trustee Contest information is unavailable because the selected address's School Division Ward could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected.",
+  };
+  for (const [office, message] of Object.entries(unresolvedTemplates)) {
+    const start = home.indexOf(`data-contest-template="${office}"`);
+    const unresolvedTemplate = home.slice(start, home.indexOf("</template>", start));
+    assert.ok(start >= 0);
+    assert.match(
+      unresolvedTemplate,
+      /<article class="applicable-contest unavailable-contest-resolution">/,
+    );
+    assert.match(unresolvedTemplate, new RegExp(`<p class="candidate-role">${office} Contest<\\/p>`));
+    assert.match(unresolvedTemplate, /<h3>Contest information unavailable<\/h3>/);
+    assert.ok(unresolvedTemplate.includes(message.replaceAll("'", "&#39;")));
+  }
+
   const unsupportedTemplate = home.slice(
     home.indexOf('data-contest-template="school-seine-river-ward-1"'),
     home.indexOf(

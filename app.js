@@ -11,20 +11,6 @@ import { calculatePopupGeometry } from "./popup-geometry.js";
 import { randomizeCandidateLists } from "./candidate-order.js";
 import { renderApplicableContests } from "./contest-result-renderer.js";
 
-function unresolvedContest(applicableContestResolution) {
-  const article = document.createElement("article");
-  article.className = "applicable-contest unavailable-contest-resolution";
-  const label = document.createElement("p");
-  label.className = "candidate-role";
-  label.textContent = `${applicableContestResolution.office} Contest`;
-  const heading = document.createElement("h3");
-  heading.textContent = "Contest information unavailable";
-  const message = document.createElement("p");
-  message.textContent = applicableContestResolution.message;
-  article.append(label, heading, message);
-  return article;
-}
-
 function positionPopup(input, wrap, list) {
   if (list.hidden) return;
   const viewport = window.visualViewport;
@@ -120,9 +106,8 @@ function startBrowserApp() {
       container: applicableContests,
       contests: contestResolutionData,
       templates: contestTemplates,
-      unresolvedContestNode: unresolvedContest,
-      randomize: () => randomizeCandidateLists(document),
     });
+    if (state.selected) randomizeCandidateLists(document);
     if (state.selected) {
       addressLookupResultAddress.textContent = state.selected.displayAddress;
       councilWard.textContent = formatCouncilWard(state.selected.councilWard);

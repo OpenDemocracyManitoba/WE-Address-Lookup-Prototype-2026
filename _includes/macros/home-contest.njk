@@ -11,3 +11,16 @@
   {{ candidateInformation(contest, "h4", "h4", "h5", contest.id ~ "-") }}
 </article>
 {% endmacro %}
+
+{% macro unresolvedHomeContest(office) %}
+{% set messages = {
+  "Mayor": "Mayoral Contest information is unavailable because it could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected.",
+  "Councillor": "Council Contest information is unavailable because the selected address's Council Ward could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected.",
+  "School Trustee": "School Trustee Contest information is unavailable because the selected address's School Division Ward could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected."
+} %}
+<article class="applicable-contest unavailable-contest-resolution">
+  <p class="candidate-role">{{ office }} Contest</p>
+  <h3>Contest information unavailable</h3>
+  <p>{{ messages[office] }}</p>
+</article>
+{% endmacro %}

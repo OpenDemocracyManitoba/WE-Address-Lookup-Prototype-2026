@@ -102,13 +102,6 @@ test("unfamiliar and incomplete labels stay unresolved while independent Contest
       ["unresolved", null],
     ],
   );
-  assert.match(unfamiliar[1].message, /Council Ward could not be matched/);
-  assert.match(
-    unfamiliar[2].message,
-    /School Division Ward could not be matched/,
-  );
-  assert.match(unfamiliar[2].message, /No different Contest was selected/);
-
   const incomplete = resolveApplicableContests({
     councilWard: "Point Douglas",
     schoolDivision: "Winnipeg",

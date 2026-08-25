@@ -21,19 +21,66 @@ function familyNameSortValue(sourcePublishedName) {
   return publishedName.split(/\s+/u).at(-1);
 }
 
+function externalUrl(value) {
+  if (!value) return null;
+  try {
+    const url = new URL(/^https?:\/\//iu.test(value) ? value : `https://${value}`);
+    return ["http:", "https:"].includes(url.protocol) ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function displayDate(value) {
+  if (!value) return null;
+  return new Intl.DateTimeFormat("en-CA", {
+    day: "numeric",
+    month: "long",
+    timeZone: "UTC",
+    year: "numeric",
+  }).format(new Date(value));
+}
+
+function phoneHref(value) {
+  return value ? value.replace(/[^\d+]/gu, "") : null;
+}
+
+function socialLabel(value) {
+  return {
+    facebook: "Facebook",
+    instagram: "Instagram",
+    linkedin: "LinkedIn",
+    twitter: "X (formerly Twitter)",
+  }[value] ?? value;
+}
+
+function presentDisclosure(disclosure) {
+  return {
+    fileName: disclosure?.fileName,
+    publicUrl: externalUrl(disclosure?.url),
+  };
+}
+
 function presentCandidate(candidate) {
   const socialLinks = (candidate.socialLinks ?? [])
     .map((socialLink) => ({
       ...socialLink,
+      label: socialLabel(socialLink.platform),
       publicUrl: externalUrl(socialLink.url),
     }))
     .filter((socialLink) => socialLink.publicUrl);
   return {
     ...candidate,
     presentation: {
+      campaignUrl: externalUrl(candidate.campaignWebsite),
+      financialDisclosure: presentDisclosure(candidate.financialDisclosure),
+      imageUrl: externalUrl(candidate.imageUrl),
       phaseLabel: phaseLabels[candidate.phase],
+      phoneHref: phoneHref(candidate.phone),
+      registrationDate: displayDate(candidate.registrationDate),
       roleLabel: roleLabels[candidate.status.value],
       socialLinks,
+      statementOfDisclosure: presentDisclosure(candidate.statementOfDisclosure),
     },
   };
 }
@@ -64,36 +111,4 @@ export function loadElectionPresentation() {
     readFileSync("data/election-2026/candidates.json", "utf8"),
   );
   return presentElection(election, candidateDocument);
-}
-
-export function externalUrl(value) {
-  if (!value) return null;
-  try {
-    const url = new URL(/^https?:\/\//iu.test(value) ? value : `https://${value}`);
-    return ["http:", "https:"].includes(url.protocol) ? url.href : null;
-  } catch {
-    return null;
-  }
-}
-
-export function displayDate(value) {
-  return new Intl.DateTimeFormat("en-CA", {
-    day: "numeric",
-    month: "long",
-    timeZone: "UTC",
-    year: "numeric",
-  }).format(new Date(value));
-}
-
-export function phoneHref(value) {
-  return value.replace(/[^\d+]/gu, "");
-}
-
-export function socialLabel(value) {
-  return {
-    facebook: "Facebook",
-    instagram: "Instagram",
-    linkedin: "LinkedIn",
-    twitter: "X (formerly Twitter)",
-  }[value] ?? value;
 }

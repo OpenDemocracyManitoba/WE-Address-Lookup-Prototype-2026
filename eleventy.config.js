@@ -1,17 +1,7 @@
-import {
-  displayDate,
-  externalUrl,
-  loadElectionPresentation,
-  phoneHref,
-  socialLabel,
-} from "./election-presentation.js";
+import { loadElectionPresentation } from "./election-presentation.js";
 
 export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("election", loadElectionPresentation);
-  eleventyConfig.addFilter("externalUrl", externalUrl);
-  eleventyConfig.addFilter("displayDate", displayDate);
-  eleventyConfig.addFilter("phoneHref", phoneHref);
-  eleventyConfig.addFilter("socialLabel", socialLabel);
   eleventyConfig.addFilter("contestResolutionData", (contests) =>
     contests.map(({ id, office, electoralArea, aliases, candidateList }) => ({
       id,
