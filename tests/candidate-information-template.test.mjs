@@ -18,6 +18,7 @@ function renderCandidateInformation(contest) {
 
 test("a Published Contest with zero Candidate Records renders an empty-list notice", () => {
   const html = renderCandidateInformation({
+    office: "Councillor",
     candidateList: { support: "supported", availability: "Published" },
     candidates: [],
   });
@@ -29,17 +30,19 @@ test("a Published Contest with zero Candidate Records renders an empty-list noti
 
 test("an Unavailable Candidate list never renders as a Published empty list", () => {
   const html = renderCandidateInformation({
+    office: "School Trustee",
     candidateList: { support: "unsupported", availability: "Unavailable" },
     candidates: [],
   });
 
-  assert.match(html, /Candidate information unavailable/);
+  assert.match(html, /Candidate list unavailable/);
   assert.match(html, /does not mean that no Candidates exist/);
   assert.doesNotMatch(html, /No published Candidate Records|data-candidate-list/);
 });
 
-test("a populated Contest renders Candidate metadata and optional contact fields", () => {
+test("a populated Contest renders contest-specific Candidate cards and optional contact fields", () => {
   const html = renderCandidateInformation({
+    office: "Councillor",
     candidateList: { support: "supported", availability: "Published" },
     candidates: [
       {
@@ -64,10 +67,9 @@ test("a populated Contest renders Candidate metadata and optional contact fields
   });
 
   assert.match(html, /data-candidate-list/);
-  assert.match(html, /<p class="candidate-role">Prospective Candidate<\/p>/);
+  assert.match(html, /<p class="candidate-role">Councillor Candidate<\/p>/);
   assert.match(html, /<h2>Alex Example<\/h2>/);
-  assert.match(html, /<dt>Election Phase<\/dt><dd>Registration<\/dd>/);
-  assert.match(html, /<dt>Candidate Status<\/dt><dd>Registered<\/dd>/);
+  assert.doesNotMatch(html, /Candidate information|candidate-metadata|Election Phase|Candidate Status|Registration Date/);
   assert.match(html, /href="https:\/\/example\.test\/campaign"/);
   assert.match(html, /href="mailto:alex@example\.test"/);
   assert.match(html, /href="tel:2045550100"/);
@@ -75,6 +77,7 @@ test("a populated Contest renders Candidate metadata and optional contact fields
 
 test("missing optional Candidate fields do not create placeholder markup", () => {
   const html = renderCandidateInformation({
+    office: "Mayor",
     candidateList: { support: "supported", availability: "Published" },
     candidates: [
       {
@@ -96,6 +99,6 @@ test("missing optional Candidate fields do not create placeholder markup", () =>
     ],
   });
 
-  assert.match(html, /<p class="candidate-role">Candidate<\/p>/);
+  assert.match(html, /<p class="candidate-role">Mayor Candidate<\/p>/);
   assert.doesNotMatch(html, /candidate-contact|Not provided|mailto:|tel:/);
 });

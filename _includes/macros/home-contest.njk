@@ -1,15 +1,24 @@
 {% from "macros/candidate-information.njk" import candidateInformation %}
 {% macro homeContest(contest) %}
-<article class="applicable-contest">
-  <p class="candidate-role">{{ contest.office }} Contest</p>
-  <h3><a href="/contests/{{ contest.id }}/">{{ contest.electoralArea.canonicalName }}</a></h3>
-  <dl class="applicable-contest-metadata">
-    <div><dt>Number to Elect</dt><dd>{{ contest.numberToElect }}</dd></div>
-    <div><dt>Candidate List Availability</dt><dd>{{ contest.candidateList.availability }}</dd></div>
-  </dl>
+<details class="applicable-contest" name="applicable-contest">
+  <summary>
+    <span class="applicable-contest-summary-copy">
+      <span class="candidate-role">{{ contest.office }} Contest</span>
+      <span class="applicable-contest-name">{{ contest.electoralArea.canonicalName }}</span>
+    </span>
+    <span class="applicable-contest-action">
+      <span class="when-closed">View candidates</span>
+      <span class="when-open">Hide candidates</span>
+    </span>
+  </summary>
+  <div class="applicable-contest-content">
+    <dl class="applicable-contest-metadata">
+      <div><dt>Number to Elect</dt><dd>{{ contest.numberToElect }}</dd></div>
+    </dl>
 
-  {{ candidateInformation(contest, "h4", "h4", "h5", contest.id ~ "-") }}
-</article>
+    {{ candidateInformation(contest, "h3", "h3", "h4", contest.id ~ "-") }}
+  </div>
+</details>
 {% endmacro %}
 
 {% macro unresolvedHomeContest(office) %}
@@ -18,9 +27,19 @@
   "Councillor": "Council Contest information is unavailable because the selected address's Council Ward could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected.",
   "School Trustee": "School Trustee Contest information is unavailable because the selected address's School Division Ward could not be matched in the reviewed 2026 Contest inventory. No different Contest was selected."
 } %}
-<article class="applicable-contest unavailable-contest-resolution">
-  <p class="candidate-role">{{ office }} Contest</p>
-  <h3>Contest information unavailable</h3>
-  <p>{{ messages[office] }}</p>
-</article>
+<details class="applicable-contest unavailable-contest-resolution" name="applicable-contest">
+  <summary>
+    <span class="applicable-contest-summary-copy">
+      <span class="candidate-role">{{ office }} Contest</span>
+      <span class="applicable-contest-name">Contest unavailable</span>
+    </span>
+    <span class="applicable-contest-action">
+      <span class="when-closed">View details</span>
+      <span class="when-open">Hide details</span>
+    </span>
+  </summary>
+  <div class="applicable-contest-content">
+    <p>{{ messages[office] }}</p>
+  </div>
+</details>
 {% endmacro %}

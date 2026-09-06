@@ -67,10 +67,17 @@ test("the home page publishes ordered Contest templates from the shared Candidat
     previousTemplateIndex = templateIndex;
 
     const template = templateFor(home, contest.id);
-    assert.ok(template.includes(`href="/contests/${contest.id}/"`));
+    assert.equal(
+      template.includes(`href="/contests/${contest.id}/"`),
+      false,
+      `${contest.id} lookup template omits its standalone Contest page link`,
+    );
+    assert.match(template, /<details class="applicable-contest" name="applicable-contest">/);
+    assert.doesNotMatch(template, /<details[^>]* open/);
+    assert.doesNotMatch(template, /Candidate List Availability/);
     for (const candidate of contest.candidates) {
       assert.ok(
-        template.includes(`>${escapeHtml(candidate.sourcePublishedName)}</h4>`),
+        template.includes(`>${escapeHtml(candidate.sourcePublishedName)}</h3>`),
         `${candidate.sourcePublishedName} appears in the ${contest.id} home-page template`,
       );
     }
@@ -79,9 +86,8 @@ test("the home page publishes ordered Contest templates from the shared Candidat
   const populated = election.contests.find((contest) => contest.candidates.length > 0);
   if (populated) {
     const populatedTemplate = templateFor(home, populated.id);
-    assert.match(populatedTemplate, /<p class="candidate-role">(?:Prospective Candidate|Candidate)<\/p>/);
-    assert.match(populatedTemplate, /<dt>Election Phase<\/dt><dd>(?:Registration|Nomination)<\/dd>/);
-    assert.match(populatedTemplate, /<dt>Candidate Status<\/dt><dd>/);
+    assert.ok(populatedTemplate.includes(`<p class="candidate-role">${populated.office} Candidate</p>`));
+    assert.doesNotMatch(populatedTemplate, /Candidate information|candidate-metadata|Election Phase|Candidate Status|Registration Date/);
     assert.match(
       populatedTemplate,
       new RegExp(`id="${populated.id}-candidate-order-explanation"[^>]*>Candidates are shown alphabetically by family name\\.<\\/p>`),
@@ -104,10 +110,10 @@ test("the home page publishes ordered Contest templates from the shared Candidat
     const unresolvedTemplate = templateFor(home, office);
     assert.match(
       unresolvedTemplate,
-      /<article class="applicable-contest unavailable-contest-resolution">/,
+      /<details class="applicable-contest unavailable-contest-resolution" name="applicable-contest">/,
     );
-    assert.match(unresolvedTemplate, new RegExp(`<p class="candidate-role">${office} Contest<\\/p>`));
-    assert.match(unresolvedTemplate, /<h3>Contest information unavailable<\/h3>/);
+    assert.match(unresolvedTemplate, new RegExp(`<span class="candidate-role">${office} Contest<\\/span>`));
+    assert.match(unresolvedTemplate, /<span class="applicable-contest-name">Contest unavailable<\/span>/);
     assert.ok(unresolvedTemplate.includes(message.replaceAll("'", "&#39;")));
   }
 
@@ -115,7 +121,7 @@ test("the home page publishes ordered Contest templates from the shared Candidat
     ({ candidateList }) => candidateList.availability === "Unavailable",
   )) {
     const unsupportedTemplate = templateFor(home, contest.id);
-    assert.match(unsupportedTemplate, /Candidate information unavailable/);
+    assert.match(unsupportedTemplate, /Candidate list unavailable/);
     assert.match(unsupportedTemplate, /does not mean that no Candidates exist/);
     assert.doesNotMatch(unsupportedTemplate, /No published Candidate Records/);
   }
@@ -126,6 +132,14 @@ test("the home page publishes ordered Contest templates from the shared Candidat
   );
   assert.match(builtApp, /renderApplicableContests/);
   assert.match(builtApp, /randomizeCandidateLists/);
+  assert.match(builtApp, /bindContestDisclosureScrolling/);
+  assert.match(
+    readFileSync(
+      new URL("../_site/assets/contest-disclosure.js", import.meta.url),
+      "utf8",
+    ),
+    /export function bindContestDisclosureScrolling/,
+  );
   assert.match(
     readFileSync(
       new URL("../_site/assets/contest-result-renderer.js", import.meta.url),
@@ -142,7 +156,7 @@ test("the home page publishes ordered Contest templates from the shared Candidat
   );
 });
 
-test("production build publishes the Contest Directory in Office order", () => {
+test("production build publishes the Contest Directory in Office order with standalone page links", () => {
   const directory = readBuiltPage("contests/index.html");
 
   const mayorHeading = directory.indexOf(">Mayor</h2>");
@@ -161,10 +175,14 @@ test("production build publishes every current Candidate Record through the shar
   for (const contest of election.contests) {
     const page = readBuiltPage(`contests/${contest.id}/index.html`);
     assert.match(page, /<main class="page-shell">/);
-    assert.ok(page.includes(`<dd>${escapeHtml(contest.office)}</dd>`));
-    assert.ok(page.includes(`<dd>${escapeHtml(contest.electoralArea.canonicalName)}</dd>`));
-    assert.ok(page.includes(`<dd>${contest.numberToElect}</dd>`));
-    assert.ok(page.includes(`<dd>${contest.candidateList.availability}</dd>`));
+    assert.doesNotMatch(page, /<dl class="contest-metadata">/);
+    assert.doesNotMatch(page, /<dt>Office<\/dt>|<dt>Electoral Area<\/dt>/);
+    assert.ok(
+      page.includes(
+        `<p class="contest-number-to-elect"><strong>Number to Elect:</strong> ${contest.numberToElect}</p>`,
+      ),
+    );
+    assert.doesNotMatch(page, /Candidate List Availability/);
 
     let previousCandidateIndex = -1;
     for (const candidate of contest.candidates) {
@@ -184,6 +202,8 @@ test("production build publishes every current Candidate Record through the shar
       `${contest.id} renders exactly its presented Candidate Records`,
     );
     if (contest.candidates.length > 0) {
+      assert.ok(page.includes(`<p class="candidate-role">${contest.office} Candidate</p>`));
+      assert.doesNotMatch(page, /Candidate information|candidate-metadata|Election Phase|Candidate Status|Registration Date/);
       assert.match(page, /Candidates are shown alphabetically by family name\./);
       assert.match(page, /<script type="module" src="\/assets\/candidate-order\.js"><\/script>/);
     }
@@ -232,7 +252,7 @@ test("production Candidate markup reflects current optional fields and excludes 
   }
 });
 
-test("Contest browsing keeps unavailable Candidate information distinct from published lists", () => {
+test("Contest browsing keeps unavailable Candidate lists distinct from published lists", () => {
   const directory = readBuiltPage("contests/index.html");
   assert.match(directory, /<nav class="site-navigation" aria-label="Main navigation">[\s\S]*href="\/contests\/"/);
 
@@ -240,7 +260,7 @@ test("Contest browsing keeps unavailable Candidate information distinct from pub
     ({ candidateList }) => candidateList.availability === "Unavailable",
   )) {
     const unavailable = readBuiltPage(`contests/${contest.id}/index.html`);
-    assert.match(unavailable, /<dd>Unavailable<\/dd>/);
+    assert.doesNotMatch(unavailable, /Candidate List Availability|<dd>Unavailable<\/dd>/);
     assert.match(unavailable, /does not currently support Candidate data/);
     assert.match(unavailable, /does not mean that no Candidates exist/);
     assert.doesNotMatch(unavailable, /No published Candidate Records/);

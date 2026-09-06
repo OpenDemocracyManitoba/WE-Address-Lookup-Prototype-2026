@@ -7,7 +7,7 @@ pagination:
 permalink: "contests/{{ contest.id }}/index.html"
 eleventyComputed:
   title: "{{ contest.office }} — {{ contest.electoralArea.canonicalName }} | Winnipeg Election 2026"
-  description: "Candidate information for the {{ contest.office }} Contest in {{ contest.electoralArea.canonicalName }}."
+  description: "Candidates for the {{ contest.office }} Contest in {{ contest.electoralArea.canonicalName }}."
 contestPage: true
 ---
 {% from "macros/candidate-information.njk" import candidateInformation %}
@@ -17,12 +17,7 @@ contestPage: true
     <h1>{{ contest.electoralArea.canonicalName }}</h1>
   </header>
 
-  <dl class="contest-metadata">
-    <div><dt>Office</dt><dd>{{ contest.office }}</dd></div>
-    <div><dt>Electoral Area</dt><dd>{{ contest.electoralArea.canonicalName }}</dd></div>
-    <div><dt>Number to Elect</dt><dd>{{ contest.numberToElect }}</dd></div>
-    <div><dt>Candidate List Availability</dt><dd>{{ contest.candidateList.availability }}</dd></div>
-  </dl>
+  <p class="contest-number-to-elect"><strong>Number to Elect:</strong> {{ contest.numberToElect }}</p>
 
   {{ candidateInformation(contest) }}
 </article>

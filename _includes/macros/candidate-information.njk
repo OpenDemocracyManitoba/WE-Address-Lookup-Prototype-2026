@@ -10,7 +10,7 @@
   {% set headingId = idPrefix ~ "candidate-information-heading" %}
   {% if contest.candidateList.availability == "Unavailable" %}
     <section class="candidate-list-notice" aria-labelledby="{{ headingId }}">
-      <{{ headingTag }} id="{{ headingId }}">Candidate information unavailable</{{ headingTag }}>
+      <{{ headingTag }} id="{{ headingId }}">Candidate list unavailable</{{ headingTag }}>
       <p>This resource does not currently support Candidate data for this Contest. This does not mean that no Candidates exist.</p>
     </section>
   {% elif contest.candidates.length == 0 %}
@@ -20,20 +20,14 @@
     </section>
   {% else %}
     {% set explanationId = idPrefix ~ "candidate-order-explanation" %}
-    <section aria-labelledby="{{ headingId }}">
-      <{{ headingTag }} id="{{ headingId }}" class="candidate-list-heading">Candidate information</{{ headingTag }}>
+    <section aria-label="{{ contest.office }} Candidates">
       <p id="{{ explanationId }}" class="ordering-explanation" data-order-explanation>Candidates are shown alphabetically by family name.</p>
       <ul class="candidate-list" data-candidate-list aria-describedby="{{ explanationId }}">
         {% for candidate in contest.candidates %}
           <li class="candidate-list-item" data-candidate-record>
             <article class="candidate-record">
-              <p class="candidate-role">{{ candidate.presentation.roleLabel }}</p>
+              <p class="candidate-role">{{ contest.office }} Candidate</p>
               <{{ nameTag }}>{{ candidate.sourcePublishedName }}</{{ nameTag }}>
-              <dl class="candidate-metadata">
-                <div><dt>Election Phase</dt><dd>{{ candidate.presentation.phaseLabel }}</dd></div>
-                <div><dt>Candidate Status</dt><dd>{{ candidate.status.value }}</dd></div>
-                {% if candidate.presentation.registrationDate %}<div><dt>Registration Date</dt><dd>{{ candidate.presentation.registrationDate }}</dd></div>{% endif %}
-              </dl>
 
               {% if candidate.presentation.imageUrl %}<img class="candidate-image" src="{{ candidate.presentation.imageUrl }}" alt="{{ candidate.sourcePublishedName }}" />{% endif %}
 

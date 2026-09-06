@@ -10,6 +10,7 @@ import {
 import { calculatePopupGeometry } from "./popup-geometry.js";
 import { randomizeCandidateLists } from "./candidate-order.js";
 import { renderApplicableContests } from "./contest-result-renderer.js";
+import { bindContestDisclosureScrolling } from "./contest-disclosure.js";
 
 function positionPopup(input, wrap, list) {
   if (list.hidden) return;
@@ -42,6 +43,7 @@ function startBrowserApp() {
   const councilWard = document.querySelector("#council-ward");
   const trusteeWard = document.querySelector("#trustee-ward");
   const applicableContests = document.querySelector("#applicable-contests");
+  bindContestDisclosureScrolling(applicableContests);
   const contestResolutionData = JSON.parse(
     document.querySelector("#contest-resolution-data").textContent,
   );
