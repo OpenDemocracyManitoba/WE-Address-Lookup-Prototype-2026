@@ -28,6 +28,7 @@ function schoolLabels(source, labels) {
 test("the 2026 Election inventory completely and unambiguously covers the committed source evidence", () => {
   const inventory = readJson("../data/election-2026/contests.json");
   const mappings = readJson("../data/election-2026/source-label-mappings.json");
+  const currentCandidateDocument = readJson("../data/election-2026/candidates.json");
   const candidateEvidence = readJson("./fixtures/election-2026/city-candidates.json");
   const addressEvidence = readJson("./fixtures/election-2026/city-addresses.json");
 
@@ -43,19 +44,45 @@ test("the 2026 Election inventory completely and unambiguously covers the commit
     assert.ok(Array.isArray(contest.aliases) && contest.aliases.length, `${contest.id} has source-label aliases`);
     assert.ok(["supported", "unsupported"].includes(contest.candidateList.support), `${contest.id} declares Candidate support`);
     assert.ok(["Published", "Unavailable"].includes(contest.candidateList.availability), `${contest.id} declares Candidate-list availability`);
-    if (contest.candidateList.availability === "Unavailable") {
-      assert.equal(contest.candidateList.verifiedCandidateCount, null, `${contest.id} must not represent unavailable coverage as zero Candidates`);
-    } else {
-      assert.ok(Number.isInteger(contest.candidateList.verifiedCandidateCount) && contest.candidateList.verifiedCandidateCount >= 0, `${contest.id} has a verified Published Candidate count`);
-    }
+    assert.equal(
+      Object.hasOwn(contest.candidateList, "verifiedCandidateCount"),
+      false,
+      `${contest.id} does not duplicate the mutable current Candidate count`,
+    );
   }
-  assert.equal(contests.get("school-winnipeg-ward-2").candidateList.verifiedCandidateCount, 0, "Published zero Candidates remains distinct from Unavailable coverage");
 
   const unsupported = inventory.contests
     .filter((contest) => contest.candidateList.support === "unsupported")
     .map((contest) => contest.id)
     .sort();
   assert.deepEqual(unsupported, ["school-interlake-ward-1", "school-seine-river-ward-1"]);
+
+  const knownStatuses = new Set([
+    "Registered",
+    "Registration Withdrawn",
+    "Nominated",
+    "Nomination Withdrawn",
+    "Not Nominated",
+    "Needs Review",
+  ]);
+  const candidateKeys = new Set();
+  for (const candidate of currentCandidateDocument.candidates) {
+    const contest = contests.get(candidate.contestId);
+    assert.ok(contest, `${candidate.sourcePublishedName} references a known Contest`);
+    assert.equal(
+      contest.candidateList.support,
+      "supported",
+      `${candidate.sourcePublishedName} references a supported Candidate list`,
+    );
+    assert.ok(knownStatuses.has(candidate.status.value), `${candidate.sourcePublishedName} has a recognized Candidate Status`);
+    assert.ok(["registration", "nomination"].includes(candidate.phase), `${candidate.sourcePublishedName} has a recognized Election Phase`);
+    assert.ok(candidate.source?.sourceId, `${candidate.sourcePublishedName} identifies its Authoritative Source`);
+    const key = candidate.source.recordId
+      ? `${candidate.source.sourceId}:record:${candidate.source.recordId}`
+      : `${candidate.source.sourceId}:record-without-id:${candidate.contestId}:${candidate.sourcePublishedName}`;
+    assert.equal(candidateKeys.has(key), false, `${key} is a unique Candidate Record`);
+    candidateKeys.add(key);
+  }
 
   const mappingCounts = new Map();
   for (const mapping of mappings.labels) {

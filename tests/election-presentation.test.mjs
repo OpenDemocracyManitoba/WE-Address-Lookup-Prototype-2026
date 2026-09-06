@@ -46,6 +46,52 @@ test("Contest presentation omits nomination-withdrawn Candidate Records", () => 
   );
 });
 
+test("Contest presentation sorts active Candidate Records by derived family name", () => {
+  const presentation = presentElection(
+    {
+      election: "Fixture Election",
+      contests: [
+        {
+          id: "council-fixture-ward",
+          office: "Councillor",
+          electoralArea: { kind: "councilWard", canonicalName: "Fixture Ward" },
+          numberToElect: 1,
+        },
+      ],
+    },
+    {
+      candidates: [
+        {
+          contestId: "council-fixture-ward",
+          sourcePublishedName: "Casey Zulu",
+          phase: "registration",
+          status: { sourceValue: "Registered", value: "Registered" },
+        },
+        {
+          contestId: "council-fixture-ward",
+          sourcePublishedName: "Robin Alpha",
+          phase: "registration",
+          status: { sourceValue: "Registered", value: "Registered" },
+        },
+        {
+          contestId: "council-fixture-ward",
+          sourcePublishedName: "Wendy Withdrawn - WITHDRAWN",
+          phase: "registration",
+          status: {
+            sourceValue: "Registered",
+            value: "Registration Withdrawn",
+          },
+        },
+      ],
+    },
+  );
+
+  assert.deepEqual(
+    presentation.contests[0].candidates.map(({ sourcePublishedName }) => sourcePublishedName),
+    ["Robin Alpha", "Casey Zulu"],
+  );
+});
+
 function presentCandidate(candidate) {
   return presentElection(
     {

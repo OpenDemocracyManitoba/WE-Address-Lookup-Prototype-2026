@@ -191,6 +191,23 @@ function comparableCandidate(candidate) {
   return { ...candidate, source };
 }
 
+function changedFieldLabels(previous, next, prefix = "") {
+  if (JSON.stringify(previous) === JSON.stringify(next)) return [];
+  const previousIsObject = previous !== null && typeof previous === "object" && !Array.isArray(previous);
+  const nextIsObject = next !== null && typeof next === "object" && !Array.isArray(next);
+  if (!previousIsObject || !nextIsObject) return [prefix];
+
+  return [...new Set([...Object.keys(previous), ...Object.keys(next)])]
+    .sort((left, right) => left.localeCompare(right, "en-CA"))
+    .flatMap((field) =>
+      changedFieldLabels(
+        previous[field],
+        next[field],
+        prefix ? `${prefix}.${field}` : field,
+      )
+    );
+}
+
 function assertNoConflictingDuplicates(candidates) {
   const records = new Map();
   for (const candidate of candidates) {
@@ -207,19 +224,45 @@ function assertNoConflictingDuplicates(candidates) {
 function summarizeChanges(previousCandidates, nextCandidates) {
   const previous = new Map(previousCandidates.map((candidate) => [candidateKey(candidate), candidate]));
   const next = new Map(nextCandidates.map((candidate) => [candidateKey(candidate), candidate]));
-  let added = 0;
-  let changed = 0;
-  let removed = 0;
+  const added = [];
+  const changed = [];
+  const removed = [];
   for (const [key, candidate] of next) {
-    if (!previous.has(key)) added += 1;
+    if (!previous.has(key)) added.push(candidate);
     else if (JSON.stringify(comparableCandidate(previous.get(key))) !== JSON.stringify(comparableCandidate(candidate))) {
-      changed += 1;
+      changed.push({
+        candidate,
+        fields: changedFieldLabels(
+          comparableCandidate(previous.get(key)),
+          comparableCandidate(candidate),
+        ),
+      });
     }
   }
   for (const key of previous.keys()) {
-    if (!next.has(key)) removed += 1;
+    if (!next.has(key)) removed.push(previous.get(key));
   }
   return { added, changed, removed };
+}
+
+function printChangeSummary(summary) {
+  console.log(
+    `Added ${summary.added.length}, changed ${summary.changed.length}, removed ${summary.removed.length}`,
+  );
+  const groups = [
+    ["Added Candidate Records:", "+", summary.added],
+    ["Changed Candidate Records:", "~", summary.changed],
+    ["Removed Candidate Records:", "-", summary.removed],
+  ];
+  for (const [heading, marker, records] of groups) {
+    if (records.length === 0) continue;
+    console.log(heading);
+    for (const record of records) {
+      const candidate = record.candidate ?? record;
+      const fields = record.fields?.length ? ` (${record.fields.join(", ")})` : "";
+      console.log(`  ${marker} [${candidate.contestId}] ${candidate.sourcePublishedName}${fields}`);
+    }
+  }
 }
 
 function contestDisplayName(contest) {
@@ -351,7 +394,7 @@ async function main() {
       });
     const previousDocument = readJsonOrDefault(candidatesFile, { candidates: [] });
     const summary = summarizeChanges(previousDocument.candidates, candidates);
-    console.log(`Added ${summary.added}, changed ${summary.changed}, removed ${summary.removed}`);
+    printChangeSummary(summary);
     const confirmed = /^(y|yes)$/i.test(await ask("Replace normalized Candidate data? [y/N] ", answers));
     if (!confirmed) throw new Error("Import declined; normalized Candidate data was not changed.");
 

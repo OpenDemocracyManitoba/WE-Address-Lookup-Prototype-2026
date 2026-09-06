@@ -114,6 +114,14 @@ test("confirmed import preserves evidence and proposes normalized Contest-scoped
   const output = runImporter(dataDirectory, sourceFile);
 
   assert.match(output, /Added 4, changed 0, removed 0/);
+  assert.match(output, /Added Candidate Records:\s+\+ \[council-st-boniface\] Matt Allard/);
+  assert.match(output, /\+ \[council-st-boniface\] Remembered Mapping/);
+  assert.match(output, /\+ \[mayor-winnipeg\] Scott Gillingham/);
+  assert.match(output, /\+ \[school-louis-riel-ward-2\] Brian Mayes/);
+  assert.ok(
+    output.indexOf("Added Candidate Records:") < output.indexOf("Replace normalized Candidate data?"),
+    "the review details are printed before confirmation",
+  );
   assert.match(output, /Candidate data replaced\./);
   assert.match(output, /Review and commit the Source Snapshot, normalized Candidate data, and any mapping decisions\./);
 
@@ -162,6 +170,72 @@ test("confirmed import preserves evidence and proposes normalized Contest-scoped
   assert.match(listing, /Mayor — Winnipeg\n  Scott Gillingham/);
   assert.match(listing, /Councillor — St\. Boniface\n  Matt Allard\n  Remembered Mapping/);
   assert.match(listing, /School Trustee — Winnipeg School Division — Ward 2\n  \(no imported candidates\)/);
+});
+
+test("import review identifies added, changed, and removed Candidate Records without exposing changed values", () => {
+  const dataDirectory = makeDataDirectory();
+  const sourceFile = join(dataDirectory, "source.json");
+  writeFileSync(
+    join(dataDirectory, "candidates.json"),
+    `${JSON.stringify({
+      candidates: [
+        {
+          contestId: "mayor-winnipeg",
+          source: {
+            sourceId: "city-candidate-dataset",
+            observedAt: "2026-08-20T00:00:00.000Z",
+            recordId: "changed-record",
+          },
+          sourcePublishedName: "Changed Candidate",
+          phase: "registration",
+          status: { sourceValue: "Registered", value: "Registered" },
+          email: "old-private-value@example.test",
+        },
+        {
+          contestId: "mayor-winnipeg",
+          source: {
+            sourceId: "city-candidate-dataset",
+            observedAt: "2026-08-20T00:00:00.000Z",
+            recordId: "removed-record",
+          },
+          sourcePublishedName: "Removed Candidate",
+          phase: "registration",
+          status: { sourceValue: "Registered", value: "Registered" },
+        },
+      ],
+    }, null, 2)}\n`,
+  );
+  writeFileSync(sourceFile, `${JSON.stringify([
+    {
+      id: "added-record",
+      election_date: "2026-10-28T00:00:00",
+      registration_date: "2026-09-01T00:00:00",
+      name: "Added Candidate",
+      type: "Mayor",
+      candidate_status: "Registered",
+    },
+    {
+      id: "changed-record",
+      election_date: "2026-10-28T00:00:00",
+      registration_date: "2026-08-01T00:00:00",
+      name: "Changed Candidate",
+      type: "Mayor",
+      candidate_status: "Nominated",
+      email: "new-private-value@example.test",
+    },
+  ], null, 2)}\n`);
+
+  const output = runImporter(dataDirectory, sourceFile);
+
+  assert.match(output, /Added 1, changed 1, removed 1/);
+  assert.match(output, /Added Candidate Records:\s+\+ \[mayor-winnipeg\] Added Candidate/);
+  assert.match(
+    output,
+    /Changed Candidate Records:\s+~ \[mayor-winnipeg\] Changed Candidate \(email, phase, registrationDate, status\.sourceValue, status\.value\)/,
+  );
+  assert.match(output, /Removed Candidate Records:\s+- \[mayor-winnipeg\] Removed Candidate/);
+  assert.doesNotMatch(output, /old-private-value|new-private-value/);
+  assert.ok(output.indexOf("Removed Candidate Records:") < output.indexOf("Replace normalized Candidate data?"));
 });
 
 test("failed validation and declined confirmation leave normalized Candidate data unchanged", async (t) => {

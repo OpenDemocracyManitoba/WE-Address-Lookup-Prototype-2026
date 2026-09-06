@@ -1,10 +1,59 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { loadElectionPresentation } from "../election-presentation.js";
 import { renderApplicableContests } from "../contest-result-renderer.js";
 
-const { contests } = loadElectionPresentation();
+const contests = [
+  {
+    id: "mayor-fixture-city",
+    office: "Mayor",
+    electoralArea: { kind: "citywide", canonicalName: "Fixture City" },
+    aliases: ["Fixture City"],
+    candidateList: { support: "supported", availability: "Published" },
+    candidates: [
+      { sourcePublishedName: "Morgan Mayor" },
+      { sourcePublishedName: "Alex Alder" },
+    ],
+  },
+  {
+    id: "council-fixture-north",
+    office: "Councillor",
+    electoralArea: { kind: "councilWard", canonicalName: "Fixture North" },
+    aliases: ["Fixture North"],
+    candidateList: { support: "supported", availability: "Published" },
+    candidates: [{ sourcePublishedName: "Casey Councillor" }],
+  },
+  {
+    id: "council-fixture-south",
+    office: "Councillor",
+    electoralArea: { kind: "councilWard", canonicalName: "Fixture South" },
+    aliases: ["Fixture South"],
+    candidateList: { support: "supported", availability: "Published" },
+    candidates: [],
+  },
+  {
+    id: "school-fixture-ward-1",
+    office: "School Trustee",
+    electoralArea: {
+      kind: "schoolDivisionWard",
+      canonicalName: "Fixture School Division — Ward 1",
+    },
+    aliases: ["Fixture School / 1"],
+    candidateList: { support: "supported", availability: "Published" },
+    candidates: [{ sourcePublishedName: "Taylor Trustee" }],
+  },
+  {
+    id: "school-unavailable-ward-1",
+    office: "School Trustee",
+    electoralArea: {
+      kind: "schoolDivisionWard",
+      canonicalName: "Unavailable School Division — Ward 1",
+    },
+    aliases: ["Unavailable School / 1"],
+    candidateList: { support: "unsupported", availability: "Unavailable" },
+    candidates: [],
+  },
+];
 
 function contestTemplates() {
   return new Map([
@@ -63,9 +112,9 @@ test("rendering selects three ordered Contest templates and replaces the prior r
   const { container, render } = harness;
 
   render({
-    councilWard: "Fort Rouge - East Fort Garry",
-    schoolDivision: "Winnipeg",
-    schoolDivisionWard: "5",
+    councilWard: "Fixture North",
+    schoolDivision: "Fixture School",
+    schoolDivisionWard: "1",
   });
   assert.deepEqual(
     container.children.map(({ contestId, href, candidates }) => ({
@@ -75,51 +124,39 @@ test("rendering selects three ordered Contest templates and replaces the prior r
     })),
     [
       {
-        contestId: "mayor-winnipeg",
-        href: "/contests/mayor-winnipeg/",
-        candidates: [
-          "Mazher Alam",
-          "Johnny Calderón",
-          "Christopher Clacio",
-          "Scott Gillingham",
-          "Brad Gross",
-          "Umar Hayat",
-          "Joshua Pagdato",
-          "Noah Redden",
-          "Zachary Uminski",
-          "Michael Vogiatzakis",
-          "Don Woodstock",
-        ],
+        contestId: "mayor-fixture-city",
+        href: "/contests/mayor-fixture-city/",
+        candidates: ["Morgan Mayor", "Alex Alder"],
       },
       {
-        contestId: "council-fort-rouge-east-fort-garry",
-        href: "/contests/council-fort-rouge-east-fort-garry/",
-        candidates: ["Jeff Palmer", "Kevin Stuart"],
+        contestId: "council-fixture-north",
+        href: "/contests/council-fixture-north/",
+        candidates: ["Casey Councillor"],
       },
       {
-        contestId: "school-winnipeg-ward-5",
-        href: "/contests/school-winnipeg-ward-5/",
-        candidates: ["Tim Bigelow"],
+        contestId: "school-fixture-ward-1",
+        href: "/contests/school-fixture-ward-1/",
+        candidates: ["Taylor Trustee"],
       },
     ],
   );
 
   render({
-    councilWard: "St. James",
-    schoolDivision: "St James-Assiniboia",
-    schoolDivisionWard: "Centre Ward",
+    councilWard: "Fixture South",
+    schoolDivision: "Fixture School",
+    schoolDivisionWard: "1",
   });
   assert.deepEqual(
     container.children.map(({ contestId }) => contestId),
     [
-      "mayor-winnipeg",
-      "council-st-james",
-      "school-st-james-assiniboia-centre",
+      "mayor-fixture-city",
+      "council-fixture-south",
+      "school-fixture-ward-1",
     ],
   );
   assert.equal(
     container.children.some(
-      ({ contestId }) => contestId === "council-fort-rouge-east-fort-garry",
+      ({ contestId }) => contestId === "council-fixture-north",
     ),
     false,
   );
@@ -131,8 +168,8 @@ test("rendering preserves resolved Contests around unsupported or unfamiliar ass
   const { container, render } = createRenderHarness();
 
   render({
-    councilWard: "St. Norbert - Seine River",
-    schoolDivision: "Seine River",
+    councilWard: "Fixture North",
+    schoolDivision: "Unavailable School",
     schoolDivisionWard: "1",
   });
   assert.deepEqual(
@@ -143,18 +180,18 @@ test("rendering preserves resolved Contests around unsupported or unfamiliar ass
       ],
     ),
     [
-      ["mayor-winnipeg", "Published"],
-      ["council-st-norbert-seine-river", "Published"],
-      ["school-seine-river-ward-1", "Unavailable"],
+      ["mayor-fixture-city", "Published"],
+      ["council-fixture-north", "Published"],
+      ["school-unavailable-ward-1", "Unavailable"],
     ],
   );
 
   render({
     councilWard: "A Different Ward",
-    schoolDivision: "Winnipeg",
+    schoolDivision: "Fixture School",
     schoolDivisionWard: "99",
   });
-  assert.equal(container.children[0].contestId, "mayor-winnipeg");
+  assert.equal(container.children[0].contestId, "mayor-fixture-city");
   assert.deepEqual(container.children.slice(1), [
     { office: "Councillor", unresolved: true },
     { office: "School Trustee", unresolved: true },
@@ -166,7 +203,7 @@ test("rendering selects unresolved templates for incomplete assignments", () => 
 
   render({});
 
-  assert.equal(container.children[0].contestId, "mayor-winnipeg");
+  assert.equal(container.children[0].contestId, "mayor-fixture-city");
   assert.deepEqual(container.children.slice(1), [
     { office: "Councillor", unresolved: true },
     { office: "School Trustee", unresolved: true },

@@ -24,6 +24,6 @@ The schema also publishes `official_agent` and `auditor`. Those administrative f
 
 ## Coverage and unresolved evidence
 
-Candidate-list availability is independent of Candidate count. The City registered-candidates publication is treated as Published coverage for every Contest the City runs, including a verified zero current records for Winnipeg School Division Ward 2. Seine River Ward 1 and Interlake Ward 1 are unsupported and Unavailable; their Candidate count is unknown, not zero.
+Candidate List Availability is independent of Candidate count. The City registered-candidates publication is treated as Published coverage for every Contest the City runs. On the dated 2026-08-22 observation, Winnipeg School Division Ward 2 had zero Candidate Records; that historical fact remains in the Source Snapshot evidence rather than as a mutable count in the runtime Contest inventory. Later imports can change the current count without changing Published availability. Seine River Ward 1 and Interlake Ward 1 are unsupported and Unavailable; their Candidate count is unknown, not zero.
 
 Address rows missing one or more Electoral Assignment fields remain visible in the address fixture's `unresolvedFindings`. No blank, unknown, or conflicting label is guessed into a Contest.
