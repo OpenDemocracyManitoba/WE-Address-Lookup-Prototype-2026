@@ -1,12 +1,12 @@
 {
   "election": "2026 Municipal Council and School Boards Election",
-  "importedAt": "2026-08-22T15:18:57.429Z",
+  "importedAt": "2026-09-06T12:31:11.623Z",
   "sourceSnapshots": [
     {
       "sourceId": "city-candidate-dataset",
-      "observedAt": "2026-08-22T15:18:57.429Z",
+      "observedAt": "2026-09-06T12:31:11.623Z",
       "retrievalUrl": "https://data.winnipeg.ca/resource/9gi9-dauz.json?$limit=18000&$where=election_date%20%3E=%20%272026-01-01T00:00:00.000%27%20AND%20election_date%20%3C%20%272027-01-01T00:00:00.000%27%20AND%20(nomination_order%20IS%20NULL%20OR%20nomination_order%20%3E=%200)",
-      "path": "source-snapshots/city-candidate-dataset/2026-08-22T15-18-57-429Z.json"
+      "path": "source-snapshots/city-candidate-dataset/2026-09-06T12-31-11-623Z.json"
     }
   ],
   "candidates": [
@@ -14,7 +14,23 @@
       "contestId": "council-charleswood-tuxedo-westwood",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-164"
+      },
+      "sourcePublishedName": "Dennis Bayomi",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-27T00:00:00.000",
+      "campaignWebsite": "https://www.whatifwinnipeg.ca/"
+    },
+    {
+      "contestId": "council-charleswood-tuxedo-westwood",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-52"
       },
       "sourcePublishedName": "Evan Duncan",
@@ -31,7 +47,7 @@
       "contestId": "council-daniel-mcintyre",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-37"
       },
       "sourcePublishedName": "Cindy Gilroy",
@@ -46,10 +62,27 @@
       "phone": "204-898-5999"
     },
     {
+      "contestId": "council-daniel-mcintyre",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-165"
+      },
+      "sourcePublishedName": "Fred Morris",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-28T00:00:00.000",
+      "email": "fredmorris@hotmail.com",
+      "phone": "204-795-1583"
+    },
+    {
       "contestId": "council-elmwood-east-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-55"
       },
       "sourcePublishedName": "Abel Gutierrez",
@@ -67,7 +100,7 @@
       "contestId": "council-elmwood-east-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-132"
       },
       "sourcePublishedName": "Adam Dudek",
@@ -84,7 +117,7 @@
       "contestId": "council-elmwood-east-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-100"
       },
       "sourcePublishedName": "Christian Sweryda",
@@ -102,7 +135,7 @@
       "contestId": "council-elmwood-east-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-80"
       },
       "sourcePublishedName": "Emma Durand-Wood",
@@ -120,7 +153,7 @@
       "contestId": "council-elmwood-east-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-131"
       },
       "sourcePublishedName": "Jessica Wiebe",
@@ -143,7 +176,7 @@
       "contestId": "council-fort-rouge-east-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-59"
       },
       "sourcePublishedName": "Jeff Palmer",
@@ -171,7 +204,7 @@
       "contestId": "council-fort-rouge-east-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-112"
       },
       "sourcePublishedName": "Kevin Stuart",
@@ -199,7 +232,7 @@
       "contestId": "council-fort-rouge-east-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-43"
       },
       "sourcePublishedName": "Sherri Rollins  - WITHDRAWN",
@@ -214,7 +247,7 @@
       "contestId": "council-mynarski",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-85"
       },
       "sourcePublishedName": "Ayaz Noor Mohammed",
@@ -241,7 +274,7 @@
       "contestId": "council-mynarski",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-56"
       },
       "sourcePublishedName": "Harold Brazil",
@@ -259,7 +292,7 @@
       "contestId": "council-mynarski",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-159"
       },
       "sourcePublishedName": "Laurie  Kozak",
@@ -271,13 +304,23 @@
       "registrationDate": "2026-08-21T00:00:00.000",
       "campaignWebsite": "www.lauriekozak.com",
       "email": "laurie@lauriekozak.com",
-      "phone": "431-866-5820"
+      "phone": "431-866-5820",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "www.facebook.com/KozakforMynarski"
+        },
+        {
+          "platform": "instagram",
+          "url": "www.instagram.com/kozakformynarski"
+        }
+      ]
     },
     {
       "contestId": "council-mynarski",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-83"
       },
       "sourcePublishedName": "Natalie  Smith",
@@ -305,7 +348,7 @@
       "contestId": "council-mynarski",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-116"
       },
       "sourcePublishedName": "Ross Eadie",
@@ -323,7 +366,7 @@
       "contestId": "council-north-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-49"
       },
       "sourcePublishedName": "Jeff Browaty",
@@ -341,7 +384,7 @@
       "contestId": "council-north-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-136"
       },
       "sourcePublishedName": "Orvie Dingwall",
@@ -369,7 +412,7 @@
       "contestId": "council-north-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-38"
       },
       "sourcePublishedName": "Tyler Andersen",
@@ -393,7 +436,7 @@
       "contestId": "council-old-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-36"
       },
       "sourcePublishedName": "Devi Sharma",
@@ -402,13 +445,15 @@
         "sourceValue": "Registered",
         "value": "Registered"
       },
-      "registrationDate": "2026-06-30T00:00:00.000"
+      "registrationDate": "2026-06-30T00:00:00.000",
+      "email": "www.votedevisharma@gmail.com",
+      "phone": "431-293-3384"
     },
     {
       "contestId": "council-old-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-72"
       },
       "sourcePublishedName": "Greg McFarlane",
@@ -432,7 +477,7 @@
       "contestId": "council-old-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-77"
       },
       "sourcePublishedName": "Love Randhawa",
@@ -459,7 +504,7 @@
       "contestId": "council-point-douglas",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-142"
       },
       "sourcePublishedName": "Mark Requinta",
@@ -477,7 +522,7 @@
       "contestId": "council-point-douglas",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-71"
       },
       "sourcePublishedName": "Vivian Santos",
@@ -495,7 +540,7 @@
       "contestId": "council-river-heights-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-48"
       },
       "sourcePublishedName": "Georgina Sabesky",
@@ -513,7 +558,7 @@
       "contestId": "council-river-heights-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-103"
       },
       "sourcePublishedName": "Jorge Requena Ramos",
@@ -523,6 +568,7 @@
         "value": "Registered"
       },
       "registrationDate": "2026-07-08T00:00:00.000",
+      "campaignWebsite": "www.togetherinriverheights.ca",
       "email": "togetherriverheights@gmail.com",
       "phone": "204-998-9780"
     },
@@ -530,7 +576,7 @@
       "contestId": "council-river-heights-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-117"
       },
       "sourcePublishedName": "Randy McDonald",
@@ -548,7 +594,7 @@
       "contestId": "council-river-heights-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-60"
       },
       "sourcePublishedName": "Sara MacArthur",
@@ -575,7 +621,7 @@
       "contestId": "council-river-heights-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-91"
       },
       "sourcePublishedName": "Ty Mitchell - WITHDRAWN",
@@ -590,7 +636,7 @@
       "contestId": "council-st-boniface",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-39"
       },
       "sourcePublishedName": "Matt Allard",
@@ -626,7 +672,7 @@
       "contestId": "council-st-boniface",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-45"
       },
       "sourcePublishedName": "Nicholas Douklias",
@@ -661,7 +707,7 @@
       "contestId": "council-st-boniface",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-102"
       },
       "sourcePublishedName": "Robyn Vilde",
@@ -688,7 +734,7 @@
       "contestId": "council-st-boniface",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-89"
       },
       "sourcePublishedName": "Sylvie Schmitt",
@@ -705,7 +751,7 @@
       "contestId": "council-st-james",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-42"
       },
       "sourcePublishedName": "Kelly Ryback",
@@ -733,7 +779,7 @@
       "contestId": "council-st-james",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-40"
       },
       "sourcePublishedName": "Shawn Dobson",
@@ -749,7 +795,7 @@
       "contestId": "council-st-james",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-62"
       },
       "sourcePublishedName": "Tyler Crichton",
@@ -767,7 +813,7 @@
       "contestId": "council-st-norbert-seine-river",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-123"
       },
       "sourcePublishedName": "Anita Roy",
@@ -795,7 +841,7 @@
       "contestId": "council-st-norbert-seine-river",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-107"
       },
       "sourcePublishedName": "Govind Thawani",
@@ -812,7 +858,7 @@
       "contestId": "council-st-norbert-seine-river",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-121"
       },
       "sourcePublishedName": "Louise May",
@@ -844,7 +890,7 @@
       "contestId": "council-st-norbert-seine-river",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-122"
       },
       "sourcePublishedName": "Ray DuBois",
@@ -856,13 +902,27 @@
       "registrationDate": "2026-07-17T00:00:00.000",
       "campaignWebsite": "www.raydubois.com",
       "email": "info@raydubois.com",
-      "phone": "204-333-4452"
+      "phone": "204-333-4452",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "www.facebook.com/RayDuBoisCityCouncil"
+        },
+        {
+          "platform": "linkedin",
+          "url": "www.linkedin.com/in/rayduboiswpg/%20"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/rayduboiscitycouncil/"
+        }
+      ]
     },
     {
       "contestId": "council-st-vital",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-46"
       },
       "sourcePublishedName": "Chris Sigurdson",
@@ -880,7 +940,7 @@
       "contestId": "council-st-vital",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-156"
       },
       "sourcePublishedName": "Doug Reimer",
@@ -891,14 +951,14 @@
       },
       "registrationDate": "2026-08-13T00:00:00.000",
       "campaignWebsite": "https://dougreimer.ca/",
-      "email": "ReimerD.68@gmail.com",
+      "email": "votedougreimer@gmail.com",
       "phone": "431-481-1928"
     },
     {
       "contestId": "council-st-vital",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-140"
       },
       "sourcePublishedName": "Season Kirkwood",
@@ -916,7 +976,7 @@
       "contestId": "council-transcona",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-41"
       },
       "sourcePublishedName": "Chris Giesbrecht",
@@ -934,7 +994,7 @@
       "contestId": "council-transcona",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-98"
       },
       "sourcePublishedName": "Lora Meseman",
@@ -952,7 +1012,7 @@
       "contestId": "council-transcona",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-58"
       },
       "sourcePublishedName": "Nathine Dagdick",
@@ -969,7 +1029,7 @@
       "contestId": "council-transcona",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-54"
       },
       "sourcePublishedName": "Shawn Nason",
@@ -987,7 +1047,7 @@
       "contestId": "council-waverley-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-118"
       },
       "sourcePublishedName": "Antar Banik",
@@ -1005,7 +1065,7 @@
       "contestId": "council-waverley-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-87"
       },
       "sourcePublishedName": "Jasmine Brar",
@@ -1041,7 +1101,7 @@
       "contestId": "council-waverley-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-44"
       },
       "sourcePublishedName": "Nafiya  Naso",
@@ -1069,7 +1129,7 @@
       "contestId": "council-waverley-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-75"
       },
       "sourcePublishedName": "Uche Nwankwo",
@@ -1101,7 +1161,7 @@
       "contestId": "council-waverley-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-84"
       },
       "sourcePublishedName": "Yuanchao Li",
@@ -1128,7 +1188,7 @@
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-148"
       },
       "sourcePublishedName": "Brad Gross",
@@ -1145,7 +1205,7 @@
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-27"
       },
       "sourcePublishedName": "Christopher Clacio",
@@ -1155,14 +1215,29 @@
         "value": "Registered"
       },
       "registrationDate": "2026-05-01T00:00:00.000",
+      "campaignWebsite": "www.chrisclacio4mayor.ca",
       "email": "chrisclacio4mayor@proton.me",
-      "phone": "204-333-1658"
+      "phone": "204-333-1658",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/ChrisClacio4Mayor"
+        },
+        {
+          "platform": "twitter",
+          "url": "https://bsky.app/profile/chrisclacio4mayor.bsky.social"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/chrisclacio4mayor"
+        }
+      ]
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-32"
       },
       "sourcePublishedName": "Don Woodstock",
@@ -1180,7 +1255,7 @@
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-34"
       },
       "sourcePublishedName": "Johnny Calderón",
@@ -1196,7 +1271,7 @@
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-33"
       },
       "sourcePublishedName": "Joshua Pagdato",
@@ -1213,7 +1288,24 @@
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-174"
+      },
+      "sourcePublishedName": "Kevin Klein",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-09-03T00:00:00.000",
+      "campaignWebsite": "KevinKlein.ca",
+      "email": "Kevin@KevinKlein.ca"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-31"
       },
       "sourcePublishedName": "Mazher Alam",
@@ -1229,7 +1321,7 @@
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-29"
       },
       "sourcePublishedName": "Michael Vogiatzakis",
@@ -1246,7 +1338,7 @@
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-35"
       },
       "sourcePublishedName": "Noah Redden",
@@ -1263,7 +1355,7 @@
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-28"
       },
       "sourcePublishedName": "Scott Gillingham",
@@ -1281,7 +1373,7 @@
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-30"
       },
       "sourcePublishedName": "Umar Hayat",
@@ -1299,7 +1391,7 @@
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-144"
       },
       "sourcePublishedName": "Zachary Uminski",
@@ -1327,7 +1419,7 @@
       "contestId": "school-louis-riel-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-135"
       },
       "sourcePublishedName": "Anna Weier",
@@ -1344,7 +1436,7 @@
       "contestId": "school-louis-riel-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-93"
       },
       "sourcePublishedName": "Ian Walker",
@@ -1354,6 +1446,7 @@
         "value": "Registered"
       },
       "registrationDate": "2026-07-06T00:00:00.000",
+      "campaignWebsite": "www.ianwalker.ca",
       "email": "ian@ianwalker.ca",
       "phone": "204-781-0438"
     },
@@ -1361,7 +1454,7 @@
       "contestId": "school-louis-riel-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-81"
       },
       "sourcePublishedName": "Moe Koroma",
@@ -1378,7 +1471,7 @@
       "contestId": "school-louis-riel-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-47"
       },
       "sourcePublishedName": "Brian Mayes",
@@ -1396,7 +1489,7 @@
       "contestId": "school-louis-riel-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-106"
       },
       "sourcePublishedName": "Irene Nordheim",
@@ -1413,7 +1506,7 @@
       "contestId": "school-louis-riel-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-96"
       },
       "sourcePublishedName": "Lauren Lambert",
@@ -1430,7 +1523,7 @@
       "contestId": "school-louis-riel-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-82"
       },
       "sourcePublishedName": "Peter Bjornson",
@@ -1440,7 +1533,6 @@
         "value": "Registered"
       },
       "registrationDate": "2026-07-03T00:00:00.000",
-      "campaignWebsite": "www.peterbjornson.ca",
       "email": "peter.bjornson@outlook.com",
       "phone": "204-232-1326",
       "socialLinks": [
@@ -1454,7 +1546,7 @@
       "contestId": "school-louis-riel-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-90"
       },
       "sourcePublishedName": "Ryan Palmquist",
@@ -1477,7 +1569,7 @@
       "contestId": "school-louis-riel-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-79"
       },
       "sourcePublishedName": "Sandy Nemeth",
@@ -1505,7 +1597,24 @@
       "contestId": "school-louis-riel-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-163"
+      },
+      "sourcePublishedName": "Bethany Kolisniak",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-26T00:00:00.000",
+      "campaignWebsite": "https://www.bethanyk.ca/",
+      "email": "hey@bethanyk.ca"
+    },
+    {
+      "contestId": "school-louis-riel-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-69"
       },
       "sourcePublishedName": "Chipalo Simunyola",
@@ -1522,7 +1631,7 @@
       "contestId": "school-louis-riel-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-138"
       },
       "sourcePublishedName": "Jocelyn  Greenwood",
@@ -1538,7 +1647,7 @@
       "contestId": "school-louis-riel-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-74"
       },
       "sourcePublishedName": "John Baert",
@@ -1556,7 +1665,7 @@
       "contestId": "school-pembina-trails-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-73"
       },
       "sourcePublishedName": "Craig Stahlke",
@@ -1574,7 +1683,7 @@
       "contestId": "school-pembina-trails-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-109"
       },
       "sourcePublishedName": "Linda Karn",
@@ -1592,7 +1701,7 @@
       "contestId": "school-pembina-trails-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-97"
       },
       "sourcePublishedName": "Samantha Pope",
@@ -1616,7 +1725,7 @@
       "contestId": "school-pembina-trails-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-78"
       },
       "sourcePublishedName": "Brook Jones",
@@ -1648,7 +1757,7 @@
       "contestId": "school-pembina-trails-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-61"
       },
       "sourcePublishedName": "Christine Jolly",
@@ -1665,7 +1774,7 @@
       "contestId": "school-pembina-trails-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-63"
       },
       "sourcePublishedName": "Lauralee Gooding",
@@ -1683,7 +1792,7 @@
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-104"
       },
       "sourcePublishedName": "Alicia Becker",
@@ -1700,7 +1809,7 @@
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-125"
       },
       "sourcePublishedName": "Asim Nawaz",
@@ -1717,7 +1826,7 @@
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-120"
       },
       "sourcePublishedName": "Carrissa Reyes",
@@ -1744,7 +1853,7 @@
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-57"
       },
       "sourcePublishedName": "Cindy Nachtigall",
@@ -1754,13 +1863,25 @@
         "value": "Registered"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
-      "phone": "204-269-3181"
+      "campaignWebsite": "https://www.votecindy.ca/",
+      "email": "CindyForSchoolTrustee@gmail.com",
+      "phone": "204-269-3181",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/cindynachtigallschooltrustee"
+        },
+        {
+          "platform": "twitter",
+          "url": "https://x.com/CindyNachtigall"
+        }
+      ]
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-153"
       },
       "sourcePublishedName": "Heethy Maan",
@@ -1787,7 +1908,7 @@
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-76"
       },
       "sourcePublishedName": "Noman Zaheer",
@@ -1815,7 +1936,7 @@
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-110"
       },
       "sourcePublishedName": "Patricia Eyamba",
@@ -1832,7 +1953,7 @@
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-126"
       },
       "sourcePublishedName": "Tasneem  Vali",
@@ -1858,7 +1979,7 @@
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-127"
       },
       "sourcePublishedName": "Tony Guan",
@@ -1875,7 +1996,7 @@
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-95"
       },
       "sourcePublishedName": "Towela Mkanda",
@@ -1892,7 +2013,7 @@
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-149"
       },
       "sourcePublishedName": "Veerpal Sandhu",
@@ -1909,7 +2030,7 @@
       "contestId": "school-river-east-transcona-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-157"
       },
       "sourcePublishedName": "Colleen Carswell",
@@ -1926,7 +2047,7 @@
       "contestId": "school-river-east-transcona-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-92"
       },
       "sourcePublishedName": "Jerry Sodomlak",
@@ -1944,7 +2065,7 @@
       "contestId": "school-river-east-transcona-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-68"
       },
       "sourcePublishedName": "Ryan Frick",
@@ -1958,10 +2079,27 @@
       "email": "frick4trustee@gmail.com"
     },
     {
+      "contestId": "school-river-east-transcona-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-160"
+      },
+      "sourcePublishedName": "Susan Bywater",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-24T00:00:00.000",
+      "email": "susanbywater@yahoo.ca",
+      "phone": "204-999-5484"
+    },
+    {
       "contestId": "school-river-east-transcona-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-143"
       },
       "sourcePublishedName": "Glenn Buffie",
@@ -1978,7 +2116,7 @@
       "contestId": "school-river-east-transcona-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-137"
       },
       "sourcePublishedName": "Idunnu Tokurah",
@@ -1996,7 +2134,24 @@
       "contestId": "school-river-east-transcona-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-175"
+      },
+      "sourcePublishedName": "Manjot Kang",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-09-03T00:00:00.000",
+      "email": "manjot.kang@gmail.com",
+      "phone": "431-999-9028"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-150"
       },
       "sourcePublishedName": "Sheri Hanson",
@@ -2013,7 +2168,7 @@
       "contestId": "school-river-east-transcona-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-88"
       },
       "sourcePublishedName": "Garry Kowalski",
@@ -2029,7 +2184,7 @@
       "contestId": "school-river-east-transcona-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-134"
       },
       "sourcePublishedName": "Lorlie Froese",
@@ -2046,7 +2201,7 @@
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-86"
       },
       "sourcePublishedName": "Brenda Bage",
@@ -2061,7 +2216,24 @@
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-169"
+      },
+      "sourcePublishedName": "Jenn Kiziak",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-09-01T00:00:00.000",
+      "email": "jennkiziak@gmail.com",
+      "phone": "204-612-7370"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-65"
       },
       "sourcePublishedName": "Joe Hilmerich",
@@ -2077,7 +2249,24 @@
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-173"
+      },
+      "sourcePublishedName": "Michelle Kowalchuk",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-09-03T00:00:00.000",
+      "email": "mikowalchuk@gmail.com",
+      "phone": "204-330-0461"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-113"
       },
       "sourcePublishedName": "Pamela Jansen",
@@ -2094,7 +2283,7 @@
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-147"
       },
       "sourcePublishedName": "Susan Olynik",
@@ -2104,14 +2293,37 @@
         "value": "Registered"
       },
       "registrationDate": "2026-08-05T00:00:00.000",
+      "campaignWebsite": "https://www.susanolynik.ca/",
       "email": "susan168823@gmail.com",
       "phone": "204-661-6440"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-170"
+      },
+      "sourcePublishedName": "Timothy Giesbrecht",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-09-01T00:00:00.000",
+      "email": "timothyfortrustee@gmail.com",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/people/Timothy-Giesbrecht/pfbid02Wdp8qaNJHfStw4HYwf4agW3gGEj6ZiiTeuGNhfzLKa41ZpDfG8w6tS8aewyXiadzl/"
+        }
+      ]
     },
     {
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-133"
       },
       "sourcePublishedName": "Derek Dabee",
@@ -2128,7 +2340,7 @@
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-101"
       },
       "sourcePublishedName": "Dirk Leavesley",
@@ -2145,7 +2357,7 @@
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-129"
       },
       "sourcePublishedName": "Ernesto Ofiaza",
@@ -2162,7 +2374,7 @@
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-128"
       },
       "sourcePublishedName": "Jagjit Khattra",
@@ -2179,7 +2391,7 @@
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-115"
       },
       "sourcePublishedName": "Leila Castro",
@@ -2196,7 +2408,7 @@
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-130"
       },
       "sourcePublishedName": "Manpreet Toor",
@@ -2213,7 +2425,7 @@
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-108"
       },
       "sourcePublishedName": "Maria Santos",
@@ -2229,7 +2441,7 @@
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-155"
       },
       "sourcePublishedName": "Robert Bilsland",
@@ -2246,7 +2458,7 @@
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-146"
       },
       "sourcePublishedName": "Sandeep Bhatti",
@@ -2263,7 +2475,7 @@
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-70"
       },
       "sourcePublishedName": "Edward Ploszay",
@@ -2280,7 +2492,7 @@
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-50"
       },
       "sourcePublishedName": "Evan Krosney",
@@ -2290,14 +2502,15 @@
         "value": "Registered"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
-      "email": "evankrosney@gmail.com",
+      "campaignWebsite": "https://www.evankrosney.ca/",
+      "email": "evan@evankrosney.ca",
       "phone": "204-250-4387"
     },
     {
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-67"
       },
       "sourcePublishedName": "Lisa Brooks",
@@ -2313,7 +2526,7 @@
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-53"
       },
       "sourcePublishedName": "Mary Jane Napolitano",
@@ -2330,7 +2543,7 @@
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-64"
       },
       "sourcePublishedName": "Richard Sawka",
@@ -2344,10 +2557,27 @@
       "phone": "204-806-0075"
     },
     {
+      "contestId": "school-seven-oaks-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-176"
+      },
+      "sourcePublishedName": "Teresa Jaworski",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-09-04T00:00:00.000",
+      "email": "teresa.jaworski2026@gmail.com",
+      "phone": "204-334-3063"
+    },
+    {
       "contestId": "school-st-james-assiniboia-centre",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-114"
       },
       "sourcePublishedName": "Craig Johnson",
@@ -2364,7 +2594,7 @@
       "contestId": "school-st-james-assiniboia-centre",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-158"
       },
       "sourcePublishedName": "Craig McGregor",
@@ -2378,10 +2608,32 @@
       "phone": "204-294-8729"
     },
     {
+      "contestId": "school-st-james-assiniboia-centre",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-167"
+      },
+      "sourcePublishedName": "Ganesh Tailor",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-31T00:00:00.000",
+      "email": "trusteetailor@gmail.com",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "www.facebook.com/TrusteeTailor"
+        }
+      ]
+    },
+    {
       "contestId": "school-st-james-assiniboia-east",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-145"
       },
       "sourcePublishedName": "Holly Hunter",
@@ -2391,6 +2643,7 @@
         "value": "Registered"
       },
       "registrationDate": "2026-08-04T00:00:00.000",
+      "campaignWebsite": "https://www.hollyhunter.ca/",
       "email": "hollyhunter@shaw.ca",
       "phone": "204-232-8202"
     },
@@ -2398,7 +2651,23 @@
       "contestId": "school-st-james-assiniboia-east",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-161"
+      },
+      "sourcePublishedName": "Pradeev Sockalingam",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-24T00:00:00.000",
+      "email": "Pradeev1987@gmail.com"
+    },
+    {
+      "contestId": "school-st-james-assiniboia-east",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-124"
       },
       "sourcePublishedName": "Tara Smith",
@@ -2415,7 +2684,7 @@
       "contestId": "school-st-james-assiniboia-east",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-152"
       },
       "sourcePublishedName": "Vicki Rempel",
@@ -2425,14 +2694,20 @@
         "value": "Registered"
       },
       "registrationDate": "2026-08-10T00:00:00.000",
-      "email": "vickster304@gmail.com",
-      "phone": "204-997-7037"
+      "email": "vickiforschooltrustee@gmail.com",
+      "phone": "431-481-9686",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/p/Victoria-Vicki-Rempel-100045069191400/"
+        }
+      ]
     },
     {
       "contestId": "school-st-james-assiniboia-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-111"
       },
       "sourcePublishedName": "Cheryl Smukowich",
@@ -2449,7 +2724,7 @@
       "contestId": "school-st-james-assiniboia-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-141"
       },
       "sourcePublishedName": "Fiona  Shiells",
@@ -2467,7 +2742,7 @@
       "contestId": "school-st-james-assiniboia-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-66"
       },
       "sourcePublishedName": "Sandy Lethbridge",
@@ -2484,7 +2759,7 @@
       "contestId": "school-winnipeg-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-119"
       },
       "sourcePublishedName": "Chris Wilson",
@@ -2498,10 +2773,44 @@
       "phone": "204-583-4608"
     },
     {
+      "contestId": "school-winnipeg-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-166"
+      },
+      "sourcePublishedName": "Jennifer Claydon",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-28T00:00:00.000",
+      "campaignWebsite": "www.jenniferclaydon.ca",
+      "email": "jenclaydon014@gmail.com"
+    },
+    {
+      "contestId": "school-winnipeg-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-171"
+      },
+      "sourcePublishedName": "Michael Thompson",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-09-02T00:00:00.000",
+      "email": "VoteMichaelT@shaw.ca",
+      "phone": "204-282-3098"
+    },
+    {
       "contestId": "school-winnipeg-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-94"
       },
       "sourcePublishedName": "Kathy Heppner",
@@ -2528,7 +2837,24 @@
       "contestId": "school-winnipeg-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-172"
+      },
+      "sourcePublishedName": "Linda Hathout",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-09-02T00:00:00.000",
+      "email": "lindalhathout@gmail.com",
+      "phone": "204-391-5434"
+    },
+    {
+      "contestId": "school-winnipeg-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-99"
       },
       "sourcePublishedName": "Lionel Lien",
@@ -2545,7 +2871,24 @@
       "contestId": "school-winnipeg-ward-5",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-162"
+      },
+      "sourcePublishedName": "Reid Pereira",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-25T00:00:00.000",
+      "campaignWebsite": "www.reid4trustee.ca",
+      "email": "reidforward5@gmail.com"
+    },
+    {
+      "contestId": "school-winnipeg-ward-5",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-151"
       },
       "sourcePublishedName": "Tim Bigelow",
@@ -2562,7 +2905,7 @@
       "contestId": "school-winnipeg-ward-6",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-105"
       },
       "sourcePublishedName": "Dante Aviso",
@@ -2580,7 +2923,7 @@
       "contestId": "school-winnipeg-ward-7",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-139"
       },
       "sourcePublishedName": "Tamara Kuly",
@@ -2598,7 +2941,23 @@
       "contestId": "school-winnipeg-ward-8",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
+        "recordId": "2026-168"
+      },
+      "sourcePublishedName": "Leah Mason",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-08-31T00:00:00.000",
+      "email": "leahmspence@gmail.com"
+    },
+    {
+      "contestId": "school-winnipeg-ward-8",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-154"
       },
       "sourcePublishedName": "Prabhnoor Singh",
@@ -2614,7 +2973,7 @@
       "contestId": "school-winnipeg-ward-9",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-08-22T15:18:57.429Z",
+        "observedAt": "2026-09-06T12:31:11.623Z",
         "recordId": "2026-51"
       },
       "sourcePublishedName": "Ann Evangelista",

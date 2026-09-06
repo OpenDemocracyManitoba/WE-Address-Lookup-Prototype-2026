@@ -1,3 +1,12 @@
 {
-  "decisions": []
+  "decisions": [
+    {
+      "source": "city-candidate-dataset",
+      "kind": "schoolDivisionWard",
+      "schoolDivision": "Winnipeg School Division",
+      "ward": "Ward 2",
+      "contestId": "school-winnipeg-ward-2",
+      "decidedAt": "2026-09-06T12:07:59.086Z"
+    }
+  ]
 }
