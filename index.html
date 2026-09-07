@@ -4,102 +4,110 @@ title: Find your Winnipeg election wards
 description: Find City Council and school trustee wards for an official Winnipeg civic address.
 lookupPage: true
 ---
+
 {% from "macros/home-contest.njk" import homeContest, unresolvedHomeContest %}
-      <section class="lookup" aria-labelledby="page-title">
-        <header class="intro">
-          <p class="eyebrow">2026 Winnipeg Election</p>
-          <h1 id="page-title">Find Your Election Wards</h1>
-          <p class="lede">
-            Start typing your street number and name, then select your address.
-          </p>
-        </header>
+<section class="lookup" aria-labelledby="page-title">
+  <header class="intro">
+    <h1 id="page-title">Find Your Candidates</h1>
+    <p class="lede">
+      Start typing your street number and name, then select your address.
+    </p>
+  </header>
 
-        <div class="search-area" id="search-area">
-          <label for="address-input">Winnipeg Street Address</label>
-          <div class="combobox-wrap" id="combobox-wrap">
-            <input
-              id="address-input"
-              name="address"
-              type="text"
-              inputmode="text"
-              autocomplete="off"
-              autocapitalize="characters"
-              spellcheck="false"
-              placeholder="For example, 1 Portage Ave"
-              role="combobox"
-              aria-autocomplete="list"
-              aria-controls="address-suggestions"
-              aria-expanded="false"
-              aria-describedby="address-status"
-            />
-            <ul
-              id="address-suggestions"
-              class="suggestions"
-              role="listbox"
-              hidden
-            ></ul>
-          </div>
-          <p
-            class="status"
-            id="address-status"
-            role="status"
-            aria-live="polite"
-            aria-atomic="true"
-          ></p>
-          <button class="retry-button" id="retry-button" type="button" hidden>
-            Retry address search
-          </button>
-        </div>
+  <div class="search-area" id="search-area">
+    <label for="address-input">Winnipeg Street Address</label>
+    <div class="combobox-wrap" id="combobox-wrap">
+      <input
+        id="address-input"
+        name="address"
+        type="text"
+        inputmode="text"
+        autocomplete="off"
+        autocapitalize="characters"
+        spellcheck="false"
+        placeholder="For example, 1 Portage Ave"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-controls="address-suggestions"
+        aria-expanded="false"
+        aria-describedby="address-status"
+      />
+      <ul
+        id="address-suggestions"
+        class="suggestions"
+        role="listbox"
+        hidden
+      ></ul>
+    </div>
+    <p
+      class="status"
+      id="address-status"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></p>
+    <button class="retry-button" id="retry-button" type="button" hidden>
+      Retry address search
+    </button>
+  </div>
 
-        <section
-          class="address-lookup-result"
-          id="address-lookup-result"
-          aria-labelledby="address-lookup-result-address"
-          hidden
-        >
-          <p class="address-lookup-result-kicker">Official civic address</p>
-          <h2 id="address-lookup-result-address"></h2>
-          <dl class="address-lookup-result-grid">
-            <div>
-              <dt>City Council</dt>
-              <dd id="council-ward"></dd>
-            </div>
-            <div>
-              <dt>School Trustee</dt>
-              <dd id="trustee-ward"></dd>
-            </div>
-          </dl>
-          <section class="applicable-contests" aria-labelledby="applicable-contests-heading">
-            <h2 id="applicable-contests-heading">Your applicable Contests</h2>
-            <div id="applicable-contests"></div>
-          </section>
-        </section>
+  <section
+    class="address-lookup-result"
+    id="address-lookup-result"
+    aria-labelledby="address-lookup-result-address"
+    hidden
+  >
+    <p class="address-lookup-result-kicker">Official civic address</p>
+    <h2 id="address-lookup-result-address"></h2>
+    <dl class="address-lookup-result-grid">
+      <div>
+        <dt>City Council</dt>
+        <dd id="council-ward"></dd>
+      </div>
+      <div>
+        <dt>School Trustee</dt>
+        <dd id="trustee-ward"></dd>
+      </div>
+    </dl>
+    <section
+      class="applicable-contests"
+      aria-labelledby="applicable-contests-heading"
+    >
+      <h2 id="applicable-contests-heading">Election Candidates</h2>
+      <div id="applicable-contests"></div>
+    </section>
+  </section>
 
-        <div hidden>
-          {% for contest in election.contests %}
-            <template data-contest-template="{{ contest.id }}">{{ homeContest(contest) }}</template>
-          {% endfor %}
-          {% for office in ["Mayor", "Councillor", "School Trustee"] %}
-            <template data-contest-template="{{ office }}">{{ unresolvedHomeContest(office) }}</template>
-          {% endfor %}
-        </div>
-        <script id="contest-resolution-data" type="application/json">{{ election.contests | contestResolutionData | jsonForHtml | safe }}</script>
+  <div hidden>
+    {% for contest in election.contests %}
+    <template data-contest-template="{{ contest.id }}"
+      >{{ homeContest(contest) }}</template
+    >
+    {% endfor %} {% for office in ["Mayor", "Councillor", "School Trustee"] %}
+    <template data-contest-template="{{ office }}"
+      >{{ unresolvedHomeContest(office) }}</template
+    >
+    {% endfor %}
+  </div>
+  <script id="contest-resolution-data" type="application/json">
+    {{ election.contests | contestResolutionData | jsonForHtml | safe }}
+  </script>
 
-        <footer class="page-footer">
-          <p class="footer-note privacy-note">
-            <strong>Privacy:</strong> Your address is not stored by this tool.
-            Searches go directly to the
-            <a href="https://data.winnipeg.ca/City-Planning/Addresses/cam2-ii3u"
-              >City of Winnipeg address service</a
-            >.
-          </p>
-          <p class="footer-note attribution-note">
-            <strong>Data attribution:</strong> This tool uses
-            <a href="https://en.wikipedia.org/wiki/Open_data">open data</a>
-            licenced under the
-            <a href="https://data.winnipeg.ca/open-data-licence"
-              >City of Winnipeg Open Government Licence</a
-            >.
-          </p>
-        </footer>
-      </section>
+  <footer class="page-footer">
+    <p class="footer-note privacy-note">
+      <strong>Privacy:</strong> Your address is not stored by this tool.
+      Searches go directly to the
+      <a href="https://data.winnipeg.ca/City-Planning/Addresses/cam2-ii3u"
+        >City of Winnipeg address service</a
+      >.
+    </p>
+    <p class="footer-note attribution-note">
+      <strong>Attribution:</strong> This tool uses
+      <a href="https://en.wikipedia.org/wiki/Open_data">open data</a>
+      licenced under the
+      <a href="https://data.winnipeg.ca/open-data-licence"
+        >City of Winnipeg Open Government Licence</a
+      >.
+    </p>
+  </footer>
+</section>

@@ -57,8 +57,11 @@ html[data-ui-variant="signal"] {
   --signal-mark: #f3df2b;
   --signal-confirm: #08775f;
   --signal-blue: #185c87;
-  --signal-sans: "Arial Narrow", "Roboto Condensed", "Aptos Narrow", "Segoe UI", Arial, sans-serif;
-  --signal-mono: "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --signal-sans:
+    "Arial Narrow", "Roboto Condensed", "Aptos Narrow", "Segoe UI", Arial,
+    sans-serif;
+  --signal-mono:
+    "Cascadia Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   background: var(--signal-paper);
 }
 
@@ -67,7 +70,8 @@ html[data-ui-variant="signal"] body {
   margin: 0;
   padding: 0 0 7rem 17.5rem;
   background:
-    linear-gradient(90deg, rgb(17 28 38 / 3%) 1px, transparent 1px) 0 0 / 5rem 100%,
+    linear-gradient(90deg, rgb(17 28 38 / 3%) 1px, transparent 1px) 0 0 / 5rem
+      100%,
     var(--signal-paper);
   color: var(--signal-ink);
   font-family: "Segoe UI", Arial, sans-serif;
@@ -292,29 +296,9 @@ html[data-ui-variant="signal"] .search-area::before {
   white-space: pre-line;
 }
 
-html[data-ui-variant="signal"] .lookup:has(.address-lookup-result[hidden]) .search-area::after {
-  position: absolute;
-  right: 0;
-  bottom: -8.35rem;
-  left: 0;
-  z-index: -1;
-  min-height: 8.35rem;
-  padding: 1.25rem 2rem 1.25rem 9rem;
-  border-right: 1px solid var(--signal-line);
-  border-bottom: 1px solid var(--signal-line);
-  border-left: 1px solid var(--signal-line);
-  background: var(--signal-paper);
-  color: var(--signal-muted);
-  content: "02  CONFIRM OFFICIAL ADDRESS + ASSIGNMENTS       QUEUED\A 03  REVIEW APPLICABLE CONTESTS + CANDIDATES       QUEUED";
-  font-family: var(--signal-mono);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.045em;
-  line-height: 2.9;
-  white-space: pre-line;
-}
-
-html[data-ui-variant="signal"] .lookup:has(.address-lookup-result[hidden]) .page-footer {
+html[data-ui-variant="signal"]
+  .lookup:has(.address-lookup-result[hidden])
+  .page-footer {
   margin-top: 11rem;
 }
 
@@ -439,7 +423,7 @@ html[data-ui-variant="signal"] .address-lookup-result::before {
   padding-top: 0.6rem;
   border-top: 0.45rem solid var(--signal-confirm);
   color: var(--signal-ink);
-  content: "02\A CONFIRM\A ASSIGNMENT";
+  content: "02\A CONFIRM\A ADDRESS";
   font-family: var(--signal-mono);
   font-size: 0.72rem;
   font-weight: 800;
@@ -588,7 +572,9 @@ html[data-ui-variant="signal"] .applicable-contest[open] summary::after {
   content: "↑";
 }
 
-html[data-ui-variant="signal"] .applicable-contest-summary-copy .candidate-role {
+html[data-ui-variant="signal"]
+  .applicable-contest-summary-copy
+  .candidate-role {
   color: var(--signal-confirm);
 }
 
@@ -678,18 +664,6 @@ html[data-ui-variant="signal"] .page-shell > .intro:not(.lookup .intro) {
   padding-top: 2.1rem;
 }
 
-html[data-ui-variant="signal"] .page-shell > .intro:not(.lookup .intro)::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: var(--signal-confirm);
-  content: "DESTINATIONS / 2026 ELECTION";
-  font-family: var(--signal-mono);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-}
-
 html[data-ui-variant="signal"] .contest-directory {
   counter-reset: signal-group;
   border-top: 0.6rem solid var(--signal-ink);
@@ -706,7 +680,7 @@ html[data-ui-variant="signal"] .contest-directory-group {
 html[data-ui-variant="signal"] .contest-directory-group h2 {
   position: relative;
   margin: 0;
-  padding: 3.8rem 1.3rem 1.5rem;
+  padding: 1.3rem 1.3rem 1.5rem;
   border-right: 1px solid var(--signal-ink);
   background: var(--signal-navy);
   color: var(--signal-surface);
@@ -719,29 +693,11 @@ html[data-ui-variant="signal"] .contest-directory-group h2 {
   overflow-wrap: anywhere;
 }
 
-html[data-ui-variant="signal"] .contest-directory-group h2::before {
-  position: absolute;
-  top: 1rem;
-  left: 1.3rem;
-  color: var(--signal-mark);
-  content: "0" counter(signal-group) " / OFFICE";
-  font-family: var(--signal-mono);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-
 html[data-ui-variant="signal"] .contest-directory-list {
-  counter-reset: signal-destination;
   display: block;
   margin: 0;
   padding: 0;
   background: var(--signal-surface);
-}
-
-html[data-ui-variant="signal"] .contest-directory-list li {
-  counter-increment: signal-destination;
-  border-bottom: 1px solid var(--signal-line);
 }
 
 html[data-ui-variant="signal"] .contest-directory-list li:last-child {
@@ -751,8 +707,8 @@ html[data-ui-variant="signal"] .contest-directory-list li:last-child {
 html[data-ui-variant="signal"] .contest-directory-list a {
   position: relative;
   display: grid;
-  min-height: 4.1rem;
-  padding: 0.85rem 4rem 0.85rem 4.5rem;
+  min-height: 5rem;
+  padding: 0.85rem 4rem 0.85rem 2rem;
   color: var(--signal-ink);
   font-family: var(--signal-sans);
   font-size: 1.08rem;
@@ -760,16 +716,6 @@ html[data-ui-variant="signal"] .contest-directory-list a {
   line-height: 1.2;
   text-decoration: none;
   align-items: center;
-}
-
-html[data-ui-variant="signal"] .contest-directory-list a::before {
-  position: absolute;
-  left: 1.2rem;
-  color: var(--signal-muted);
-  content: counter(signal-destination, decimal-leading-zero);
-  font-family: var(--signal-mono);
-  font-size: 0.72rem;
-  font-weight: 800;
 }
 
 html[data-ui-variant="signal"] .contest-directory-list a::after {
@@ -801,17 +747,6 @@ html[data-ui-variant="signal"] .contest-page {
 html[data-ui-variant="signal"] .contest-page > .intro {
   display: block;
   grid-column: 1;
-}
-
-html[data-ui-variant="signal"] .contest-page > .intro::before {
-  display: block;
-  margin-bottom: 1rem;
-  color: var(--signal-confirm);
-  content: "DESTINATION SHEET / 2026";
-  font-family: var(--signal-mono);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
 }
 
 html[data-ui-variant="signal"] .contest-page > .intro h1 {
@@ -884,27 +819,13 @@ html[data-ui-variant="signal"] .candidate-list-notice {
   position: relative;
   display: grid;
   min-height: 8rem;
-  padding: 1.4rem 1.5rem 1.5rem 8rem;
+  padding: 1.4rem 1.5rem 1.5rem 1.5rem;
   border: 0;
   border-radius: 0;
   background: var(--signal-surface);
   box-shadow: none;
   grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.48fr);
   gap: 0.7rem 2rem;
-}
-
-html[data-ui-variant="signal"] .candidate-record::before {
-  position: absolute;
-  top: 1.35rem;
-  left: 1.2rem;
-  width: 4.6rem;
-  padding-top: 0.45rem;
-  border-top: 0.35rem solid var(--signal-mark);
-  color: var(--signal-muted);
-  content: "C-" counter(signal-candidate, decimal-leading-zero);
-  font-family: var(--signal-mono);
-  font-size: 0.75rem;
-  font-weight: 850;
 }
 
 html[data-ui-variant="signal"] .candidate-record > .candidate-role,
@@ -960,10 +881,6 @@ html[data-ui-variant="signal"] .applicable-contest .candidate-list {
   border-top-width: 1px;
 }
 
-html[data-ui-variant="signal"] .applicable-contest .candidate-record {
-  padding-left: 6.5rem;
-}
-
 html[data-ui-variant="signal"] .applicable-contest .candidate-record > h3,
 html[data-ui-variant="signal"] .applicable-contest .candidate-list-notice > h3 {
   font-size: clamp(1.45rem, 2.6vw, 2.2rem);
@@ -975,17 +892,6 @@ html[data-ui-variant="signal"] .page-shell > h1 {
   padding: 0 0 1.5rem;
   border-bottom: 0.6rem solid var(--signal-ink);
   font-size: clamp(3rem, 6vw, 6rem);
-}
-
-html[data-ui-variant="signal"] .page-shell > h1::before {
-  display: block;
-  margin-bottom: 1.2rem;
-  color: var(--signal-confirm);
-  content: "PUBLIC INFORMATION / 2026";
-  font-family: var(--signal-mono);
-  font-size: 0.7rem;
-  font-weight: 850;
-  letter-spacing: 0.1em;
 }
 
 html[data-ui-variant="signal"] .page-shell > h1 ~ p,
@@ -1091,7 +997,6 @@ html[data-ui-variant="signal"] .page-shell > h1 ~ h2::before {
   html[data-ui-variant="signal"] .page-shell {
     width: min(100% - 3rem, 76rem);
   }
-
 }
 
 @media (max-width: 42rem) {
@@ -1122,16 +1027,19 @@ html[data-ui-variant="signal"] .page-shell > h1 ~ h2::before {
     left: 1rem;
   }
 
-  html[data-ui-variant="signal"] .lookup:has(.address-lookup-result[hidden]) .search-area::after {
+  html[data-ui-variant="signal"]
+    .lookup:has(.address-lookup-result[hidden])
+    .search-area::after {
     bottom: -9.8rem;
     min-height: 9.8rem;
     padding: 1rem;
-    content: "02  CONFIRM ADDRESS + ASSIGNMENTS  / QUEUED\A 03  REVIEW CONTESTS + CANDIDATES  / QUEUED";
     font-size: 0.67rem;
     line-height: 3.6;
   }
 
-  html[data-ui-variant="signal"] .lookup:has(.address-lookup-result[hidden]) .page-footer {
+  html[data-ui-variant="signal"]
+    .lookup:has(.address-lookup-result[hidden])
+    .page-footer {
     margin-top: 12.5rem;
   }
 
@@ -1322,7 +1230,6 @@ html[data-ui-variant="signal"] .page-shell > h1 ~ h2::before {
   html[data-ui-variant="signal"] .search-area {
     min-height: 11rem;
   }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2054,11 +1961,20 @@ html[data-ui-variant="atlas"] body {
   position: relative;
   color: var(--atlas-charcoal);
   background:
-    linear-gradient(90deg, transparent calc(50% - 0.5px), rgb(17 63 87 / 4%) 50%, transparent calc(50% + 0.5px)),
+    linear-gradient(
+      90deg,
+      transparent calc(50% - 0.5px),
+      rgb(17 63 87 / 4%) 50%,
+      transparent calc(50% + 0.5px)
+    ),
     linear-gradient(rgb(17 63 87 / 4%) 1px, transparent 1px),
     linear-gradient(90deg, rgb(17 63 87 / 4%) 1px, transparent 1px),
     var(--atlas-paper);
-  background-size: 100% 100%, 4.5rem 4.5rem, 4.5rem 4.5rem, auto;
+  background-size:
+    100% 100%,
+    4.5rem 4.5rem,
+    4.5rem 4.5rem,
+    auto;
   font-family: var(--atlas-sans);
 }
 
@@ -2429,7 +2345,12 @@ html[data-ui-variant="atlas"] .address-lookup-result {
   border-top: 0.65rem solid var(--atlas-blue);
   border-radius: 0;
   background:
-    linear-gradient(90deg, transparent 50%, var(--atlas-faint-line) 50%, transparent calc(50% + 1px)),
+    linear-gradient(
+      90deg,
+      transparent 50%,
+      var(--atlas-faint-line) 50%,
+      transparent calc(50% + 1px)
+    ),
     var(--atlas-paper-light);
   box-shadow: 1rem 1rem 0 var(--atlas-paper-deep);
 }
@@ -2859,7 +2780,11 @@ html[data-ui-variant="atlas"] .page-shell > h1 ~ h2 {
 
 @media (max-width: 46rem) {
   html[data-ui-variant="atlas"] body {
-    background-size: 100% 100%, 3.25rem 3.25rem, 3.25rem 3.25rem, auto;
+    background-size:
+      100% 100%,
+      3.25rem 3.25rem,
+      3.25rem 3.25rem,
+      auto;
   }
 
   html[data-ui-variant="atlas"] .site-header,
@@ -3111,17 +3036,25 @@ html[data-ui-variant="mosaic"] body {
   padding-bottom: 6.5rem;
   color: var(--mosaic-ink);
   background:
-    radial-gradient(circle at 10% 8rem, rgb(243 187 67 / 24%) 0 0.33rem, transparent 0.36rem),
-    radial-gradient(circle at 10% 8rem, transparent 0 1rem, rgb(82 35 70 / 10%) 1.04rem 1.12rem, transparent 1.16rem),
+    radial-gradient(
+      circle at 10% 8rem,
+      rgb(243 187 67 / 24%) 0 0.33rem,
+      transparent 0.36rem
+    ),
+    radial-gradient(
+      circle at 10% 8rem,
+      transparent 0 1rem,
+      rgb(82 35 70 / 10%) 1.04rem 1.12rem,
+      transparent 1.16rem
+    ),
     linear-gradient(90deg, transparent 0 76%, rgb(204 234 217 / 32%) 76% 100%),
     var(--mosaic-cream);
-  background-size: 9rem 9rem, 9rem 9rem, 100% 100%, auto;
-  font-family:
-    ui-rounded,
-    "Avenir Next",
-    "Segoe UI",
-    system-ui,
-    sans-serif;
+  background-size:
+    9rem 9rem,
+    9rem 9rem,
+    100% 100%,
+    auto;
+  font-family: ui-rounded, "Avenir Next", "Segoe UI", system-ui, sans-serif;
   font-size: 1.05rem;
   line-height: 1.65;
 }
@@ -3165,9 +3098,21 @@ html[data-ui-variant="mosaic"] .site-header::before {
   height: 2.8rem;
   border-radius: 0.75rem 0.75rem 0.75rem 0.2rem;
   background:
-    linear-gradient(90deg, var(--mosaic-marigold) 0 48%, transparent 48% 52%, var(--mosaic-coral) 52% 100%),
-    linear-gradient(90deg, var(--mosaic-mint) 0 48%, transparent 48% 52%, var(--mosaic-teal) 52% 100%);
-  background-position: 0 0, 0 100%;
+    linear-gradient(
+      90deg,
+      var(--mosaic-marigold) 0 48%,
+      transparent 48% 52%,
+      var(--mosaic-coral) 52% 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--mosaic-mint) 0 48%,
+      transparent 48% 52%,
+      var(--mosaic-teal) 52% 100%
+    );
+  background-position:
+    0 0,
+    0 100%;
   background-size: 100% 48%;
   background-repeat: no-repeat;
   box-shadow: 0.24rem 0.24rem 0 var(--mosaic-plum);
@@ -3261,10 +3206,16 @@ html[data-ui-variant="mosaic"] .lookup > .intro {
   min-height: 23rem;
   margin: 0;
   padding: clamp(2rem, 5vw, 4rem);
-  border-radius: var(--mosaic-radius-lg) var(--mosaic-radius-lg) 0 var(--mosaic-radius-lg);
+  border-radius: var(--mosaic-radius-lg) var(--mosaic-radius-lg) 0
+    var(--mosaic-radius-lg);
   color: var(--mosaic-cream);
   background:
-    linear-gradient(135deg, transparent 0 74%, rgb(243 187 67 / 20%) 74% 84%, transparent 84%),
+    linear-gradient(
+      135deg,
+      transparent 0 74%,
+      rgb(243 187 67 / 20%) 74% 84%,
+      transparent 84%
+    ),
     var(--mosaic-plum);
   box-shadow: 0.65rem 0.65rem 0 var(--mosaic-coral-soft);
   overflow: hidden;
@@ -3306,7 +3257,8 @@ html[data-ui-variant="mosaic"] .lookup > .search-area {
   min-height: 19.5rem;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   border: 2px solid var(--mosaic-plum);
-  border-radius: var(--mosaic-radius) var(--mosaic-radius) var(--mosaic-radius) 0;
+  border-radius: var(--mosaic-radius) var(--mosaic-radius) var(--mosaic-radius)
+    0;
   background: var(--mosaic-marigold);
   box-shadow: -0.55rem 0.55rem 0 var(--mosaic-mint);
 }
@@ -3454,7 +3406,8 @@ html[data-ui-variant="mosaic"] .address-lookup-result {
   padding: clamp(1.5rem, 4vw, 3rem);
   border: 2px solid var(--mosaic-plum);
   border-top: 2px solid var(--mosaic-plum);
-  border-radius: var(--mosaic-radius-lg) 0 var(--mosaic-radius-lg) var(--mosaic-radius-lg);
+  border-radius: var(--mosaic-radius-lg) 0 var(--mosaic-radius-lg)
+    var(--mosaic-radius-lg);
   background: var(--mosaic-paper);
   box-shadow: 0.8rem 0.8rem 0 var(--mosaic-plum);
 }
@@ -3467,7 +3420,9 @@ html[data-ui-variant="mosaic"] .address-lookup-result::before {
   height: 2.9rem;
   border-radius: 0.7rem 0.7rem 0 0;
   background: var(--mosaic-coral);
-  box-shadow: 3.7rem 0 0 var(--mosaic-marigold), 7.4rem 0 0 var(--mosaic-mint);
+  box-shadow:
+    3.7rem 0 0 var(--mosaic-marigold),
+    7.4rem 0 0 var(--mosaic-mint);
   content: "";
 }
 
@@ -3492,7 +3447,8 @@ html[data-ui-variant="mosaic"] .address-lookup-result-grid {
 html[data-ui-variant="mosaic"] .address-lookup-result-grid div {
   min-height: 8rem;
   padding: 1.25rem 1.4rem;
-  border-radius: var(--mosaic-radius) var(--mosaic-radius) 0 var(--mosaic-radius);
+  border-radius: var(--mosaic-radius) var(--mosaic-radius) 0
+    var(--mosaic-radius);
   background: var(--mosaic-coral-soft);
 }
 
@@ -3537,13 +3493,15 @@ html[data-ui-variant="mosaic"] #applicable-contests {
 html[data-ui-variant="mosaic"] .applicable-contest {
   min-width: 0;
   border: 2px solid var(--mosaic-plum);
-  border-radius: var(--mosaic-radius) var(--mosaic-radius) 0 var(--mosaic-radius);
+  border-radius: var(--mosaic-radius) var(--mosaic-radius) 0
+    var(--mosaic-radius);
   background: var(--mosaic-cream);
   overflow: clip;
 }
 
 html[data-ui-variant="mosaic"] .applicable-contest:nth-child(2) {
-  border-radius: var(--mosaic-radius) 0 var(--mosaic-radius) var(--mosaic-radius);
+  border-radius: var(--mosaic-radius) 0 var(--mosaic-radius)
+    var(--mosaic-radius);
   background: #fff1dc;
 }
 
@@ -3621,7 +3579,12 @@ html[data-ui-variant="mosaic"] .page-shell > .intro:not(.lookup .intro)::after {
   width: min(12rem, 30%);
   height: 0.55rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--mosaic-marigold) 0 38%, var(--mosaic-teal) 38% 72%, var(--mosaic-plum) 72%);
+  background: linear-gradient(
+    90deg,
+    var(--mosaic-marigold) 0 38%,
+    var(--mosaic-teal) 38% 72%,
+    var(--mosaic-plum) 72%
+  );
   content: "";
 }
 
@@ -3636,13 +3599,15 @@ html[data-ui-variant="mosaic"] .contest-directory-group {
   gap: clamp(1.5rem, 4vw, 3.5rem);
   padding: clamp(1.4rem, 4vw, 3rem);
   border: 2px solid var(--mosaic-plum);
-  border-radius: var(--mosaic-radius-lg) var(--mosaic-radius-lg) 0 var(--mosaic-radius-lg);
+  border-radius: var(--mosaic-radius-lg) var(--mosaic-radius-lg) 0
+    var(--mosaic-radius-lg);
   background: var(--mosaic-marigold);
   box-shadow: 0.55rem 0.55rem 0 var(--mosaic-plum);
 }
 
 html[data-ui-variant="mosaic"] .contest-directory-group:nth-child(2) {
-  border-radius: var(--mosaic-radius-lg) 0 var(--mosaic-radius-lg) var(--mosaic-radius-lg);
+  border-radius: var(--mosaic-radius-lg) 0 var(--mosaic-radius-lg)
+    var(--mosaic-radius-lg);
   background: var(--mosaic-coral-soft);
   box-shadow: 0.55rem 0.55rem 0 var(--mosaic-coral);
 }
@@ -3732,7 +3697,8 @@ html[data-ui-variant="mosaic"] .contest-page > .intro {
   min-height: 17rem;
   margin: 0;
   padding: clamp(1.7rem, 4vw, 3.5rem);
-  border-radius: var(--mosaic-radius-lg) var(--mosaic-radius-lg) 0 var(--mosaic-radius-lg);
+  border-radius: var(--mosaic-radius-lg) var(--mosaic-radius-lg) 0
+    var(--mosaic-radius-lg);
   color: #fff;
   background: var(--mosaic-plum);
   box-shadow: 0.55rem 0.55rem 0 var(--mosaic-coral-soft);
@@ -3756,7 +3722,8 @@ html[data-ui-variant="mosaic"] .contest-number-to-elect {
   margin: 0;
   padding: 2rem 1.25rem;
   border: 2px solid var(--mosaic-plum);
-  border-radius: var(--mosaic-radius) 0 var(--mosaic-radius) var(--mosaic-radius);
+  border-radius: var(--mosaic-radius) 0 var(--mosaic-radius)
+    var(--mosaic-radius);
   color: var(--mosaic-plum-deep);
   background: var(--mosaic-marigold);
   font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -3801,17 +3768,23 @@ html[data-ui-variant="mosaic"] .candidate-list-notice {
   min-height: 100%;
   padding: clamp(1.35rem, 3vw, 2.15rem);
   border: 2px solid var(--mosaic-plum);
-  border-radius: var(--mosaic-radius) var(--mosaic-radius) 0 var(--mosaic-radius);
+  border-radius: var(--mosaic-radius) var(--mosaic-radius) 0
+    var(--mosaic-radius);
   background: var(--mosaic-paper);
   box-shadow: 0.4rem 0.4rem 0 var(--mosaic-coral-soft);
 }
 
-html[data-ui-variant="mosaic"] .candidate-list-item:nth-child(3n + 2) .candidate-record {
-  border-radius: var(--mosaic-radius) 0 var(--mosaic-radius) var(--mosaic-radius);
+html[data-ui-variant="mosaic"]
+  .candidate-list-item:nth-child(3n + 2)
+  .candidate-record {
+  border-radius: var(--mosaic-radius) 0 var(--mosaic-radius)
+    var(--mosaic-radius);
   box-shadow: 0.4rem 0.4rem 0 var(--mosaic-mint);
 }
 
-html[data-ui-variant="mosaic"] .candidate-list-item:nth-child(3n) .candidate-record {
+html[data-ui-variant="mosaic"]
+  .candidate-list-item:nth-child(3n)
+  .candidate-record {
   box-shadow: 0.4rem 0.4rem 0 var(--mosaic-marigold);
 }
 
@@ -3826,11 +3799,15 @@ html[data-ui-variant="mosaic"] .candidate-record::before {
   content: "";
 }
 
-html[data-ui-variant="mosaic"] .candidate-list-item:nth-child(3n + 2) .candidate-record::before {
+html[data-ui-variant="mosaic"]
+  .candidate-list-item:nth-child(3n + 2)
+  .candidate-record::before {
   background: var(--mosaic-teal);
 }
 
-html[data-ui-variant="mosaic"] .candidate-list-item:nth-child(3n) .candidate-record::before {
+html[data-ui-variant="mosaic"]
+  .candidate-list-item:nth-child(3n)
+  .candidate-record::before {
   background: var(--mosaic-marigold);
 }
 
@@ -3890,7 +3867,8 @@ html[data-ui-variant="mosaic"] .candidate-disclosures a:hover {
 html[data-ui-variant="mosaic"] .candidate-image {
   width: min(100%, 16rem);
   border: 0.45rem solid var(--mosaic-cream-deep);
-  border-radius: var(--mosaic-radius-sm) var(--mosaic-radius-sm) 0 var(--mosaic-radius-sm);
+  border-radius: var(--mosaic-radius-sm) var(--mosaic-radius-sm) 0
+    var(--mosaic-radius-sm);
 }
 
 /* Sparse reading pages become a calm, intentional community-notice layout. */
@@ -3898,7 +3876,8 @@ html[data-ui-variant="mosaic"] .page-shell > h1 {
   max-width: 15ch;
   margin-bottom: 2.5rem;
   padding: clamp(1.7rem, 5vw, 3.5rem);
-  border-radius: var(--mosaic-radius-lg) var(--mosaic-radius-lg) 0 var(--mosaic-radius-lg);
+  border-radius: var(--mosaic-radius-lg) var(--mosaic-radius-lg) 0
+    var(--mosaic-radius-lg);
   color: #fff;
   background: var(--mosaic-plum);
   box-shadow: 0.65rem 0.65rem 0 var(--mosaic-coral-soft);
@@ -3941,9 +3920,15 @@ html[data-ui-variant="mosaic"] .page-shell > h1 ~ h2 {
   html[data-ui-variant="mosaic"] body {
     padding-bottom: 7rem;
     background:
-      radial-gradient(circle at 10% 8rem, rgb(243 187 67 / 24%) 0 0.3rem, transparent 0.34rem),
+      radial-gradient(
+        circle at 10% 8rem,
+        rgb(243 187 67 / 24%) 0 0.3rem,
+        transparent 0.34rem
+      ),
       var(--mosaic-cream);
-    background-size: 7rem 7rem, auto;
+    background-size:
+      7rem 7rem,
+      auto;
   }
 
   html[data-ui-variant="mosaic"] .site-header {
