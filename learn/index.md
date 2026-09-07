@@ -8,4 +8,6 @@ description: Learn how Winnipeg's municipal and school board election works.
 
 This page will collect plain-language explainers about City Council, School Boards, and voting in the 2026 Election.
 
+There will also be a short "About Open Democracy Manitoba" section and a FAQ.
+
 For now, use the [Address Lookup](/) to find the Council Ward and School Division Ward associated with a Winnipeg Civic Address.

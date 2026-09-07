@@ -7,7 +7,10 @@ import { loadElectionPresentation } from "../election-presentation.js";
 const projectRoot = new URL("../", import.meta.url);
 const election = loadElectionPresentation();
 const candidateDocument = JSON.parse(
-  readFileSync(new URL("../data/election-2026/candidates.json", import.meta.url), "utf8"),
+  readFileSync(
+    new URL("../data/election-2026/candidates.json", import.meta.url),
+    "utf8",
+  ),
 );
 
 function readBuiltPage(path) {
@@ -30,26 +33,43 @@ function templateFor(html, key) {
 }
 
 test("production build publishes the shared site shell and Address Lookup assets", () => {
-  const command = process.platform === "win32"
-    ? [process.env.ComSpec ?? "cmd.exe", ["/d", "/s", "/c", "npm run build --silent"]]
-    : ["npm", ["run", "build", "--silent"]];
+  const command =
+    process.platform === "win32"
+      ? [
+          process.env.ComSpec ?? "cmd.exe",
+          ["/d", "/s", "/c", "npm run build --silent"],
+        ]
+      : ["npm", ["run", "build", "--silent"]];
   execFileSync(command[0], command[1], {
     cwd: projectRoot,
     stdio: "pipe",
   });
 
-  const pages = ["index.html", "learn/index.html", "about/index.html", "faq/index.html"]
-    .map(readBuiltPage);
+  const pages = [
+    "index.html",
+    "learn/index.html",
+    "about/index.html",
+    "faq/index.html",
+  ].map(readBuiltPage);
 
   for (const html of pages) {
-    assert.match(html, /<nav class="site-navigation" aria-label="Main navigation">/);
+    assert.match(
+      html,
+      /<nav class="site-navigation" aria-label="Main navigation">/,
+    );
     assert.match(html, /href="\/learn\/"/);
     assert.match(html, /href="\/assets\/styles\.css"/);
   }
 
   assert.match(pages[0], /id="address-input"/);
-  assert.match(pages[0], /<script type="module" src="\/assets\/app\.js"><\/script>/);
-  assert.match(readFileSync(new URL("../_site/assets/app.js", import.meta.url), "utf8"), /LookupController/);
+  assert.match(
+    pages[0],
+    /<script type="module" src="\/assets\/app\.js"><\/script>/,
+  );
+  assert.match(
+    readFileSync(new URL("../_site/assets/app.js", import.meta.url), "utf8"),
+    /LookupController/,
+  );
 });
 
 test("the home page publishes ordered Contest templates from the shared Candidate presentation", () => {
@@ -61,7 +81,10 @@ test("the home page publishes ordered Contest templates from the shared Candidat
   for (const contest of election.contests) {
     const marker = `data-contest-template="${contest.id}"`;
     const templateIndex = home.indexOf(marker);
-    assert.ok(templateIndex > previousTemplateIndex, `${contest.id} preserves inventory order`);
+    assert.ok(
+      templateIndex > previousTemplateIndex,
+      `${contest.id} preserves inventory order`,
+    );
     previousTemplateIndex = templateIndex;
 
     const template = templateFor(home, contest.id);
@@ -70,7 +93,10 @@ test("the home page publishes ordered Contest templates from the shared Candidat
       false,
       `${contest.id} lookup template omits its standalone Contest page link`,
     );
-    assert.match(template, /<details class="applicable-contest" name="applicable-contest">/);
+    assert.match(
+      template,
+      /<details class="applicable-contest" name="applicable-contest">/,
+    );
     assert.doesNotMatch(template, /<details[^>]* open/);
     assert.doesNotMatch(template, /Candidate List Availability/);
     for (const candidate of contest.candidates) {
@@ -81,18 +107,31 @@ test("the home page publishes ordered Contest templates from the shared Candidat
     }
   }
 
-  const populated = election.contests.find((contest) => contest.candidates.length > 0);
+  const populated = election.contests.find(
+    (contest) => contest.candidates.length > 0,
+  );
   if (populated) {
     const populatedTemplate = templateFor(home, populated.id);
-    assert.ok(populatedTemplate.includes(`<p class="candidate-role">${populated.office} Candidate</p>`));
-    assert.doesNotMatch(populatedTemplate, /Candidate information|candidate-metadata|Election Phase|Candidate Status|Registration Date/);
-    assert.match(
+    assert.ok(
+      populatedTemplate.includes(
+        `<p class="candidate-role">${populated.office} Candidate</p>`,
+      ),
+    );
+    assert.doesNotMatch(
       populatedTemplate,
-      new RegExp(`id="${populated.id}-candidate-order-explanation"[^>]*>[\\s\\S]*?Candidates are shown alphabetically by family name\\.<\\/span><\\/p>`),
+      /Candidate information|candidate-metadata|Election Phase|Candidate Status|Registration Date/,
     );
     assert.match(
       populatedTemplate,
-      new RegExp(`data-candidate-list aria-describedby="${populated.id}-candidate-order-explanation"`),
+      new RegExp(
+        `id="${populated.id}-candidate-order-explanation"[^>]*>[\\s\\S]*?Candidates are shown alphabetically by family name\\.<\\/span><\\/p>`,
+      ),
+    );
+    assert.match(
+      populatedTemplate,
+      new RegExp(
+        `data-candidate-list aria-describedby="${populated.id}-candidate-order-explanation"`,
+      ),
     );
   }
 
@@ -110,8 +149,14 @@ test("the home page publishes ordered Contest templates from the shared Candidat
       unresolvedTemplate,
       /<details class="applicable-contest unavailable-contest-resolution" name="applicable-contest">/,
     );
-    assert.match(unresolvedTemplate, new RegExp(`<span class="candidate-role">${office} Contest<\\/span>`));
-    assert.match(unresolvedTemplate, /<span class="applicable-contest-name">Contest unavailable<\/span>/);
+    assert.match(
+      unresolvedTemplate,
+      new RegExp(`<span class="candidate-role">${office} Contest<\\/span>`),
+    );
+    assert.match(
+      unresolvedTemplate,
+      /<span class="applicable-contest-name">Contest unavailable<\/span>/,
+    );
     assert.ok(unresolvedTemplate.includes(message.replaceAll("'", "&#39;")));
   }
 
@@ -193,17 +238,31 @@ test("production build publishes every current Candidate Record through the shar
       previousCandidateIndex = candidateIndex;
     }
 
-    const renderedCandidateCount = page.match(/data-candidate-record/g)?.length ?? 0;
+    const renderedCandidateCount =
+      page.match(/data-candidate-record/g)?.length ?? 0;
     assert.equal(
       renderedCandidateCount,
       contest.candidates.length,
       `${contest.id} renders exactly its presented Candidate Records`,
     );
     if (contest.candidates.length > 0) {
-      assert.ok(page.includes(`<p class="candidate-role">${contest.office} Candidate</p>`));
-      assert.doesNotMatch(page, /Candidate information|candidate-metadata|Election Phase|Candidate Status|Registration Date/);
-      assert.match(page, /Candidates are shown alphabetically by family name\./);
-      assert.match(page, /<script type="module" src="\/assets\/candidate-order\.js"><\/script>/);
+      assert.ok(
+        page.includes(
+          `<p class="candidate-role">${contest.office} Candidate</p>`,
+        ),
+      );
+      assert.doesNotMatch(
+        page,
+        /Candidate information|candidate-metadata|Election Phase|Candidate Status|Registration Date/,
+      );
+      assert.match(
+        page,
+        /Candidates are shown alphabetically by family name\./,
+      );
+      assert.match(
+        page,
+        /<script type="module" src="\/assets\/candidate-order\.js"><\/script>/,
+      );
     }
   }
 });
@@ -214,13 +273,23 @@ test("production Candidate markup reflects current optional fields and excludes 
     assert.doesNotMatch(page, /Not provided|Official Agent|Auditor/);
     for (const candidate of contest.candidates) {
       if (candidate.presentation.campaignUrl) {
-        assert.ok(page.includes(`href="${escapeHtml(candidate.presentation.campaignUrl)}"`));
+        assert.ok(
+          page.includes(
+            `href="${escapeHtml(candidate.presentation.campaignUrl)}"`,
+          ),
+        );
       }
       if (candidate.email) {
-        assert.ok(page.includes(`href="mailto:${escapeHtml(candidate.email)}"`));
+        assert.ok(
+          page.includes(`href="mailto:${escapeHtml(candidate.email)}"`),
+        );
       }
       if (candidate.phone) {
-        assert.ok(page.includes(`href="tel:${escapeHtml(candidate.presentation.phoneHref)}"`));
+        assert.ok(
+          page.includes(
+            `href="tel:${escapeHtml(candidate.presentation.phoneHref)}"`,
+          ),
+        );
         assert.ok(page.includes(`>${escapeHtml(candidate.phone)}</a>`));
       }
       for (const socialLink of candidate.presentation.socialLinks) {
@@ -233,14 +302,23 @@ test("production Candidate markup reflects current optional fields and excludes 
   const presentedNamesByContest = new Map(
     election.contests.map((contest) => [
       contest.id,
-      new Set(contest.candidates.map(({ sourcePublishedName }) => sourcePublishedName)),
+      new Set(
+        contest.candidates.map(
+          ({ sourcePublishedName }) => sourcePublishedName,
+        ),
+      ),
     ]),
   );
   const withdrawn = candidateDocument.candidates.filter(({ status }) =>
-    ["Nomination Withdrawn", "Registration Withdrawn"].includes(status.value)
+    ["Nomination Withdrawn", "Registration Withdrawn"].includes(status.value),
   );
   for (const candidate of withdrawn) {
-    assert.equal(presentedNamesByContest.get(candidate.contestId)?.has(candidate.sourcePublishedName), false);
+    assert.equal(
+      presentedNamesByContest
+        .get(candidate.contestId)
+        ?.has(candidate.sourcePublishedName),
+      false,
+    );
     assert.ok(
       !readBuiltPage(`contests/${candidate.contestId}/index.html`).includes(
         escapeHtml(candidate.sourcePublishedName),
@@ -252,19 +330,24 @@ test("production Candidate markup reflects current optional fields and excludes 
 
 test("Contest browsing keeps unavailable Candidate lists distinct from published lists", () => {
   const directory = readBuiltPage("contests/index.html");
-  assert.match(directory, /<nav class="site-navigation" aria-label="Main navigation">[\s\S]*href="\/contests\/"/);
+  assert.match(
+    directory,
+    /<nav class="site-navigation" aria-label="Main navigation">[\s\S]*href="\/contests\/"/,
+  );
 
   for (const contest of election.contests.filter(
     ({ candidateList }) => candidateList.availability === "Unavailable",
   )) {
     const unavailable = readBuiltPage(`contests/${contest.id}/index.html`);
-    assert.doesNotMatch(unavailable, /Candidate List Availability|<dd>Unavailable<\/dd>/);
+    assert.doesNotMatch(
+      unavailable,
+      /Candidate List Availability|<dd>Unavailable<\/dd>/,
+    );
     assert.match(unavailable, /does not currently support Candidate data/);
     assert.match(unavailable, /does not mean that no Candidates exist/);
     assert.doesNotMatch(unavailable, /No published Candidate Records/);
   }
 });
-
 
 test("Signal is the permanent shell and its visible labels are markup", () => {
   const home = readBuiltPage("index.html");
@@ -276,13 +359,15 @@ test("Signal is the permanent shell and its visible labels are markup", () => {
     assert.equal(declaration[1], '""', "CSS only generates empty decorations");
   }
   assert.match(home, /class="search-step">01<br \/>ENTER<br \/>ADDRESS/);
-  assert.match(home, /class="confirmation-step">02<br \/>CONFIRM<br \/>ADDRESS/);
-  assert.match(home, /class="contests-step">03<br \/>REVIEW<br \/>CONTESTS/);
-  assert.match(home, /class="site-resource-note">NONPARTISAN VOTER RESOURCE/);
+  assert.doesNotMatch(home, /confirmation-step/);
+  assert.match(home, /class="contests-step">02<br \/>REVIEW<br \/>CONTESTS/);
   assert.match(home, /class="status-label" aria-hidden="true">STATUS \/ /);
   assert.match(home, /id="address-status-message"><\/span>/);
   assert.match(home, /class="ordering-label">LIST ORDER \/ /);
   assert.match(home, /class="disclosure-arrow" aria-hidden="true"/);
   assert.match(home, /id="address-option-template"/);
-  assert.match(readBuiltPage("faq/index.html"), /class="section-number">02 \/<\/span>/);
+  assert.match(
+    readBuiltPage("faq/index.html"),
+    /class="section-number">02 \/<\/span>/,
+  );
 });

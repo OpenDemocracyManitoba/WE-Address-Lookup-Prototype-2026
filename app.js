@@ -1,8 +1,4 @@
 import {
-  formatCouncilWard,
-  formatSchoolTrustee,
-} from "./address-data.js";
-import {
   isRetryablePhase,
   LookupController,
   statusMessage,
@@ -42,8 +38,6 @@ function startBrowserApp() {
   const addressLookupResultAddress = document.querySelector(
     "#address-lookup-result-address",
   );
-  const councilWard = document.querySelector("#council-ward");
-  const trusteeWard = document.querySelector("#trustee-ward");
   const applicableContests = document.querySelector("#applicable-contests");
   bindContestDisclosureScrolling(applicableContests);
   const contestResolutionData = JSON.parse(
@@ -114,15 +108,8 @@ function startBrowserApp() {
     if (state.selected) randomizeCandidateLists(document);
     if (state.selected) {
       addressLookupResultAddress.textContent = state.selected.displayAddress;
-      councilWard.textContent = formatCouncilWard(state.selected.councilWard);
-      trusteeWard.textContent = formatSchoolTrustee(
-        state.selected.schoolDivision,
-        state.selected.schoolDivisionWard,
-      );
     } else {
       addressLookupResultAddress.textContent = "";
-      councilWard.textContent = "";
-      trusteeWard.textContent = "";
     }
     if (state.popupOpen)
       requestAnimationFrame(() => positionPopup(input, wrap, list));

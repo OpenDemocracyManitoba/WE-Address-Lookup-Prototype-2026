@@ -171,7 +171,6 @@ summary:focus-visible {
 }
 
 .eyebrow,
-.address-lookup-result-kicker,
 .candidate-role {
   margin: 0 0 0.7rem;
   color: var(--signal-confirm);
@@ -187,7 +186,6 @@ summary:focus-visible {
 }
 
 h1,
-.address-lookup-result > h2,
 .candidate-record > h2,
 .candidate-record > h3,
 .candidate-list-notice > h2,
@@ -382,13 +380,30 @@ input:hover {
   margin: 2.5rem 0 0;
   padding: 2rem 0 0 9rem;
   border: 0;
-  border-top: 0.6rem solid var(--signal-confirm);
+  border-top: 0.6rem solid var(--signal-ink);
   border-radius: 0;
   background: transparent;
   box-shadow: none;
 }
 
-.confirmation-step {
+.applicable-contests-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.5rem;
+}
+
+.address-lookup-result-subtitle {
+  min-width: 0;
+  margin: 0;
+  color: var(--signal-ink);
+  font-family: var(--signal-sans);
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.contests-step {
   position: absolute;
   top: 1.8rem;
   left: 0;
@@ -404,91 +419,8 @@ input:hover {
   white-space: pre-line;
 }
 
-.address-lookup-result-kicker {
-  color: var(--signal-confirm);
-}
-
-.address-lookup-result > h2 {
-  max-width: 24ch;
-  margin: 0 0 1.6rem;
-  color: var(--signal-ink);
-  font-size: clamp(2rem, 4.5vw, 4.2rem);
-  text-transform: uppercase;
-}
-
-.address-lookup-result-grid {
-  display: block;
+.applicable-contests-header > h2 {
   margin: 0;
-  border-top: 1px solid var(--signal-ink);
-  border-bottom: 1px solid var(--signal-ink);
-  background: var(--signal-surface);
-}
-
-.address-lookup-result-grid div {
-  min-width: 0;
-  display: grid;
-  min-height: 5rem;
-  padding: 0;
-  border: 0;
-  grid-template-columns: minmax(9rem, 0.34fr) minmax(0, 1fr);
-  align-items: stretch;
-}
-
-.address-lookup-result-grid div + div {
-  border-top: 1px solid var(--signal-line);
-}
-
-.address-lookup-result-grid dt {
-  display: flex;
-  margin: 0;
-  padding: 1rem;
-  background: var(--signal-ink);
-  color: var(--signal-surface);
-  font-family: var(--signal-mono);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  align-items: center;
-}
-
-.address-lookup-result-grid dd {
-  overflow-wrap: anywhere;
-  display: flex;
-  margin: 0;
-  padding: 1rem 1.35rem;
-  color: var(--signal-ink);
-  font-family: var(--signal-sans);
-  font-size: clamp(1.2rem, 2.2vw, 1.7rem);
-  font-weight: 820;
-  align-items: center;
-}
-
-.applicable-contests {
-  position: relative;
-  margin: 4rem 0 0 -9rem;
-  padding: 2rem 0 0 9rem;
-  border-top: 0.6rem solid var(--signal-ink);
-}
-
-.contests-step {
-  position: absolute;
-  top: 1.8rem;
-  left: 0;
-  width: 5.5rem;
-  padding-top: 0.6rem;
-  border-top: 0.45rem solid var(--signal-mark);
-  color: var(--signal-ink);
-  font-family: var(--signal-mono);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  line-height: 1.45;
-  white-space: pre-line;
-}
-
-.applicable-contests > h2 {
-  margin: 0 0 1.3rem;
   color: var(--signal-ink);
   font-family: var(--signal-sans);
   font-size: clamp(1.8rem, 4vw, 3.5rem);
@@ -1073,24 +1005,6 @@ input:hover {
     padding: 6.6rem 0 0;
   }
 
-  .confirmation-step {
-    top: 1.5rem;
-  }
-
-  .address-lookup-result-grid div {
-    grid-template-columns: 1fr;
-  }
-
-  .address-lookup-result-grid dt,
-  .address-lookup-result-grid dd {
-    min-height: 3rem;
-  }
-
-  .applicable-contests {
-    margin: 3rem 0 0;
-    padding: 6.8rem 0 0;
-  }
-
   .contests-step {
     top: 1.5rem;
   }
@@ -1133,11 +1047,7 @@ input:hover {
   .candidate-record,
   .candidate-list-notice {
     display: block;
-    padding: 5rem 1rem 1.5rem;
-  }
-
-  .applicable-contest .candidate-record {
-    padding: 5rem 1rem 1.5rem;
+    padding: 1.4rem 1rem 1.5rem;
   }
 
   .candidate-record > section,

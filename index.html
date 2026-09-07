@@ -53,32 +53,18 @@ lookupPage: true
   </div>
 
   <section
-    class="address-lookup-result"
+    class="address-lookup-result applicable-contests"
     id="address-lookup-result"
-    aria-labelledby="address-lookup-result-address"
+    aria-labelledby="applicable-contests-heading"
+    aria-describedby="address-lookup-result-address"
     hidden
   >
-    <div class="confirmation-step">02<br />CONFIRM<br />ADDRESS</div>
-    <p class="address-lookup-result-kicker">Official civic address</p>
-    <h2 id="address-lookup-result-address"></h2>
-    <dl class="address-lookup-result-grid">
-      <div>
-        <dt>City Council</dt>
-        <dd id="council-ward"></dd>
-      </div>
-      <div>
-        <dt>School Trustee</dt>
-        <dd id="trustee-ward"></dd>
-      </div>
-    </dl>
-    <section
-      class="applicable-contests"
-      aria-labelledby="applicable-contests-heading"
-    >
-      <div class="contests-step">03<br />REVIEW<br />CONTESTS</div>
+    <div class="contests-step">02<br />REVIEW<br />CONTESTS</div>
+    <header class="applicable-contests-header">
       <h2 id="applicable-contests-heading">Election Candidates</h2>
-      <div id="applicable-contests"></div>
-    </section>
+      <p class="address-lookup-result-subtitle">For <span id="address-lookup-result-address"></span></p>
+    </header>
+    <div id="applicable-contests"></div>
   </section>
 
   <template id="address-option-template"><li role="option"><span class="suggestion-address"></span><span class="suggestion-arrow" aria-hidden="true">→</span></li></template>
