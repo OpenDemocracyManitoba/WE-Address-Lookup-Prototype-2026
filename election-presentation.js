@@ -86,13 +86,16 @@ function presentCandidate(candidate) {
 }
 
 export function presentElection(election, candidateDocument) {
+  const visibleStatus = election.phase === "nomination" ? "Nominated" : "Registered";
   return {
     ...election,
     contests: election.contests.map((contest) => ({
       ...contest,
       candidates: candidateDocument.candidates
         .filter((candidate) =>
-          candidate.contestId === contest.id && !withdrawnStatuses.has(candidate.status.value)
+          candidate.contestId === contest.id
+          && candidate.status.value === visibleStatus
+          && !withdrawnStatuses.has(candidate.status.value)
         )
         .map(presentCandidate)
         .sort((left, right) =>

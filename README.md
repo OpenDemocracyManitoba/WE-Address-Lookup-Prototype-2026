@@ -1,6 +1,6 @@
 # Winnipeg election ward address lookup
 
-A small, static Eleventy site that maps an official Winnipeg civic street address to its City Council ward, school division, and school trustee ward. The Address Lookup uses browser JavaScript and queries the City address service directly.
+A small, static Eleventy site that maps an official Winnipeg civic street address to its City Council ward, school division, and school trustee ward, then presents the applicable 2026 Contests and Candidates. Visitors can also browse the complete Contest Directory. The Address Lookup uses browser JavaScript and queries the City address service directly.
 
 ## Run the prototype
 
@@ -45,6 +45,8 @@ npm run list:candidates
 
 This read-only listing intentionally shows Candidate names only. Contests with a verified empty imported list are shown with `(no imported candidates)`; unsupported Seine River and Interlake Candidate sources are not imported or listed by this command.
 
+Candidate presentation follows the explicit `phase` in `data/election-2026/contests.json`. `registration` shows active Registered records; `nomination` shows only active Nominated records. Withdrawn records remain in source evidence but are not displayed. The site will launch only after the nomination period has ended and this setting has been changed to `nomination`.
+
 The deterministic suite does not contact the City service. To repeat the live parser and displayed-result audit against the complete current grouped dataset, run:
 
 ```sh
@@ -69,7 +71,7 @@ Each request selects and groups only these civic and election fields: `street_ad
 
 The City dataset returns two authoritative grouped records for `1615 REGENT AVE W`. Both records have the same municipal ward, but their school trustee values are **Ward 1** and **Ward 2**. The address is a shopping-centre property with zero dwelling units, and its underlying units span the two trustee wards. Because Electors must reside in the school division ward, no 2026 Elector can live at this address and receive the wrong trustee ward from this conflict.
 
-The prototype shows `1615 REGENT AVE W` once. Its general display-address deduplication retains the first tuple in the normal deterministic sort; there is no Regent-specific resolution code. Because the address has no residential units, choosing between its duplicate trustee records is not useful to this residential lookup. A future conflict affecting a residential address would require an explicit data and product decision.
+The prototype shows `1615 REGENT AVE W` once. Its general display-address deduplication retains the first tuple in the normal deterministic sort; there is no Regent-specific resolution code. A review of the complete address dataset found no other duplicate Electoral Assignment conflict. Because this address has no residential units, choosing between its duplicate trustee records is not useful to this residential lookup. A future conflict affecting a residential address would require an explicit data and product decision.
 
 ## Parsing and query behavior
 

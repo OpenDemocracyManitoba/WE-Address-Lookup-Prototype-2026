@@ -1,6 +1,7 @@
 {
   "election": "2026 Municipal Council and School Boards Election",
-  "status": "proposal-reviewed-under-issue-5",
+  "status": "implemented",
+  "phase": "registration",
   "observedAt": "2026-08-22",
   "contests": [
     {

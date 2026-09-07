@@ -1,4 +1,4 @@
-# Minimal Candidate Record proposal
+# Candidate Record shape
 
 A Candidate Record belongs directly to one Contest. It does not introduce a Person, Candidacy, Person ID, Candidacy ID, hand-authored given name, or hand-authored family name.
 
@@ -22,7 +22,7 @@ The required fields are the minimum needed to assign the record correctly, descr
 
 ## Optional voter-facing fields
 
-| Group | Proposed field | City raw field(s) |
+| Group | Field | City raw field(s) |
 | --- | --- | --- |
 | Registration evidence | `registrationDate` | `registration_date` |
 | Biography | `biography`, `biographyFrench` | `biography`, `biography_francais` |
@@ -40,4 +40,4 @@ The City schema contained biography, image, and disclosure fields on 2026-08-22 
 
 `official_agent` and `auditor` remain in raw Source Snapshots as administrative evidence but are excluded from normalized public Candidate Records. Address, postal code, fax, signatures, and other registration-form administration are also excluded unless a later issue establishes a voter-facing requirement.
 
-No canonical name parts are required. A later static alphabetical presentation may derive a sort value while retaining `sourcePublishedName`, but that derivation is outside Issue #5.
+No canonical name parts are required. The site derives an alphabetical sort value while retaining `sourcePublishedName`.

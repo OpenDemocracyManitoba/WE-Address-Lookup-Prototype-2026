@@ -6,6 +6,7 @@ test("Contest presentation omits nomination-withdrawn Candidate Records", () => 
   const presentation = presentElection(
     {
       election: "Fixture Election",
+      phase: "nomination",
       contests: [
         {
           id: "council-fixture-ward",
@@ -50,6 +51,7 @@ test("Contest presentation sorts active Candidate Records by derived family name
   const presentation = presentElection(
     {
       election: "Fixture Election",
+      phase: "registration",
       contests: [
         {
           id: "council-fixture-ward",
@@ -96,6 +98,7 @@ function presentCandidate(candidate) {
   return presentElection(
     {
       election: "Fixture Election",
+      phase: "registration",
       contests: [
         {
           id: "mayor-winnipeg",

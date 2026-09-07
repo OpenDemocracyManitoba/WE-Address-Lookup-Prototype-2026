@@ -75,7 +75,7 @@ The time-stamped set of Candidates currently recognized by official sources for 
 _Avoid_: Final candidate list
 
 **Election Phase**:
-The explicit presentation phase for Candidate Records: Registration shows Prospective Candidates and their current statuses, while Nominated shows only accepted Candidates.
+The explicit presentation phase for Candidate Records: Registration shows active Prospective Candidates, while Nomination shows only accepted Candidates. Winnipeg Election will launch only after the nomination period has ended, with the Election Phase set to Nomination. The phase changes only through an explicit configuration update; it does not switch automatically at a deadline.
 _Avoid_: Publication state, approval stage, automatic deadline switch
 
 **Official Candidate Record**:
@@ -102,7 +102,8 @@ _Avoid_: A single source of truth for all election data
 
 **Electoral Area**:
 The geographic area for which an Office is elected: Winnipeg as a whole, a Council Ward, or a School Division Ward.
-_Avoid_: District, unqualified ward
+Ward is acceptable when the surrounding context makes the particular electoral division clear. Use Council Ward or School Division Ward when the distinction matters, and identify a School Division Ward with its School Division when needed to avoid ambiguity.
+_Avoid_: District, ambiguous ward references
 
 **2026 Electoral Geography**:
 The Council Wards, School Divisions, School Division Wards, Numbers to Elect, and Civic Address assignments applicable to this Election.
@@ -110,7 +111,7 @@ _Avoid_: Current boundaries, timeless electoral geography
 
 **Council Ward**:
 An area of Winnipeg that elects one Councillor.
-_Avoid_: Municipal ward, city ward, unqualified ward
+Municipal ward, city ward, and ward are acceptable public-facing synonyms when the context clearly refers to City Council.
 
 **School Division**:
 A named public-education authority, such as Louis Riel School Division or Seven Oaks School Division.
@@ -118,7 +119,7 @@ _Avoid_: School district, school ward
 
 **School Division Ward**:
 An electoral area within a School Division that elects one or more School Trustees. Its identity requires both the School Division and its numbered or named ward label, such as `Louis Riel — 1` or `St. James - Assiniboia — Centre Ward`.
-_Avoid_: Trustee ward, school ward, unqualified ward number or name
+Trustee ward, school ward, and ward are acceptable public-facing synonyms when the School Division is clear. A ward number or name alone is not a stable identity because labels repeat between School Divisions.
 
 **Canonical Name**:
 Winnipeg Election's authoritative display name for an electoral entity, independent of the spelling, punctuation, or abbreviations used by any source.

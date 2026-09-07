@@ -33,6 +33,7 @@ test("the 2026 Election inventory completely and unambiguously covers the commit
   const addressEvidence = readJson("./fixtures/election-2026/city-addresses.json");
 
   const contests = new Map(inventory.contests.map((contest) => [contest.id, contest]));
+  assert.ok(["registration", "nomination"].includes(inventory.phase), "Election Phase is explicitly configured");
   assert.equal(contests.size, inventory.contests.length, "Contest IDs must be unique");
   assert.equal(inventory.contests.length, 43, "the curated inventory must contain all 43 applicable Contests");
 
