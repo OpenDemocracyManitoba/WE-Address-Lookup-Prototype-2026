@@ -2,10 +2,6 @@ import { loadElectionPresentation } from "./election-presentation.js";
 
 export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("election", loadElectionPresentation);
-  eleventyConfig.addGlobalData(
-    "prototypeUiEnabled",
-    process.env.NODE_ENV !== "production",
-  );
   eleventyConfig.addFilter("contestResolutionData", (contests) =>
     contests.map(({ id, office, electoralArea, aliases, candidateList }) => ({
       id,
@@ -22,7 +18,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "address-data.js": "assets/address-data.js",
     "app.js": "assets/app.js",
-    "prototype-ui-switcher.js": "assets/prototype-ui-switcher.js",
     "lookup-controller.js": "assets/lookup-controller.js",
     "popup-geometry.js": "assets/popup-geometry.js",
     "candidate-order.js": "assets/candidate-order.js",

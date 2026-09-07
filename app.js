@@ -35,6 +35,8 @@ function startBrowserApp() {
   const searchArea = document.querySelector("#search-area");
   const list = document.querySelector("#address-suggestions");
   const status = document.querySelector("#address-status");
+  const statusText = document.querySelector("#address-status-message");
+  const optionTemplate = document.querySelector("#address-option-template");
   const retryButton = document.querySelector("#retry-button");
   const addressLookupResult = document.querySelector("#address-lookup-result");
   const addressLookupResultAddress = document.querySelector(
@@ -60,7 +62,7 @@ function startBrowserApp() {
     if (resultsChanged) {
       list.replaceChildren();
       state.results.forEach((row, index) => {
-        const option = document.createElement("li");
+        const option = optionTemplate.content.firstElementChild.cloneNode(true);
         option.id = `address-option-${index}`;
         option.setAttribute("role", "option");
         option.setAttribute(
@@ -68,7 +70,7 @@ function startBrowserApp() {
           String(index === state.activeIndex),
         );
         option.dataset.index = String(index);
-        option.textContent = row.displayAddress;
+        option.querySelector(".suggestion-address").textContent = row.displayAddress;
         list.append(option);
       });
       lastResults = state.results;
@@ -99,7 +101,7 @@ function startBrowserApp() {
       state.phase === "selected",
     );
     const nextStatus = statusMessage(state);
-    if (status.textContent !== nextStatus) status.textContent = nextStatus;
+    if (statusText.textContent !== nextStatus) statusText.textContent = nextStatus;
     retryButton.hidden = !isRetryablePhase(state.phase);
 
     addressLookupResult.hidden = !state.selected;

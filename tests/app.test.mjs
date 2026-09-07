@@ -725,8 +725,7 @@ test("Address Lookup Result status represents missing values like the visible re
 test("header copy, address description, and help markup match the interface", () => {
   const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
   const css = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
-  assert.match(html, /<p class="eyebrow">2026 Winnipeg Election<\/p>/);
-  assert.match(html, /<h1 id="page-title">Find Your Election Wards<\/h1>/);
+  assert.match(html, /<h1 id="page-title">Find Your Candidates<\/h1>/);
   assert.match(html, /aria-describedby="address-status"/);
   assert.doesNotMatch(html, /id="address-help"/);
   assert.doesNotMatch(css.match(/h1\s*{[^}]*}/)?.[0] ?? "", /max-width\s*:/);
@@ -756,7 +755,7 @@ test("footer preserves the privacy notice and acknowledges the City data licence
   );
   assert.match(
     html,
-    /<p class="footer-note attribution-note">\s*<strong>Data attribution:<\/strong> This tool uses\s*<a href="https:\/\/en\.wikipedia\.org\/wiki\/Open_data">open data<\/a>\s*licenced under the\s*<a href="https:\/\/data\.winnipeg\.ca\/open-data-licence"\s*>City of Winnipeg Open Government Licence<\/a\s*>\./,
+    /<p class="footer-note attribution-note">\s*<strong>Attribution:<\/strong> This tool uses\s*<a href="https:\/\/en\.wikipedia\.org\/wiki\/Open_data">open data<\/a>\s*licenced under the\s*<a href="https:\/\/data\.winnipeg\.ca\/open-data-licence"\s*>City of Winnipeg Open Government Licence<\/a\s*>\./,
   );
   assert.match(html, /<\/p>\s*<p class="footer-note attribution-note">/);
 });

@@ -18,8 +18,8 @@ test("Candidate lists randomize independently and explain their displayed order"
   const mayorList = candidateList(["Alpha", "Bravo", "Charlie"], "mayor-order");
   const councilList = candidateList(["Delta", "Echo", "Foxtrot"], "council-order");
   const explanations = new Map([
-    ["mayor-order", { textContent: "Candidates are shown alphabetically by family name." }],
-    ["council-order", { textContent: "Candidates are shown alphabetically by family name." }],
+    ["mayor-order", { label: "LIST ORDER / ", message: { textContent: "Candidates are shown alphabetically by family name." }, querySelector() { return this.message; } }],
+    ["council-order", { label: "LIST ORDER / ", message: { textContent: "Candidates are shown alphabetically by family name." }, querySelector() { return this.message; } }],
   ]);
   const root = {
     querySelectorAll: () => [mayorList, councilList],
@@ -32,6 +32,7 @@ test("Candidate lists randomize independently and explain their displayed order"
   assert.deepEqual(mayorList.children.map(({ name }) => name), ["Bravo", "Charlie", "Alpha"]);
   assert.deepEqual(councilList.children.map(({ name }) => name), ["Echo", "Delta", "Foxtrot"]);
   for (const explanation of explanations.values()) {
-    assert.equal(explanation.textContent, "Candidates are shown in a randomized order.");
+    assert.equal(explanation.label, "LIST ORDER / ");
+    assert.equal(explanation.message.textContent, "Candidates are shown in a randomized order.");
   }
 });

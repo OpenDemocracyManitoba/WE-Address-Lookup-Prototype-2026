@@ -1,54 +1,25 @@
 <!doctype html>
-<html lang="en"{% if prototypeUiEnabled %} data-ui-variant="current"{% endif %}>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="{{ description }}" />
     <title>{{ title }}</title>
-    {% if prototypeUiEnabled %}<script>
-      (() => {
-        const variants = ["current", "atlas", "mosaic", "signal"];
-        const requested = new URLSearchParams(location.search).get("variant");
-        document.documentElement.dataset.uiVariant = variants.includes(requested)
-          ? requested
-          : "current";
-      })();
-    </script>{% endif %}
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
-  <body{% if prototypeUiEnabled %} data-ui-variant="current"{% endif %}>
+  <body>
     <header class="site-header">
       <a class="site-name" href="/">Winnipeg Election 2026</a>
       <nav class="site-navigation" aria-label="Main navigation">
-        <a href="/">Address Lookup</a>
-        <a href="/contests/">Candidates</a>
-        <a href="/learn/">Learn</a>
+        <a href="/">Address Lookup<span class="navigation-arrow" aria-hidden="true">→</span></a>
+        <a href="/contests/">Candidates<span class="navigation-arrow" aria-hidden="true">→</span></a>
+        <a href="/learn/">Learn<span class="navigation-arrow" aria-hidden="true">→</span></a>
       </nav>
+      <div class="site-resource-note">NONPARTISAN VOTER RESOURCE<br />WINNIPEG · 2026</div>
     </header>
     <main class="page-shell">
       {{ content | safe }}
     </main>
-    {% if prototypeUiEnabled %}<aside class="prototype-ui-switcher" aria-label="Temporary design prototype switcher">
-      <div class="prototype-ui-switcher__summary" aria-live="polite">
-        <span aria-hidden="true">Prototype</span>
-        <strong id="prototype-ui-current-label">Current</strong>
-      </div>
-      <div class="prototype-ui-switcher__controls">
-        <button class="prototype-ui-switcher__arrow" type="button" data-prototype-direction="previous" aria-label="Previous design">
-          <span aria-hidden="true">&#8592;</span>
-        </button>
-        <div class="prototype-ui-switcher__choices" role="group" aria-label="Choose a design">
-          <button type="button" data-prototype-variant="current">Current</button>
-          <button type="button" data-prototype-variant="atlas">Atlas</button>
-          <button type="button" data-prototype-variant="mosaic">Mosaic</button>
-          <button type="button" data-prototype-variant="signal">Signal</button>
-        </div>
-        <button class="prototype-ui-switcher__arrow" type="button" data-prototype-direction="next" aria-label="Next design">
-          <span aria-hidden="true">&#8594;</span>
-        </button>
-      </div>
-    </aside>
-    <script type="module" src="/assets/prototype-ui-switcher.js"></script>{% endif %}
     {% if lookupPage %}<script type="module" src="/assets/app.js"></script>{% endif %}
     {% if contestPage %}<script type="module" src="/assets/candidate-order.js"></script>{% endif %}
   </body>

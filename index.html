@@ -15,6 +15,7 @@ lookupPage: true
   </header>
 
   <div class="search-area" id="search-area">
+    <div class="search-step">01<br />ENTER<br />ADDRESS</div>
     <label for="address-input">Winnipeg Street Address</label>
     <div class="combobox-wrap" id="combobox-wrap">
       <input
@@ -45,7 +46,7 @@ lookupPage: true
       role="status"
       aria-live="polite"
       aria-atomic="true"
-    ></p>
+    ><span class="status-label" aria-hidden="true">STATUS / </span><span class="status-message" id="address-status-message"></span></p>
     <button class="retry-button" id="retry-button" type="button" hidden>
       Retry address search
     </button>
@@ -57,6 +58,7 @@ lookupPage: true
     aria-labelledby="address-lookup-result-address"
     hidden
   >
+    <div class="confirmation-step">02<br />CONFIRM<br />ADDRESS</div>
     <p class="address-lookup-result-kicker">Official civic address</p>
     <h2 id="address-lookup-result-address"></h2>
     <dl class="address-lookup-result-grid">
@@ -73,11 +75,13 @@ lookupPage: true
       class="applicable-contests"
       aria-labelledby="applicable-contests-heading"
     >
+      <div class="contests-step">03<br />REVIEW<br />CONTESTS</div>
       <h2 id="applicable-contests-heading">Election Candidates</h2>
       <div id="applicable-contests"></div>
     </section>
   </section>
 
+  <template id="address-option-template"><li role="option"><span class="suggestion-address"></span><span class="suggestion-arrow" aria-hidden="true">→</span></li></template>
   <div hidden>
     {% for contest in election.contests %}
     <template data-contest-template="{{ contest.id }}"

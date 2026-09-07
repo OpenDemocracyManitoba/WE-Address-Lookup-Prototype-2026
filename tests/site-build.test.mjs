@@ -44,8 +44,6 @@ test("production build publishes the shared site shell and Address Lookup assets
   for (const html of pages) {
     assert.match(html, /<nav class="site-navigation" aria-label="Main navigation">/);
     assert.match(html, /href="\/learn\/"/);
-    assert.match(html, /href="\/about\/"/);
-    assert.match(html, /href="\/faq\/"/);
     assert.match(html, /href="\/assets\/styles\.css"/);
   }
 
@@ -90,7 +88,7 @@ test("the home page publishes ordered Contest templates from the shared Candidat
     assert.doesNotMatch(populatedTemplate, /Candidate information|candidate-metadata|Election Phase|Candidate Status|Registration Date/);
     assert.match(
       populatedTemplate,
-      new RegExp(`id="${populated.id}-candidate-order-explanation"[^>]*>Candidates are shown alphabetically by family name\\.<\\/p>`),
+      new RegExp(`id="${populated.id}-candidate-order-explanation"[^>]*>[\\s\\S]*?Candidates are shown alphabetically by family name\\.<\\/span><\\/p>`),
     );
     assert.match(
       populatedTemplate,
@@ -265,4 +263,26 @@ test("Contest browsing keeps unavailable Candidate lists distinct from published
     assert.match(unavailable, /does not mean that no Candidates exist/);
     assert.doesNotMatch(unavailable, /No published Candidate Records/);
   }
+});
+
+
+test("Signal is the permanent shell and its visible labels are markup", () => {
+  const home = readBuiltPage("index.html");
+  const css = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
+  assert.doesNotMatch(home, /prototype-ui|data-ui-variant|variant=/);
+  assert.doesNotMatch(css, /data-ui-variant|prototype-ui|--atlas|--mosaic/);
+  assert.match(css, /:root\s*\{[^}]*--signal-paper:/);
+  for (const declaration of css.matchAll(/^\s*content:\s*([^;]+);/gm)) {
+    assert.equal(declaration[1], '""', "CSS only generates empty decorations");
+  }
+  assert.match(home, /class="search-step">01<br \/>ENTER<br \/>ADDRESS/);
+  assert.match(home, /class="confirmation-step">02<br \/>CONFIRM<br \/>ADDRESS/);
+  assert.match(home, /class="contests-step">03<br \/>REVIEW<br \/>CONTESTS/);
+  assert.match(home, /class="site-resource-note">NONPARTISAN VOTER RESOURCE/);
+  assert.match(home, /class="status-label" aria-hidden="true">STATUS \/ /);
+  assert.match(home, /id="address-status-message"><\/span>/);
+  assert.match(home, /class="ordering-label">LIST ORDER \/ /);
+  assert.match(home, /class="disclosure-arrow" aria-hidden="true"/);
+  assert.match(home, /id="address-option-template"/);
+  assert.match(readBuiltPage("faq/index.html"), /class="section-number">02 \/<\/span>/);
 });

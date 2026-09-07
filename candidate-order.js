@@ -10,7 +10,7 @@ export function randomizeCandidateLists(root, random = Math.random) {
     const explanationId = list.getAttribute("aria-describedby");
     const explanation = explanationId ? root.getElementById(explanationId) : null;
     if (explanation) {
-      explanation.textContent = "Candidates are shown in a randomized order.";
+      explanation.querySelector("[data-order-message]").textContent = "Candidates are shown in a randomized order.";
     }
   }
 }
