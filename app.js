@@ -49,6 +49,7 @@ function startBrowserApp() {
   );
   let lastResults = null;
   let lastPopupOpen = false;
+  let lastSelected = null;
 
   const render = (state) => {
     if (input.value !== state.rawInput) input.value = state.rawInput;
@@ -111,6 +112,14 @@ function startBrowserApp() {
     } else {
       addressLookupResultAddress.textContent = "";
     }
+    if (state.selected && state.selected !== lastSelected) {
+      requestAnimationFrame(() => {
+        if (!addressLookupResult.hidden) {
+          addressLookupResult.scrollIntoView({ block: "start" });
+        }
+      });
+    }
+    lastSelected = state.selected;
     if (state.popupOpen)
       requestAnimationFrame(() => positionPopup(input, wrap, list));
   };
