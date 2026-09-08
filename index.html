@@ -26,8 +26,9 @@ lookupPage: true
         autocomplete="off"
         autocapitalize="characters"
         spellcheck="false"
-        placeholder="For example, 1 Portage Ave"
+        placeholder="Type street number and name here"
         role="combobox"
+        autofocus
         aria-autocomplete="list"
         aria-controls="address-suggestions"
         aria-expanded="false"
@@ -46,7 +47,10 @@ lookupPage: true
       role="status"
       aria-live="polite"
       aria-atomic="true"
-    ><span class="status-label" aria-hidden="true">STATUS / </span><span class="status-message" id="address-status-message"></span></p>
+    >
+      <span class="status-label" aria-hidden="true"></span
+      ><span class="status-message" id="address-status-message"></span>
+    </p>
     <button class="retry-button" id="retry-button" type="button" hidden>
       Retry address search
     </button>
@@ -62,12 +66,19 @@ lookupPage: true
     <div class="contests-step">02<br />REVIEW<br />CONTESTS</div>
     <header class="applicable-contests-header">
       <h2 id="applicable-contests-heading">Election Candidates</h2>
-      <p class="address-lookup-result-subtitle">For <span id="address-lookup-result-address"></span></p>
+      <p class="address-lookup-result-subtitle">
+        For <span id="address-lookup-result-address"></span>
+      </p>
     </header>
     <div id="applicable-contests"></div>
   </section>
 
-  <template id="address-option-template"><li role="option"><span class="suggestion-address"></span><span class="suggestion-arrow" aria-hidden="true">→</span></li></template>
+  <template id="address-option-template"
+    ><li role="option">
+      <span class="suggestion-address"></span
+      ><span class="suggestion-arrow" aria-hidden="true">→</span>
+    </li></template
+  >
   <div hidden>
     {% for contest in election.contests %}
     <template data-contest-template="{{ contest.id }}"
@@ -86,7 +97,7 @@ lookupPage: true
   <footer class="page-footer">
     <p class="footer-note privacy-note">
       <strong>Privacy:</strong> Your address is not stored by this tool.
-      Searches go directly to the
+      Searches go to the
       <a href="https://data.winnipeg.ca/City-Planning/Addresses/cam2-ii3u"
         >City of Winnipeg address service</a
       >.

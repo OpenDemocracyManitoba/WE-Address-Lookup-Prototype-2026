@@ -47,7 +47,7 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 summary:focus-visible {
-  outline: 4px solid var(--signal-mark);
+  outline: 2px solid var(--signal-mark);
   outline-offset: 4px;
 }
 
@@ -206,7 +206,7 @@ h1 {
 }
 
 .lede {
-  max-inline-size: 31ch;
+  max-inline-size: 50ch;
   margin: 0;
   padding-left: 1.2rem;
   border-left: 0.45rem solid var(--signal-mark);
@@ -251,8 +251,7 @@ h1 {
   white-space: pre-line;
 }
 
-.lookup:has(.address-lookup-result[hidden])
-  .page-footer {
+.lookup:has(.address-lookup-result[hidden]) .page-footer {
   margin-top: 11rem;
 }
 
@@ -476,8 +475,7 @@ input:hover {
   font-weight: 850;
 }
 
-.applicable-contest-summary-copy
-  .candidate-role {
+.applicable-contest-summary-copy .candidate-role {
   color: var(--signal-confirm);
 }
 
@@ -990,8 +988,7 @@ input:hover {
     left: 1rem;
   }
 
-    .lookup:has(.address-lookup-result[hidden])
-    .page-footer {
+  .lookup:has(.address-lookup-result[hidden]) .page-footer {
     margin-top: 12.5rem;
   }
 
