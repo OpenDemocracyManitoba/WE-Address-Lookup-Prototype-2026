@@ -283,7 +283,6 @@ input {
   font-size: clamp(1.4rem, 3.2vw, 2.35rem);
   font-weight: 760;
   letter-spacing: -0.035em;
-  box-shadow: inset 0 -0.42rem 0 var(--signal-mark);
 }
 
 input::placeholder {
