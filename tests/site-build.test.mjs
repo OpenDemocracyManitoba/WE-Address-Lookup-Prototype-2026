@@ -29,7 +29,9 @@ function escapeHtml(value) {
 function templateFor(html, key) {
   const start = html.indexOf(`data-contest-template="${key}"`);
   assert.ok(start >= 0, `${key} has a home-page Contest template`);
-  return html.slice(start, html.indexOf("</template>", start));
+  const end = html.indexOf("</template", start);
+  assert.ok(end > start, `${key} Contest template is closed`);
+  return html.slice(start, end);
 }
 
 test("production build publishes the shared site shell and Address Lookup assets", () => {
@@ -415,7 +417,7 @@ test("Contest pages show News coverage from the coverage data", () => {
     assert.ok(page.indexOf("contest-number-to-elect") < sectionStart);
     assert.ok(sectionStart < page.indexOf("data-candidate-list"));
     assert.match(section, /<h2 id="news-coverage-heading" class="news-coverage-heading">News coverage<\/h2>/);
-    assert.match(section, /Coverage compiled from the Winnipeg Free Press and CBC Manitoba, Oct\. 25, 2026\./);
+    assert.match(section, /Coverage compiled from the Winnipeg Free Press and CBC Manitoba, Oct\. 25, 2026\. <a href="\/about\/#news-coverage">How we chose these articles<\/a>\./);
     for (const item of items) {
       assert.ok(page.includes(`href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"`));
       assert.equal(page.split(`href="${escapeHtml(item.url)}"`).length - 1, 1, `${item.url} appears once on ${contest.id}`);
@@ -441,10 +443,6 @@ test("Contest pages show News coverage from the coverage data", () => {
 
 test("Address Lookup Contest templates show the same News coverage", () => {
   const home = readBuiltPage("index.html");
-  const templateFor = (html, key) => {
-    const start = html.indexOf(`data-contest-template="${key}"`);
-    return html.slice(start, html.indexOf("</template", start));
-  };
   const stVital = templateFor(home, "council-st-vital");
   assert.match(stVital, /<h3 id="council-st-vital-news-coverage-heading" class="news-coverage-heading">News coverage<\/h3>/);
   assert.ok(stVital.indexOf("news-coverage") < stVital.indexOf("data-candidate-list"));
