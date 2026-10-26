@@ -50,7 +50,6 @@ test("production build publishes the shared site shell and Address Lookup assets
   const pages = [
     "index.html",
     "about/index.html",
-    "faq/index.html",
   ].map(readBuiltPage);
 
   for (const html of pages) {
@@ -391,10 +390,6 @@ test("Signal is the permanent shell and its visible labels are markup", () => {
   assert.match(home, /class="ordering-label">LIST ORDER \/ /);
   assert.match(home, /class="disclosure-arrow" aria-hidden="true"/);
   assert.match(home, /id="address-option-template"/);
-  assert.match(
-    readBuiltPage("faq/index.html"),
-    /class="section-number">02 \/<\/span>/,
-  );
 });
 
 test("Contest pages show News coverage from the coverage data", () => {

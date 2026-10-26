@@ -32,7 +32,7 @@ Never edit `_site/`; it is generated output.
 - `images/` — social share image and favicons, published under `/assets/`
 - `scripts/import-candidates.mjs` — Candidate data import
 - `data/election-2026/` — election data and preserved source evidence
-- `faq/` — placeholder section for now; do not assume its current content or structure is final
+- `faq/` — placeholder section for now, excluded from the build in `.eleventyignore`; do not assume its current content or structure is final
 
 ## Domain and election data
 
