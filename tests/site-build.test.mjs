@@ -57,7 +57,7 @@ test("production build publishes the shared site shell and Address Lookup assets
       /<nav class="site-navigation" aria-label="Main navigation">/,
     );
     assert.match(html, /href="\/about\/"/);
-    assert.match(html, /<meta property="og:image" content="https:\/\/winnipegelection\.ca\/assets\/og-image\.jpg" \/>/);
+    assert.match(html, /<meta property="og:image" content="https:\/\/www\.winnipegelection\.ca\/assets\/og-image\.jpg" \/>/);
     assert.match(html, /href="\/assets\/styles\.css"/);
   }
 
