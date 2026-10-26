@@ -1,0 +1,14 @@
+// Cloudflare Workers static assets for www.winnipegelection.ca. See README "Hosting".
+{
+  "name": "static-www-winnipegelection-ca",
+  "compatibility_date": "2026-10-26",
+  "workers_dev": false,
+  "preview_urls": false,
+  "build": { "command": "npm run build" },
+  "assets": {
+    "directory": "./_site",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "routes": [{ "pattern": "www.winnipegelection.ca/*", "zone_name": "winnipegelection.ca" }]
+}

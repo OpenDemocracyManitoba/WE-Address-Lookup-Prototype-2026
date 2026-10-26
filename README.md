@@ -183,3 +183,13 @@ Property-based parser fuzzing, mutation testing, HTML and CSS validation, and st
 The schema and source values were checked against the official endpoint on August 13, 2026. `street_number` remained numeric; all required fields existed; suffixes were blank, `1/2`, `1/2A`, and letters `A` through `N`; and street directions were blank, `E`, `N`, `NW`, `S`, `SW`, and `W`. Street-type and direction values are returned for authoritative display and result matching, but the parser does not maintain vocabularies for them.
 
 Earlier live browser validation on August 11, 2026 covered keyboard selection and its complete live announcement, desktop and mobile layouts, constrained list scrolling, and browser console diagnostics. The August 13 dataset audit subsequently validated the current vocabulary-free parser across type-like and direction-like names, partial types and directions, and civic suffix forms. The manual checklist above should be repeated before release against the current result-filtering behavior.
+
+## Hosting
+
+Served at **https://www.winnipegelection.ca** from Cloudflare Workers static assets. `wrangler.jsonc` holds the config.
+
+* **Worker:** `static-www-winnipegelection-ca`, which replaced the 2026 placeholder landing page from `OpenDemocracyManitoba/static-www.winnipegelection.ca`.
+* **Deploy:** `npx wrangler@4.148.0 deploy` from the repository root. It runs `npm run build` first, then uploads only `_site/`.
+* **Route:** `www.winnipegelection.ca/*` on zone `winnipegelection.ca`. The apex `winnipegelection.ca` 301s to `www` through a zone redirect rule, and http → https comes from the zone's Always Use HTTPS setting.
+* **Serving:** `html_handling: auto-trailing-slash` (`/contests/mayor-winnipeg/` serves its `index.html`) and `not_found_handling: 404-page` (`_site/404.html`). workers.dev and preview URLs are off.
+* **Rollback:** `npx wrangler@4.148.0 rollback` returns to the previous version, including the old placeholder page.
