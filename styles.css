@@ -89,7 +89,7 @@ summary:focus-visible {
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  line-height: 1.7;
+  line-height: 2.1;
   white-space: pre-line;
 }
 
@@ -1012,7 +1012,7 @@ input:hover {
   body {
     position: relative;
     padding-left: 0;
-    padding-bottom: 5rem;
+    padding-bottom: 6.5rem;
   }
 
   .site-header {
@@ -1206,7 +1206,7 @@ input:hover {
   body {
     position: relative;
     padding-left: 0;
-    padding-bottom: 5rem;
+    padding-bottom: 6.5rem;
   }
 
   .site-header {
