@@ -6,9 +6,11 @@ description: About the nonpartisan WinnipegElection.ca voter resource from Open 
 
 # About
 
-WinnipegElection.ca is a voter resource built by Open Democracy Manitoba (ODM). ODM is a non-profit organization that builds digital tools for democratic engagement. 
+WinnipegElection.ca is a voter resource built by Open Democracy Manitoba (ODM). ODM is a non-profit organization that builds digital tools for democratic engagement. <a href="https://opendemocracymanitoba.ca">Learn more about Open Democracy Manitoba</a>.
 
-<a href="https://opendemocracymanitoba.ca">Learn more about Open Democracy Manitoba</a>.
+Ongoing site development and maintenance is performed on a volunteer basis by the board members of [Open Democracy Manitoba](https://opendemocracymanitoba.ca).
+
+All candidate information, including contact details, social media, and disclosure documents, is sourced from [the City of Winnipeg's official election candidates open dataset](https://data.winnipeg.ca/d/9gi9-dauz).
 
 ## Contact
 
@@ -27,11 +29,3 @@ To find the articles, we went through each outlet’s 2026 election coverage pub
 School trustee races have no news links because so few were covered that listing them would single out individual candidates.
 
 Links go to the publishers’ own sites, and some Free Press stories need a subscription.
-
-## How Is This Website Funded?
-
-Ongoing site development and maintenance is performed on a volunteer basis by the board members of [Open Democracy Manitoba](https://opendemocracymanitoba.ca).
-
-## How Do You Decide What Candidate Info to List?
-
-All candidate information, including contact details, social media, and disclosure documents, is sourced from [the City of Winnipeg's official election candidates open dataset](https://data.winnipeg.ca/d/9gi9-dauz). Candidate-related news articles are sourced from CBC Manitoba and the Winnipeg Free Press. See [above](#news-coverage) for news coverage details.
