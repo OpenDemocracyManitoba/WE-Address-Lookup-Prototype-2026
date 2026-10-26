@@ -31,11 +31,18 @@
         <a href="/contests/">Candidates<span class="navigation-arrow" aria-hidden="true">→</span></a>
         <a href="/about/">About<span class="navigation-arrow" aria-hidden="true">→</span></a>
       </nav>
-      <div class="site-resource-note"><a href="https://opendemocracymanitoba.ca">OPEN DEMOCRACY MANITOBA</a><br />WINNIPEG · 2026</div>
+      <div class="site-resource-note"><a href="https://opendemocracymanitoba.ca">OPEN DEMOCRACY MANITOBA</a><br /><a class="contact-email" data-user="vote" data-domain="opendemocracymanitoba.ca">vote [at] opendemocracymanitoba [dot] ca</a><br />WINNIPEG · 2026</div>
     </header>
     <main class="page-shell">
       {{ content | safe }}
     </main>
+    <script>
+      for (const link of document.querySelectorAll(".contact-email")) {
+        const address = `${link.dataset.user}@${link.dataset.domain}`;
+        link.href = `mailto:${address}`;
+        link.textContent = address;
+      }
+    </script>
     {% if lookupPage %}<script type="module" src="/assets/app.js"></script>{% endif %}
     {% if contestPage %}<script type="module" src="/assets/candidate-order.js"></script>{% endif %}
   </body>
