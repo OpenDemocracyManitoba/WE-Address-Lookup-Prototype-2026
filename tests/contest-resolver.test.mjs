@@ -50,6 +50,14 @@ for (const assignment of [
     schoolContestId: "school-seine-river-ward-1",
   },
   {
+    name: "Seine River (misspelled Siene River address label)",
+    councilWard: "St. Norbert - Seine River",
+    schoolDivision: "Siene River",
+    schoolDivisionWard: "1",
+    councilContestId: "council-st-norbert-seine-river",
+    schoolContestId: "school-seine-river-ward-1",
+  },
+  {
     name: "Interlake Rosser",
     councilWard: "St. James",
     schoolDivision: "Interlake",

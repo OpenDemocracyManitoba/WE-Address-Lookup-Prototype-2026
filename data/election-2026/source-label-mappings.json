@@ -614,6 +614,15 @@
     {
       "source": "city-address-dataset",
       "kind": "schoolDivisionWard",
+      "schoolDivision": "Siene River",
+      "ward": "1",
+      "contestId": "school-seine-river-ward-1",
+      "note": "Misspelling the City address data used on 2026-10-25; the correct spelling stays mapped in case the City fixes it.",
+      "candidateListSupport": "unsupported"
+    },
+    {
+      "source": "city-address-dataset",
+      "kind": "schoolDivisionWard",
       "schoolDivision": "Interlake",
       "ward": "Rosser",
       "contestId": "school-interlake-ward-1",
