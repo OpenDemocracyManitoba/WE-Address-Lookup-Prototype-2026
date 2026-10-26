@@ -55,6 +55,10 @@ node scripts/audit-live-addresses.mjs
 
 The audit downloads the complete grouped City dataset and checks the current implementation's recall and displayed results for official addresses, number-and-name input, partial types and directions, long type aliases, and compact, spaced, and split fractional civic-suffix forms. It reports failures, result counts, target ranks, maximum Address Interpretations, and maximum query length, and exits nonzero if any target is not both recalled and displayed. Run it with `--progressive` to audit every progressive street-name prefix that is Lookup Ready instead of the standard corpora. Because this is a live, exhaustive check, it requires network access and takes substantially longer than `node --test`.
 
+## Update news coverage
+
+Contest pages and Address Lookup results link to Winnipeg Free Press and CBC Manitoba coverage from `data/election-2026/contest_coverage.json`. To update it, replace that file with a regenerated copy and rebuild; no template changes are needed. The build fails if the file names a Contest ID that has no Contest page, or a `candidate_id` that is not a displayed Candidate Record's City record ID in that Contest, such as a Candidate who has since withdrawn. Regenerate the file rather than editing the mapping by hand. The About page explains how the coverage was selected.
+
 ## City data and field choices
 
 Searches go directly from the browser to the City of Winnipeg Open Data Socrata endpoint:
