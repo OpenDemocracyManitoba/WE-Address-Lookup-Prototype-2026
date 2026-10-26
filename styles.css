@@ -52,7 +52,8 @@ summary:focus-visible {
 }
 
 .site-header {
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-y: auto;
   gap: 0.75rem 1.5rem;
   justify-content: space-between;
   position: fixed;
@@ -1001,13 +1002,16 @@ input:hover {
 
 @media (max-width: 58rem) {
   body {
+    position: relative;
     padding-left: 0;
+    padding-bottom: 5rem;
   }
 
   .site-header {
-    position: relative;
+    position: static;
     inset: auto;
     display: grid;
+    overflow: visible;
     width: 100%;
     min-height: 0;
     padding: 1.2rem 1.5rem;
@@ -1025,7 +1029,13 @@ input:hover {
   }
 
   .site-resource-note {
-    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem 1.5rem;
+    border-top: 0;
+    background: var(--signal-ink);
   }
 
   .site-name {
@@ -1186,13 +1196,16 @@ input:hover {
 
 @media (max-height: 31rem) and (orientation: landscape) {
   body {
+    position: relative;
     padding-left: 0;
+    padding-bottom: 5rem;
   }
 
   .site-header {
-    position: relative;
+    position: static;
     inset: auto;
     display: grid;
+    overflow: visible;
     width: 100%;
     min-height: 0;
     padding: 0.7rem 1rem;
@@ -1207,7 +1220,13 @@ input:hover {
   }
 
   .site-resource-note {
-    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    border-top: 0;
+    background: var(--signal-ink);
   }
 
   .site-name {
