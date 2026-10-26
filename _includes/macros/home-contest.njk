@@ -1,5 +1,7 @@
 {% from "macros/candidate-information.njk" import candidateInformation %}
-{% macro homeContest(contest) %}
+{% from "macros/news-coverage.njk" import newsCoverage %}
+{% macro homeContest(contest, contestCoverage) %}
+{% set coverage = contestCoverage.contests[contest.id] %}
 <details class="applicable-contest" name="applicable-contest">
   <summary>
     <span class="applicable-contest-summary-copy">
@@ -17,7 +19,9 @@
       <div><dt>Number to Elect</dt><dd>{{ contest.numberToElect }}</dd></div>
     </dl>
 
-    {{ candidateInformation(contest, "h3", "h3", "h4", contest.id ~ "-") }}
+    {{ newsCoverage(coverage, contestCoverage.compiled, "h3", contest.id ~ "-") }}
+
+    {{ candidateInformation(contest, "h3", "h3", "h4", contest.id ~ "-", coverage) }}
   </div>
 </details>
 {% endmacro %}

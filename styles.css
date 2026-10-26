@@ -789,8 +789,17 @@ input:hover {
   object-fit: cover;
 }
 
-.applicable-contest .candidate-list {
+.applicable-contest .candidate-list,
+.applicable-contest .news-coverage {
   border-top-width: 1px;
+}
+
+.applicable-contest .news-coverage {
+  margin-bottom: 1.8rem;
+}
+
+.applicable-contest .news-coverage-heading {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
 }
 
 .applicable-contest .candidate-record > h3,
@@ -859,7 +868,7 @@ input:hover {
   border-top: 0.6rem solid var(--signal-ink);
 }
 
-.news-coverage h2 {
+.news-coverage-heading {
   margin: 0 0 1rem;
   color: var(--signal-ink);
   font-family: var(--signal-sans);

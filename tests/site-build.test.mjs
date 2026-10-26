@@ -414,7 +414,7 @@ test("Contest pages show News coverage from the coverage data", () => {
     const section = page.slice(sectionStart, page.indexOf("</section>", sectionStart));
     assert.ok(page.indexOf("contest-number-to-elect") < sectionStart);
     assert.ok(sectionStart < page.indexOf("data-candidate-list"));
-    assert.match(section, /<h2 id="news-coverage-heading">News coverage<\/h2>/);
+    assert.match(section, /<h2 id="news-coverage-heading" class="news-coverage-heading">News coverage<\/h2>/);
     assert.match(section, /Coverage compiled from the Winnipeg Free Press and CBC Manitoba, Oct\. 25, 2026\./);
     for (const item of items) {
       assert.ok(page.includes(`href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"`));
@@ -437,4 +437,21 @@ test("Contest pages show News coverage from the coverage data", () => {
     freePressBlocks.map((block) => block.match(/<h2>([^<]+)<\/h2>/)[1]).sort(),
     ["Kevin KLEIN", "Scott GILLINGHAM"],
   );
+});
+
+test("Address Lookup Contest templates show the same News coverage", () => {
+  const home = readBuiltPage("index.html");
+  const templateFor = (html, key) => {
+    const start = html.indexOf(`data-contest-template="${key}"`);
+    return html.slice(start, html.indexOf("</template", start));
+  };
+  const stVital = templateFor(home, "council-st-vital");
+  assert.match(stVital, /<h3 id="council-st-vital-news-coverage-heading" class="news-coverage-heading">News coverage<\/h3>/);
+  assert.ok(stVital.indexOf("news-coverage") < stVital.indexOf("data-candidate-list"));
+  assert.equal(stVital.match(/<span class="news-roundup">/g).length, 2);
+
+  const mayor = templateFor(home, "mayor-winnipeg");
+  assert.equal(mayor.match(/<h4>In the news<\/h4>/g).length, 12);
+
+  assert.doesNotMatch(templateFor(home, "school-winnipeg-ward-2"), /news-coverage|In the news/);
 });

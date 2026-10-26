@@ -4,7 +4,6 @@
 
 {% macro newsLabels(item) -%}
   {% if item.video %} <span class="news-label">Video</span>{% endif %}
-  {%- if item.paywalled %} <span class="news-label">Paywall</span>{% endif %}
 {%- endmacro %}
 
 {% macro newsList(items) %}
@@ -19,10 +18,11 @@
   </ul>
 {% endmacro %}
 
-{% macro newsCoverage(coverage, compiled) %}
+{% macro newsCoverage(coverage, compiled, headingTag="h2", idPrefix="") %}
   {% if coverage.raceItems.length %}
-    <section class="news-coverage" aria-labelledby="news-coverage-heading">
-      <h2 id="news-coverage-heading">News coverage</h2>
+    {% set headingId = idPrefix ~ "news-coverage-heading" %}
+    <section class="news-coverage" aria-labelledby="{{ headingId }}">
+      <{{ headingTag }} id="{{ headingId }}" class="news-coverage-heading">News coverage</{{ headingTag }}>
       {{ newsList(coverage.raceItems) }}
       {% if coverage.roundups.length %}
         <p class="news-roundups">Also covering all 15 wards:

@@ -82,7 +82,7 @@ lookupPage: true
   <div hidden>
     {% for contest in election.contests %}
     <template data-contest-template="{{ contest.id }}"
-      >{{ homeContest(contest) }}</template
+      >{{ homeContest(contest, contestCoverage) }}</template
     >
     {% endfor %} {% for office in ["Mayor", "Councillor", "School Trustee"] %}
     <template data-contest-template="{{ office }}"
