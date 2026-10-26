@@ -11,7 +11,7 @@
   {% if contest.candidateList.availability == "Unavailable" %}
     <section class="candidate-list-notice" aria-labelledby="{{ headingId }}">
       <{{ headingTag }} id="{{ headingId }}">Candidate list unavailable</{{ headingTag }}>
-      <p>This resource does not currently support Candidate data for this Contest. This does not mean that no Candidates exist.</p>
+      <p>{{ contest.electoralArea.schoolDivision }} runs this election, not the City of Winnipeg, so its Candidates are not listed here. This does not mean that no Candidates exist.{% if contest.candidateList.officialResourceUrl %} <a href="{{ contest.candidateList.officialResourceUrl }}">See {{ contest.electoralArea.schoolDivision }}'s candidate information</a>.{% endif %}</p>
     </section>
   {% elif contest.candidates.length == 0 %}
     <section class="candidate-list-notice" aria-labelledby="{{ headingId }}">
@@ -26,10 +26,10 @@
         {% for candidate in contest.candidates %}
           <li class="candidate-list-item" data-candidate-record>
             <article class="candidate-record">
-              <p class="candidate-role">{{ contest.office }} Candidate</p>
-              <{{ nameTag }}>{{ candidate.sourcePublishedName }}</{{ nameTag }}>
+              <p class="candidate-role">{{ contest.office }} Candidate{% if candidate.presentation.acclaimed %} <span class="acclaimed-badge">Acclaimed</span>{% endif %}</p>
+              <{{ nameTag }}>{{ candidate.presentation.displayName }}</{{ nameTag }}>
 
-              {% if candidate.presentation.imageUrl %}<img class="candidate-image" src="{{ candidate.presentation.imageUrl }}" alt="{{ candidate.sourcePublishedName }}" />{% endif %}
+              {% if candidate.presentation.imageUrl %}<img class="candidate-image" src="{{ candidate.presentation.imageUrl }}" alt="{{ candidate.presentation.displayName }}" />{% endif %}
 
               {% if candidate.biography or candidate.biographyFrench %}
                 <section class="candidate-biography">

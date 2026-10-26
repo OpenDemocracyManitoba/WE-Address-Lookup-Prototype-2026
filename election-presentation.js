@@ -15,9 +15,10 @@ const roleLabels = {
 };
 
 const withdrawnStatuses = new Set(["Nomination Withdrawn", "Registration Withdrawn"]);
+const acclaimedSuffix = /\s+-\s+ACCLAIMED\s*$/iu;
 
 function familyNameSortValue(sourcePublishedName) {
-  const publishedName = sourcePublishedName.replace(/\s+-\s+WITHDRAWN\s*$/iu, "").trim();
+  const publishedName = sourcePublishedName.replace(/\s+-\s+(?:WITHDRAWN|ACCLAIMED)\s*$/iu, "").trim();
   return publishedName.split(/\s+/u).at(-1);
 }
 
@@ -72,7 +73,9 @@ function presentCandidate(candidate) {
   return {
     ...candidate,
     presentation: {
+      acclaimed: acclaimedSuffix.test(candidate.sourcePublishedName),
       campaignUrl: externalUrl(candidate.campaignWebsite),
+      displayName: candidate.sourcePublishedName.replace(acclaimedSuffix, "").trim(),
       financialDisclosure: presentDisclosure(candidate.financialDisclosure),
       imageUrl: externalUrl(candidate.imageUrl),
       phaseLabel: phaseLabels[candidate.phase],
@@ -106,6 +109,14 @@ export function presentElection(election, candidateDocument) {
         ),
     })),
   };
+}
+
+// Contests the City does not run (Seine River, Interlake) remain Applicable
+// Contests for Address Lookup but are omitted from the Contest Directory.
+export function directoryContests(election) {
+  return election.contests.filter(
+    ({ candidateList }) => candidateList.availability !== "Unavailable",
+  );
 }
 
 export function loadElectionPresentation() {

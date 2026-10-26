@@ -31,11 +31,13 @@ test("a Published Contest with zero Candidate Records renders an empty-list noti
 test("an Unavailable Candidate list never renders as a Published empty list", () => {
   const html = renderCandidateInformation({
     office: "School Trustee",
+    electoralArea: { schoolDivision: "Fixture School Division" },
     candidateList: { support: "unsupported", availability: "Unavailable" },
     candidates: [],
   });
 
   assert.match(html, /Candidate list unavailable/);
+  assert.match(html, /Fixture School Division runs this election, not the City of Winnipeg/);
   assert.match(html, /does not mean that no Candidates exist/);
   assert.doesNotMatch(html, /No published Candidate Records|data-candidate-list/);
 });
@@ -52,7 +54,9 @@ test("a populated Contest renders contest-specific Candidate cards and optional 
         email: "alex@example.test",
         phone: "204-555-0100",
         presentation: {
+          acclaimed: false,
           campaignUrl: "https://example.test/campaign",
+          displayName: "Alex Example",
           financialDisclosure: { fileName: undefined, publicUrl: null },
           imageUrl: null,
           phaseLabel: "Registration",
@@ -85,7 +89,9 @@ test("missing optional Candidate fields do not create placeholder markup", () =>
         phase: "nomination",
         status: { sourceValue: "Nominated", value: "Nominated" },
         presentation: {
+          acclaimed: false,
           campaignUrl: null,
+          displayName: "No Contact Example",
           financialDisclosure: { fileName: undefined, publicUrl: null },
           imageUrl: null,
           phaseLabel: "Nomination",

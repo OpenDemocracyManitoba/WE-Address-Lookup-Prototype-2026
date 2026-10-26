@@ -143,7 +143,9 @@ test("Candidate presentation derives populated display values", () => {
   });
 
   assert.deepEqual(candidate.presentation, {
+    acclaimed: false,
     campaignUrl: "https://campaign.example/",
+    displayName: "Casey Candidate",
     financialDisclosure: {
       fileName: "Financial disclosure.pdf",
       publicUrl: "https://files.example/financial.pdf",
@@ -176,7 +178,9 @@ test("Candidate presentation derives populated display values", () => {
 
 test("Candidate presentation represents missing optional display values", () => {
   assert.deepEqual(presentCandidate({}).presentation, {
+    acclaimed: false,
     campaignUrl: null,
+    displayName: "Casey Candidate",
     financialDisclosure: { fileName: undefined, publicUrl: null },
     imageUrl: null,
     phaseLabel: "Registration",
@@ -186,6 +190,14 @@ test("Candidate presentation represents missing optional display values", () => 
     socialLinks: [],
     statementOfDisclosure: { fileName: undefined, publicUrl: null },
   });
+});
+
+test("Candidate presentation separates an acclaimed suffix from the display name", () => {
+  const { presentation } = presentCandidate({
+    sourcePublishedName: "Casey CANDIDATE  - ACCLAIMED",
+  });
+  assert.equal(presentation.acclaimed, true);
+  assert.equal(presentation.displayName, "Casey CANDIDATE");
 });
 
 test("Candidate presentation rejects invalid optional external URLs", () => {

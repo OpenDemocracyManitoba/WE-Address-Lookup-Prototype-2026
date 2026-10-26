@@ -17,7 +17,7 @@ description: Browse every Contest in the 2026 Municipal Council and School Board
   >
     <h2 id="{{ office | slugify }}-contests">{{ office }}</h2>
     <ul class="contest-directory-list">
-      {% for contest in election.contests %} {% if contest.office == office %}
+      {% for contest in directoryContests %} {% if contest.office == office %}
       <li>
         <a href="/contests/{{ contest.id }}/"
           >{{ contest.electoralArea.canonicalName }}<span class="directory-arrow" aria-hidden="true">→</span></a

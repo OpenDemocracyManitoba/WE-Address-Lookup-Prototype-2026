@@ -181,6 +181,13 @@ summary:focus-visible {
   text-transform: uppercase;
 }
 
+.acclaimed-badge {
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.45rem;
+  background: var(--signal-mark);
+  color: var(--signal-ink);
+}
+
 .intro .eyebrow {
   grid-column: 1 / -1;
 }

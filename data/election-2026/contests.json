@@ -965,7 +965,8 @@
       ],
       "candidateList": {
         "support": "unsupported",
-        "availability": "Unavailable"
+        "availability": "Unavailable",
+        "officialResourceUrl": "https://www.srsd.ca/governance/2026_manitoba_school_trustee_elections/trustee_candidates"
       }
     },
     {
@@ -989,7 +990,8 @@
       ],
       "candidateList": {
         "support": "unsupported",
-        "availability": "Unavailable"
+        "availability": "Unavailable",
+        "officialResourceUrl": "https://www.interlakesd.ca/2026-manitoba-school-trustee-election/"
       }
     }
   ]
