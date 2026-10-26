@@ -11,6 +11,8 @@ eleventyComputed:
 contestPage: true
 ---
 {% from "macros/candidate-information.njk" import candidateInformation %}
+{% from "macros/news-coverage.njk" import newsCoverage %}
+{% set coverage = contestCoverage.contests[contest.id] %}
 <article class="contest-page">
   <header class="intro">
     <p class="eyebrow">{{ contest.office }} Contest</p>
@@ -19,5 +21,7 @@ contestPage: true
 
   <p class="contest-number-to-elect"><strong>Number to Elect:</strong> {{ contest.numberToElect }}</p>
 
-  {{ candidateInformation(contest) }}
+  {{ newsCoverage(coverage, contestCoverage.compiled) }}
+
+  {{ candidateInformation(contest, coverage=coverage) }}
 </article>

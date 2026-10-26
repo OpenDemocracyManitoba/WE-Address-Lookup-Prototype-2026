@@ -1,0 +1,1545 @@
+{
+  "meta": {
+    "description": "News coverage (race profiles, candidate profiles, interviews, guides) from the Winnipeg Free Press and CBC Manitoba for each 2026 Winnipeg contest, keyed by the We Address tool's contest slug.",
+    "compiled": "2026-10-25",
+    "election_date": "2026-10-28",
+    "candidate_ids": "City of Winnipeg Open Data dataset 9gi9-dauz `id` field; name_official is that dataset's `name` field.",
+    "kinds": {
+      "race_profile": "An article or video about this ward race as a whole.",
+      "race_guide": "Mayor only: a page covering every mayoral candidate (interview collection, platform tracker).",
+      "candidate_profile": "A piece focused on one candidate in this contest.",
+      "candidate_interview": "Mayor only: a one-on-one interview video with one candidate.",
+      "all_wards_roundup": "A piece covering all 15 council races; it applies to every ward but gives each one only a few paragraphs."
+    },
+    "school_trustees": "School trustee contests are intentionally empty: coverage was too sparse (one candidate profile across 18 contested races) to show without singling out a candidate.",
+    "sort": "Within each contest, items are pre-sorted: race-level items first, then candidate items, then roundups; newest first within each group.",
+    "contests": 41,
+    "items_total": 74
+  },
+  "contests": {
+    "mayor-winnipeg": {
+      "contest_slug": "mayor-winnipeg",
+      "contest_name": "Mayor",
+      "office": "Mayor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A040",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "CBC interviews all 12 of Winnipeg's mayoral candidates",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-mayoral-candidate-interviews-9.7389380",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "article + video",
+          "kind": "race_guide",
+          "paywalled": false,
+          "summary": "One page collecting CBC's one-on-one video interviews with each of the 12 mayoral candidates.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A061",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "What promises have Winnipeg's 2026 mayoral candidates made on key issues?",
+          "url": "https://newsinteractives.cbc.ca/features/2026/winnipeg-mayoral-platforms/",
+          "date": null,
+          "byline": "Bryce Hoye, Lauren Scott (CBC News Labs)",
+          "format": "interactive",
+          "kind": "race_guide",
+          "paywalled": false,
+          "summary": "Side-by-side tracker of all 12 candidates' promises on crime, housing, taxes and transit, updated through the campaign.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A024",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "A Rocky day on the campaign trail for Winnipeg mayoral candidate Kevin Klein",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/09/a-rocky-day-on-the-campaign-trail",
+          "date": "2026-10-09",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "candidate_profile",
+          "paywalled": true,
+          "summary": "A day with Kevin Klein in the final weeks of his mayoral campaign.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-174",
+              "name_official": "Kevin KLEIN"
+            }
+          ]
+        },
+        {
+          "id": "A018",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "A day on the campaign trail: Winnipeg's mayor, seeking a second term, does double duty",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/02/gillingham-on-the-go",
+          "date": "2026-10-02",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "candidate_profile",
+          "paywalled": true,
+          "summary": "A day with Scott Gillingham as he campaigns while still running the city.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-28",
+              "name_official": "Scott GILLINGHAM"
+            }
+          ]
+        },
+        {
+          "id": "A042",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Brad Gross focuses on city's financial sustainability",
+          "url": "https://www.cbc.ca/player/play/video/9.7387577",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "Gross on jobs and new city revenue.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-148",
+              "name_official": "Brad GROSS"
+            }
+          ]
+        },
+        {
+          "id": "A043",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Chris Clacio focuses on public safety",
+          "url": "https://www.cbc.ca/player/play/video/9.7387580",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "Clacio on transit funding, fleet growth and public safety.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-27",
+              "name_official": "Chris CLACIO"
+            }
+          ]
+        },
+        {
+          "id": "A044",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Don Woodstock focuses on transit, housing",
+          "url": "https://www.cbc.ca/player/play/video/9.7387578",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "Woodstock on halving water bills and housing on vacant land.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-32",
+              "name_official": "Don WOODSTOCK"
+            }
+          ]
+        },
+        {
+          "id": "A045",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Johnny Calderon focuses on men's mental health, addictions",
+          "url": "https://www.cbc.ca/player/play/video/9.7387567",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "Calderon on open drug use, addiction and men's mental health.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-34",
+              "name_official": "Johnny CALDERON"
+            }
+          ]
+        },
+        {
+          "id": "A046",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Joshua Pagdato prioritizes addiction crisis, homelessness",
+          "url": "https://www.cbc.ca/player/play/video/9.7387586",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "Pagdato on micro-home communities and the addiction crisis.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-33",
+              "name_official": "Joshua PAGDATO"
+            }
+          ]
+        },
+        {
+          "id": "A047",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Kevin Klein focusing on safety, homelessness",
+          "url": "https://www.cbc.ca/player/play/video/9.7388835",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "The former councillor and MLA on safety and homelessness.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-174",
+              "name_official": "Kevin KLEIN"
+            }
+          ]
+        },
+        {
+          "id": "A048",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Mazher Alam promises reduced utility bills, taxes",
+          "url": "https://www.cbc.ca/player/play/video/9.7387604",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "Alam on cutting utility bills and property taxes through audits.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-31",
+              "name_official": "Mazher ALAM"
+            }
+          ]
+        },
+        {
+          "id": "A049",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Mike Vogiatzakis says he's focused on safety",
+          "url": "https://www.cbc.ca/player/play/video/9.7384598",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "Vogiatzakis on making streets safer.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-29",
+              "name_official": "Mike VOGIATZAKIS"
+            }
+          ]
+        },
+        {
+          "id": "A050",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Noah Redden prioritizes transit funding, addiction supports",
+          "url": "https://www.cbc.ca/player/play/video/9.7387550",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "Redden on transit funding, bike lanes and addiction supports.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-35",
+              "name_official": "Noah REDDEN"
+            }
+          ]
+        },
+        {
+          "id": "A051",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Scott Gillingham touts downtown revitalization efforts",
+          "url": "https://www.cbc.ca/player/play/video/9.7389400",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "The incumbent on continuing his public safety, housing and downtown work.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-28",
+              "name_official": "Scott GILLINGHAM"
+            }
+          ]
+        },
+        {
+          "id": "A052",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Tracey Drexler pledges transit safety, housing supports",
+          "url": "https://www.cbc.ca/player/play/video/9.7387557",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "Drexler on transit safety, restoring routes and housing supports.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-178",
+              "name_official": "Tracey DREXLER"
+            }
+          ]
+        },
+        {
+          "id": "A053",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Winnipeg mayoral candidate Umar Hayat says social housing a priority",
+          "url": "https://www.cbc.ca/player/play/video/9.7384824",
+          "date": "2026-10-21",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "candidate_interview",
+          "paywalled": false,
+          "summary": "Hayat on social housing, crime and poverty.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-30",
+              "name_official": "Umar HAYAT"
+            }
+          ]
+        }
+      ]
+    },
+    "council-charleswood-tuxedo-westwood": {
+      "contest_slug": "council-charleswood-tuxedo-westwood",
+      "contest_name": "Councillor – Charleswood-Tuxedo-Westwood",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A055",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Only two contenders for one seat in three city wards — Charleswood-Tuxedo-Westwood, Point Douglas, Daniel McIntyre",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/21/playing-one-on-one",
+          "date": "2026-10-21",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "The three two-person races, each pitting an incumbent against a single challenger.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-daniel-mcintyre": {
+      "contest_slug": "council-daniel-mcintyre",
+      "contest_name": "Councillor – Daniel McIntyre",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A055",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Only two contenders for one seat in three city wards — Charleswood-Tuxedo-Westwood, Point Douglas, Daniel McIntyre",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/21/playing-one-on-one",
+          "date": "2026-10-21",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "The three two-person races, each pitting an incumbent against a single challenger.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-elmwood-east-kildonan": {
+      "contest_slug": "council-elmwood-east-kildonan",
+      "contest_name": "Councillor – Elmwood-East Kildonan",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A037",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Rematch one year in the making in Elmwood-East Kildonan",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/19/rematch-one-year-in-the-making",
+          "date": "2026-10-19",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "Incumbent Emma Durand-Wood faces four challengers, two of whom she beat in the 2025 byelection.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-fort-rouge-east-fort-garry": {
+      "contest_slug": "council-fort-rouge-east-fort-garry",
+      "contest_name": "Councillor – Fort Rouge-East Fort Garry",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A035",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Four Winnipeg councillor candidates vie for wide-open Fort Rouge-East Fort Garry ward",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/18/four-councillor-candidates-vie-for-wide-open-fort-rouge-east-fort-garry-ward",
+          "date": "2026-10-18",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "The four candidates running for the seat left open by Sherri Rollins.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A023",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Homelessness, safety high priorities for 4 candidates vying for open Fort Rouge-East Fort Garry seat",
+          "url": "https://www.cbc.ca/news/canada/manitoba/fort-rouge-east-fort-garry-election-winnipeg-2026-9.7375215",
+          "date": "2026-10-09",
+          "byline": "Cameron MacLean",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "The four candidates for the seat Sherri Rollins is leaving rank homelessness and public safety as top issues.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-mynarski": {
+      "contest_slug": "council-mynarski",
+      "contest_name": "Councillor – Mynarski",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A060",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Winnipeg city councillor Eadie faces crowded field in bid for fifth term in Mynarski",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/23/eadie-faces-crowded-field-including-former-councillor-in-bid-for-fifth-term-in-mynarski",
+          "date": "2026-10-23",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "Ross Eadie seeks a fifth term against five challengers, including former councillor Terry Wachniak.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-north-kildonan": {
+      "contest_slug": "council-north-kildonan",
+      "contest_name": "Councillor – North Kildonan",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A058",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "In North Kildonan, fresh ideas challenge decades of experience",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/23/winnipeg-election-2026-north-kildonan-candidates",
+          "date": "2026-10-23",
+          "byline": "Joyanne Pursaga",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "Long-serving Jeff Browaty against two first-time challengers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-old-kildonan": {
+      "contest_slug": "council-old-kildonan",
+      "contest_name": "Councillor – Old Kildonan",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A054",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Old Kildonan candidates say growing ward not getting share of city resources",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/21/winnipeg-election-2026-old-kildonan-candidates",
+          "date": "2026-10-21",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "Incumbent Devi Sharma and two challengers agree the growing ward is short-changed on city resources.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-point-douglas": {
+      "contest_slug": "council-point-douglas",
+      "contest_name": "Councillor – Point Douglas",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A055",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Only two contenders for one seat in three city wards — Charleswood-Tuxedo-Westwood, Point Douglas, Daniel McIntyre",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/21/playing-one-on-one",
+          "date": "2026-10-21",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "The three two-person races, each pitting an incumbent against a single challenger.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-river-heights-fort-garry": {
+      "contest_slug": "council-river-heights-fort-garry",
+      "contest_name": "Councillor – River Heights-Fort Garry",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A022",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Winnipeg infill development on minds of all three River Heights-Fort Garry candidates",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/06/infill-development-on-all-three-river-heights-fort-garry-candidates",
+          "date": "2026-10-06",
+          "byline": "Joyanne Pursaga",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "Infill housing is the shared concern of the three candidates seeking the open River Heights-Fort Garry seat.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A016",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Race underway in River Heights-Fort Garry to become 1st new councillor in 17 years",
+          "url": "https://www.cbc.ca/news/canada/manitoba/river-heights-fort-garry-election-9.7364582",
+          "date": "2026-10-01",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "The three candidates vying to replace John Orlikow, the ward's councillor since 2009.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A015",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Wide-open race in River Heights-Fort Garry",
+          "url": "https://www.cbc.ca/player/play/video/9.7364562",
+          "date": "2026-09-30",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "Video companion to CBC's River Heights-Fort Garry profile.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-st-boniface": {
+      "contest_slug": "council-st-boniface",
+      "contest_name": "Councillor – St. Boniface",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A056",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Three vying to unseat Allard in St. Boniface",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/21/three-vying-to-unseat-allard-in-st-boniface",
+          "date": "2026-10-21",
+          "byline": "Matthew Frank",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "Incumbent Matt Allard against three challengers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-st-james": {
+      "contest_slug": "council-st-james",
+      "contest_name": "Councillor – St. James",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A039",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Dobson up against two tech types in St. James council race",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/20/dobson-up-against-two-tech-types-in-st-james-council-race",
+          "date": "2026-10-20",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "Incumbent Shawn Dobson against two challengers from the tech sector.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A032",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Two IT managers try to wrest St. James ward from incumbent Shawn Dobson",
+          "url": "https://www.cbc.ca/news/canada/manitoba/stjames-winnipeg-council-race-9.7380658",
+          "date": "2026-10-15",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "Incumbent Shawn Dobson faces two challengers who both work in information technology, including his 2022 opponent.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A031",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "3 candidates vying for council in Winnipeg's St. James ward",
+          "url": "https://www.cbc.ca/player/play/video/9.7382697",
+          "date": "2026-10-15",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "Video companion to CBC's St. James profile.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-st-norbert-seine-river": {
+      "contest_slug": "council-st-norbert-seine-river",
+      "contest_name": "Councillor – St. Norbert-Seine River",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A029",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "For most candidates in St. Norbert-Seine River, running for council is a growing concern",
+          "url": "https://www.cbc.ca/news/canada/manitoba/st-norbert-seine-rver-council-candidates-9.7378162",
+          "date": "2026-10-14",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "The four candidates for the open St. Norbert-Seine River seat, several of whom grow food or plants for a living.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A028",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "4 candidates vie for open council seat in St. Norbert-Seine River",
+          "url": "https://www.cbc.ca/player/play/video/9.7380279",
+          "date": "2026-10-14",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "Video companion to CBC's St. Norbert-Seine River profile.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A027",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "St. Norbert–Seine River wide open race with four contenders",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/13/suburban-brawl",
+          "date": "2026-10-13",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "Two farmers, a nurse and a garden-shop operator compete for the open seat.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-st-vital": {
+      "contest_slug": "council-st-vital",
+      "contest_name": "Councillor – St. Vital",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A038",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidates vie to fill Brian Mayes' long-held St. Vital seat",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/20/winnipeg-election-2026-st-vital-ward-candidates",
+          "date": "2026-10-20",
+          "byline": "Joyanne Pursaga",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "The three newcomers competing to succeed Brian Mayes in St. Vital.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A025",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Lawyer, land-based educator, business exec vie for vacant council seat in St. Vital",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-stvital-council-candidates-2026-9.7377243",
+          "date": "2026-10-12",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "The three candidates for St. Vital's open seat, vacated by Brian Mayes.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A026",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "St. Vital prepares to choose first new councillor in 15 years",
+          "url": "https://www.cbc.ca/player/play/video/9.7378116",
+          "date": "2026-10-12",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "Video companion to CBC's St. Vital profile.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-transcona": {
+      "contest_slug": "council-transcona",
+      "contest_name": "Councillor – Transcona",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A034",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Shadow of charges hangs over Transcona race as candidates pitch vision for ward",
+          "url": "https://www.cbc.ca/news/canada/manitoba/transcona-candidates-winnipeg-election-2026-9.7382901",
+          "date": "2026-10-16",
+          "byline": "Cameron MacLean",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "Incumbent Russ Wyatt runs while facing sexual assault charges; four challengers, including former councillor Shawn Nason, pitch their plans.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A033",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Cloud of criminal charges hangs over Winnipeg's Transcona ward race",
+          "url": "https://www.cbc.ca/player/play/video/9.7384400",
+          "date": "2026-10-16",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "Video companion to CBC's Transcona profile; four challengers face incumbent Russ Wyatt.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A030",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "A decision with potential for 'distraction' and 'disrespect' in Winnipeg's Transcona ward",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/14/a-decision-with-potential-for-distraction-and-disrespect-in-transcona",
+          "date": "2026-10-14",
+          "byline": "Malak Abas",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": true,
+          "summary": "Transcona voters weigh incumbent Russ Wyatt, who faces criminal charges, against four challengers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "council-waverley-west": {
+      "contest_slug": "council-waverley-west",
+      "contest_name": "Councillor – Waverley West",
+      "office": "Councillor",
+      "acclaimed": false,
+      "has_race_coverage": true,
+      "items": [
+        {
+          "id": "A020",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Rapid growth and diverse candidates: A look inside the race for Waverley West",
+          "url": "https://www.cbc.ca/news/canada/manitoba/waverley-west-winnipeg-election-candidates-9.7370482",
+          "date": "2026-10-06",
+          "byline": "Cameron MacLean",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "All five candidates for the open seat in Winnipeg's largest, fastest-growing ward, where keeping services in step with new housing dominates.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A021",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Waverley West candidates tackle rapid growth in open council race",
+          "url": "https://www.cbc.ca/player/play/video/9.7370254",
+          "date": "2026-10-06",
+          "byline": "CBC News",
+          "format": "video",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "Video companion to CBC's Waverley West profile.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A006",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Waverley West council candidates say city services haven't kept up with fastest-growing ward",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/08/25/waverley-west-booming-but-recreation-a-bust",
+          "date": "2026-08-25",
+          "byline": "Joyanne Pursaga",
+          "format": "article",
+          "kind": "race_profile",
+          "paywalled": false,
+          "summary": "Early look at the open Waverley West race; candidates say recreation and other services lag the ward's rapid growth.",
+          "covers_all_candidates": true,
+          "candidates": []
+        },
+        {
+          "id": "A036",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "Candidate profiles: Who wants to be your city councillor?",
+          "url": "https://www.winnipegfreepress.com/civic-election/civic-election-info/2026/10/19/winnipeg-election-2026-candidate-profiles-who-wants-to-be-your-city-councillor",
+          "date": "2026-10-19",
+          "byline": "Free Press staff",
+          "format": "index page",
+          "kind": "all_wards_roundup",
+          "paywalled": true,
+          "summary": "Landing page collecting the Free Press's ward-by-ward council profiles.",
+          "covers_all_candidates": false,
+          "candidates": []
+        },
+        {
+          "id": "A014",
+          "outlet": "CBC Manitoba",
+          "outlet_short": "CBC",
+          "title": "Beyond the open wards: Where change is most likely to occur in Winnipeg council races",
+          "url": "https://www.cbc.ca/news/canada/manitoba/winnipeg-election-2026-analysis-9.7358870",
+          "date": "2026-09-26",
+          "byline": "Bartley Kives",
+          "format": "article",
+          "kind": "all_wards_roundup",
+          "paywalled": false,
+          "summary": "Analysis naming every council candidate: the five open seats, five wards where incumbents face experienced challengers, and five where they face only newcomers.",
+          "covers_all_candidates": true,
+          "candidates": []
+        }
+      ]
+    },
+    "school-louis-riel-ward-1": {
+      "contest_slug": "school-louis-riel-ward-1",
+      "contest_name": "School Trustee – Louis Riel School Division – Ward 1",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-louis-riel-ward-2": {
+      "contest_slug": "school-louis-riel-ward-2",
+      "contest_name": "School Trustee – Louis Riel School Division – Ward 2",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-louis-riel-ward-3": {
+      "contest_slug": "school-louis-riel-ward-3",
+      "contest_name": "School Trustee – Louis Riel School Division – Ward 3",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-louis-riel-ward-4": {
+      "contest_slug": "school-louis-riel-ward-4",
+      "contest_name": "School Trustee – Louis Riel School Division – Ward 4",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-pembina-trails-ward-1": {
+      "contest_slug": "school-pembina-trails-ward-1",
+      "contest_name": "School Trustee – Pembina Trails School Division – Ward 1",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-pembina-trails-ward-2": {
+      "contest_slug": "school-pembina-trails-ward-2",
+      "contest_name": "School Trustee – Pembina Trails School Division – Ward 2",
+      "office": "School Trustee",
+      "acclaimed": true,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-pembina-trails-ward-3": {
+      "contest_slug": "school-pembina-trails-ward-3",
+      "contest_name": "School Trustee – Pembina Trails School Division – Ward 3",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-river-east-transcona-ward-1": {
+      "contest_slug": "school-river-east-transcona-ward-1",
+      "contest_name": "School Trustee – River East Transcona School Division – Ward 1",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-river-east-transcona-ward-2": {
+      "contest_slug": "school-river-east-transcona-ward-2",
+      "contest_name": "School Trustee – River East Transcona School Division – Ward 2",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-river-east-transcona-ward-3": {
+      "contest_slug": "school-river-east-transcona-ward-3",
+      "contest_name": "School Trustee – River East Transcona School Division – Ward 3",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-river-east-transcona-ward-4": {
+      "contest_slug": "school-river-east-transcona-ward-4",
+      "contest_name": "School Trustee – River East Transcona School Division – Ward 4",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-seven-oaks-ward-2": {
+      "contest_slug": "school-seven-oaks-ward-2",
+      "contest_name": "School Trustee – Seven Oaks School Division – Ward 2",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-seven-oaks-ward-3": {
+      "contest_slug": "school-seven-oaks-ward-3",
+      "contest_name": "School Trustee – Seven Oaks School Division – Ward 3",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-st-james-assiniboia-centre": {
+      "contest_slug": "school-st-james-assiniboia-centre",
+      "contest_name": "School Trustee – St. James – Assiniboia School Division – Centre",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-st-james-assiniboia-east": {
+      "contest_slug": "school-st-james-assiniboia-east",
+      "contest_name": "School Trustee – St. James – Assiniboia School Division – East",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-st-james-assiniboia-west": {
+      "contest_slug": "school-st-james-assiniboia-west",
+      "contest_name": "School Trustee – St. James – Assiniboia School Division – West",
+      "office": "School Trustee",
+      "acclaimed": true,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-winnipeg-ward-1": {
+      "contest_slug": "school-winnipeg-ward-1",
+      "contest_name": "School Trustee – Winnipeg School Division – Ward 1",
+      "office": "School Trustee",
+      "acclaimed": true,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-winnipeg-ward-2": {
+      "contest_slug": "school-winnipeg-ward-2",
+      "contest_name": "School Trustee – Winnipeg School Division – Ward 2",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-winnipeg-ward-3": {
+      "contest_slug": "school-winnipeg-ward-3",
+      "contest_name": "School Trustee – Winnipeg School Division – Ward 3",
+      "office": "School Trustee",
+      "acclaimed": true,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-winnipeg-ward-4": {
+      "contest_slug": "school-winnipeg-ward-4",
+      "contest_name": "School Trustee – Winnipeg School Division – Ward 4",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-winnipeg-ward-5": {
+      "contest_slug": "school-winnipeg-ward-5",
+      "contest_name": "School Trustee – Winnipeg School Division – Ward 5",
+      "office": "School Trustee",
+      "acclaimed": true,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-winnipeg-ward-6": {
+      "contest_slug": "school-winnipeg-ward-6",
+      "contest_name": "School Trustee – Winnipeg School Division – Ward 6",
+      "office": "School Trustee",
+      "acclaimed": true,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-winnipeg-ward-7": {
+      "contest_slug": "school-winnipeg-ward-7",
+      "contest_name": "School Trustee – Winnipeg School Division – Ward 7",
+      "office": "School Trustee",
+      "acclaimed": true,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-winnipeg-ward-8": {
+      "contest_slug": "school-winnipeg-ward-8",
+      "contest_name": "School Trustee – Winnipeg School Division – Ward 8",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    },
+    "school-winnipeg-ward-9": {
+      "contest_slug": "school-winnipeg-ward-9",
+      "contest_name": "School Trustee – Winnipeg School Division – Ward 9",
+      "office": "School Trustee",
+      "acclaimed": false,
+      "has_race_coverage": false,
+      "items": []
+    }
+  }
+}

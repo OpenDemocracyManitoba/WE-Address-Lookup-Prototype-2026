@@ -1,0 +1,37 @@
+{% macro newsLink(item) -%}
+  {% if item.publicUrl %}<a href="{{ item.publicUrl }}" target="_blank" rel="noopener noreferrer">{{ item.title }}<span class="visually-hidden"> (opens in a new tab)</span></a>{% else %}{{ item.title }}{% endif %}
+{%- endmacro %}
+
+{% macro newsLabels(item) -%}
+  {% if item.video %} <span class="news-label">Video</span>{% endif %}
+  {%- if item.paywalled %} <span class="news-label">Paywall</span>{% endif %}
+{%- endmacro %}
+
+{% macro newsList(items) %}
+  <ul class="news-list">
+    {% for item in items %}
+      <li>
+        <p class="news-meta"><span class="news-outlet">{{ item.outlet_short }}</span>{% if item.displayDate %} · <time datetime="{{ item.date }}">{{ item.displayDate }}</time>{% endif %}{{ newsLabels(item) }}</p>
+        <p class="news-title">{{ newsLink(item) }}</p>
+        {% if item.summary %}<p class="news-summary">{{ item.summary }}</p>{% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro newsCoverage(coverage, compiled) %}
+  {% if coverage.raceItems.length %}
+    <section class="news-coverage" aria-labelledby="news-coverage-heading">
+      <h2 id="news-coverage-heading">News coverage</h2>
+      {{ newsList(coverage.raceItems) }}
+      {% if coverage.roundups.length %}
+        <p class="news-roundups">Also covering all 15 wards:
+          {% for item in coverage.roundups %}
+            <span class="news-roundup">{{ item.outlet_short }}: {{ newsLink(item) }}{% if item.displayDate %} (<time datetime="{{ item.date }}">{{ item.displayDate }}</time>){% endif %}{{ newsLabels(item) }}</span>{% if not loop.last %} · {% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
+      <p class="news-source-note">Coverage compiled from the Winnipeg Free Press and CBC Manitoba, {{ compiled }}. Links go to the publishers' sites.</p>
+    </section>
+  {% endif %}
+{% endmacro %}

@@ -394,3 +394,47 @@ test("Signal is the permanent shell and its visible labels are markup", () => {
     /class="section-number">02 \/<\/span>/,
   );
 });
+
+test("Contest pages show News coverage from the coverage data", () => {
+  const coverage = JSON.parse(
+    readFileSync(new URL("../data/election-2026/contest_coverage.json", import.meta.url), "utf8"),
+  );
+  const pageIds = directoryContests(election).map((contest) => contest.id).sort();
+  assert.deepEqual(Object.keys(coverage.contests).sort(), pageIds, "every coverage key is a Contest page");
+
+  for (const contest of directoryContests(election)) {
+    const page = readBuiltPage(`contests/${contest.id}/index.html`);
+    const { items } = coverage.contests[contest.id];
+    const raceItems = items.filter((item) => ["race_profile", "race_guide"].includes(item.kind));
+    if (raceItems.length === 0) {
+      assert.doesNotMatch(page, /news-coverage|In the news|news-list/, `${contest.id} has no News coverage`);
+      continue;
+    }
+    const sectionStart = page.indexOf('<section class="news-coverage"');
+    const section = page.slice(sectionStart, page.indexOf("</section>", sectionStart));
+    assert.ok(page.indexOf("contest-number-to-elect") < sectionStart);
+    assert.ok(sectionStart < page.indexOf("data-candidate-list"));
+    assert.match(section, /<h2 id="news-coverage-heading">News coverage<\/h2>/);
+    assert.match(section, /Coverage compiled from the Winnipeg Free Press and CBC Manitoba, Oct\. 25, 2026\./);
+    for (const item of items) {
+      assert.ok(page.includes(`href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"`));
+      assert.equal(page.split(`href="${escapeHtml(item.url)}"`).length - 1, 1, `${item.url} appears once on ${contest.id}`);
+    }
+  }
+
+  const stVital = readBuiltPage("contests/council-st-vital/index.html");
+  assert.equal(stVital.match(/<span class="news-roundup">/g).length, 2);
+  assert.doesNotMatch(stVital, /In the news/);
+
+  const mayor = readBuiltPage("contests/mayor-winnipeg/index.html");
+  const candidateBlocks = mayor.split("data-candidate-record").slice(1);
+  assert.equal(candidateBlocks.length, 12);
+  for (const block of candidateBlocks) {
+    assert.match(block, /<h3>In the news<\/h3>[\s\S]*<span class="news-outlet">CBC<\/span>[\s\S]*<span class="news-label">Video<\/span>/);
+  }
+  const freePressBlocks = candidateBlocks.filter((block) => block.includes("candidate-news") && /candidate-news[\s\S]*Free Press/.test(block));
+  assert.deepEqual(
+    freePressBlocks.map((block) => block.match(/<h2>([^<]+)<\/h2>/)[1]).sort(),
+    ["Kevin KLEIN", "Scott GILLINGHAM"],
+  );
+});

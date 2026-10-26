@@ -126,3 +126,63 @@ export function loadElectionPresentation() {
   );
   return presentElection(election, candidateDocument);
 }
+
+// Canadian Press month abbreviations: "Oct. 20", "Sept. 26", "May 4".
+const newsMonths = ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
+const raceCoverageKinds = new Set(["race_profile", "race_guide"]);
+
+function newsDate(value) {
+  if (!value) return null;
+  const [, month, day] = value.split("-").map(Number);
+  return `${newsMonths[month - 1]} ${day}`;
+}
+
+function presentCoverageItem(item) {
+  return {
+    ...item,
+    displayDate: newsDate(item.date),
+    publicUrl: externalUrl(item.url),
+    video: item.format === "video",
+  };
+}
+
+// News coverage is keyed by Contest id and links candidates by their City
+// dataset record id. Unknown keys fail the build rather than being guessed at.
+export function presentContestCoverage(coverageDocument, election) {
+  const contestsById = new Map(directoryContests(election).map((contest) => [contest.id, contest]));
+  const { compiled } = coverageDocument.meta;
+  const coverage = {
+    compiled: `${newsDate(compiled)}, ${compiled.slice(0, 4)}`,
+    contests: {},
+  };
+  for (const [contestId, { items }] of Object.entries(coverageDocument.contests)) {
+    const contest = contestsById.get(contestId);
+    if (!contest) throw new Error(`News coverage names unknown Contest "${contestId}"`);
+    const recordIds = new Set(contest.candidates.map((candidate) => candidate.source.recordId));
+    const presented = items.map(presentCoverageItem);
+    const raceItems = presented.filter((item) => raceCoverageKinds.has(item.kind));
+    const candidateItems = {};
+    for (const item of presented) {
+      if (raceCoverageKinds.has(item.kind) || item.kind === "all_wards_roundup") continue;
+      for (const { candidate_id: recordId, name_official: name } of item.candidates) {
+        if (!recordIds.has(recordId)) {
+          throw new Error(`News coverage names unknown Candidate ${recordId} (${name}) in ${contestId}`);
+        }
+        (candidateItems[recordId] ??= []).push(item);
+      }
+    }
+    coverage.contests[contestId] = {
+      raceItems,
+      roundups: raceItems.length ? presented.filter((item) => item.kind === "all_wards_roundup") : [],
+      candidateItems,
+    };
+  }
+  return coverage;
+}
+
+export function loadContestCoverage() {
+  return presentContestCoverage(
+    JSON.parse(readFileSync("data/election-2026/contest_coverage.json", "utf8")),
+    loadElectionPresentation(),
+  );
+}

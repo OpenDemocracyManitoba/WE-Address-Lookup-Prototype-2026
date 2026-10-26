@@ -6,7 +6,9 @@
   {% endif %}
 {% endmacro %}
 
-{% macro candidateInformation(contest, headingTag="h2", nameTag="h2", subheadingTag="h3", idPrefix="") %}
+{% from "macros/news-coverage.njk" import newsList %}
+
+{% macro candidateInformation(contest, headingTag="h2", nameTag="h2", subheadingTag="h3", idPrefix="", coverage=null) %}
   {% set headingId = idPrefix ~ "candidate-information-heading" %}
   {% if contest.candidateList.availability == "Unavailable" %}
     <section class="candidate-list-notice" aria-labelledby="{{ headingId }}">
@@ -50,6 +52,14 @@
                       <li><a href="{{ social.publicUrl }}">{{ social.label }}</a></li>
                     {% endfor %}
                   </ul>
+                </div>
+              {% endif %}
+
+              {% set newsItems = coverage.candidateItems[candidate.source.recordId] if coverage else [] %}
+              {% if newsItems.length %}
+                <div class="candidate-news">
+                  <{{ subheadingTag }}>In the news</{{ subheadingTag }}>
+                  {{ newsList(newsItems) }}
                 </div>
               {% endif %}
 

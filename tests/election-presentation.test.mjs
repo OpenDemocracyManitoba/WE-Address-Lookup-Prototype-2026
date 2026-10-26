@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { presentElection } from "../election-presentation.js";
+import { presentContestCoverage, presentElection } from "../election-presentation.js";
 
 test("Contest presentation omits nomination-withdrawn Candidate Records", () => {
   const presentation = presentElection(
@@ -223,4 +223,44 @@ test("Candidate presentation rejects invalid optional external URLs", () => {
     fileName: undefined,
     publicUrl: null,
   });
+});
+
+function coverageFixture(contests) {
+  return presentContestCoverage(
+    { meta: { compiled: "2026-09-05" }, contests },
+    {
+      contests: [
+        {
+          id: "council-fixture-ward",
+          candidateList: { availability: "Published" },
+          candidates: [{ source: { recordId: "2026-1" } }],
+        },
+      ],
+    },
+  );
+}
+
+test("News coverage groups race, Candidate, and roundup items in file order", () => {
+  const race = { kind: "race_profile", date: "2026-09-26", format: "video", url: "https://example.test/race", candidates: [] };
+  const profile = { kind: "candidate_profile", date: "2026-05-04", format: "article", url: "https://example.test/one", candidates: [{ candidate_id: "2026-1", name_official: "Alex EXAMPLE" }] };
+  const roundup = { kind: "all_wards_roundup", date: null, format: "article", url: "https://example.test/all", candidates: [] };
+  const coverage = coverageFixture({ "council-fixture-ward": { items: [race, profile, roundup] } });
+
+  assert.equal(coverage.compiled, "Sept. 5, 2026");
+  const contest = coverage.contests["council-fixture-ward"];
+  assert.deepEqual(contest.raceItems.map((item) => [item.url, item.displayDate, item.video]), [["https://example.test/race", "Sept. 26", true]]);
+  assert.deepEqual(contest.candidateItems["2026-1"].map((item) => [item.url, item.displayDate]), [["https://example.test/one", "May 4"]]);
+  assert.deepEqual(contest.roundups.map((item) => [item.url, item.displayDate]), [["https://example.test/all", null]]);
+});
+
+test("News coverage never shows a roundup as a Contest's only race-level coverage", () => {
+  const roundup = { kind: "all_wards_roundup", date: "2026-09-26", url: "https://example.test/all", candidates: [] };
+  const coverage = coverageFixture({ "council-fixture-ward": { items: [roundup] } });
+  assert.deepEqual(coverage.contests["council-fixture-ward"].roundups, []);
+});
+
+test("News coverage rejects unknown Contests and Candidates instead of guessing", () => {
+  assert.throws(() => coverageFixture({ "council-missing-ward": { items: [] } }), /unknown Contest "council-missing-ward"/);
+  const profile = { kind: "candidate_profile", date: "2026-10-01", url: "https://example.test/x", candidates: [{ candidate_id: "2026-9", name_official: "Pat NOBODY" }] };
+  assert.throws(() => coverageFixture({ "council-fixture-ward": { items: [profile] } }), /unknown Candidate 2026-9 \(Pat NOBODY\)/);
 });

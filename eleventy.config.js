@@ -1,10 +1,11 @@
-import { directoryContests, loadElectionPresentation } from "./election-presentation.js";
+import { directoryContests, loadContestCoverage, loadElectionPresentation } from "./election-presentation.js";
 
 export default function (eleventyConfig) {
   eleventyConfig.addGlobalData("election", loadElectionPresentation);
   eleventyConfig.addGlobalData("directoryContests", () =>
     directoryContests(loadElectionPresentation())
   );
+  eleventyConfig.addGlobalData("contestCoverage", loadContestCoverage);
   eleventyConfig.addFilter("contestResolutionData", (contests) =>
     contests.map(({ id, office, electoralArea, aliases, candidateList }) => ({
       id,
