@@ -6,7 +6,7 @@ description: About the nonpartisan WinnipegElection.ca voter resource from Open 
 
 # About
 
-WinnipegElection.ca is a voter resource built by Kyle Geske on behalf of Open Democracy Manitoba (ODM). ODM is a non-profit organization that builds digital tools for democratic engagement. Learn more about <a href="https://opendemocracymanitoba.ca">Open Democracy Manitoba</a>.
+WinnipegElection.ca is a voter resource built by Open Democracy Manitoba (ODM). ODM is a non-profit organization that builds digital tools for democratic engagement. Learn more about <a href="https://opendemocracymanitoba.ca">Open Democracy Manitoba</a>.
 
 ## Contact
 
