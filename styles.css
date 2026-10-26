@@ -93,6 +93,14 @@ summary:focus-visible {
   white-space: pre-line;
 }
 
+.site-resource-note a {
+  color: inherit;
+}
+
+.site-resource-note a:hover {
+  color: var(--signal-mark);
+}
+
 .site-name {
   max-width: 12rem;
   color: var(--signal-surface);
