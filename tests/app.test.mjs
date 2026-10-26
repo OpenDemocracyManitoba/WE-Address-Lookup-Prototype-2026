@@ -1094,6 +1094,15 @@ test("footer preserves the privacy notice and acknowledges the City data licence
   assert.match(html, /<\/p>\s*<p class="footer-note attribution-note">/);
 });
 
+test("affiliation note follows the lookup results and links to the About page", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  assert.match(
+    html,
+    /<div id="applicable-contests"><\/div>\s*<\/section>\s*<p class="affiliation-note">\s*<strong>Not affiliated with the City of Winnipeg:<\/strong>/,
+  );
+  assert.match(html, /<a href="\/about\/">Open Democracy Manitoba<\/a>/);
+});
+
 test("visually hidden popup status retains its normal-flow layout space", () => {
   const css = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
   const hiddenStatusRule =

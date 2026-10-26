@@ -576,9 +576,12 @@ input:hover {
   border-left-color: var(--signal-confirm);
 }
 
-.page-footer .affiliation-note {
-  grid-column: 1 / -1;
-  border-left-color: var(--signal-blue);
+.affiliation-note {
+  margin: 1.5rem 0 0;
+  padding-left: 1.3rem;
+  border-left: 0.35rem solid var(--signal-blue);
+  color: var(--signal-muted);
+  font-size: 0.78rem;
 }
 
 .page-shell > .intro:not(.lookup .intro) {
