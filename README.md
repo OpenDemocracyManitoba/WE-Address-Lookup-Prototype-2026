@@ -158,7 +158,7 @@ For deployment, review the Content Security Policy, `frame-ancestors`, HSTS, `X-
 
 ### 4. Licensing, policy, and election-content review
 
-The footer includes the required City data acknowledgement. A broader policy review should still confirm non-endorsement and official/unofficial presentation, links to authoritative election information, correction and escalation language, applicable bilingual and plain-language expectations, records and privacy requirements, and the response to authoritative data changes during the election period.
+The footer includes the required City data acknowledgement and a non-affiliation note linking to the City's official 2026 Election site; the About page repeats that statement. A broader policy review should still confirm non-endorsement and official/unofficial presentation, correction and escalation language, applicable bilingual and plain-language expectations, records and privacy requirements, and the response to authoritative data changes during the election period.
 
 ### 5. Automated real-browser integration and compatibility testing
 

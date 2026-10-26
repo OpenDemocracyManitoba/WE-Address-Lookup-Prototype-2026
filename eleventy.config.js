@@ -28,6 +28,10 @@ export default function (eleventyConfig) {
     "contest-resolver.js": "assets/contest-resolver.js",
     "contest-result-renderer.js": "assets/contest-result-renderer.js",
     "styles.css": "assets/styles.css",
+    "images/og-image.jpg": "assets/og-image.jpg",
+    "images/favicon-32.png": "assets/favicon-32.png",
+    "images/favicon-192.png": "assets/favicon-192.png",
+    "images/apple-touch-icon.png": "assets/apple-touch-icon.png",
   });
 
   return {

@@ -1,11 +1,13 @@
 ---
 layout: layouts/base.njk
-title: About Winnipeg Election
-description: About the nonpartisan Winnipeg Election voter resource.
+title: About WinnipegElection.ca
+description: About the nonpartisan WinnipegElection.ca voter resource from Open Democracy Manitoba.
 ---
 
-# About Winnipeg Election
+# About WinnipegElection.ca
 
-Winnipeg Election is a nonpartisan voter resource for the 2026 Municipal Council and School Boards Election.
+WinnipegElection.ca is a voter resource built by Kyle Geske on behalf of Open Democracy Manitoba (ODM). ODM is a non-profit organization that builds digital tools for democratic engagement. Learn more about <a href="https://opendemocracymanitoba.ca">Open Democracy Manitoba</a>.
 
-More information about the project and its contributors will be added here.
+## Not Affiliated with the City of Winnipeg
+
+WinnipegElection.ca has no affiliation with the City of Winnipeg. The City Clerk’s Department, which is the official Election authority for city council and school trustee elections, runs <a href="https://www.winnipeg.ca/city-governance/wards-elections/2026-election">the official Winnipeg City 2026 Election site</a>.

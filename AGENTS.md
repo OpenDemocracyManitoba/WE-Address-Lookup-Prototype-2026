@@ -29,9 +29,10 @@ Never edit `_site/`; it is generated output.
 - `contest-resolver.js` — applicable election contests
 - `election-presentation.js` — election presentation logic
 - `styles.css` — site styling
+- `images/` — social share image and favicons, published under `/assets/`
 - `scripts/import-candidates.mjs` — Candidate data import
 - `data/election-2026/` — election data and preserved source evidence
-- `about/`, `faq/`, `learn/` — placeholder sections for now; do not assume their current content or structure is final
+- `faq/` — placeholder section for now; do not assume its current content or structure is final
 
 ## Domain and election data
 
