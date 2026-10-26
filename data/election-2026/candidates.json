@@ -1,12 +1,12 @@
 {
   "election": "2026 Municipal Council and School Boards Election",
-  "importedAt": "2026-09-06T12:31:11.623Z",
+  "importedAt": "2026-10-26T03:09:38.935Z",
   "sourceSnapshots": [
     {
       "sourceId": "city-candidate-dataset",
-      "observedAt": "2026-09-06T12:31:11.623Z",
-      "retrievalUrl": "https://data.winnipeg.ca/resource/9gi9-dauz.json?$limit=18000&$where=election_date%20%3E=%20%272026-01-01T00:00:00.000%27%20AND%20election_date%20%3C%20%272027-01-01T00:00:00.000%27%20AND%20(nomination_order%20IS%20NULL%20OR%20nomination_order%20%3E=%200)",
-      "path": "source-snapshots/city-candidate-dataset/2026-09-06T12-31-11-623Z.json"
+      "observedAt": "2026-10-26T03:09:38.935Z",
+      "retrievalUrl": "file:/tmp/claude-1000/-home-stungeye-WE-Address-Lookup-Prototype-2026/26c418d2-facf-420b-8cce-d88699e220e4/scratchpad/live/dataset.json",
+      "path": "source-snapshots/city-candidate-dataset/2026-10-26T03-09-38-935Z.json"
     }
   ],
   "candidates": [
@@ -14,176 +14,262 @@
       "contestId": "council-charleswood-tuxedo-westwood",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-164"
       },
-      "sourcePublishedName": "Dennis Bayomi",
-      "phase": "registration",
+      "sourcePublishedName": "Dennis BAYOMI",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-27T00:00:00.000",
-      "campaignWebsite": "https://www.whatifwinnipeg.ca/"
+      "campaignWebsite": "https://www.whatifwinnipeg.ca/",
+      "statementOfDisclosure": {
+        "fileName": "Dennis Bayomi Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/CT-DennisBAYOMI.pdf"
+      }
     },
     {
       "contestId": "council-charleswood-tuxedo-westwood",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-52"
       },
-      "sourcePublishedName": "Evan Duncan",
-      "phase": "registration",
+      "sourcePublishedName": "Evan DUNCAN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.voteevanduncan.ca",
-      "email": "voteevanduncan@gmail.com"
+      "email": "voteevanduncan@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Evan Duncan Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/CT-EvanDUNCAN.pdf"
+      }
     },
     {
       "contestId": "council-daniel-mcintyre",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-37"
       },
-      "sourcePublishedName": "Cindy Gilroy",
-      "phase": "registration",
+      "sourcePublishedName": "Cindy GILROY",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "https://votecindygilroy.ca/",
       "email": "votecindygilroy@gmail.com",
-      "phone": "204-898-5999"
+      "phone": "204-898-5999",
+      "statementOfDisclosure": {
+        "fileName": "Cindy Gilroy Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/DM-CindyGILROY.pdf"
+      }
     },
     {
       "contestId": "council-daniel-mcintyre",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-165"
       },
-      "sourcePublishedName": "Fred Morris",
-      "phase": "registration",
+      "sourcePublishedName": "Fred MORRIS",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-28T00:00:00.000",
       "email": "fredmorris@hotmail.com",
-      "phone": "204-795-1583"
+      "phone": "204-795-1583",
+      "statementOfDisclosure": {
+        "fileName": "Fred Morris Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/DM-FredMORRIS.pdf"
+      }
     },
     {
       "contestId": "council-elmwood-east-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-55"
       },
-      "sourcePublishedName": "Abel Gutierrez",
-      "phase": "registration",
+      "sourcePublishedName": "Abel GUTIERREZ",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.voteabel.com",
       "email": "abelj18@hotmail.com",
-      "phone": "204-960-4744"
+      "phone": "204-960-4744",
+      "statementOfDisclosure": {
+        "fileName": "Abel Gutierrez Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/EK-AbelGUTIERREZ.pdf"
+      }
     },
     {
       "contestId": "council-elmwood-east-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-132"
       },
-      "sourcePublishedName": "Adam Dudek",
-      "phase": "registration",
+      "sourcePublishedName": "Adam DUDEK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-21T00:00:00.000",
       "campaignWebsite": "www.adamdudek.ca",
-      "email": "dudekwpg@gmail.com"
+      "email": "dudekwpg@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Adam Dudek Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/EK-AdamDUDEK.pdf"
+      }
     },
     {
       "contestId": "council-elmwood-east-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-100"
       },
-      "sourcePublishedName": "Christian Sweryda",
-      "phase": "registration",
+      "sourcePublishedName": "Chris SWERYDA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-07T00:00:00.000",
       "campaignWebsite": "www.chrisforelmwoodek.ca",
       "email": "umsweryd@myumanitoba.ca",
-      "phone": "204-801-9239"
+      "phone": "204-801-9239",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/people/Christian-Sweryda-for-Elmwood-East-Kildonan/61592496838528/"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Chris Sweryda Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/EK-ChrisSWERYDA.pdf"
+      }
     },
     {
       "contestId": "council-elmwood-east-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-80"
       },
-      "sourcePublishedName": "Emma Durand-Wood",
-      "phase": "registration",
+      "sourcePublishedName": "Emma DURAND-WOOD",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "www.teamemma.ca",
       "email": "hello@teamemma.ca",
-      "phone": "204-202-3173"
+      "phone": "204-202-3173",
+      "statementOfDisclosure": {
+        "fileName": "Emma Durand-Wood Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/EE-EmmaDURANDWOOD.pdf"
+      }
     },
     {
       "contestId": "council-elmwood-east-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-131"
       },
-      "sourcePublishedName": "Jessica Wiebe",
-      "phase": "registration",
+      "sourcePublishedName": "Jessica WIEBE",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-21T00:00:00.000",
       "campaignWebsite": "https://jessicawiebeforek.com",
-      "email": "jessicawiebeforeastkildonan@outlook.com",
+      "email": "votejessicawiebe@outlook.com",
       "socialLinks": [
         {
           "platform": "facebook",
           "url": "https://www.facebook.com/jessica.dawn.jfire"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Jessica Wiebe Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/EK-JessicaWIEBE.pdf"
+      }
     },
     {
       "contestId": "council-fort-rouge-east-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-183"
+      },
+      "sourcePublishedName": "Brook JONES",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-11T00:00:00.000",
+      "campaignWebsite": "www.brookjones.ca",
+      "email": "brook@brookjones.ca ",
+      "phone": "204291-4120",
+      "statementOfDisclosure": {
+        "fileName": "Brook Jones Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/FR-BrookJONES.pdf"
+      }
+    },
+    {
+      "contestId": "council-fort-rouge-east-fort-garry",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-193"
+      },
+      "sourcePublishedName": "Carson MAUTHE",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-15T00:00:00.000",
+      "campaignWebsite": "www.votecarsonmauthe.com",
+      "email": "info@votecarsonmauthe.com",
+      "phone": "204-298-9768",
+      "statementOfDisclosure": {
+        "fileName": "Carson Mauthe Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/FR-CarsonMAUTHE.pdf"
+      }
+    },
+    {
+      "contestId": "council-fort-rouge-east-fort-garry",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-59"
       },
-      "sourcePublishedName": "Jeff Palmer",
-      "phase": "registration",
+      "sourcePublishedName": "Jeff PALMER",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.votejeffpalmer.ca",
@@ -198,20 +284,24 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/jeff4fortrougeeastfortgarry/%20"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Jeff Palmer Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/FR-JeffPALMER.pdf"
+      }
     },
     {
       "contestId": "council-fort-rouge-east-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-112"
       },
-      "sourcePublishedName": "Kevin Stuart",
-      "phase": "registration",
+      "sourcePublishedName": "Kevin STUART",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-13T00:00:00.000",
       "campaignWebsite": "www.teamkevinstuart.com",
@@ -226,13 +316,17 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/teamkevinstuart"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Kevin Stuart Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/FR-KevinSTUART.pdf"
+      }
     },
     {
       "contestId": "council-fort-rouge-east-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-43"
       },
       "sourcePublishedName": "Sherri Rollins  - WITHDRAWN",
@@ -247,14 +341,14 @@
       "contestId": "council-mynarski",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-85"
       },
-      "sourcePublishedName": "Ayaz Noor Mohammed",
-      "phase": "registration",
+      "sourcePublishedName": "Ayaz NOOR MOHAMMED",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-03T00:00:00.000",
       "campaignWebsite": "https://ayazformynarski.ca",
@@ -268,38 +362,46 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/ayazformynarski"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Ayaz Noor Mohammed Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/MY-AyazNOORMOHAMMED.pdf"
+      }
     },
     {
       "contestId": "council-mynarski",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-56"
       },
-      "sourcePublishedName": "Harold Brazil",
-      "phase": "registration",
+      "sourcePublishedName": "Harold BRAZIL",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.haroldbrazilformynarski.ca",
       "email": "haroldbrazilformynarski@gmail.com",
-      "phone": "204-995-5533"
+      "phone": "204-995-5533",
+      "statementOfDisclosure": {
+        "fileName": "Harold Brazil Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/MY-HaroldBRAZIL.pdf"
+      }
     },
     {
       "contestId": "council-mynarski",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-159"
       },
-      "sourcePublishedName": "Laurie  Kozak",
-      "phase": "registration",
+      "sourcePublishedName": "Laurie KOZAK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-21T00:00:00.000",
       "campaignWebsite": "www.lauriekozak.com",
@@ -314,20 +416,24 @@
           "platform": "instagram",
           "url": "www.instagram.com/kozakformynarski"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Laurie Kozak Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/MY-LaurieKOZAK.pdf"
+      }
     },
     {
       "contestId": "council-mynarski",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-83"
       },
-      "sourcePublishedName": "Natalie  Smith",
-      "phase": "registration",
+      "sourcePublishedName": "Natalie SMITH",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-03T00:00:00.000",
       "campaignWebsite": "natalieformynarski.com",
@@ -342,56 +448,88 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/nat4mynarski/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Natalie Smith Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/MY-NatalieSMITH.pdf"
+      }
     },
     {
       "contestId": "council-mynarski",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-116"
       },
-      "sourcePublishedName": "Ross Eadie",
-      "phase": "registration",
+      "sourcePublishedName": "Ross EADIE",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-14T00:00:00.000",
       "campaignWebsite": "www.rosseadie.ca",
       "email": "ross@rosseadie.ca",
-      "phone": "204-471-4803"
+      "phone": "204-471-4803",
+      "statementOfDisclosure": {
+        "fileName": "Ross Eadie Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/MY-RossEADIE.pdf"
+      }
+    },
+    {
+      "contestId": "council-mynarski",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-204"
+      },
+      "sourcePublishedName": "Terry WACHNIAK",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-19T00:00:00.000",
+      "phone": "204-558-4389",
+      "statementOfDisclosure": {
+        "fileName": "Terry Wachniak Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/MY-TerryWACHNIAK.pdf"
+      }
     },
     {
       "contestId": "council-north-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-49"
       },
-      "sourcePublishedName": "Jeff Browaty",
-      "phase": "registration",
+      "sourcePublishedName": "Jeff BROWATY",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "https://www.jeffbrowaty.com/",
       "email": "info@jeffbrowaty.com",
-      "phone": "204-663-4157"
+      "phone": "204-663-4157",
+      "statementOfDisclosure": {
+        "fileName": "Jeff Browaty Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/NK-JeffBROWATY.pdf"
+      }
     },
     {
       "contestId": "council-north-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-136"
       },
-      "sourcePublishedName": "Orvie Dingwall",
-      "phase": "registration",
+      "sourcePublishedName": "Orvie DINGWALL",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-23T00:00:00.000",
       "campaignWebsite": "www.orvie.ca",
@@ -406,20 +544,24 @@
           "platform": "instagram",
           "url": "www.instagram.com/orvie4nk"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Orvie Dingwall Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/NK-OrvieDINGWALL.pdf"
+      }
     },
     {
       "contestId": "council-north-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-38"
       },
-      "sourcePublishedName": "Tyler Andersen",
-      "phase": "registration",
+      "sourcePublishedName": "Tyler ANDERSEN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.Tyler4NK.com",
@@ -430,63 +572,77 @@
           "platform": "facebook",
           "url": "https://www.facebook.com/profile.php?id=61591590775886"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Tyler Ander Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/NK-TylerANDERSEN.pdf"
+      }
     },
     {
       "contestId": "council-old-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-36"
       },
-      "sourcePublishedName": "Devi Sharma",
-      "phase": "registration",
+      "sourcePublishedName": "Devi SHARMA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
-      "email": "www.votedevisharma@gmail.com",
-      "phone": "431-293-3384"
+      "campaignWebsite": "https://votesharma.ca/",
+      "email": "votedevisharma@gmail.com",
+      "phone": "431-293-3384",
+      "statementOfDisclosure": {
+        "fileName": "Devi Sharma Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/OK-DeviSHARMA.pdf"
+      }
     },
     {
       "contestId": "council-old-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-72"
       },
-      "sourcePublishedName": "Greg McFarlane",
-      "phase": "registration",
+      "sourcePublishedName": "Greg McFARLANE",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "www.greg-mcfarlane.ca",
       "email": "vote4greg2026@gmail.com",
-      "phone": "204-479-4941",
+      "phone": "431-703-0310",
       "socialLinks": [
         {
           "platform": "facebook",
           "url": "https://www.facebook.com/share/1H98HdakkZ/?mibextid=wwXIfr"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Greg McFarlance Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/OK-GregMCFARLANE.pdf"
+      }
     },
     {
       "contestId": "council-old-kildonan",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-77"
       },
-      "sourcePublishedName": "Love Randhawa",
-      "phase": "registration",
+      "sourcePublishedName": "Love RANDHAWA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "https://voteloverandhawa.ca/",
       "email": "loverandhawa33@yahoo.com",
       "phone": "204-960-8592",
       "socialLinks": [
@@ -498,92 +654,112 @@
           "platform": "twitter",
           "url": "https://x.com/LoveRandhawawpg"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Love Randhawa Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/OK-LoveRANDHAWA.pdf"
+      }
     },
     {
       "contestId": "council-point-douglas",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-142"
       },
-      "sourcePublishedName": "Mark Requinta",
-      "phase": "registration",
+      "sourcePublishedName": "Mark REQUINTA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-30T00:00:00.000",
       "campaignWebsite": "www.requinta.ca",
       "email": "markrequintaforpointdouglas@gmail.com",
-      "phone": "204-979-5007"
+      "phone": "204-979-5007",
+      "statementOfDisclosure": {
+        "fileName": "Mark Requinta Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PD-MarkREQUINTA.pdf"
+      }
     },
     {
       "contestId": "council-point-douglas",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-71"
       },
-      "sourcePublishedName": "Vivian Santos",
-      "phase": "registration",
+      "sourcePublishedName": "Vivian SANTOS",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "www.vivian4pointdouglas.ca",
       "email": "info@vivian4pointdouglas.ca",
-      "phone": "204-510-1608"
+      "phone": "204-510-1608",
+      "statementOfDisclosure": {
+        "fileName": "Vivian Santos Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PD-VivianSANTOS.pdf"
+      }
     },
     {
       "contestId": "council-river-heights-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-48"
       },
-      "sourcePublishedName": "Georgina Sabesky",
-      "phase": "registration",
+      "sourcePublishedName": "Georgina SABESKY",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.sabesky.ca",
       "email": "info@sabesky.ca",
-      "phone": "204-272-9180"
+      "phone": "204-272-9180",
+      "statementOfDisclosure": {
+        "fileName": "Georgina Sabesky Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RG-GeorginaSABESKY.pdf"
+      }
     },
     {
       "contestId": "council-river-heights-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-103"
       },
-      "sourcePublishedName": "Jorge Requena Ramos",
-      "phase": "registration",
+      "sourcePublishedName": "Jorge REQUENA RAMOS",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-08T00:00:00.000",
       "campaignWebsite": "www.togetherinriverheights.ca",
       "email": "togetherriverheights@gmail.com",
-      "phone": "204-998-9780"
+      "phone": "204-998-9780",
+      "statementOfDisclosure": {
+        "fileName": "Jorge Requena Ramos Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RG-JorgeREQUENARAMOS.pdf"
+      }
     },
     {
       "contestId": "council-river-heights-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-117"
       },
-      "sourcePublishedName": "Randy McDonald",
+      "sourcePublishedName": "Randy McDonald - WITHDRAWN",
       "phase": "registration",
       "status": {
         "sourceValue": "Registered",
-        "value": "Registered"
+        "value": "Registration Withdrawn"
       },
       "registrationDate": "2026-07-14T00:00:00.000",
       "campaignWebsite": "https://v4rm2026.blogspot.com/",
@@ -594,14 +770,14 @@
       "contestId": "council-river-heights-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-60"
       },
-      "sourcePublishedName": "Sara MacArthur",
-      "phase": "registration",
+      "sourcePublishedName": "Sara MacARTHUR",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "https://saramacarthur.com/",
@@ -615,13 +791,17 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/saramacarthur/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Sara MacArthur Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RG-SaraMACARTHUR.pdf"
+      }
     },
     {
       "contestId": "council-river-heights-fort-garry",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-91"
       },
       "sourcePublishedName": "Ty Mitchell - WITHDRAWN",
@@ -636,14 +816,14 @@
       "contestId": "council-st-boniface",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-39"
       },
-      "sourcePublishedName": "Matt Allard",
-      "phase": "registration",
+      "sourcePublishedName": "Matt ALLARD",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.mattallard.ca",
@@ -666,20 +846,24 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/mathieufredericallard/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Matt Allard Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SB-MattALLARD.pdf"
+      }
     },
     {
       "contestId": "council-st-boniface",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-45"
       },
-      "sourcePublishedName": "Nicholas Douklias",
-      "phase": "registration",
+      "sourcePublishedName": "Nicholas DOUKLIAS",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.nicholasdouklias.ca",
@@ -701,20 +885,24 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/nicholasdouklias"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Nicholas Douklias Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SB-NicholasDOUKLIAS.pdf"
+      }
     },
     {
       "contestId": "council-st-boniface",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-102"
       },
-      "sourcePublishedName": "Robyn Vilde",
-      "phase": "registration",
+      "sourcePublishedName": "Robyn VILDE",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-08T00:00:00.000",
       "campaignWebsite": "https://www.robynvildecampaign.com/",
@@ -728,37 +916,51 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/robynev_94/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Robyn Vilde Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SB-RobynVILDE.pdf"
+      }
     },
     {
       "contestId": "council-st-boniface",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-89"
       },
-      "sourcePublishedName": "Sylvie Schmitt",
-      "phase": "registration",
+      "sourcePublishedName": "Sylvie SCHMITT",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-03T00:00:00.000",
       "campaignWebsite": "https://sylvie4citycouncil.neocities.org/sylvie-schmitt-campaign",
-      "email": "sylvie4citycouncil@gmail.com"
+      "email": "sylvie4citycouncil@gmail.com",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/people/Sylvie-Schmitt-forpour-St-Boniface/61594188951266/"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Sylvie Schmitt Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SB-SylvieSCHMITT.pdf"
+      }
     },
     {
       "contestId": "council-st-james",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-42"
       },
-      "sourcePublishedName": "Kelly Ryback",
-      "phase": "registration",
+      "sourcePublishedName": "Kelly RYBACK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.ryback.ca",
@@ -773,54 +975,76 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/Ryback4StJames/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Kelly Ryback Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJ-KellyRYBACK.pdf"
+      }
     },
     {
       "contestId": "council-st-james",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-40"
       },
-      "sourcePublishedName": "Shawn Dobson",
-      "phase": "registration",
+      "sourcePublishedName": "Shawn DOBSON",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
-      "email": "Stdobson01@gmail.com"
+      "email": "Stdobson01@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Shawn Dobson Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJ-ShawnDOBSON.pdf"
+      }
     },
     {
       "contestId": "council-st-james",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-62"
       },
-      "sourcePublishedName": "Tyler Crichton",
-      "phase": "registration",
+      "sourcePublishedName": "Tyler CRICHTON",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.TylerForStJames.ca",
       "email": "hello@tylerforstjames.ca",
-      "phone": "431-877-8276"
+      "phone": "431-877-8276",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/TylerForStJames"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/tylerforstjames"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Tyler Crichton Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJ-TylerCRICHTON.pdf"
+      }
     },
     {
       "contestId": "council-st-norbert-seine-river",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-123"
       },
-      "sourcePublishedName": "Anita Roy",
-      "phase": "registration",
+      "sourcePublishedName": "Anita ROY",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-20T00:00:00.000",
       "campaignWebsite": "www.anitaroy.ca",
@@ -835,42 +1059,51 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/anitaforcommunity/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Anita Roy Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SN-AnitaROY.pdf"
+      }
     },
     {
       "contestId": "council-st-norbert-seine-river",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-107"
       },
-      "sourcePublishedName": "Govind Thawani",
-      "phase": "registration",
+      "sourcePublishedName": "Govind THAWANI",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-10T00:00:00.000",
+      "campaignWebsite": "www.govind4stnorbert-seineriver.ca",
       "email": "govindthawani@hotmail.com",
-      "phone": "204-952-1505"
+      "phone": "204-952-1505",
+      "statementOfDisclosure": {
+        "fileName": "Govind Thawani Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SN-GovindTHAWANI.pdf"
+      }
     },
     {
       "contestId": "council-st-norbert-seine-river",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-121"
       },
-      "sourcePublishedName": "Louise May",
-      "phase": "registration",
+      "sourcePublishedName": "Louise MAY",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-17T00:00:00.000",
       "campaignWebsite": "www.louisemay.ca",
       "email": "louisemay@louisemay.ca",
-      "phone": "204-202-4844",
+      "phone": "204-202-4660",
       "socialLinks": [
         {
           "platform": "facebook",
@@ -884,20 +1117,24 @@
           "platform": "instagram",
           "url": "https://instagram.com/louisemay_wpgcitycouncil"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Louise May Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SN-LouiseMAY.pdf"
+      }
     },
     {
       "contestId": "council-st-norbert-seine-river",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-122"
       },
-      "sourcePublishedName": "Ray DuBois",
-      "phase": "registration",
+      "sourcePublishedName": "Ray DuBOIS",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-17T00:00:00.000",
       "campaignWebsite": "www.raydubois.com",
@@ -916,163 +1153,219 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/rayduboiscitycouncil/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Ray DuBois Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SN-RayDUBOIS.pdf"
+      }
     },
     {
       "contestId": "council-st-vital",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-46"
       },
-      "sourcePublishedName": "Chris Sigurdson",
-      "phase": "registration",
+      "sourcePublishedName": "Chris SIGURDSON",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "https://sigurdson4sv.ca/",
       "email": "sigurd01@shaw.ca",
-      "phone": "204-470-8713"
+      "phone": "204-470-8713",
+      "statementOfDisclosure": {
+        "fileName": "Chris SIgurdson Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SV-ChrisSIGURDSON.pdf"
+      }
     },
     {
       "contestId": "council-st-vital",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-156"
       },
-      "sourcePublishedName": "Doug Reimer",
-      "phase": "registration",
+      "sourcePublishedName": "Doug REIMER",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-13T00:00:00.000",
       "campaignWebsite": "https://dougreimer.ca/",
-      "email": "votedougreimer@gmail.com",
-      "phone": "431-481-1928"
+      "email": "votedougreimer@gmail.com ",
+      "phone": "431-481-1928",
+      "statementOfDisclosure": {
+        "fileName": "Doug Reimer Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SV-DougREIMER.pdf"
+      }
     },
     {
       "contestId": "council-st-vital",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-140"
       },
-      "sourcePublishedName": "Season Kirkwood",
-      "phase": "registration",
+      "sourcePublishedName": "Season KIRKWOOD",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-28T00:00:00.000",
       "campaignWebsite": "www.seasonkirkwood.ca",
       "email": "voteseasonkirkwood@gmail.com",
-      "phone": "431-866-3847"
+      "statementOfDisclosure": {
+        "fileName": "Season Kirkwood Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SV-SeasonKIRKWOOD.pdf"
+      }
     },
     {
       "contestId": "council-transcona",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-41"
       },
-      "sourcePublishedName": "Chris Giesbrecht",
-      "phase": "registration",
+      "sourcePublishedName": "Chris GIESBRECHT",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.transconaproud.ca",
       "email": "chris@transconaproud.ca",
-      "phone": "431-533-2325"
+      "phone": "431-533-2325",
+      "statementOfDisclosure": {
+        "fileName": "Chris Giesbrecht Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/TR-ChrisGIESBRECHT.pdf"
+      }
     },
     {
       "contestId": "council-transcona",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-98"
       },
-      "sourcePublishedName": "Lora Meseman",
-      "phase": "registration",
+      "sourcePublishedName": "Lora MESEMAN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-07T00:00:00.000",
       "campaignWebsite": "www.lora4transcona.ca",
       "email": "team@lora4transcona.ca",
-      "phone": "431-791-5672"
+      "phone": "431-791-5672",
+      "statementOfDisclosure": {
+        "fileName": "Lora Meseman Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/TR-LoraMESEMAN.pdf"
+      }
     },
     {
       "contestId": "council-transcona",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-58"
       },
-      "sourcePublishedName": "Nathine Dagdick",
-      "phase": "registration",
+      "sourcePublishedName": "Nathine DAGDICK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "https://www.nathinedagdickfortranscona.ca/",
-      "email": "nathinedagdick@yahoo.com"
+      "email": "nathinedagdick@yahoo.com",
+      "statementOfDisclosure": {
+        "fileName": "Nathine Dagdick Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/TR-NathineDAGDICK.pdf"
+      }
     },
     {
       "contestId": "council-transcona",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-211"
+      },
+      "sourcePublishedName": "Russ WYATT",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-21T00:00:00.000",
+      "email": "russwyattcda@gmail.com",
+      "phone": "204-403-8307",
+      "statementOfDisclosure": {
+        "fileName": "Russ Wyatt Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/TR-RussWYATT.pdf"
+      }
+    },
+    {
+      "contestId": "council-transcona",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-54"
       },
-      "sourcePublishedName": "Shawn Nason",
-      "phase": "registration",
+      "sourcePublishedName": "Shawn NASON",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.nason2026.ca",
       "email": "vote@nason2026.ca",
-      "phone": "204-894-8121"
+      "phone": "204-894-8121",
+      "statementOfDisclosure": {
+        "fileName": "Shawn Nason Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/TR-ShawnNASON.pdf"
+      }
     },
     {
       "contestId": "council-waverley-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-118"
       },
-      "sourcePublishedName": "Antar Banik",
-      "phase": "registration",
+      "sourcePublishedName": "Antar BANIK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-15T00:00:00.000",
       "campaignWebsite": "www.antarforcouncil.com",
       "email": "contact@antarforcouncil.com",
-      "phone": "431-342-1670"
+      "phone": "431-342-1670",
+      "statementOfDisclosure": {
+        "fileName": "Antar Banik Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/WW-AntarBANIK.pdf"
+      }
     },
     {
       "contestId": "council-waverley-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-87"
       },
-      "sourcePublishedName": "Jasmine Brar",
-      "phase": "registration",
+      "sourcePublishedName": "Jasmine BRAR",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-03T00:00:00.000",
       "campaignWebsite": "www.jasminebrar.ca",
@@ -1095,24 +1388,28 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/jasminebrar12/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Jasmine Brar Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/WW-JasmineBRAR.pdf"
+      }
     },
     {
       "contestId": "council-waverley-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-44"
       },
-      "sourcePublishedName": "Nafiya  Naso",
-      "phase": "registration",
+      "sourcePublishedName": "Nafiya NASO",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.votenaso.ca",
-      "email": "nafiya@votenaso.ca",
+      "email": "nafiya@votenaso.ca ",
       "phone": "204-955-3938",
       "socialLinks": [
         {
@@ -1123,20 +1420,24 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/nafiyanaso/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Nafiya Naso Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/WW-NafiyaNASO.pdf"
+      }
     },
     {
       "contestId": "council-waverley-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-75"
       },
-      "sourcePublishedName": "Uche Nwankwo",
-      "phase": "registration",
+      "sourcePublishedName": "Uche NWANKWO",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "https://uchenwankwo.ca/",
@@ -1155,20 +1456,24 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/uchenwankwo.focus/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Uche Nwankwo Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/WW-UcheNWANKWO.pdf"
+      }
     },
     {
       "contestId": "council-waverley-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-84"
       },
-      "sourcePublishedName": "Yuanchao Li",
-      "phase": "registration",
+      "sourcePublishedName": "Yuanchao LI",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-03T00:00:00.000",
       "email": "yuanchaoli@longhan.ca",
@@ -1182,37 +1487,60 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/yuanchao_li_wpg"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Yuanchao Li Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/WW-YuanchaoLI.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
-        "recordId": "2026-148"
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-203"
       },
-      "sourcePublishedName": "Brad Gross",
+      "sourcePublishedName": "Abdel-Kareem Chehadi",
       "phase": "registration",
       "status": {
         "sourceValue": "Registered",
         "value": "Registered"
+      },
+      "registrationDate": "2026-09-18T00:00:00.000"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-148"
+      },
+      "sourcePublishedName": "Brad GROSS",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-07T00:00:00.000",
       "email": "509sold@gmail.com",
-      "phone": "204-509-7653"
+      "phone": "204-509-7653",
+      "statementOfDisclosure": {
+        "fileName": "Brad Gross Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-BradGROSS.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-27"
       },
-      "sourcePublishedName": "Christopher Clacio",
-      "phase": "registration",
+      "sourcePublishedName": "Chris CLACIO",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-05-01T00:00:00.000",
       "campaignWebsite": "www.chrisclacio4mayor.ca",
@@ -1231,178 +1559,306 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/chrisclacio4mayor"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Chris Clacio Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/mayor-christopher-clacio.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-32"
       },
-      "sourcePublishedName": "Don Woodstock",
-      "phase": "registration",
+      "sourcePublishedName": "Don WOODSTOCK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-05-20T00:00:00.000",
-      "campaignWebsite": "donwoodstock.com",
+      "campaignWebsite": "www.donwoodstock.com",
       "email": "donwoodstockcampaign@gmail.com",
-      "phone": "204-880-1564"
+      "phone": "204-880-1564",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/don.woodstock1"
+        },
+        {
+          "platform": "twitter",
+          "url": "https://x.com/Don_Woodstock"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/woodstock.don/"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Don Woodstock Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-DonWOODSTOCK.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-200"
+      },
+      "sourcePublishedName": "Ed Ackerman - WITHDRAWN",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registration Withdrawn"
+      },
+      "registrationDate": "2026-09-18T00:00:00.000"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-185"
+      },
+      "sourcePublishedName": "Gagandeep Bawa",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-09-14T00:00:00.000",
+      "phone": "204-292-3531"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-213"
+      },
+      "sourcePublishedName": "Joaquin Sandul",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registered"
+      },
+      "registrationDate": "2026-09-22T00:00:00.000",
+      "email": "joaquinsandul@gmail.com",
+      "phone": "204-509-7470"
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-34"
       },
-      "sourcePublishedName": "Johnny Calderón",
-      "phase": "registration",
+      "sourcePublishedName": "Johnny CALDERON",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-16T00:00:00.000",
-      "email": "jc@jcforwinnipeg.com"
+      "email": "jc@jcforwinnipeg.com",
+      "statementOfDisclosure": {
+        "fileName": "Johnny Calderon Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-JohnnyCALDERON.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-33"
       },
-      "sourcePublishedName": "Joshua Pagdato",
-      "phase": "registration",
+      "sourcePublishedName": "Joshua PAGDATO",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-05-22T00:00:00.000",
       "email": "projectptkc@gmail.com",
-      "phone": "431-998-6532"
+      "phone": "431-998-6532",
+      "statementOfDisclosure": {
+        "fileName": "Joshua Pagdato Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-JoshuaPAGDATO.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-174"
       },
-      "sourcePublishedName": "Kevin Klein",
-      "phase": "registration",
+      "sourcePublishedName": "Kevin KLEIN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-09-03T00:00:00.000",
       "campaignWebsite": "KevinKlein.ca",
-      "email": "Kevin@KevinKlein.ca"
+      "email": "Kevin@KevinKlein.ca",
+      "statementOfDisclosure": {
+        "fileName": "Kevin Klein Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-KevinKLEIN.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-31"
       },
-      "sourcePublishedName": "Mazher Alam",
-      "phase": "registration",
+      "sourcePublishedName": "Mazher ALAM",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-05-20T00:00:00.000",
-      "email": "mazher313@gmail.com"
+      "email": "mazher313@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Mazher Alam Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-MazherALAM.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-29"
       },
-      "sourcePublishedName": "Michael Vogiatzakis",
-      "phase": "registration",
+      "sourcePublishedName": "Mike VOGIATZAKIS",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-05-07T00:00:00.000",
       "campaignWebsite": "Mikeformayor2026.com",
-      "email": "Mikeformayor2026@gmail.com"
+      "email": "Mikeformayor2026@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Mike Vogiatzakis Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-MichaelVOGIATZAKIS.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-35"
       },
-      "sourcePublishedName": "Noah Redden",
-      "phase": "registration",
+      "sourcePublishedName": "Noah REDDEN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-26T00:00:00.000",
       "campaignWebsite": "https://linktr.ee/noahreddenforwinnipeg",
-      "email": "noahreddenforwinnipeg@gmail.com"
+      "email": "noahreddenforwinnipeg@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Noah Redden Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-NoahREDDEN.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-28"
       },
-      "sourcePublishedName": "Scott Gillingham",
-      "phase": "registration",
+      "sourcePublishedName": "Scott GILLINGHAM",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-05-01T00:00:00.000",
       "campaignWebsite": "www.scottgillingham.com",
       "email": "info@scottgillingham.com",
-      "phone": "204-500-0950"
+      "phone": "204-500-0950",
+      "statementOfDisclosure": {
+        "fileName": "Scott Gillingham Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-ScottGILLINGHAM.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-178"
+      },
+      "sourcePublishedName": "Tracey DREXLER",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-08T00:00:00.000",
+      "email": "elect_tracey@northmail.ca",
+      "socialLinks": [
+        {
+          "platform": "instagram",
+          "url": "www.instagram.com/elect_tracey"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Tracey Drexler Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-TraceyDREXLER.pdf"
+      }
+    },
+    {
+      "contestId": "mayor-winnipeg",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-30"
       },
-      "sourcePublishedName": "Umar Hayat",
-      "phase": "registration",
+      "sourcePublishedName": "Umar HAYAT",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-05-13T00:00:00.000",
       "campaignWebsite": "hayatformayor.com",
       "email": "hayattumar@hotmail.com",
-      "phone": "204-955-2989"
+      "phone": "204-955-2989",
+      "statementOfDisclosure": {
+        "fileName": "Umar Hayat Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/Mayor-UmarHAYAT.pdf"
+      }
     },
     {
       "contestId": "mayor-winnipeg",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-144"
       },
-      "sourcePublishedName": "Zachary Uminski",
+      "sourcePublishedName": "Zachary Uminski - WITHDRAWN",
       "phase": "registration",
       "status": {
         "sourceValue": "Registered",
-        "value": "Registered"
+        "value": "Registration Withdrawn"
       },
       "registrationDate": "2026-07-31T00:00:00.000",
       "campaignWebsite": "voteforzac.ca",
-      "email": "info@voteforzac.ca",
+      "email": "info@voteforzac.ca ",
       "phone": "431-777-6956",
       "socialLinks": [
         {
@@ -1419,118 +1875,223 @@
       "contestId": "school-louis-riel-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-135"
       },
-      "sourcePublishedName": "Anna Weier",
-      "phase": "registration",
+      "sourcePublishedName": "Anna WEIER",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-23T00:00:00.000",
-      "email": "weier.anna@gmail.com",
-      "phone": "204-297-0100"
+      "campaignWebsite": "https://www.annaweier.ca/",
+      "email": "annaweier.lrsd@gmail.com",
+      "phone": "204-297-0100",
+      "statementOfDisclosure": {
+        "fileName": "Anna Weier Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR1-AnnaWEIER.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-93"
       },
-      "sourcePublishedName": "Ian Walker",
-      "phase": "registration",
+      "sourcePublishedName": "Ian WALKER",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-06T00:00:00.000",
       "campaignWebsite": "www.ianwalker.ca",
       "email": "ian@ianwalker.ca",
-      "phone": "204-781-0438"
+      "phone": "204-781-0438",
+      "statementOfDisclosure": {
+        "fileName": "Ian Walker Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR1-IanWALKER.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-180"
+      },
+      "sourcePublishedName": "Ina PROKIPCHUK",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-09T00:00:00.000",
+      "campaignWebsite": "https://www.inafortrustee.ca/",
+      "email": "Ina@InaForTrustee.ca",
+      "phone": "204-955-9391",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "facebook.com/inafortrustee"
+        },
+        {
+          "platform": "instagram",
+          "url": "instagram.com/inafortrustee"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Ina Prokipchuk Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR1-InaPROKIPCHUK.pdf"
+      }
+    },
+    {
+      "contestId": "school-louis-riel-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-81"
       },
-      "sourcePublishedName": "Moe Koroma",
-      "phase": "registration",
+      "sourcePublishedName": "Moe KOROMA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
+      "campaignWebsite": "https://moekoroma.ca/",
       "email": "makoroma@gmail.com",
-      "phone": "204-557-8384"
+      "phone": "204-557-8384",
+      "statementOfDisclosure": {
+        "fileName": "Moe Koroma Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR1-MohamedKOROMA.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-47"
       },
-      "sourcePublishedName": "Brian Mayes",
-      "phase": "registration",
+      "sourcePublishedName": "Brian MAYES",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.brianmayes4trustee.com",
       "email": "brianmayes4trustee@gmail.com",
-      "phone": "204-255-4909"
+      "phone": "204-255-4909",
+      "statementOfDisclosure": {
+        "fileName": "Brian Mayes Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR2-BrianMAYES.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-106"
       },
-      "sourcePublishedName": "Irene Nordheim",
-      "phase": "registration",
+      "sourcePublishedName": "Irene NORDHEIM",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-09T00:00:00.000",
       "email": "nordheimirene@gmail.com",
-      "phone": "204-290-3739"
+      "phone": "204-290-3739",
+      "statementOfDisclosure": {
+        "fileName": "Irene Nordheim Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR2-IreneNORDHEIM.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-96"
       },
-      "sourcePublishedName": "Lauren Lambert",
-      "phase": "registration",
+      "sourcePublishedName": "Lauren LAMBERT",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-07T00:00:00.000",
       "email": "LaurenLambertlrsd@gmail.com",
-      "phone": "204-807-0554"
+      "phone": "204-807-0554",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/share/1JfApujXNC/?mibextid=wwXIfr"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/lauren4lrsd"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Lauren Lambert Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR2-LaurenLAMBERT.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
-        "recordId": "2026-82"
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-184"
       },
-      "sourcePublishedName": "Peter Bjornson",
+      "sourcePublishedName": "Ben SINGER",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-11T00:00:00.000",
+      "email": "actward3@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Ben Singer Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR3-BenSINGER.pdf"
+      }
+    },
+    {
+      "contestId": "school-louis-riel-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-188"
+      },
+      "sourcePublishedName": "Marcel Boille",
       "phase": "registration",
       "status": {
         "sourceValue": "Registered",
         "value": "Registered"
+      },
+      "registrationDate": "2026-09-14T00:00:00.000",
+      "email": "myboille@yahoo.com",
+      "phone": "204-293-1312"
+    },
+    {
+      "contestId": "school-louis-riel-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-82"
+      },
+      "sourcePublishedName": "Peter BJORNSON",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-03T00:00:00.000",
       "email": "peter.bjornson@outlook.com",
@@ -1540,20 +2101,24 @@
           "platform": "facebook",
           "url": "https://www.facebook.com/p/Peter-Bjornson-for-LRSD-Ward-3-61580203888345/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Peter Bjornson Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR3-PeterBJORNSON.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-90"
       },
-      "sourcePublishedName": "Ryan Palmquist",
-      "phase": "registration",
+      "sourcePublishedName": "Ryan PALMQUIST",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-03T00:00:00.000",
       "email": "ryan.m.palmquist@gmail.com",
@@ -1563,20 +2128,24 @@
           "platform": "facebook",
           "url": "https://www.facebook.com/RyanPalmquistStVital/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Ryan Palmquist Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR3-RyanPALMQUIST.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-79"
       },
-      "sourcePublishedName": "Sandy Nemeth",
-      "phase": "registration",
+      "sourcePublishedName": "Sandy NEMETH",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "https://sandynemeth.blogspot.com/",
@@ -1591,124 +2160,179 @@
           "platform": "instagram",
           "url": "www.instagram.com/sandynemethlrsd/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Sandy Nemeth Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR3-SandraNEMETH.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-163"
       },
-      "sourcePublishedName": "Bethany Kolisniak",
-      "phase": "registration",
+      "sourcePublishedName": "Bethany KOLISNIAK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-26T00:00:00.000",
       "campaignWebsite": "https://www.bethanyk.ca/",
-      "email": "hey@bethanyk.ca"
+      "email": "hey@bethanyk.ca",
+      "statementOfDisclosure": {
+        "fileName": "Bethany Kolisniak Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR4-BethanyKOLISNIAK.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-69"
       },
-      "sourcePublishedName": "Chipalo Simunyola",
-      "phase": "registration",
+      "sourcePublishedName": "Chipalo SIMUNYOLA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
-      "email": "csimunyola@gmail.com",
-      "phone": "204-688-7479"
+      "campaignWebsite": "www.votechipalo.com",
+      "email": "Chipalo4wardfour@votechipalo.com ",
+      "phone": "204-688-7479",
+      "statementOfDisclosure": {
+        "fileName": "Chipalo Simunyola Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR4-ChipaloSIMUNYOLA.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-138"
       },
-      "sourcePublishedName": "Jocelyn  Greenwood",
-      "phase": "registration",
+      "sourcePublishedName": "Jocelyn GREENWOOD",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-27T00:00:00.000",
-      "email": "jgreenw369@gmail.com"
+      "email": "jgreenw369@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Jocelyn Greenwood Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR4-JocelynGREENWOOD.pdf"
+      }
     },
     {
       "contestId": "school-louis-riel-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-74"
       },
-      "sourcePublishedName": "John Baert",
-      "phase": "registration",
+      "sourcePublishedName": "John BAERT",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "https://www.johnbaert4ward4.ca/",
       "email": "johnbaert204@gmail.com",
-      "phone": "204-453-4466"
+      "phone": "204-453-4466",
+      "statementOfDisclosure": {
+        "fileName": "John Baert Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/LR4-JohnBAERT.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-73"
       },
-      "sourcePublishedName": "Craig Stahlke",
-      "phase": "registration",
+      "sourcePublishedName": "Craig STAHLKE",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "www.stahlkefortrustee.com",
       "email": "cnstahlke@shaw.ca",
-      "phone": "204-781-5622"
+      "phone": "204-781-5622",
+      "statementOfDisclosure": {
+        "fileName": "Craig Stahlke Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT1-CraigSTAHLKE.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-182"
+      },
+      "sourcePublishedName": "Janet BELLUK",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-11T00:00:00.000",
+      "campaignWebsite": "www.janetbelluk.com",
+      "email": "belluk4schooltrustee@gmail.com",
+      "socialLinks": [
+        {
+          "platform": "instagram",
+          "url": "www.instagram.com/belluk.school.trustee"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Janet Belluk Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT1-JanetBELLUK.pdf"
+      }
+    },
+    {
+      "contestId": "school-pembina-trails-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-109"
       },
-      "sourcePublishedName": "Linda Karn",
-      "phase": "registration",
+      "sourcePublishedName": "Linda KARN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-13T00:00:00.000",
       "campaignWebsite": "https://lindakarn5.wixsite.com/trustee",
-      "email": "linda.karn@protonmail.com",
-      "phone": "204-888-5974"
+      "email": "linda.karn@proton.me",
+      "statementOfDisclosure": {
+        "fileName": "Lina Karn Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT1-LindaKARN.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-97"
       },
-      "sourcePublishedName": "Samantha Pope",
-      "phase": "registration",
+      "sourcePublishedName": "Samantha POPE",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-07T00:00:00.000",
       "campaignWebsite": "samantha4ward1.ca",
@@ -1719,20 +2343,73 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/samantha4ward1/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Samantha Pope Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT1-SamanthaPOPE.pdf"
+      }
+    },
+    {
+      "contestId": "school-pembina-trails-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-190"
+      },
+      "sourcePublishedName": "Sharon ESAU",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-15T00:00:00.000",
+      "email": "sharesauschooltrustee@gmail.com",
+      "phone": "204-232-4277",
+      "statementOfDisclosure": {
+        "fileName": "Sharon Esau Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT1-SharonESAU.pdf"
+      }
+    },
+    {
+      "contestId": "school-pembina-trails-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-212"
+      },
+      "sourcePublishedName": "Terri MACLEOD",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-22T00:00:00.000",
+      "campaignWebsite": "www.terri4ward1.ca",
+      "email": "terri4ward1@gmail.com",
+      "phone": "204-998-1288",
+      "socialLinks": [
+        {
+          "platform": "instagram",
+          "url": "www.instagram.com/terri4ward1"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Terri MacLeod Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT1-TerriMACLEOD.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-78"
       },
-      "sourcePublishedName": "Brook Jones",
+      "sourcePublishedName": "Brook Jones - WITHDRAWN",
       "phase": "registration",
       "status": {
         "sourceValue": "Registered",
-        "value": "Registered"
+        "value": "Registration Withdrawn"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "https://electbrookjones.ca/",
@@ -1757,83 +2434,135 @@
       "contestId": "school-pembina-trails-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-61"
       },
-      "sourcePublishedName": "Christine Jolly",
-      "phase": "registration",
+      "sourcePublishedName": "Christine JOLLY - ACCLAIMED",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
-      "email": "jollychristine57@gmail.com",
-      "phone": "431-305-5193"
+      "socialLinks": [
+        {
+          "platform": "linkedin",
+          "url": "https://www.linkedin.com/in/christine-jolly-9b6875231"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Christine Jolly Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT2-ChristineJOLLY.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-63"
       },
-      "sourcePublishedName": "Lauralee Gooding",
-      "phase": "registration",
+      "sourcePublishedName": "Lauralee GOODING - ACCLAIMED",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "www.lauraleegooding.ca",
       "email": "goodinglauralee@gmail.com",
-      "phone": "431-371-1900"
+      "phone": "431-371-1900",
+      "statementOfDisclosure": {
+        "fileName": "Lauralee Gooding Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT2-LauraleeGOODING.pdf"
+      }
+    },
+    {
+      "contestId": "school-pembina-trails-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-187"
+      },
+      "sourcePublishedName": "Tim JOHNSON - ACCLAIMED",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-14T00:00:00.000",
+      "email": "timjohnson4trustee2026@gmail.com",
+      "phone": "204-290-6091",
+      "statementOfDisclosure": {
+        "fileName": "Tim Johnson Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT2-TimJOHNSON.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-104"
       },
-      "sourcePublishedName": "Alicia Becker",
-      "phase": "registration",
+      "sourcePublishedName": "Alicia BECKER",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-08T00:00:00.000",
-      "email": "aliciamack999@gmail.com",
-      "phone": "204-261-7602"
+      "campaignWebsite": "www.aliciabecker4ward3.com",
+      "email": "aliciabeckerfortrustee@gmail.com",
+      "phone": "431-276-4079",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "www.facebook.com/TrusteeAliciaBecker"
+        },
+        {
+          "platform": "instagram",
+          "url": "www.instagram.com/aliciabeckerfortrustee"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Alicia Becker Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-AliciaBECKER.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-125"
       },
-      "sourcePublishedName": "Asim Nawaz",
-      "phase": "registration",
+      "sourcePublishedName": "Asim NAWAZ",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-20T00:00:00.000",
       "email": "asimncc7@gmail.com",
-      "phone": "204-333-8600"
+      "phone": "204-333-8600",
+      "statementOfDisclosure": {
+        "fileName": "Asim Nawaz Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-AsimNAWAZ.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-120"
       },
-      "sourcePublishedName": "Carrissa Reyes",
-      "phase": "registration",
+      "sourcePublishedName": "Carrissa REYES",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-17T00:00:00.000",
       "email": "vote4carrissa@gmail.com",
@@ -1847,20 +2576,24 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/carrissareyes4schooltrustee?igsh=anh1MHpybzRpZW56&utm_source=qr"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Carrissa Reyes Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-CarrissaREYES.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-57"
       },
-      "sourcePublishedName": "Cindy Nachtigall",
-      "phase": "registration",
+      "sourcePublishedName": "Cindy NACHTIGALL",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "https://www.votecindy.ca/",
@@ -1875,22 +2608,49 @@
           "platform": "twitter",
           "url": "https://x.com/CindyNachtigall"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Cindy Nachtigall Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-CindyNACHTIGALL.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-177"
+      },
+      "sourcePublishedName": "Eric LABAUPA",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-08T00:00:00.000",
+      "campaignWebsite": "https://vote4eric.ca/",
+      "email": "elabaupa@gmail.com",
+      "phone": "204-995-6583",
+      "statementOfDisclosure": {
+        "fileName": "Eric Labaupa Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-EricLABAUPA.pdf"
+      }
+    },
+    {
+      "contestId": "school-pembina-trails-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-153"
       },
-      "sourcePublishedName": "Heethy Maan",
-      "phase": "registration",
+      "sourcePublishedName": "Heethy MAAN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-11T00:00:00.000",
+      "campaignWebsite": "www.heethymaan.ca",
       "email": "heethymaan@gmail.com",
       "phone": "204-997-4119",
       "socialLinks": [
@@ -1902,20 +2662,24 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/heethymaan?igsh=MTUwMHNyZjNydmloOA%3D%3D&utm_source=qr"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Heethy Maan Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-HeethyMAAN.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-76"
       },
-      "sourcePublishedName": "Noman Zaheer",
-      "phase": "registration",
+      "sourcePublishedName": "Noman ZAHEER",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "www.votezaheer.ca",
@@ -1930,37 +2694,46 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/votezaheer"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Noman Zaheer Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-NomanZAHEER.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-110"
       },
-      "sourcePublishedName": "Patricia Eyamba",
-      "phase": "registration",
+      "sourcePublishedName": "Patricia EYAMBA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-13T00:00:00.000",
+      "campaignWebsite": "https://patricia-eyamba.ca/",
       "email": "eyambapatricia@gmail.com",
-      "phone": "204-914-0614"
+      "phone": "204-914-0614",
+      "statementOfDisclosure": {
+        "fileName": "Patricia Eyamba Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-PatriciaEYAMBA.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-126"
       },
-      "sourcePublishedName": "Tasneem  Vali",
-      "phase": "registration",
+      "sourcePublishedName": "Tasneem VALI",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-21T00:00:00.000",
       "email": "tvali@hotmail.com",
@@ -1973,133 +2746,211 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/valiforschooltrustee/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Tasneem Vali Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-TasneemVALI.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-127"
       },
-      "sourcePublishedName": "Tony Guan",
-      "phase": "registration",
+      "sourcePublishedName": "Tony GUAN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-21T00:00:00.000",
       "email": "tonyjguan@gmail.com",
-      "phone": "204-230-0659"
+      "phone": "204-230-0659",
+      "statementOfDisclosure": {
+        "fileName": "Tony Guan Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-TonyGUAN.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-95"
       },
-      "sourcePublishedName": "Towela Mkanda",
-      "phase": "registration",
+      "sourcePublishedName": "Towela MKANDA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-06T00:00:00.000",
+      "campaignWebsite": "TowelaMkanda.com",
       "email": "info.whoa.yoga@gmail.com",
-      "phone": "204-296-2211"
+      "phone": "204-296-2211",
+      "socialLinks": [
+        {
+          "platform": "instagram",
+          "url": "@Malawianyogi_tee"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Towela Mkanda Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-TowelaMKANDA.pdf"
+      }
     },
     {
       "contestId": "school-pembina-trails-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-149"
       },
-      "sourcePublishedName": "Veerpal Sandhu",
-      "phase": "registration",
+      "sourcePublishedName": "Veerpal SANDHU",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-07T00:00:00.000",
       "email": "india1953@live.com",
-      "phone": "204-995-1035"
+      "phone": "204-995-1035",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "www.facebook.com/veerpal.sandhu.18659"
+        },
+        {
+          "platform": "instagram",
+          "url": "www.instagram.com/veerpal.sandhu.18659"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Veerpal Sandhu Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/PT3-VeerpalSANDHU.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-192"
+      },
+      "sourcePublishedName": "Adam BURKOWSKI",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-15T00:00:00.000",
+      "campaignWebsite": "www.adamburkowski.com",
+      "email": "adam.e.burkowski@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Adam Burkowski Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET1-AdamBURKOWSKI.pdf"
+      }
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-157"
       },
-      "sourcePublishedName": "Colleen Carswell",
-      "phase": "registration",
+      "sourcePublishedName": "Colleen CARSWELL",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-17T00:00:00.000",
+      "campaignWebsite": "www.colleencarswell.ca",
       "email": "colleencarswell@gmail.com",
-      "phone": "204-222-1486"
+      "phone": "204-222-1486",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/people/Re-Elect-Colleen-Carswell-School-Trustee/100085228578033/"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Colleen Carswell Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET1-ColleenCARSWELL.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-92"
       },
-      "sourcePublishedName": "Jerry Sodomlak",
-      "phase": "registration",
+      "sourcePublishedName": "Jerry SODOMLAK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-06T00:00:00.000",
       "campaignWebsite": "jerrysodomlak4schooltrustee.ca",
       "email": "jsodomlak@gmail.com",
-      "phone": "204-999-1409"
+      "phone": "204-999-1409",
+      "statementOfDisclosure": {
+        "fileName": "Jerry Sodomlak Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET1-JerrySODOMLAK.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-68"
       },
-      "sourcePublishedName": "Ryan Frick",
-      "phase": "registration",
+      "sourcePublishedName": "Ryan FRICK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "campaignWebsite": "www.ryanfrick.ca",
-      "email": "frick4trustee@gmail.com"
+      "email": "frick4trustee@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Ryan Frick Satement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET1-RyanFRICK.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-160"
       },
-      "sourcePublishedName": "Susan Bywater",
-      "phase": "registration",
+      "sourcePublishedName": "Susan BYWATER",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-24T00:00:00.000",
+      "campaignWebsite": "https://susanbywater4trustee.ca/",
       "email": "susanbywater@yahoo.ca",
-      "phone": "204-999-5484"
+      "phone": "204-999-5484",
+      "statementOfDisclosure": {
+        "fileName": "Susan Bywater Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET1-SusanBYWATER.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-143"
       },
       "sourcePublishedName": "Glenn Buffie",
@@ -2116,199 +2967,396 @@
       "contestId": "school-river-east-transcona-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-137"
       },
-      "sourcePublishedName": "Idunnu Tokurah",
-      "phase": "registration",
+      "sourcePublishedName": "Idunnu TOKURAH",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-24T00:00:00.000",
       "campaignWebsite": "https://vote4idunnu.ca/",
       "email": "vote4idunnu@gmail.com",
-      "phone": "204-296-6474"
+      "phone": "204-296-6474",
+      "statementOfDisclosure": {
+        "fileName": "Idunnu Tokurah Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET2-IdunnuTOKURAH.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-175"
       },
-      "sourcePublishedName": "Manjot Kang",
-      "phase": "registration",
+      "sourcePublishedName": "Manjot KANG",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-09-03T00:00:00.000",
+      "campaignWebsite": "www.manjotkang.ca",
       "email": "manjot.kang@gmail.com",
-      "phone": "431-999-9028"
+      "phone": "431-999-9028",
+      "statementOfDisclosure": {
+        "fileName": "Manjot Kang Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET2-ManjotKANG.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-150"
       },
-      "sourcePublishedName": "Sheri Hanson",
-      "phase": "registration",
+      "sourcePublishedName": "Sheri HANSON",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-07T00:00:00.000",
+      "campaignWebsite": "www.sherihanson.ca",
       "email": "sd.hanson@icloud.com",
-      "phone": "431-278-0738"
+      "phone": "431-278-0738",
+      "statementOfDisclosure": {
+        "fileName": "Sheri Hanson Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET2-SheriHANSON.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-194"
+      },
+      "sourcePublishedName": "Brian HOOPER",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-16T00:00:00.000",
+      "campaignWebsite": "www.brianhooper.ca",
+      "email": "info@brianhooper.ca",
+      "phone": "204-688-9433",
+      "statementOfDisclosure": {
+        "fileName": "Brian Hooper Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET3-BrianHOOPER.pdf"
+      }
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-198"
+      },
+      "sourcePublishedName": "Brianne GOERTZEN",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-18T00:00:00.000",
+      "campaignWebsite": "www.briannegoertzen.ca",
+      "email": "votebrianne@gmail.com",
+      "phone": "204-955-6782",
+      "statementOfDisclosure": {
+        "fileName": "Brianne Goertzen Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET3-BrianneGOERTZEN.pdf"
+      }
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-88"
       },
-      "sourcePublishedName": "Garry Kowalski",
-      "phase": "registration",
+      "sourcePublishedName": "Garry KOWALSKI",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-03T00:00:00.000",
-      "email": "garykowalski@hotmail.com"
+      "email": "garykowalski@hotmail.com",
+      "phone": "204-668-6195",
+      "statementOfDisclosure": {
+        "fileName": "Garry Kowalski Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET3-GarryKOWALSKI.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-195"
+      },
+      "sourcePublishedName": "Lindsay FRITZSCHE",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-16T00:00:00.000",
+      "campaignWebsite": "https://linzfritz.com/",
+      "email": "linzfritz@hotmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Lindsay Fritzsche Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET3-LindsayFRITZSCHE.pdf"
+      }
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-134"
       },
-      "sourcePublishedName": "Lorlie Froese",
-      "phase": "registration",
+      "sourcePublishedName": "Lorlie FROESE",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-22T00:00:00.000",
       "email": "lorliefroese@gmail.com",
-      "phone": "204-997-0030"
+      "phone": "204-997-0030",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/LorlieFroese"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Lorlie Froese Statement of Disclosure ",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET3-LorlieFROESE.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-86"
       },
-      "sourcePublishedName": "Brenda Bage",
-      "phase": "registration",
+      "sourcePublishedName": "Brenda BAGE",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
-      "registrationDate": "2026-07-03T00:00:00.000"
+      "registrationDate": "2026-07-03T00:00:00.000",
+      "email": "brendabage@gmail.com",
+      "phone": "204-221-2951",
+      "statementOfDisclosure": {
+        "fileName": "Brenda Bage Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET4-BrendaBAGE.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-181"
+      },
+      "sourcePublishedName": "Chloe WOWRYK BAKKER",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-10T00:00:00.000",
+      "campaignWebsite": "www.chloewbfortrustee.ca",
+      "email": "chloe@chloewbfortrustee.ca",
+      "phone": "204-202-2730",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/chloewbfortrustee/"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Chloe Wowryk Bakker Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET4-ChloeWOWRYKBAKKER.pdf"
+      }
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-169"
       },
-      "sourcePublishedName": "Jenn Kiziak",
-      "phase": "registration",
+      "sourcePublishedName": "Jenn KIZIAK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-09-01T00:00:00.000",
+      "campaignWebsite": "jennkiziak.ca",
       "email": "jennkiziak@gmail.com",
-      "phone": "204-612-7370"
+      "phone": "204-612-7370",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/profile.php?id=61594260631312"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Jenn Kiziak Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET4-JennKIZIAK.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-65"
       },
-      "sourcePublishedName": "Joe Hilmerich",
-      "phase": "registration",
+      "sourcePublishedName": "Joe HILMERICH",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
-      "email": "joachimfortrustee@gmail.com"
+      "email": "joachimfortrustee@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Joe Hilmerich Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET4-JoeHILMERICH.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-173"
       },
-      "sourcePublishedName": "Michelle Kowalchuk",
-      "phase": "registration",
+      "sourcePublishedName": "Michelle KOWALCHUK",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-09-03T00:00:00.000",
-      "email": "mikowalchuk@gmail.com",
-      "phone": "204-330-0461"
+      "campaignWebsite": "https://votekowalchuk.ca/",
+      "email": "info@votekowalchuk.ca",
+      "phone": "204-330-0461",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/share/1YekAEECmT/"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Michelle Kowalchuk Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET4-MichelleKOWALCHUK.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-113"
       },
-      "sourcePublishedName": "Pamela Jansen",
-      "phase": "registration",
+      "sourcePublishedName": "Pamela JANSEN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-13T00:00:00.000",
       "email": "2peacefulwarriors@gmail.com",
-      "phone": "204-806-3674"
+      "phone": "204-806-3674",
+      "statementOfDisclosure": {
+        "fileName": "Pamela Jansen Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET4-PamelaJANSEN.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
-        "recordId": "2026-147"
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-206"
       },
-      "sourcePublishedName": "Susan Olynik",
+      "sourcePublishedName": "Peter KOTYK",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-21T00:00:00.000",
+      "email": "pkotyk73@outlook.com",
+      "statementOfDisclosure": {
+        "fileName": "Peter Kotyk Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET4-PeterKOTYK.pdf"
+      }
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-186"
+      },
+      "sourcePublishedName": "Peter Kotyk - WITHDRAWN",
       "phase": "registration",
       "status": {
         "sourceValue": "Registered",
-        "value": "Registered"
+        "value": "Registration Withdrawn"
+      },
+      "registrationDate": "2026-09-14T00:00:00.000"
+    },
+    {
+      "contestId": "school-river-east-transcona-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-147"
+      },
+      "sourcePublishedName": "Susan OLYNIK",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-05T00:00:00.000",
       "campaignWebsite": "https://www.susanolynik.ca/",
       "email": "susan168823@gmail.com",
-      "phone": "204-661-6440"
+      "phone": "204-661-6440",
+      "statementOfDisclosure": {
+        "fileName": "Susan Olynik Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET4-SusanOLYNIK.pdf"
+      }
     },
     {
       "contestId": "school-river-east-transcona-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-170"
       },
-      "sourcePublishedName": "Timothy Giesbrecht",
-      "phase": "registration",
+      "sourcePublishedName": "Timothy GIESBRECHT",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-09-01T00:00:00.000",
       "email": "timothyfortrustee@gmail.com",
@@ -2317,115 +3365,143 @@
           "platform": "facebook",
           "url": "https://www.facebook.com/people/Timothy-Giesbrecht/pfbid02Wdp8qaNJHfStw4HYwf4agW3gGEj6ZiiTeuGNhfzLKa41ZpDfG8w6tS8aewyXiadzl/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Timothy Giesbrecht Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/RET4-TimothyGIESBRECHT.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-133"
       },
-      "sourcePublishedName": "Derek Dabee",
-      "phase": "registration",
+      "sourcePublishedName": "Derek DABEE - WITHDRAWN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nomination Withdrawn"
       },
       "registrationDate": "2026-07-22T00:00:00.000",
-      "email": "ddabee@mymts.net",
-      "phone": "204-996-4055"
+      "statementOfDisclosure": {
+        "fileName": "Derek Dabee Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO2-DerekDABEE.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-101"
       },
-      "sourcePublishedName": "Dirk Leavesley",
-      "phase": "registration",
+      "sourcePublishedName": "Dirk LEAVESLEY",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-07T00:00:00.000",
+      "campaignWebsite": "https://www.dirkleavesley.ca/",
       "email": "dirkleavesley41@gmail.com",
-      "phone": "204-955-0547"
+      "phone": "204-955-0547",
+      "statementOfDisclosure": {
+        "fileName": "Dirk Leavesley Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO2-DirkLEAVESLEY.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-129"
       },
-      "sourcePublishedName": "Ernesto Ofiaza",
-      "phase": "registration",
+      "sourcePublishedName": "Ernesto OFIAZA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-21T00:00:00.000",
       "email": "enofiaza63@yahoo.ca",
-      "phone": "204-470-1002"
+      "phone": "204-470-1002",
+      "statementOfDisclosure": {
+        "fileName": "Ernesto Ofiaza Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO2-ErnestoOFIAZA.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-128"
       },
-      "sourcePublishedName": "Jagjit Khattra",
-      "phase": "registration",
+      "sourcePublishedName": "Jagjit KHATTRA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-21T00:00:00.000",
       "email": "jagjitkhattra83@gmail.com",
-      "phone": "204-509-9006"
+      "phone": "204-509-9006",
+      "statementOfDisclosure": {
+        "fileName": "Jagjit Khattra Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO2-JagjitKHATTRA.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-115"
       },
-      "sourcePublishedName": "Leila Castro",
-      "phase": "registration",
+      "sourcePublishedName": "Leila CASTRO",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-14T00:00:00.000",
+      "campaignWebsite": "https://electleilacastro.ca/",
       "email": "Leilacastro.ca@gmail.com",
-      "phone": "204-807-4109"
+      "phone": "204-807-4109",
+      "statementOfDisclosure": {
+        "fileName": "Leila Castro Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO2-LeilaCASTRO.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-130"
       },
-      "sourcePublishedName": "Manpreet Toor",
-      "phase": "registration",
+      "sourcePublishedName": "Manpreet TOOR",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-21T00:00:00.000",
       "email": "manpreettoor457@gmail.com",
-      "phone": "204-894-7547"
+      "phone": "204-894-7547",
+      "statementOfDisclosure": {
+        "fileName": "Manpreet Toor Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO2-ManpreetTOOR.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-108"
       },
       "sourcePublishedName": "Maria Santos",
@@ -2441,257 +3517,402 @@
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-155"
       },
-      "sourcePublishedName": "Robert Bilsland",
-      "phase": "registration",
+      "sourcePublishedName": "Rob BILSLAND",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-12T00:00:00.000",
-      "email": "robbilsland@hotmail.com",
-      "phone": "204-226-9422"
+      "campaignWebsite": "https://rob-bilsland-trustee.pages.dev",
+      "email": "robbilslandtrustee@gmail.com",
+      "phone": "204-226-9422",
+      "statementOfDisclosure": {
+        "fileName": "Rob Bilsland Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO2-RobertBILSLAND.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-146"
       },
-      "sourcePublishedName": "Sandeep Bhatti",
-      "phase": "registration",
+      "sourcePublishedName": "Sandeep BHATTI",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-04T00:00:00.000",
       "email": "sandeepbhattilife@gmail.com",
-      "phone": "204-914-3232"
+      "phone": "204-914-3232",
+      "statementOfDisclosure": {
+        "fileName": "Sandeep Bhatti Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO2-SandeepBHATTI.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-191"
+      },
+      "sourcePublishedName": "Danica VICOVAC",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-15T00:00:00.000",
+      "email": "djovanovic10@hotmail.com",
+      "phone": "204-619-7259",
+      "statementOfDisclosure": {
+        "fileName": "Danica Vicovac Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO3-DanicaVICOVAC.pdf"
+      }
+    },
+    {
+      "contestId": "school-seven-oaks-ward-3",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-70"
       },
-      "sourcePublishedName": "Edward Ploszay",
-      "phase": "registration",
+      "sourcePublishedName": "Edward PLOSZAY",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "email": "mploszay@yahoo.com",
-      "phone": "204-339-1260"
+      "phone": "204-339-1260",
+      "statementOfDisclosure": {
+        "fileName": "Edward Ploszay Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO3-EdwardPLOSZAY.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-50"
       },
-      "sourcePublishedName": "Evan Krosney",
-      "phase": "registration",
+      "sourcePublishedName": "Evan KROSNEY",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "https://www.evankrosney.ca/",
       "email": "evan@evankrosney.ca",
-      "phone": "204-250-4387"
+      "phone": "204-250-4387",
+      "statementOfDisclosure": {
+        "fileName": "Evan Krosney Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO3-EvanKROSNEY.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-67"
       },
-      "sourcePublishedName": "Lisa Brooks",
-      "phase": "registration",
+      "sourcePublishedName": "Lisa BROOKS",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
-      "phone": "204-795-6240"
+      "email": "lisa.monkbrooks@gmail.com",
+      "phone": "204-795-6240",
+      "statementOfDisclosure": {
+        "fileName": "Lisa Brooks Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO3-LisaBROOKS.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-53"
       },
-      "sourcePublishedName": "Mary Jane Napolitano",
-      "phase": "registration",
+      "sourcePublishedName": "Mary-Jane NAPOLITANO",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "email": "maryjane.napolitano@gmail.com",
-      "phone": "204-999-5094"
+      "phone": "204-999-5094",
+      "statementOfDisclosure": {
+        "fileName": "Mary-Jane Napolitano Statement of Disclosure ",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO3-MaryJaneNAPOLITANO.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-64"
       },
-      "sourcePublishedName": "Richard Sawka",
-      "phase": "registration",
+      "sourcePublishedName": "Richard SAWKA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "email": "richard.sawka2026@gmail.com",
-      "phone": "204-806-0075"
+      "phone": "204-806-0075",
+      "statementOfDisclosure": {
+        "fileName": "Richard Sawka Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO3-RichardSAWKA.pdf"
+      }
     },
     {
       "contestId": "school-seven-oaks-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-176"
       },
-      "sourcePublishedName": "Teresa Jaworski",
-      "phase": "registration",
+      "sourcePublishedName": "Teresa JAWORSKI",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-09-04T00:00:00.000",
       "email": "teresa.jaworski2026@gmail.com",
-      "phone": "204-334-3063"
+      "phone": "204-334-3063",
+      "statementOfDisclosure": {
+        "fileName": "Teresa Jaworski Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SO3-TeresaJAWORSKI.pdf"
+      }
     },
     {
       "contestId": "school-st-james-assiniboia-centre",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-114"
       },
-      "sourcePublishedName": "Craig Johnson",
-      "phase": "registration",
+      "sourcePublishedName": "Craig JOHNSON",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-14T00:00:00.000",
       "email": "craig.johnson@mts.net",
-      "phone": "204-880-6878"
+      "phone": "204-880-6878",
+      "statementOfDisclosure": {
+        "fileName": "Craig Johnson Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJACentre-CraigJOHNSON.pdf"
+      }
     },
     {
       "contestId": "school-st-james-assiniboia-centre",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-158"
       },
-      "sourcePublishedName": "Craig McGregor",
-      "phase": "registration",
+      "sourcePublishedName": "Craig MᶜGREGOR",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-18T00:00:00.000",
       "email": "craigmcgregor294@gmail.com",
-      "phone": "204-294-8729"
+      "phone": "204-294-8729",
+      "statementOfDisclosure": {
+        "fileName": "Craig McGregor Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJACentre-CraigMCGREGOR.pdf"
+      }
     },
     {
       "contestId": "school-st-james-assiniboia-centre",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-167"
       },
-      "sourcePublishedName": "Ganesh Tailor",
-      "phase": "registration",
+      "sourcePublishedName": "Ganesh TAILOR",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-31T00:00:00.000",
       "email": "trusteetailor@gmail.com",
+      "phone": "431-294-0538",
       "socialLinks": [
         {
           "platform": "facebook",
           "url": "www.facebook.com/TrusteeTailor"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Ganesh Tailor Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJACentre-GaneshTAILOR.pdf"
+      }
+    },
+    {
+      "contestId": "school-st-james-assiniboia-centre",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-189"
+      },
+      "sourcePublishedName": "Michael CABRAL",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-15T00:00:00.000",
+      "email": "mcabral@204mortgages.com",
+      "phone": "204-997-5021",
+      "statementOfDisclosure": {
+        "fileName": "Michael Cabral Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJACentre-MichaelCABRAL.pdf"
+      }
+    },
+    {
+      "contestId": "school-st-james-assiniboia-centre",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-210"
+      },
+      "sourcePublishedName": "Pierre ATTALLAH",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-21T00:00:00.000",
+      "campaignWebsite": "https://www.pallix.ca/PierreAttallah",
+      "email": "pierre@pa.pallix.ca",
+      "phone": "204-885-9228",
+      "statementOfDisclosure": {
+        "fileName": "Pierre Attallah Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJACentre-PierreATTALLAH.pdf"
+      }
     },
     {
       "contestId": "school-st-james-assiniboia-east",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
-        "recordId": "2026-145"
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-179"
       },
-      "sourcePublishedName": "Holly Hunter",
+      "sourcePublishedName": "Angela  Froese",
       "phase": "registration",
       "status": {
         "sourceValue": "Registered",
         "value": "Registered"
+      },
+      "registrationDate": "2026-09-08T00:00:00.000"
+    },
+    {
+      "contestId": "school-st-james-assiniboia-east",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-145"
+      },
+      "sourcePublishedName": "Holly HUNTER",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-04T00:00:00.000",
       "campaignWebsite": "https://www.hollyhunter.ca/",
       "email": "hollyhunter@shaw.ca",
-      "phone": "204-232-8202"
+      "phone": "204-232-8202",
+      "statementOfDisclosure": {
+        "fileName": "Holly Hunter Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJAEast-HollyHUNTER.pdf"
+      }
     },
     {
       "contestId": "school-st-james-assiniboia-east",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-161"
       },
-      "sourcePublishedName": "Pradeev Sockalingam",
-      "phase": "registration",
+      "sourcePublishedName": "Pradeev SOCKALINGAM",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-24T00:00:00.000",
-      "email": "Pradeev1987@gmail.com"
+      "email": "Pradeev1987@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Pradeev Sockalingham Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJAEast-PradeevSOCKALINGAM.pdf"
+      }
     },
     {
       "contestId": "school-st-james-assiniboia-east",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-124"
       },
-      "sourcePublishedName": "Tara Smith",
-      "phase": "registration",
+      "sourcePublishedName": "Tara SMITH",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-20T00:00:00.000",
+      "campaignWebsite": "www.Trustee-tara-smith.com",
       "email": "tara.smith4000@gmail.com",
-      "phone": "204-996-3516"
+      "phone": "204-996-3516",
+      "socialLinks": [
+        {
+          "platform": "instagram",
+          "url": "www.instagram.com/trusteetarasmith"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Tara Smith Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJAEast-TaraSMITH.pdf"
+      }
     },
     {
       "contestId": "school-st-james-assiniboia-east",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-152"
       },
-      "sourcePublishedName": "Vicki Rempel",
-      "phase": "registration",
+      "sourcePublishedName": "Vicki REMPEL",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-10T00:00:00.000",
       "email": "vickiforschooltrustee@gmail.com",
@@ -2701,127 +3922,231 @@
           "platform": "facebook",
           "url": "https://www.facebook.com/p/Victoria-Vicki-Rempel-100045069191400/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Vicki Rempel Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJAEast-VickiREMPEL.pdf"
+      }
     },
     {
       "contestId": "school-st-james-assiniboia-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-111"
       },
-      "sourcePublishedName": "Cheryl Smukowich",
-      "phase": "registration",
+      "sourcePublishedName": "Cheryl SMUKOWICH - ACCLAIMED",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-13T00:00:00.000",
       "email": "cheryl.smukowich@gmail.com",
-      "phone": "204-899-5819"
+      "phone": "204-899-5819",
+      "statementOfDisclosure": {
+        "fileName": "Cheryl Smukowich Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJAWest-CherylSMUKOWICH.pdf"
+      }
     },
     {
       "contestId": "school-st-james-assiniboia-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-141"
       },
-      "sourcePublishedName": "Fiona  Shiells",
-      "phase": "registration",
+      "sourcePublishedName": "Fiona SHIELLS  - ACCLAIMED",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-29T00:00:00.000",
       "campaignWebsite": "www.fionashiells.com",
       "email": "fshiells@gmail.com",
-      "phone": "204-590-8352"
+      "phone": "204-590-8352",
+      "statementOfDisclosure": {
+        "fileName": "Fiona  Shiells Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJAWest-FionaSHIELLS.pdf"
+      }
     },
     {
       "contestId": "school-st-james-assiniboia-west",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-66"
       },
-      "sourcePublishedName": "Sandy Lethbridge",
-      "phase": "registration",
+      "sourcePublishedName": "Sandy LETHBRIDGE - ACCLAIMED",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-02T00:00:00.000",
       "email": "sandylethbridgewestward@shaw.ca",
-      "phone": "204-951-9686"
+      "phone": "204-951-9686",
+      "statementOfDisclosure": {
+        "fileName": "Sandy Lethbridge Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/SJAWest-SandyLETHBRIDGE.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-1",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
-        "recordId": "2026-119"
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-209"
       },
-      "sourcePublishedName": "Chris Wilson",
+      "sourcePublishedName": "Brad Kirbyson - WITHDRAWN",
       "phase": "registration",
       "status": {
         "sourceValue": "Registered",
-        "value": "Registered"
+        "value": "Registration Withdrawn"
       },
-      "registrationDate": "2026-07-16T00:00:00.000",
-      "email": "cjpw@shaw.ca",
-      "phone": "204-583-4608"
+      "registrationDate": "2026-09-21T00:00:00.000",
+      "email": "bkirbyson@hotmail.com"
+    },
+    {
+      "contestId": "school-winnipeg-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-119"
+      },
+      "sourcePublishedName": "Chris Wilson - WITHDRAWN",
+      "phase": "registration",
+      "status": {
+        "sourceValue": "Registered",
+        "value": "Registration Withdrawn"
+      },
+      "registrationDate": "2026-07-16T00:00:00.000"
+    },
+    {
+      "contestId": "school-winnipeg-ward-1",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-196"
+      },
+      "sourcePublishedName": "Katrina TESSIER - ACCLAIMED",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-16T00:00:00.000",
+      "email": "katrina.tessier@live.ca",
+      "phone": "204-999-0023",
+      "statementOfDisclosure": {
+        "fileName": "Katrina Tessier Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W1-KatrinaTESSIER.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-199"
+      },
+      "sourcePublishedName": "Andrew KOHAN",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-18T00:00:00.000",
+      "campaignWebsite": "www.andrewkohan.com",
+      "email": "elect@andrewkohan.com",
+      "phone": "204-816-8827",
+      "statementOfDisclosure": {
+        "fileName": "Andrew Kohan Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W2-AndrewKOHAN.pdf"
+      }
+    },
+    {
+      "contestId": "school-winnipeg-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-207"
+      },
+      "sourcePublishedName": "Chris BROWN",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-21T00:00:00.000",
+      "campaignWebsite": "www.schooltrustee.ca",
+      "email": "chris@schooltrustee.ca",
+      "phone": "204-997-3075",
+      "statementOfDisclosure": {
+        "fileName": "Chris Brown Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W2-ChrisBROWN.pdf"
+      }
+    },
+    {
+      "contestId": "school-winnipeg-ward-2",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-166"
       },
-      "sourcePublishedName": "Jennifer Claydon",
-      "phase": "registration",
+      "sourcePublishedName": "Jennifer CLAYDON",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-28T00:00:00.000",
       "campaignWebsite": "www.jenniferclaydon.ca",
-      "email": "jenclaydon014@gmail.com"
+      "email": "jenniferclaydontrustee@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Jennifer Claydon Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W2-JenniferCLAYDON.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-2",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-171"
       },
-      "sourcePublishedName": "Michael Thompson",
-      "phase": "registration",
+      "sourcePublishedName": "Michael THOMPSON",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-09-02T00:00:00.000",
+      "campaignWebsite": "www.votemthompsontrustee.com",
       "email": "VoteMichaelT@shaw.ca",
-      "phone": "204-282-3098"
+      "phone": "204-282-3098",
+      "statementOfDisclosure": {
+        "fileName": "Michael Thompson Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W2-MichaelTHOMPSON.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-3",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-94"
       },
-      "sourcePublishedName": "Kathy Heppner",
-      "phase": "registration",
+      "sourcePublishedName": "Kathy HEPPNER - ACCLAIMED",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-06T00:00:00.000",
       "campaignWebsite": "www.kathyheppner.ca",
-      "email": "kathy@kathyheppner.ca",
+      "email": "kathy@kathyheppner.ca ",
       "socialLinks": [
         {
           "platform": "facebook",
@@ -2831,156 +4156,311 @@
           "platform": "instagram",
           "url": "https://www.instagram.com/kathyheppnerwsdtrustee/"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Kathy Heppner Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W3-KathyHEPPNER.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-197"
+      },
+      "sourcePublishedName": "Jamie BONNER",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-17T00:00:00.000",
+      "campaignWebsite": "http://www.votebonner.org",
+      "email": "votejamiebonner@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Jamie Bonner Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W4-JamieBONNER.pdf"
+      }
+    },
+    {
+      "contestId": "school-winnipeg-ward-4",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-172"
       },
-      "sourcePublishedName": "Linda Hathout",
-      "phase": "registration",
+      "sourcePublishedName": "Linda HATHOUT",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-09-02T00:00:00.000",
-      "email": "lindalhathout@gmail.com",
-      "phone": "204-391-5434"
+      "campaignWebsite": "www.lindahathout.ca",
+      "email": "LindaHathout@gmail.com ",
+      "phone": "204-391-5434",
+      "statementOfDisclosure": {
+        "fileName": "Linda Hathout Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W4-LindaHATHOUT.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-4",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-99"
       },
-      "sourcePublishedName": "Lionel Lien",
-      "phase": "registration",
+      "sourcePublishedName": "Lionel LIEN",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-07T00:00:00.000",
       "email": "lionell_99@yahoo.com",
-      "phone": "204-227-9064"
+      "phone": "204-227-9064",
+      "statementOfDisclosure": {
+        "fileName": "Lionel Lien Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W4-LionelLIEN.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-5",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-162"
       },
-      "sourcePublishedName": "Reid Pereira",
-      "phase": "registration",
+      "sourcePublishedName": "Reid PEREIRA - ACCLAIMED",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-25T00:00:00.000",
       "campaignWebsite": "www.reid4trustee.ca",
-      "email": "reidforward5@gmail.com"
+      "email": "reidforward5@gmail.com",
+      "statementOfDisclosure": {
+        "fileName": "Reid Pereira Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W5-ReidPEREIRA.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-5",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-151"
       },
-      "sourcePublishedName": "Tim Bigelow",
+      "sourcePublishedName": "Tim Bigelow - WITHDRAWN",
       "phase": "registration",
       "status": {
         "sourceValue": "Registered",
-        "value": "Registered"
+        "value": "Registration Withdrawn"
       },
-      "registrationDate": "2026-08-07T00:00:00.000",
-      "email": "standupguytim@gmail.com",
-      "phone": "204-333-0177"
+      "registrationDate": "2026-08-07T00:00:00.000"
     },
     {
       "contestId": "school-winnipeg-ward-6",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-105"
       },
-      "sourcePublishedName": "Dante Aviso",
-      "phase": "registration",
+      "sourcePublishedName": "Dante AVISO - ACCLAIMED",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-09T00:00:00.000",
       "campaignWebsite": "danteaviso.ca",
       "email": "dantewsd1@gmail.com",
-      "phone": "204-698-3198"
+      "phone": "204-698-3198",
+      "statementOfDisclosure": {
+        "fileName": "Dante Aviso Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W6-DanteAVISO.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-7",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-139"
       },
-      "sourcePublishedName": "Tamara Kuly",
-      "phase": "registration",
+      "sourcePublishedName": "Tamara KULY - ACCLAIMED",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-07-27T00:00:00.000",
       "campaignWebsite": "votetamarakuly.com",
       "email": "votetamarakuly@gmail.ca",
-      "phone": "204-287-8820"
+      "phone": "204-287-8820",
+      "statementOfDisclosure": {
+        "fileName": "Tamara Kuly Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W7-TamaraKULY.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-8",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-208"
+      },
+      "sourcePublishedName": "Ewa ROMOLO",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-21T00:00:00.000",
+      "email": "ewaromologmail.com",
+      "phone": "205-509-0840",
+      "statementOfDisclosure": {
+        "fileName": "Ewa Romolo Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W8-EwaROMOLO.pdf"
+      }
+    },
+    {
+      "contestId": "school-winnipeg-ward-8",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-168"
       },
-      "sourcePublishedName": "Leah Mason",
-      "phase": "registration",
+      "sourcePublishedName": "Leah MASON",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-31T00:00:00.000",
-      "email": "leahmspence@gmail.com"
+      "email": "leahmspence@gmail.com",
+      "socialLinks": [
+        {
+          "platform": "linkedin",
+          "url": "https://www.linkedin.com/in/leah-spence-mason-a95473427"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Leah Mason Statement of DIsclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W8-LeahMASON.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-8",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-205"
+      },
+      "sourcePublishedName": "Michael BLOCK",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-19T00:00:00.000",
+      "email": "votemichaelblock@gmail.com",
+      "phone": "431-866-5820",
+      "socialLinks": [
+        {
+          "platform": "facebook",
+          "url": "https://www.facebook.com/MichaelBlockforWard8/"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Michael Block Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W8-MichaelBLOCK.pdf"
+      }
+    },
+    {
+      "contestId": "school-winnipeg-ward-8",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-201"
+      },
+      "sourcePublishedName": "Patrick ALLARD",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-18T00:00:00.000",
+      "email": "pallard_316@hotmail.com",
+      "phone": "204-297-5446",
+      "statementOfDisclosure": {
+        "fileName": "Patrick Allard Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W8-PatrickALLARD.pdf"
+      }
+    },
+    {
+      "contestId": "school-winnipeg-ward-8",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-154"
       },
-      "sourcePublishedName": "Prabhnoor Singh",
-      "phase": "registration",
+      "sourcePublishedName": "Prabhnoor SINGH",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-08-12T00:00:00.000",
-      "email": "Prabhnoor.Singh.mb@gmail.com"
+      "campaignWebsite": "https://www.singh4trustee.ca",
+      "email": "Prabhnoor.Singh.mb@gmail.com",
+      "socialLinks": [
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/singh4schooltrustee/"
+        }
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Prabhnoor Singh Statemtent of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W8-PrabhnoorSINGH.pdf"
+      }
+    },
+    {
+      "contestId": "school-winnipeg-ward-8",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-214"
+      },
+      "sourcePublishedName": "Sonia BECENKO",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-22T00:00:00.000",
+      "email": "Vote4SoniaSB@gmail.com",
+      "phone": "431-278-5664",
+      "statementOfDisclosure": {
+        "fileName": "Sonia Becenko Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W8-SoniaBECENKO.pdf"
+      }
     },
     {
       "contestId": "school-winnipeg-ward-9",
       "source": {
         "sourceId": "city-candidate-dataset",
-        "observedAt": "2026-09-06T12:31:11.623Z",
+        "observedAt": "2026-10-26T03:09:38.935Z",
         "recordId": "2026-51"
       },
-      "sourcePublishedName": "Ann Evangelista",
-      "phase": "registration",
+      "sourcePublishedName": "Ann EVANGELISTA",
+      "phase": "nomination",
       "status": {
-        "sourceValue": "Registered",
-        "value": "Registered"
+        "sourceValue": "Nominated",
+        "value": "Nominated"
       },
       "registrationDate": "2026-06-30T00:00:00.000",
       "campaignWebsite": "www.annevangelista.ca",
@@ -2995,7 +4475,32 @@
           "platform": "linkedin",
           "url": "https://ca.linkedin.com/in/annyourschooltrustee"
         }
-      ]
+      ],
+      "statementOfDisclosure": {
+        "fileName": "Ann Evangelista Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W9-AnnEVANGELISTA.pdf"
+      }
+    },
+    {
+      "contestId": "school-winnipeg-ward-9",
+      "source": {
+        "sourceId": "city-candidate-dataset",
+        "observedAt": "2026-10-26T03:09:38.935Z",
+        "recordId": "2026-202"
+      },
+      "sourcePublishedName": "Linda SCHATKOWSKY",
+      "phase": "nomination",
+      "status": {
+        "sourceValue": "Nominated",
+        "value": "Nominated"
+      },
+      "registrationDate": "2026-09-18T00:00:00.000",
+      "email": "lschatkowsky@outlook.com",
+      "phone": "204-299-8984",
+      "statementOfDisclosure": {
+        "fileName": "Linda Schatkowsky Statement of Disclosure",
+        "url": "https://stwpgwebdata.blob.core.windows.net/wpgwebdata/elections/disclosure-statements/W9-LindaSCHATKOWSKY.pdf"
+      }
     }
   ]
 }
