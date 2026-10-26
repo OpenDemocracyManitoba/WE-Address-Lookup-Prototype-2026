@@ -352,13 +352,20 @@ test("full official addresses drop at most their two trailing structural tokens"
     parseAddress("1 Dr. David Friesen Dr").addressInterpretations.map(
       (item) => item.streetName,
     ),
-    ["DR. DAVID FRIESEN DR", "DR. DAVID FRIESEN", "DR. DAVID"],
+    [
+      "DR. DAVID FRIESEN DR",
+      "DR. DAVID FRIESEN",
+      "DR. DAVID",
+      "DR DAVID FRIESEN DR",
+      "DR DAVID FRIESEN",
+      "DR DAVID",
+    ],
   );
   assert.deepEqual(
     parseAddress("1 Portage Ave.").addressInterpretations.map(
       (item) => item.streetName,
     ),
-    ["PORTAGE AVE.", "PORTAGE"],
+    ["PORTAGE AVE.", "PORTAGE", "PORTAGE AVE", "PORTAGE"],
   );
 });
 
@@ -512,7 +519,12 @@ test("multi-word names retain literal prefixes before bounded structural fallbac
     parseAddress("1 Dr. David-Friesen Dr").addressInterpretations.map(
       (item) => item.streetName,
     ),
-    ["DR. DAVID-FRIESEN DR", "DR. DAVID-FRIESEN"],
+    [
+      "DR. DAVID-FRIESEN DR",
+      "DR. DAVID-FRIESEN",
+      "DR DAVID-FRIESEN DR",
+      "DR DAVID-FRIESEN",
+    ],
   );
   assert.deepEqual(
     parseAddress("20 Rue des Meurons St").addressInterpretations.map(
@@ -539,6 +551,27 @@ test("address interpretation generation is bounded at six across ambiguous suffi
       [null, "A ALPHA BETA"],
     ],
   );
+});
+
+test("typed periods and apostrophes also match City names published without them", () => {
+  const { parsed, where } = queryParts("123 St. Anne's Rd");
+  assert.match(where, /like 'ST. ANNE''S%'/);
+  assert.match(where, /like 'ST ANNES%'/);
+  const row = {
+    display_address: "123 ST ANNES RD",
+    street_number: "123",
+    street_name: "ST ANNES",
+    street_type: "RD",
+  };
+  assert.deepEqual(
+    buildAddressResults(
+      [row],
+      parsed.addressInterpretations,
+      parsed.normalizedInput,
+    ).map((result) => result.displayAddress),
+    ["123 ST ANNES RD"],
+  );
+  assert.match(queryParts("330 Dr. Jose Rizal Way").where, /like 'DR. JOSE%'/);
 });
 
 test("SoQL escaping doubles every apostrophe", () => {

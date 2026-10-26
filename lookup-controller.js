@@ -30,11 +30,11 @@ export function isRetryablePhase(phase) {
 
 const STATUS_MESSAGES = Object.freeze({
   guidance:
-    "Keep typing: enter a street number and at least three letters of the street name.",
+    "Keep typing: enter a street number and at least three letters of the street name. Leave out any unit or apartment number.",
   pending: "Looking up official City addresses…",
   loading: "Looking up official City addresses…",
   empty:
-    "No matching Winnipeg addresses found. Try omitting the street type or entering less of the street name.",
+    "No matching Winnipeg addresses found. Leave out any unit number, and try omitting the street type or entering less of the street name.",
   error400:
     "That address could not be searched. Check the civic number and street name, then try again.",
   error429: "The City address service is busy. Wait a moment, then try again.",

@@ -27,6 +27,12 @@ export function normalizeInput(value) {
     .toLocaleUpperCase("en-CA");
 }
 
+// The City publishes most street names without periods or apostrophes
+// (ST ANNES, ST MARYS), so typed punctuation is also tried without them.
+function withoutPunctuation(value) {
+  return value.replace(/\./g, " ").replace(/'/g, "").replace(/\s+/g, " ").trim();
+}
+
 function normalizeSuffix(value) {
   const suffix = String(value ?? "").toUpperCase();
   return SUFFIXES.has(suffix) ? suffix : null;
@@ -110,8 +116,11 @@ export function parseAddress(value) {
     };
   }
 
+  const punctuationReadings = readings
+    .map((reading) => ({ ...reading, tail: withoutPunctuation(reading.tail) }))
+    .filter((reading, index) => reading.tail !== readings[index].tail);
   const addressInterpretations = Object.freeze(
-    readings.flatMap((reading) =>
+    [...readings, ...punctuationReadings].flatMap((reading) =>
       generateTailInterpretations(
         streetNumber,
         reading.suffix,
@@ -144,18 +153,15 @@ function queryAlternativePredicate(queryAlternative) {
 }
 
 function selectQueryAlternatives(addressInterpretations) {
-  const shortestBySuffix = new Map();
-  for (const addressInterpretation of addressInterpretations) {
-    const suffixKey = addressInterpretation.streetNumberSuffix ?? "";
-    const current = shortestBySuffix.get(suffixKey);
-    if (
-      !current ||
-      addressInterpretation.streetName.length < current.streetName.length
-    ) {
-      shortestBySuffix.set(suffixKey, addressInterpretation);
-    }
-  }
-  return [...shortestBySuffix.values()];
+  return addressInterpretations.filter((item, index) =>
+    !addressInterpretations.some(
+      (other, otherIndex) =>
+        (other.streetNumberSuffix ?? "") === (item.streetNumberSuffix ?? "") &&
+        item.streetName.startsWith(other.streetName) &&
+        (other.streetName.length < item.streetName.length ||
+          otherIndex < index),
+    ),
+  );
 }
 
 export function buildQuery(addressInterpretations, endpoint = API_ENDPOINT) {
@@ -256,7 +262,7 @@ function addressInterpretationMatchTier(row, addressInterpretations) {
 }
 
 function comparableAddress(value) {
-  return normalizeInput(value).replace(
+  return withoutPunctuation(normalizeInput(value)).replace(
     /^(\d+)\s+(1\/2[A-N]?|[A-N])\s+/u,
     "$1$2 ",
   );
