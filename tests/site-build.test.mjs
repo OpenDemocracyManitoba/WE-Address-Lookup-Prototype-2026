@@ -412,7 +412,7 @@ test("Contest pages show News coverage from the coverage data", () => {
     assert.ok(page.indexOf("contest-number-to-elect") < sectionStart);
     assert.ok(sectionStart < page.indexOf("data-candidate-list"));
     assert.match(section, /<h2 id="news-coverage-heading" class="news-coverage-heading">News coverage<\/h2>/);
-    assert.match(section, /Coverage compiled from the Winnipeg Free Press and CBC Manitoba, Oct\. 25, 2026\. <a href="\/about\/#news-coverage">How we chose these articles<\/a>\./);
+    assert.match(section, /Coverage compiled from the Winnipeg Free Press and CBC Manitoba, Oct\. 26, 2026\. <a href="\/about\/#news-coverage">How we chose these articles<\/a>\./);
     for (const item of items) {
       assert.ok(page.includes(`href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer"`));
       assert.equal(page.split(`href="${escapeHtml(item.url)}"`).length - 1, 1, `${item.url} appears once on ${contest.id}`);
@@ -432,7 +432,7 @@ test("Contest pages show News coverage from the coverage data", () => {
   const freePressBlocks = candidateBlocks.filter((block) => block.includes("candidate-news") && /candidate-news[\s\S]*Free Press/.test(block));
   assert.deepEqual(
     freePressBlocks.map((block) => block.match(/<h2>([^<]+)<\/h2>/)[1]).sort(),
-    ["Kevin KLEIN", "Scott GILLINGHAM"],
+    ["Kevin KLEIN", "Noah REDDEN", "Scott GILLINGHAM"],
   );
 });
 

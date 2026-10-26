@@ -20,7 +20,7 @@ WinnipegElection.ca has no affiliation with the City of Winnipeg. The City Clerk
 
 Contest pages and address lookup results link to race and candidate profiles from two newsrooms: CBC Manitoba and the Winnipeg Free Press. We limited it to these two so every race is checked against the same sources. Other outlets also covered the election, and leaving them out doesn’t reflect on their reporting.
 
-To find the articles, we went through each outlet’s 2026 election coverage published up to October 25 and matched each piece to the City of Winnipeg’s official list of nominated candidates. We include only pieces that profile a race or a candidate, such as ward profiles, candidate interviews and platform guides, and leave out day-to-day campaign news.
+To find the articles, we went through each outlet’s 2026 election coverage published up to October 26 and matched each piece to the City of Winnipeg’s official list of nominated candidates. We include only pieces that profile a race or a candidate, such as ward profiles, candidate interviews and platform guides, and leave out day-to-day campaign news.
 
 School trustee races have no news links because so few were covered that listing them would single out individual candidates.
 

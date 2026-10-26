@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "News coverage (race profiles, candidate profiles, interviews, guides) from the Winnipeg Free Press and CBC Manitoba for each 2026 Winnipeg contest, keyed by the We Address tool's contest slug.",
-    "compiled": "2026-10-25",
+    "compiled": "2026-10-26",
     "election_date": "2026-10-28",
     "candidate_ids": "City of Winnipeg Open Data dataset 9gi9-dauz `id` field; name_official is that dataset's `name` field.",
     "kinds": {
@@ -14,7 +14,7 @@
     "school_trustees": "School trustee contests are intentionally empty: coverage was too sparse (one candidate profile across 18 contested races) to show without singling out a candidate.",
     "sort": "Within each contest, items are pre-sorted: race-level items first, then candidate items, then roundups; newest first within each group.",
     "contests": 41,
-    "items_total": 74
+    "items_total": 75
   },
   "contests": {
     "mayor-winnipeg": {
@@ -53,6 +53,26 @@
           "summary": "Side-by-side tracker of all 12 candidates' promises on crime, housing, taxes and transit, updated through the campaign.",
           "covers_all_candidates": true,
           "candidates": []
+        },
+        {
+          "id": "A062",
+          "outlet": "Winnipeg Free Press",
+          "outlet_short": "Free Press",
+          "title": "‘Exciting’ turn for mayoral candidate",
+          "url": "https://www.winnipegfreepress.com/breakingnews/2026/10/25/exciting-turn-for-mayoral-candidate",
+          "date": "2026-10-25",
+          "byline": "Erik Pindera",
+          "format": "article",
+          "kind": "candidate_profile",
+          "paywalled": true,
+          "summary": "Noah Redden meets voters at a Portage Avenue diner after a new poll suggests he has become a player in the mayoral race.",
+          "covers_all_candidates": false,
+          "candidates": [
+            {
+              "candidate_id": "2026-35",
+              "name_official": "Noah REDDEN"
+            }
+          ]
         },
         {
           "id": "A024",
