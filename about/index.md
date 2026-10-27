@@ -6,9 +6,7 @@ description: About the nonpartisan WinnipegElection.ca voter resource from Open 
 
 # About
 
-WinnipegElection.ca is a voter resource built by Open Democracy Manitoba (ODM). ODM is a non-profit organization that builds digital tools for democratic engagement. <a href="https://opendemocracymanitoba.ca">Learn more about Open Democracy Manitoba</a>.
-
-Ongoing site development and maintenance is performed on a volunteer basis by the board members of [Open Democracy Manitoba](https://opendemocracymanitoba.ca).
+WinnipegElection.ca is a voter resource built by [Open Democracy Manitoba](https://opendemocracymanitoba.ca) (ODM). ODM is a non-profit organization that builds digital tools for democratic engagement. Ongoing site development and maintenance is performed on a volunteer basis by ODM board members.
 
 All candidate information, including contact details, social media, and disclosure documents, is sourced from [the City of Winnipeg's official election candidates open dataset](https://data.winnipeg.ca/d/9gi9-dauz).
 
