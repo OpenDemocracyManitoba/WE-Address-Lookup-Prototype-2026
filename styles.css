@@ -414,6 +414,12 @@ input:hover {
   overflow-wrap: anywhere;
 }
 
+.voting-place-link {
+  flex-basis: 100%;
+  margin: 0;
+  font-weight: 700;
+}
+
 .contests-step {
   position: absolute;
   top: 1.8rem;

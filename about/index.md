@@ -16,7 +16,7 @@ Questions or corrections? Email <a class="contact-email" data-user="vote" data-d
 
 ## Not Affiliated with the City of Winnipeg
 
-WinnipegElection.ca has no affiliation with the City of Winnipeg. The City Clerk’s Department, which is the official Election authority for city council and school trustee elections, runs <a href="https://www.winnipeg.ca/city-governance/wards-elections/2026-election">the official Winnipeg City 2026 Election site</a>.
+WinnipegElection.ca has no affiliation with the City of Winnipeg. The City Clerk’s Department, which is the official Election authority for city council and school trustee elections, runs <a href="https://www.winnipeg.ca/city-governance/wards-elections/2026-election">the official Winnipeg City 2026 Election site</a>, including its <a href="https://www.winnipeg.ca/city-governance/wards-elections/2026-election/voter-app/where-do-i-vote">Where do I vote?</a> tool for finding your voting place.
 
 <h2 id="news-coverage">News Coverage</h2>
 
