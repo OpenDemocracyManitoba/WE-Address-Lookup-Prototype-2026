@@ -746,10 +746,19 @@ input:hover {
   gap: 0.7rem 2rem;
 }
 
-.candidate-record > .candidate-role,
-.candidate-record > h2,
-.candidate-record > h3 {
-  grid-column: 1;
+.candidate-record {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.2rem 2.5rem;
+}
+
+.candidate-record > * {
+  flex: 1 1 100%;
+}
+
+.candidate-record > .candidate-role {
+  margin-bottom: 0;
 }
 
 .candidate-record > h2,
@@ -764,8 +773,16 @@ input:hover {
 
 .candidate-record > section,
 .candidate-record > div {
-  grid-column: 2;
+  flex: 1 1 14rem;
   margin: 0;
+}
+
+.candidate-record > .candidate-biography {
+  flex-basis: 100%;
+}
+
+.candidate-record > .candidate-news {
+  flex: 2 1 22rem;
 }
 
 .candidate-record h3,
@@ -773,7 +790,7 @@ input:hover {
   margin: 0 0 0.45rem;
   color: var(--signal-muted);
   font-family: var(--signal-mono);
-  font-size: 0.68rem;
+  font-size: 0.9rem;
   font-weight: 850;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -789,7 +806,7 @@ input:hover {
   display: block;
   height: auto;
   margin: 1rem 0;
-  grid-column: 1;
+  flex: 0 0 auto;
   width: 7rem;
   max-height: 9rem;
   margin-top: 0.5rem;
@@ -813,6 +830,7 @@ input:hover {
 
 .applicable-contest .candidate-record > h3,
 .applicable-contest .candidate-list-notice > h3 {
+  margin: 0;
   font-size: clamp(1.45rem, 2.6vw, 2.2rem);
 }
 
@@ -872,9 +890,28 @@ input:hover {
 }
 
 .news-coverage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
   margin: 0 0 2.5rem;
   padding: 1.25rem 0 0;
   border-top: 0.6rem solid var(--signal-ink);
+  gap: 1rem 2.5rem;
+}
+
+.news-coverage > .news-coverage-heading {
+  flex: 1 1 100%;
+  margin-bottom: 0;
+}
+
+.news-coverage > .news-list {
+  flex: 3 1 32rem;
+}
+
+.news-notes {
+  flex: 1 1 16rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--signal-line-soft);
 }
 
 .news-coverage-heading {
@@ -895,7 +932,7 @@ input:hover {
 }
 
 .news-coverage .news-list {
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
 }
 
 .news-list li {
@@ -934,13 +971,18 @@ input:hover {
   font-weight: 700;
 }
 
-.news-summary {
+.news-list .news-summary {
+  margin-top: 0.35rem;
   color: var(--signal-muted);
   font-size: 0.9rem;
 }
 
 .news-roundups {
-  margin: 1.25rem 0 0;
+  margin: 0;
+}
+
+.news-notes > :first-child {
+  margin-top: 0;
 }
 
 .news-source-note {
@@ -1163,6 +1205,10 @@ input:hover {
   .candidate-list-notice {
     display: block;
     padding: 1.4rem 1rem 1.5rem;
+  }
+
+  .candidate-record > .candidate-role {
+    margin-bottom: 0.7rem;
   }
 
   .candidate-record > section,

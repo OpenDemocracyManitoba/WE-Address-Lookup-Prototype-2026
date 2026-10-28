@@ -42,7 +42,7 @@ test("an Unavailable Candidate list never renders as a Published empty list", ()
   assert.doesNotMatch(html, /No published Candidate Records|data-candidate-list/);
 });
 
-test("a populated Contest renders contest-specific Candidate cards and optional contact fields", () => {
+test("a populated Contest renders contest-specific Candidate cards and campaign links without email or phone", () => {
   const html = renderCandidateInformation({
     office: "Councillor",
     candidateList: { support: "supported", availability: "Published" },
@@ -75,11 +75,12 @@ test("a populated Contest renders contest-specific Candidate cards and optional 
   assert.match(html, /<h2>Alex Example<\/h2>/);
   assert.doesNotMatch(html, /Candidate information|candidate-metadata|Election Phase|Candidate Status|Registration Date/);
   assert.match(html, /href="https:\/\/example\.test\/campaign"/);
-  assert.match(html, /href="mailto:alex@example\.test"/);
-  assert.match(html, /href="tel:2045550100"/);
+  assert.match(html, /Campaign links/);
+  assert.doesNotMatch(html, /mailto:|tel:|alex@example\.test|204-555-0100/);
+  assert.doesNotMatch(html, /No campaign website or social media listed/);
 });
 
-test("missing optional Candidate fields do not create placeholder markup", () => {
+test("missing campaign links render a short City of Winnipeg notice instead of placeholder fields", () => {
   const html = renderCandidateInformation({
     office: "Mayor",
     candidateList: { support: "supported", availability: "Published" },
@@ -106,5 +107,6 @@ test("missing optional Candidate fields do not create placeholder markup", () =>
   });
 
   assert.match(html, /<p class="candidate-role">Mayor Candidate<\/p>/);
-  assert.doesNotMatch(html, /candidate-contact|Not provided|mailto:|tel:/);
+  assert.doesNotMatch(html, /Not provided|mailto:|tel:/);
+  assert.match(html, /No campaign website or social media listed with the City of Winnipeg\./);
 });

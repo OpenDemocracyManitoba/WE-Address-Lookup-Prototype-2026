@@ -291,17 +291,10 @@ test("production Candidate markup reflects current optional fields and excludes 
         );
       }
       if (candidate.email) {
-        assert.ok(
-          page.includes(`href="mailto:${escapeHtml(candidate.email)}"`),
-        );
+        assert.ok(!page.includes(`mailto:${escapeHtml(candidate.email)}`));
       }
       if (candidate.phone) {
-        assert.ok(
-          page.includes(
-            `href="tel:${escapeHtml(candidate.presentation.phoneHref)}"`,
-          ),
-        );
-        assert.ok(page.includes(`>${escapeHtml(candidate.phone)}</a>`));
+        assert.ok(!page.includes(`>${escapeHtml(candidate.phone)}</a>`));
       }
       for (const socialLink of candidate.presentation.socialLinks) {
         assert.ok(page.includes(`href="${escapeHtml(socialLink.publicUrl)}"`));

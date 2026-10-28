@@ -41,19 +41,19 @@
                 </section>
               {% endif %}
 
-              {% if candidate.presentation.campaignUrl or candidate.email or candidate.phone or candidate.presentation.socialLinks.length %}
-                <div class="candidate-contact">
-                  <{{ subheadingTag }}>Campaign and contact information</{{ subheadingTag }}>
+              <div class="candidate-contact">
+                <{{ subheadingTag }}>Campaign links</{{ subheadingTag }}>
+                {% if candidate.presentation.campaignUrl or candidate.presentation.socialLinks.length %}
                   <ul>
                     {% if candidate.presentation.campaignUrl %}<li><a href="{{ candidate.presentation.campaignUrl }}">Campaign website</a></li>{% endif %}
-                    {% if candidate.email %}<li><a href="mailto:{{ candidate.email }}">{{ candidate.email }}</a></li>{% endif %}
-                    {% if candidate.phone %}<li><a href="tel:{{ candidate.presentation.phoneHref }}">{{ candidate.phone }}</a></li>{% endif %}
                     {% for social in candidate.presentation.socialLinks %}
                       <li><a href="{{ social.publicUrl }}">{{ social.label }}</a></li>
                     {% endfor %}
                   </ul>
-                </div>
-              {% endif %}
+                {% else %}
+                  <p>No campaign website or social media listed with the City of Winnipeg.</p>
+                {% endif %}
+              </div>
 
               {% set newsItems = coverage.candidateItems[candidate.source.recordId] if coverage else [] %}
               {% if newsItems.length %}

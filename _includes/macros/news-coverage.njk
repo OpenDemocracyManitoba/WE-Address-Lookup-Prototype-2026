@@ -24,14 +24,16 @@
     <section class="news-coverage" aria-labelledby="{{ headingId }}">
       <{{ headingTag }} id="{{ headingId }}" class="news-coverage-heading">News coverage</{{ headingTag }}>
       {{ newsList(coverage.raceItems) }}
-      {% if coverage.roundups.length %}
-        <p class="news-roundups">Also covering all 15 wards:
-          {% for item in coverage.roundups %}
-            <span class="news-roundup">{{ item.outlet_short }}: {{ newsLink(item) }}{% if item.displayDate %} (<time datetime="{{ item.date }}">{{ item.displayDate }}</time>){% endif %}{{ newsLabels(item) }}</span>{% if not loop.last %} · {% endif %}
-          {% endfor %}
-        </p>
-      {% endif %}
-      <p class="news-source-note">Coverage compiled from the Winnipeg Free Press and CBC Manitoba, {{ compiled }}. <a href="/about/#news-coverage">How we chose these articles</a>.</p>
+      <div class="news-notes">
+        {% if coverage.roundups.length %}
+          <p class="news-roundups">Also covering all 15 wards:
+            {% for item in coverage.roundups %}
+              <span class="news-roundup">{{ item.outlet_short }}: {{ newsLink(item) }}{% if item.displayDate %} (<time datetime="{{ item.date }}">{{ item.displayDate }}</time>){% endif %}{{ newsLabels(item) }}</span>{% if not loop.last %} · {% endif %}
+            {% endfor %}
+          </p>
+        {% endif %}
+        <p class="news-source-note">Coverage compiled from the Winnipeg Free Press and CBC Manitoba, {{ compiled }}. <a href="/about/#news-coverage">How we chose these articles</a>.</p>
+      </div>
     </section>
   {% endif %}
 {% endmacro %}
