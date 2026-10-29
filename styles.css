@@ -579,6 +579,25 @@ input:hover {
   border-left-color: var(--signal-confirm);
 }
 
+.lookup .intro h1 {
+  max-inline-size: none;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+}
+
+.election-over-notice {
+  margin: 0 0 2rem;
+  padding: 0.9rem 1.2rem;
+  border-left: 0.45rem solid var(--signal-ink);
+  background: var(--signal-mark);
+  color: var(--signal-ink);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.election-over-notice a {
+  color: var(--signal-ink);
+}
+
 .affiliation-note {
   margin: 1.5rem 0 0;
   padding-left: 1.3rem;
