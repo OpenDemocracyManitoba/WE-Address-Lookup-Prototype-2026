@@ -7,12 +7,6 @@ lookupPage: true
 
 {% from "macros/home-contest.njk" import homeContest, unresolvedHomeContest %}
 <section class="lookup" aria-labelledby="page-title">
-  <p class="election-over-notice">
-    <strong>The 2026 election has taken place.</strong> See the
-    <a href="https://legacy.winnipeg.ca/clerks/election/election-2026/results/index.html"
-      >City of Winnipeg's unofficial election results</a
-    >.
-  </p>
   <header class="intro">
     <h1 id="page-title">Find Your Candidates</h1>
     <p class="lede">
@@ -75,18 +69,6 @@ lookupPage: true
       <p class="address-lookup-result-subtitle">
         For <span id="address-lookup-result-address"></span>
       </p>
-      <p class="voting-place-link">
-        <a
-          href="https://www.winnipeg.ca/city-governance/wards-elections/2026-election/voter-app/where-do-i-vote"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Find your voting place on the City of Winnipeg site<span
-            class="visually-hidden"
-          >
-            (opens in a new tab)</span
-          ></a
-        >
-      </p>
     </header>
     <div id="applicable-contests"></div>
   </section>
@@ -98,8 +80,7 @@ lookupPage: true
     information, visit the
     <a href="https://www.winnipeg.ca/city-governance/wards-elections/2026-election"
       >City of Winnipeg 2026 Election site</a
-    >. To find where you vote, use the City's
-    <a href="https://www.winnipeg.ca/city-governance/wards-elections/2026-election/voter-app/where-do-i-vote">Where do I vote?</a> tool.
+    >.
   </p>
 
   <template id="address-option-template"

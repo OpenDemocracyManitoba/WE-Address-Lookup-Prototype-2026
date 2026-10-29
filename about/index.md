@@ -8,15 +8,13 @@ description: About the nonpartisan WinnipegElection.ca voter resource from Open 
 
 WinnipegElection.ca is a voter resource built by [Open Democracy Manitoba](https://opendemocracymanitoba.ca) (ODM). ODM is a non-profit organization that builds digital tools for democratic engagement. Ongoing site development and maintenance is performed on a volunteer basis by ODM board members.
 
+The 2026 election took place on October 28, 2026. This site won’t be updated until the lead-up to the next election.
+
 All candidate information, including contact details, social media, and disclosure documents, is sourced from [the City of Winnipeg's official election candidates open dataset](https://data.winnipeg.ca/d/9gi9-dauz).
-
-## Contact
-
-Questions or corrections? Email <a class="contact-email" data-user="vote" data-domain="opendemocracymanitoba.ca">vote [at] opendemocracymanitoba [dot] ca</a>.
 
 ## Not Affiliated with the City of Winnipeg
 
-WinnipegElection.ca has no affiliation with the City of Winnipeg. The City Clerk’s Department is the official Election authority for city council and school trustee elections. It runs <a href="https://www.winnipeg.ca/city-governance/wards-elections/2026-election">the official Winnipeg City 2026 Election site</a>. To find your voting place, use the City’s <a href="https://www.winnipeg.ca/city-governance/wards-elections/2026-election/voter-app/where-do-i-vote">Where do I vote?</a> tool.
+WinnipegElection.ca has no affiliation with the City of Winnipeg. The City Clerk’s Department is the official Election authority for city council and school trustee elections. It runs <a href="https://www.winnipeg.ca/city-governance/wards-elections/2026-election">the official Winnipeg City 2026 Election site</a>.
 
 <h2 id="news-coverage">News Coverage</h2>
 
